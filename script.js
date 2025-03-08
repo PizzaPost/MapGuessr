@@ -268,19 +268,22 @@ function startGame(gameArea) {
 
     const possibleImages = collectLists(gameArea);
 
+    let actualMap = null;
+
     let [imagePath, solution] = [null, null];
 
     if (possibleImages[0].length === 2) {
+        actualMap = gameArea[0];
         const selectedImage = possibleImages.length > 0 ? possibleImages[Math.floor(Math.random() * possibleImages.length)] : [];
         //const randomIndex = Math.floor(1 + (Math.random() * (selectedImage.length - 1)));
         [imagePath, solution] = selectedImage; //[randomIndex];
     } else {
         const selected_map = possibleImages.length > 0 ? possibleImages[Math.floor(Math.random() * possibleImages.length)] : [];
+        actualMap = selected_map[0];
         const randomIndex = Math.floor(1 + (Math.random() * (selected_map.length - 1)));
         [imagePath, solution] = selected_map[randomIndex];
     }
     const randomImage = document.createElement('img');
-    console.log(imagePath);
     randomImage.src = imagePath;
     randomImage.style.maxWidth = '100%';
     randomImage.style.height = '50%';
@@ -435,7 +438,7 @@ function startGame(gameArea) {
             if (marker.style.display === 'block') {
                 backButton.remove();
                 gameContainer.appendChild(continueButton);
-                if (selectedMap === selection[0]) {
+                if (selectedMap === actualMap) {
                     const userX = parseFloat(marker.dataset.x);
                     const userY = parseFloat(marker.dataset.y);
                     const [solutionX, solutionY] = solution;
@@ -457,7 +460,7 @@ function startGame(gameArea) {
                         alert('You got the map correct!\nThis image has not been assigned a solution yet.');
                     }
                 } else {
-                    const pathToMap = selectedPathElement.innerText;
+                    const pathToMap = actualMap.split('/').slice(-2).join(' > ');
                     alert('You have chosen the wrong map. It was ' + pathToMap);
                 }
 
@@ -468,6 +471,8 @@ function startGame(gameArea) {
         };
         gameContainer.appendChild(document.createElement('br'));
         gameContainer.appendChild(submitButton);
+
+        console.log(`Currently on map ${actualMap}, which you think is ${selectedMap}`);
 
         // Create continue button
         const continueButton = document.createElement('button');
