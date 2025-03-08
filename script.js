@@ -147,7 +147,8 @@ function gameModeSelector() {
             button.innerText = key;
             const value = options[key];
             if (!(typeof value === 'object' && !Array.isArray(value))) {
-                button.style.backgroundColor = 'green';
+                button.style.backgroundColor = 'black';
+                button.style.color = 'white';
             }
 
             button.onclick = () => {
@@ -158,7 +159,7 @@ function gameModeSelector() {
                     parentKeys.push(key);
                     renderOptions(value, parentKeys);
                 } else {
-                    selectGameMode()
+                    selectGameMode();
                 }
             };
             gameModeSelector.appendChild(button);
@@ -199,10 +200,10 @@ function startGame(gameArea) {
         return result;
     }
 
-    const lists = collectLists(gameArea);
-    const list = lists.length > 0 ? lists[Math.floor(Math.random() * lists.length)] : [];
-    const randomIndex = Math.floor(1 + (Math.random() * (list.length - 1)));
-    const [imagePath, solution] = list[randomIndex];
+    const possibleImages = collectLists(gameArea);
+    const selectedImage = possibleImages.length > 0 ? possibleImages[Math.floor(Math.random() * possibleImages.length)] : [];
+    //const randomIndex = Math.floor(1 + (Math.random() * (selectedImage.length - 1)));
+    const [imagePath, solution] = selectedImage; //[randomIndex];
     const randomImage = document.createElement('img');
     randomImage.src = imagePath;
     randomImage.style.maxWidth = '100%';
@@ -211,6 +212,8 @@ function startGame(gameArea) {
     resize();
 
     const mapImage = document.createElement('img');
+
+    let selectedMap = null;
 
     // Create the map selector
     let selection = JSON.parse(JSON.stringify(gameArea));
@@ -232,7 +235,6 @@ function startGame(gameArea) {
     function selectMap() {
         gameState = 2;
         mapSelector.style.display = 'none';
-        console.log(selection);
         displayMap(selection[0]);
 
         // Create a back button
@@ -306,10 +308,15 @@ function startGame(gameArea) {
     }
 
     // Start rendering options from the top level
-    renderOptions(selection);
+    if (Array.isArray(selection)) {
+        selectMap();
+    } else {
+        renderOptions(selection);
+    }
 
     function displayMap(map) {
         // Display the map image
+        selectedMap = map
         mapImage.src = map;
         mapImage.style.maxWidth = '100%';
         mapImage.style.height = '50%';
@@ -328,15 +335,17 @@ function startGame(gameArea) {
 
         // Listen for map clicks to place marker
         mapImage.onclick = (event) => {
-            const rect = mapImage.getBoundingClientRect();
-            const x = ((event.clientX - rect.left) + window.scrollX) / rect.width;
-            const y = ((event.clientY - rect.top) + window.scrollY) / rect.height;
-            marker.style.left = `${event.pageX - 5}px`; // subtract half the size of the marker
-            marker.style.top = `${event.pageY - 5}px`;
-            marker.style.display = 'block';
-            marker.dataset.x = x;
-            marker.dataset.y = y;
-            console.log(x, y);
+            if (document.body.contains(submitButton)) {
+                const rect = mapImage.getBoundingClientRect();
+                const x = ((event.clientX - rect.left) + window.scrollX) / rect.width;
+                const y = ((event.clientY - rect.top) + window.scrollY) / rect.height;
+                marker.style.left = `${event.pageX - 5}px`; // subtract half the size of the marker
+                marker.style.top = `${event.pageY - 5}px`;
+                marker.style.display = 'block';
+                marker.dataset.x = x;
+                marker.dataset.y = y;
+                console.log(x, y);
+            }
         };
 
         // Create submit button
@@ -345,7 +354,7 @@ function startGame(gameArea) {
             if (marker.style.display === 'block') {
                 backButton.remove();
                 gameContainer.appendChild(continueButton);
-                if (list[0] === selection[0]) {
+                if (selectedMap === selection[0]) {
                     const userX = parseFloat(marker.dataset.x);
                     const userY = parseFloat(marker.dataset.y);
                     const [solutionX, solutionY] = solution;
