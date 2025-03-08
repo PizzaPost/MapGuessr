@@ -5,6 +5,10 @@ const gameModes = {
                 "Container Ride": [
                     "images/portal2/chapter1/container-ride/map.jpg",
                     ["images/portal2/chapter1/container-ride/1.jpg", []]
+                ],
+                "test": [
+                    "images/portal2/chapter1/test/map.jpg",
+                    ["images/portal2/chapter1/test/1.jpg", []]
                 ]
             }
         }
@@ -143,8 +147,12 @@ function startGame(gameArea) {
     randomImage.style.height = '50%';
     gameContainer.appendChild(randomImage);
 
+    const mapImage = document.createElement('img');
+
     // Create the map selector
     let selection = JSON.parse(JSON.stringify(gameArea));
+
+    const backButton = document.createElement('button');
 
     const mapSelector = document.createElement('div');
     mapSelector.id = 'mapSelector';
@@ -158,8 +166,22 @@ function startGame(gameArea) {
     // Helper function to select a map
     function selectMap() {
         gameState = 2;
-        mapSelector.remove();
+        mapSelector.style.display = 'none';
+        console.log(selection);
         displayMap(selection[0]);
+
+        // Create a back button
+        backButton.innerText = 'Back';
+        backButton.onclick = () => {
+            // Go back to the map selection screen
+            gameState = 1;
+            mapSelector.style.display = 'block';
+            mapImage.style.display = 'none';
+            selection = JSON.parse(JSON.stringify(gameArea));
+            backButton.remove();
+            renderOptions(selection);
+        };
+        gameContainer.appendChild(backButton);
     }
 
     // Helper function to render options
@@ -221,7 +243,6 @@ function startGame(gameArea) {
 
     function displayMap(map) {
         // Display the map image
-        const mapImage = document.createElement('img');
         mapImage.src = map;
         mapImage.style.maxWidth = '100%';
         mapImage.style.height = '50%';
@@ -254,27 +275,31 @@ function startGame(gameArea) {
         submitButton.innerText = 'Submit';
         submitButton.onclick = () => {
             if (marker.style.display === 'block') {
-                console.log(list[0], selection[0]);
+                backButton.remove();
+                gameContainer.appendChild(continueButton);
                 if (list[0] === selection[0]) {
                     const userX = parseFloat(marker.dataset.x);
                     const userY = parseFloat(marker.dataset.y);
                     const [solutionX, solutionY] = solution;
                     const distance = Math.sqrt(Math.pow(userX - solutionX, 2) + Math.pow(userY - solutionY, 2));
                     const score = Math.max(0, 1000 - distance * 1000);
-                    alert(`You scored ${score.toFixed(0)} points!`);
-                    gameContainer.appendChild(continueButton);
 
-                    const solutionMarker = document.createElement('div');
-                    solutionMarker.style.position = 'absolute';
-                    solutionMarker.style.width = '10px';
-                    solutionMarker.style.height = '10px';
-                    solutionMarker.style.backgroundColor = 'green';
-                    solutionMarker.style.borderRadius = '50%';
-                    solutionMarker.style.left = `${mapImage.offsetLeft + solutionX * mapImage.offsetWidth - 5}px`; // subtract half the size of the marker
-                    solutionMarker.style.top = `${mapImage.offsetTop + solutionY * mapImage.offsetHeight - 5}px`;
-                    document.body.appendChild(solutionMarker);
+                    if (Array.isArray(solution) && solution.length > 0) {
+                        alert(`You scored ${score.toFixed(0)} points!`);
+                        const solutionMarker = document.createElement('div');
+                        solutionMarker.style.position = 'absolute';
+                        solutionMarker.style.width = '10px';
+                        solutionMarker.style.height = '10px';
+                        solutionMarker.style.backgroundColor = 'green';
+                        solutionMarker.style.borderRadius = '50%';
+                        solutionMarker.style.left = `${mapImage.offsetLeft + solutionX * mapImage.offsetWidth - 5}px`; // subtract half the size of the marker
+                        solutionMarker.style.top = `${mapImage.offsetTop + solutionY * mapImage.offsetHeight - 5}px`;
+                        document.body.appendChild(solutionMarker);
+                    } else {
+                        alert('You got the map correct!\nThis image has not been assigned a solution yet.');
+                    }
                 } else {
-                    const pathToMap = list[0];
+                    const pathToMap = selectedPathElement.innerText;
                     alert('You have chosen the wrong map. It was ' + pathToMap);
                 }
 
@@ -290,6 +315,7 @@ function startGame(gameArea) {
         const continueButton = document.createElement('button');
         continueButton.innerText = 'Continue';
         continueButton.onclick = () => {
+            marker.remove();
             startGame(gameArea); // Restart game with current area
         };
     }
