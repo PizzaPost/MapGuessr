@@ -118,10 +118,12 @@ const gameModes = {
                         ["images/portal2/chapter1/incinerator/0.png", []],
                     ],
                     "1": [
+                        "images/portal2/chapter1/incinerator/maps/1.png",
                         ["images/portal2/chapter1/incinerator/1.png", []],
 
                     ],
                     "2": [
+                        "images/portal2/chapter1/incinerator/maps/2.png",
                         ["images/portal2/chapter1/incinerator/2.png", []],
                         ["images/portal2/chapter1/incinerator/3.png", []],
                         ["images/portal2/chapter1/incinerator/4.png", []],
@@ -325,24 +327,15 @@ function startGame(gameArea) {
 
     let [imagePath, solution] = [null, null];
 
-    if (possibleImages[0].length === 2) {
-        if (typeof possibleImages[0][0] !== 'string') {
-            actualMap = Array.isArray(gameArea) ? gameArea[0] : Object.values(gameArea)[0][0];
-            const selectedImage = possibleImages[Math.floor(Math.random() * possibleImages.length)];
-            //const randomIndex = Math.floor(1 + (Math.random() * (selectedImage.length - 1)));
-            [imagePath, solution] = selectedImage; //[randomIndex];
-        } else {
-            const selected_map = possibleImages[Math.floor(Math.random() * possibleImages.length)];
-            actualMap = selected_map[0];
-            const randomIndex = Math.floor(1 + (Math.random() * (selected_map.length - 1)));
-            [imagePath, solution] = selected_map[randomIndex];
-        }
+    if (Array.isArray(gameArea)) {
+        actualMap = gameArea[0];
+        [imagePath, solution] = gameArea[1 + Math.floor(Math.random() * (gameArea.length - 1))];
     } else {
-        const selected_map = possibleImages[Math.floor(Math.random() * possibleImages.length)];
-        actualMap = selected_map[0];
-        const randomIndex = Math.floor(1 + (Math.random() * (selected_map.length - 1)));
-        [imagePath, solution] = selected_map[randomIndex];
+        const possibleImage = possibleImages[Math.floor(Math.random() * possibleImages.length)][Math.floor(Math.random() * possibleImages[0].length)];
+        actualMap = possibleImages.find(list => list.includes(possibleImage))[0];
+        [imagePath, solution] = possibleImage;
     }
+
     const randomImage = document.createElement('img');
     randomImage.src = imagePath;
     randomImage.style.maxWidth = '100%';
