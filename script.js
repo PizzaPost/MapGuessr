@@ -12,19 +12,18 @@ const gameModes = {
                         ["images/portal2/chapter1/container_ride/1.png", []],
                         ["images/portal2/chapter1/container_ride/2.png", []],
                         ["images/portal2/chapter1/container_ride/3.png", []],
-                        ["images/portal2/chapter1/container_ride/4.png", []],
                         
                     ],
                     "Container Ride": [
                         "images/portal2/chapter1/container_ride/maps/container_ride.png",
+                        ["images/portal2/chapter1/container_ride/4.png", []],
                         ["images/portal2/chapter1/container_ride/5.png", []],
-                        ["images/portal2/chapter1/container_ride/6.png", []],
                     ],
                     "Puzzle": [
                         "images/portal2/chapter1/container_ride/maps/puzzle.png",
+                        ["images/portal2/chapter1/container_ride/6.png", []],
                         ["images/portal2/chapter1/container_ride/7.png", []],
                         ["images/portal2/chapter1/container_ride/8.png", []],
-                        ["images/portal2/chapter1/container_ride/9.png", []],
                     ]
                 },
                 "Portal Carousel": [
