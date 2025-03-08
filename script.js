@@ -3,115 +3,115 @@ const gameModes = {
         "Portal 2": {
             "Chapter 1 - The Courtesy Call": {
                 "Container Ride": [
-                    "images/portal2/chapter1/container_ride/map.jpg",
-                    ["images/portal2/chapter1/container_ride/0.jpg", []],
-                    ["images/portal2/chapter1/container_ride/1.jpg", []],
-                    ["images/portal2/chapter1/container_ride/2.jpg", []],
-                    ["images/portal2/chapter1/container_ride/3.jpg", []],
-                    ["images/portal2/chapter1/container_ride/4.jpg", []],
-                    ["images/portal2/chapter1/container_ride/5.jpg", []],
-                    ["images/portal2/chapter1/container_ride/6.jpg", []],
-                    ["images/portal2/chapter1/container_ride/7.jpg", []],
-                    ["images/portal2/chapter1/container_ride/8.jpg", []],
-                    ["images/portal2/chapter1/container_ride/9.jpg", []]
+                    "images/portal2/chapter1/container_ride/map.png",
+                    ["images/portal2/chapter1/container_ride/0.png", []],
+                    ["images/portal2/chapter1/container_ride/1.png", []],
+                    ["images/portal2/chapter1/container_ride/2.png", []],
+                    ["images/portal2/chapter1/container_ride/3.png", []],
+                    ["images/portal2/chapter1/container_ride/4.png", []],
+                    ["images/portal2/chapter1/container_ride/5.png", []],
+                    ["images/portal2/chapter1/container_ride/6.png", []],
+                    ["images/portal2/chapter1/container_ride/7.png", []],
+                    ["images/portal2/chapter1/container_ride/8.png", []],
+                    ["images/portal2/chapter1/container_ride/9.png", []]
                 ],
                 "Portal Carousel": [
-                    "images/portal2/chapter1/portal_carousel/map.jpg",
-                    ["images/portal2/chapter1/portal_carousel/0.jpg", []],
-                    ["images/portal2/chapter1/portal_carousel/1.jpg", []]
+                    "images/portal2/chapter1/portal_carousel/map.png",
+                    ["images/portal2/chapter1/portal_carousel/0.png", []],
+                    ["images/portal2/chapter1/portal_carousel/1.png", []]
                 ],
                 "Portal Gun": [
-                    "images/portal2/chapter1/portal_gun/map.jpg",
-                    ["images/portal2/chapter1/portal_gun/0.jpg", []],
-                    ["images/portal2/chapter1/portal_gun/1.jpg", []],
-                    ["images/portal2/chapter1/portal_gun/2.jpg", []],
-                    ["images/portal2/chapter1/portal_gun/3.jpg", []],
-                    ["images/portal2/chapter1/portal_gun/4.jpg", []],
-                    ["images/portal2/chapter1/portal_gun/5.jpg", []],
-                    ["images/portal2/chapter1/portal_gun/6.jpg", []],
-                    ["images/portal2/chapter1/portal_gun/7.jpg", []],
-                    ["images/portal2/chapter1/portal_gun/8.jpg", []]
+                    "images/portal2/chapter1/portal_gun/map.png",
+                    ["images/portal2/chapter1/portal_gun/0.png", []],
+                    ["images/portal2/chapter1/portal_gun/1.png", []],
+                    ["images/portal2/chapter1/portal_gun/2.png", []],
+                    ["images/portal2/chapter1/portal_gun/3.png", []],
+                    ["images/portal2/chapter1/portal_gun/4.png", []],
+                    ["images/portal2/chapter1/portal_gun/5.png", []],
+                    ["images/portal2/chapter1/portal_gun/6.png", []],
+                    ["images/portal2/chapter1/portal_gun/7.png", []],
+                    ["images/portal2/chapter1/portal_gun/8.png", []]
                 ],
                 "Smooth Jazz": [
-                    "images/portal2/chapter1/smooth_jazz/map.jpg",
-                    ["images/portal2/chapter1/smooth_jazz/0.jpg", []],
-                    ["images/portal2/chapter1/smooth_jazz/1.jpg", []],
-                    ["images/portal2/chapter1/smooth_jazz/2.jpg", []],
-                    ["images/portal2/chapter1/smooth_jazz/3.jpg", []]
+                    "images/portal2/chapter1/smooth_jazz/map.png",
+                    ["images/portal2/chapter1/smooth_jazz/0.png", []],
+                    ["images/portal2/chapter1/smooth_jazz/1.png", []],
+                    ["images/portal2/chapter1/smooth_jazz/2.png", []],
+                    ["images/portal2/chapter1/smooth_jazz/3.png", []]
                 ],
                 "Cube Momentum": [
-                    "images/portal2/chapter1/cube_momentum/map.jpg",
-                    ["images/portal2/chapter1/cube_momentum/0.jpg", []],
-                    ["images/portal2/chapter1/cube_momentum/1.jpg", []],
-                    ["images/portal2/chapter1/cube_momentum/2.jpg", []]
+                    "images/portal2/chapter1/cube_momentum/map.png",
+                    ["images/portal2/chapter1/cube_momentum/0.png", []],
+                    ["images/portal2/chapter1/cube_momentum/1.png", []],
+                    ["images/portal2/chapter1/cube_momentum/2.png", []]
                 ],
                 "Future Starter": [
-                    "images/portal2/chapter1/future_starter/map.jpg",
-                    ["images/portal2/chapter1/future_starter/0.jpg", []],
-                    ["images/portal2/chapter1/future_starter/1.jpg", []],
-                    ["images/portal2/chapter1/future_starter/2.jpg", []],
-                    ["images/portal2/chapter1/future_starter/3.jpg", []],
-                    ["images/portal2/chapter1/future_starter/4.jpg", []],
-                    ["images/portal2/chapter1/future_starter/5.jpg", []]
+                    "images/portal2/chapter1/future_starter/map.png",
+                    ["images/portal2/chapter1/future_starter/0.png", []],
+                    ["images/portal2/chapter1/future_starter/1.png", []],
+                    ["images/portal2/chapter1/future_starter/2.png", []],
+                    ["images/portal2/chapter1/future_starter/3.png", []],
+                    ["images/portal2/chapter1/future_starter/4.png", []],
+                    ["images/portal2/chapter1/future_starter/5.png", []]
                 ],
                 "Secret Panel": [
-                    "images/portal2/chapter1/secret_panel/map.jpg",
-                    ["images/portal2/chapter1/secret_panel/0.jpg", []],
-                    ["images/portal2/chapter1/secret_panel/1.jpg", []],
-                    ["images/portal2/chapter1/secret_panel/2.jpg", []],
-                    ["images/portal2/chapter1/secret_panel/3.jpg", []],
-                    ["images/portal2/chapter1/secret_panel/4.jpg", []]
+                    "images/portal2/chapter1/secret_panel/map.png",
+                    ["images/portal2/chapter1/secret_panel/0.png", []],
+                    ["images/portal2/chapter1/secret_panel/1.png", []],
+                    ["images/portal2/chapter1/secret_panel/2.png", []],
+                    ["images/portal2/chapter1/secret_panel/3.png", []],
+                    ["images/portal2/chapter1/secret_panel/4.png", []]
                 ],
                 "Wake Up": [
-                    "images/portal2/chapter1/wake_up/map.jpg",
-                    ["images/portal2/chapter1/wake_up/0.jpg", []],
-                    ["images/portal2/chapter1/wake_up/1.jpg", []],
-                    ["images/portal2/chapter1/wake_up/2.jpg", []],
-                    ["images/portal2/chapter1/wake_up/3.jpg", []],
-                    ["images/portal2/chapter1/wake_up/4.jpg", []],
-                    ["images/portal2/chapter1/wake_up/5.jpg", []]
+                    "images/portal2/chapter1/wake_up/map.png",
+                    ["images/portal2/chapter1/wake_up/0.png", []],
+                    ["images/portal2/chapter1/wake_up/1.png", []],
+                    ["images/portal2/chapter1/wake_up/2.png", []],
+                    ["images/portal2/chapter1/wake_up/3.png", []],
+                    ["images/portal2/chapter1/wake_up/4.png", []],
+                    ["images/portal2/chapter1/wake_up/5.png", []]
                 ],
                 "Incinerator": [
-                    "images/portal2/chapter1/incinerator/map.jpg",
-                    ["images/portal2/chapter1/incinerator/0.jpg", []],
-                    ["images/portal2/chapter1/incinerator/1.jpg", []],
-                    ["images/portal2/chapter1/incinerator/2.jpg", []],
-                    ["images/portal2/chapter1/incinerator/3.jpg", []],
-                    ["images/portal2/chapter1/incinerator/4.jpg", []]
+                    "images/portal2/chapter1/incinerator/map.png",
+                    ["images/portal2/chapter1/incinerator/0.png", []],
+                    ["images/portal2/chapter1/incinerator/1.png", []],
+                    ["images/portal2/chapter1/incinerator/2.png", []],
+                    ["images/portal2/chapter1/incinerator/3.png", []],
+                    ["images/portal2/chapter1/incinerator/4.png", []]
                 ]
             },
             "Chapter 2 - The Cold Boot": {
                 "Laser Intro": [
-                    "images/portal2/chapter2/laser_intro/map.jpg",
-                    ["images/portal2/chapter2/laser_intro/1.jpg", []]
+                    "images/portal2/chapter2/laser_intro/map.png",
+                    ["images/portal2/chapter2/laser_intro/1.png", []]
                 ],
                 "Laser Stairs": [
-                    "images/portal2/chapter2/laser_stairs/map.jpg",
-                    ["images/portal2/chapter2/laser_stairs/1.jpg", []]
+                    "images/portal2/chapter2/laser_stairs/map.png",
+                    ["images/portal2/chapter2/laser_stairs/1.png", []]
                 ],
                 "Dual Lasers": [
-                    "images/portal2/chapter2/dual_lasers/map.jpg",
-                    ["images/portal2/chapter2/dual_lasers/1.jpg", []]
+                    "images/portal2/chapter2/dual_lasers/map.png",
+                    ["images/portal2/chapter2/dual_lasers/1.png", []]
                 ],
                 "Laser Over Goo": [
-                    "images/portal2/chapter2/laser_over_goo/map.jpg",
-                    ["images/portal2/chapter2/laser_over_goo/1.jpg", []]
+                    "images/portal2/chapter2/laser_over_goo/map.png",
+                    ["images/portal2/chapter2/laser_over_goo/1.png", []]
                 ],
                 "Catapult Intro": [
-                    "images/portal2/chapter2/catapult_intro/map.jpg",
-                    ["images/portal2/chapter2/catapult_intro/1.jpg", []]
+                    "images/portal2/chapter2/catapult_intro/map.png",
+                    ["images/portal2/chapter2/catapult_intro/1.png", []]
                 ],
                 "Trust Fling": [
-                    "images/portal2/chapter2/trust_fling/map.jpg",
-                    ["images/portal2/chapter2/trust_fling/1.jpg", []]
+                    "images/portal2/chapter2/trust_fling/map.png",
+                    ["images/portal2/chapter2/trust_fling/1.png", []]
                 ],
                 "Pit Flings": [
-                    "images/portal2/chapter2/pit_flings/map.jpg",
-                    ["images/portal2/chapter2/pit_flings/1.jpg", []]
+                    "images/portal2/chapter2/pit_flings/map.png",
+                    ["images/portal2/chapter2/pit_flings/1.png", []]
                 ],
                 "Fizzler Intro": [
-                    "images/portal2/chapter2/fizzler_intro/map.jpg",
-                    ["images/portal2/chapter2/fizzler_intro/1.jpg", []]
+                    "images/portal2/chapter2/fizzler_intro/map.png",
+                    ["images/portal2/chapter2/fizzler_intro/1.png", []]
                 ]
             }
         }
@@ -242,10 +242,20 @@ function startGame(gameArea) {
     }
 
     const possibleImages = collectLists(gameArea);
-    const selectedImage = possibleImages.length > 0 ? possibleImages[Math.floor(Math.random() * possibleImages.length)] : [];
-    //const randomIndex = Math.floor(1 + (Math.random() * (selectedImage.length - 1)));
-    const [imagePath, solution] = selectedImage; //[randomIndex];
+
+    let [imagePath, solution] = [null, null];
+
+    if (possibleImages[0].length === 2) {
+        const selectedImage = possibleImages.length > 0 ? possibleImages[Math.floor(Math.random() * possibleImages.length)] : [];
+        //const randomIndex = Math.floor(1 + (Math.random() * (selectedImage.length - 1)));
+        [imagePath, solution] = selectedImage; //[randomIndex];
+    } else {
+        const selected_map = possibleImages.length > 0 ? possibleImages[Math.floor(Math.random() * possibleImages.length)] : [];
+        const randomIndex = Math.floor(1 + (Math.random() * (selected_map.length - 1)));
+        [imagePath, solution] = selected_map[randomIndex];
+    }
     const randomImage = document.createElement('img');
+    console.log(imagePath);
     randomImage.src = imagePath;
     randomImage.style.maxWidth = '100%';
     randomImage.style.height = '50%';
@@ -288,7 +298,7 @@ function startGame(gameArea) {
             selection = JSON.parse(JSON.stringify(gameArea));
             submitButton.remove();
             backButton.remove();
-            renderOptions(selection);
+            renderOptions(selection, selection.parentKeys);
         };
         gameContainer.appendChild(backButton);
     }
@@ -336,12 +346,17 @@ function startGame(gameArea) {
             button.onclick = () => {
                 const selectedPath = parentKeys.concat([key]).join(' > ');
                 selectedPathElement.innerText = selectedPath;
-                selection = getNestedObject(gameModes, parentKeys.concat([key]));
+                const newSelected = getNestedObject(gameModes, parentKeys.concat([key]));
+                if (!newSelected) {
+                    selection = selection[key];
+                } else {
+                    selection = newSelected;
+                }
                 if (typeof value === 'object' && !Array.isArray(value)) {
                     parentKeys.push(key);
                     renderOptions(value, parentKeys);
                 } else {
-                    selectMap()
+                    selectMap();
                 }
             };
             mapSelector.appendChild(button);
