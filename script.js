@@ -13,7 +13,6 @@ const gameModes = {
                         ["images/portal2/chapter1/container_ride/2.png", []],
                         ["images/portal2/chapter1/container_ride/3.png", []],
                         ["images/portal2/chapter1/container_ride/4.png", []],
-                        
                     ],
                     "Container Ride": [
                         "images/portal2/chapter1/container_ride/maps/container_ride.png",
@@ -25,12 +24,12 @@ const gameModes = {
                         ["images/portal2/chapter1/container_ride/7.png", []],
                         ["images/portal2/chapter1/container_ride/8.png", []],
                         ["images/portal2/chapter1/container_ride/9.png", []],
-                    ]
+                    ],
                 },
                 "Portal Carousel": [
                     "images/portal2/chapter1/portal_carousel/map.png",
                     ["images/portal2/chapter1/portal_carousel/0.png", []],
-                    ["images/portal2/chapter1/portal_carousel/1.png", []]
+                    ["images/portal2/chapter1/portal_carousel/1.png", []],
                 ],
                 "Portal Gun": [
                     "images/portal2/chapter1/portal_gun/map.png",
@@ -42,7 +41,7 @@ const gameModes = {
                     ["images/portal2/chapter1/portal_gun/5.png", []],
                     ["images/portal2/chapter1/portal_gun/6.png", []],
                     ["images/portal2/chapter1/portal_gun/7.png", []],
-                    ["images/portal2/chapter1/portal_gun/8.png", []]
+                    ["images/portal2/chapter1/portal_gun/8.png", []],
                 ],
                 "Smooth Jazz": [
                     "images/portal2/chapter1/smooth_jazz/map.png",
@@ -285,12 +284,19 @@ function startGame(gameArea) {
     let [imagePath, solution] = [null, null];
 
     if (possibleImages[0].length === 2) {
-        actualMap = gameArea[0];
-        const selectedImage = possibleImages.length > 0 ? possibleImages[Math.floor(Math.random() * possibleImages.length)] : [];
-        //const randomIndex = Math.floor(1 + (Math.random() * (selectedImage.length - 1)));
-        [imagePath, solution] = selectedImage; //[randomIndex];
+        if (typeof possibleImages[0][0] !== 'string') {
+            actualMap = Array.isArray(gameArea) ? gameArea[0] : Object.values(gameArea)[0][0];
+            const selectedImage = possibleImages[Math.floor(Math.random() * possibleImages.length)];
+            //const randomIndex = Math.floor(1 + (Math.random() * (selectedImage.length - 1)));
+            [imagePath, solution] = selectedImage; //[randomIndex];
+        } else {
+            const selected_map = possibleImages[Math.floor(Math.random() * possibleImages.length)];
+            actualMap = selected_map[0];
+            const randomIndex = Math.floor(1 + (Math.random() * (selected_map.length - 1)));
+            [imagePath, solution] = selected_map[randomIndex];
+        }
     } else {
-        const selected_map = possibleImages.length > 0 ? possibleImages[Math.floor(Math.random() * possibleImages.length)] : [];
+        const selected_map = possibleImages[Math.floor(Math.random() * possibleImages.length)];
         actualMap = selected_map[0];
         const randomIndex = Math.floor(1 + (Math.random() * (selected_map.length - 1)));
         [imagePath, solution] = selected_map[randomIndex];
