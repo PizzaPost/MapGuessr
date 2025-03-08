@@ -130,20 +130,20 @@ const gameModes = {
             },
             "Chapter 2 - The Cold Boot": {
                 "Laser Intro": [
-                    "images/portal2/chapter2/laser_intro/map.png",
+                    "images/portal2/chapter2/laser_intro/maps/0.png",
                     ["images/portal2/chapter2/laser_intro/0.png", []],
                     ["images/portal2/chapter2/laser_intro/1.png", []],
                     ["images/portal2/chapter2/laser_intro/2.png", []],
                 ],
                 "Laser Stairs": [
-                    "images/portal2/chapter2/laser_stairs/map.png",
+                    "images/portal2/chapter2/laser_stairs/maps/0.png",
                     ["images/portal2/chapter2/laser_stairs/0.png", []],
                     ["images/portal2/chapter2/laser_stairs/1.png", []],
                     ["images/portal2/chapter2/laser_stairs/2.png", []],
                     ["images/portal2/chapter2/laser_stairs/3.png", []],
                 ],
                 "Dual Lasers": [
-                    "images/portal2/chapter2/dual_lasers/map.png",
+                    "images/portal2/chapter2/dual_lasers/maps/0.png",
                     ["images/portal2/chapter2/dual_lasers/0.png", []],
                     ["images/portal2/chapter2/dual_lasers/1.png", []],
                     ["images/portal2/chapter2/dual_lasers/2.png", []],
@@ -151,7 +151,7 @@ const gameModes = {
                     ["images/portal2/chapter2/dual_lasers/4.png", []],
                 ],
                 "Laser Over Goo": [
-                    "images/portal2/chapter2/laser_over_goo/map.png",
+                    "images/portal2/chapter2/laser_over_goo/maps/0.png",
                     ["images/portal2/chapter2/laser_over_goo/0.png", []],
                     ["images/portal2/chapter2/laser_over_goo/1.png", []],
                     ["images/portal2/chapter2/laser_over_goo/2.png", []],
@@ -159,14 +159,14 @@ const gameModes = {
                     ["images/portal2/chapter2/laser_over_goo/4.png", []],
                 ],
                 "Catapult Intro": [
-                    "images/portal2/chapter2/catapult_intro/map.png",
+                    "images/portal2/chapter2/catapult_intro/maps/0.png",
                     ["images/portal2/chapter2/catapult_intro/0.png", []],
                     ["images/portal2/chapter2/catapult_intro/1.png", []],
                     ["images/portal2/chapter2/catapult_intro/2.png", []],
                     ["images/portal2/chapter2/catapult_intro/3.png", []],
                 ],
                 "Trust Fling": [
-                    "images/portal2/chapter2/trust_fling/map.png",
+                    "images/portal2/chapter2/trust_fling/maps/0.png",
                     ["images/portal2/chapter2/trust_fling/0.png", []],
                     ["images/portal2/chapter2/trust_fling/1.png", []],
                     ["images/portal2/chapter2/trust_fling/2.png", []],
@@ -174,14 +174,14 @@ const gameModes = {
                     ["images/portal2/chapter2/trust_fling/4.png", []],
                 ],
                 "Pit Flings": [
-                    "images/portal2/chapter2/pit_flings/map.png",
+                    "images/portal2/chapter2/pit_flings/maps/0.png",
                     ["images/portal2/chapter2/pit_flings/0.png", []],
                     ["images/portal2/chapter2/pit_flings/1.png", []],
                     ["images/portal2/chapter2/pit_flings/2.png", []],
                     ["images/portal2/chapter2/pit_flings/3.png", []],
                 ],
                 "Fizzler Intro": [
-                    "images/portal2/chapter2/fizzler_intro/map.png",
+                    "images/portal2/chapter2/fizzler_intro/maps/0.png",
                     ["images/portal2/chapter2/fizzler_intro/0.png", []],
                     ["images/portal2/chapter2/fizzler_intro/1.png", []],
                     ["images/portal2/chapter2/fizzler_intro/2.png", []],
