@@ -4,73 +4,124 @@ const gameModes = {
             "Chapter 1 - The Courtesy Call": {
                 "Container Ride": [
                     "images/portal2/chapter1/container_ride/map.jpg",
-                    ["images/portal2/chapter1/container_ride/1.jpg", []]
+                    [
+                        "images/portal2/chapter1/container_ride/1.jpg",
+                        []
+                    ]
                 ],
                 "Portal Carousel": [
                     "images/portal2/chapter1/portal_carousel/map.jpg",
-                    ["images/portal2/chapter1/portal_carousel/1.jpg", []]
+                    [
+                        "images/portal2/chapter1/portal_carousel/1.jpg",
+                        []
+                    ]
                 ],
                 "Portal Gun": [
                     "images/portal2/chapter1/portal_gun/map.jpg",
-                    ["images/portal2/chapter1/portal_gun/1.jpg", []]
+                    [
+                        "images/portal2/chapter1/portal_gun/1.jpg",
+                        []
+                    ]
                 ],
                 "Smooth Jazz": [
                     "images/portal2/chapter1/smooth_jazz/map.jpg",
-                    ["images/portal2/chapter1/smooth_jazz/1.jpg", []]
+                    [
+                        "images/portal2/chapter1/smooth_jazz/1.jpg",
+                        []
+                    ]
                 ],
                 "Cube Momentum": [
                     "images/portal2/chapter1/cube_momentum/map.jpg",
-                    ["images/portal2/chapter1/cube_momentum/1.jpg", []]
+                    [
+                        "images/portal2/chapter1/cube_momentum/1.jpg",
+                        []
+                    ]
                 ],
                 "Future Starter": [
                     "images/portal2/chapter1/future_starter/map.jpg",
-                    ["images/portal2/chapter1/future_starter/1.jpg", []]
+                    [
+                        "images/portal2/chapter1/future_starter/1.jpg",
+                        []
+                    ]
                 ],
                 "Secret Panel": [
                     "images/portal2/chapter1/secret_panel/map.jpg",
-                    ["images/portal2/chapter1/secret_panel/1.jpg", []]
+                    [
+                        "images/portal2/chapter1/secret_panel/1.jpg",
+                        []
+                    ]
                 ],
                 "Wake Up": [
                     "images/portal2/chapter1/wake_up/map.jpg",
-                    ["images/portal2/chapter1/wake_up/1.jpg", []]
+                    [
+                        "images/portal2/chapter1/wake_up/1.jpg",
+                        []
+                    ]
                 ],
                 "Incinerator": [
                     "images/portal2/chapter1/incinerator/map.jpg",
-                    ["images/portal2/chapter1/incinerator/1.jpg", []]
+                    [
+                        "images/portal2/chapter1/incinerator/1.jpg",
+                        []
+                    ]
                 ]
             },
             "Chapter 2 - The Cold Boot": {
                 "Laser Intro": [
                     "images/portal2/chapter2/laser_intro/map.jpg",
-                    ["images/portal2/chapter2/laser_intro/1.jpg", []]
+                    [
+                        "images/portal2/chapter2/laser_intro/1.jpg",
+                        []
+                    ]
                 ],
                 "Laser Stairs": [
                     "images/portal2/chapter2/laser_stairs/map.jpg",
-                    ["images/portal2/chapter2/laser_stairs/1.jpg", []]
+                    [
+                        "images/portal2/chapter2/laser_stairs/1.jpg",
+                        []
+                    ]
                 ],
                 "Dual Lasers": [
                     "images/portal2/chapter2/dual_lasers/map.jpg",
-                    ["images/portal2/chapter2/dual_lasers/1.jpg", []]
+                    [
+                        "images/portal2/chapter2/dual_lasers/1.jpg",
+                        []
+                    ]
                 ],
                 "Laser Over Goo": [
                     "images/portal2/chapter2/laser_over_goo/map.jpg",
-                    ["images/portal2/chapter2/laser_over_goo/1.jpg", []]
+                    [
+                        "images/portal2/chapter2/laser_over_goo/1.jpg",
+                        []
+                    ]
                 ],
                 "Catapult Intro": [
                     "images/portal2/chapter2/catapult_intro/map.jpg",
-                    ["images/portal2/chapter2/catapult_intro/1.jpg", []]
+                    [
+                        "images/portal2/chapter2/catapult_intro/1.jpg",
+                        []
+                    ]
                 ],
                 "Trust Fling": [
                     "images/portal2/chapter2/trust_fling/map.jpg",
-                    ["images/portal2/chapter2/trust_fling/1.jpg", []]
+                    [
+                        "images/portal2/chapter2/trust_fling/1.jpg",
+                        []
+                    ]
                 ],
                 "Pit Flings": [
                     "images/portal2/chapter2/pit_flings/map.jpg",
-                    ["images/portal2/chapter2/pit_flings/1.jpg", []]
+                    [
+                        "images/portal2/chapter2/pit_flings/1.jpg",
+                        []
+                    ]
                 ],
                 "Fizzler Intro": [
                     "images/portal2/chapter2/fizzler_intro/map.jpg",
-                    ["images/portal2/chapter2/fizzler_intro/1.jpg", []]
+                    [
+                        "images/portal2/chapter2/fizzler_intro/1.jpg",
+                        []
+                    ]
                 ]
             }
         }
@@ -147,7 +198,8 @@ function gameModeSelector() {
             button.innerText = key;
             const value = options[key];
             if (!(typeof value === 'object' && !Array.isArray(value))) {
-                button.style.backgroundColor = 'green';
+                button.style.backgroundColor = 'black';
+                button.style.color = 'white';
             }
 
             button.onclick = () => {
@@ -158,7 +210,7 @@ function gameModeSelector() {
                     parentKeys.push(key);
                     renderOptions(value, parentKeys);
                 } else {
-                    selectGameMode()
+                    selectGameMode();
                 }
             };
             gameModeSelector.appendChild(button);
@@ -199,10 +251,10 @@ function startGame(gameArea) {
         return result;
     }
 
-    const lists = collectLists(gameArea);
-    const list = lists.length > 0 ? lists[Math.floor(Math.random() * lists.length)] : [];
-    const randomIndex = Math.floor(1 + (Math.random() * (list.length - 1)));
-    const [imagePath, solution] = list[randomIndex];
+    const possibleImages = collectLists(gameArea);
+    const selectedImage = possibleImages.length > 0 ? possibleImages[Math.floor(Math.random() * possibleImages.length)] : [];
+    //const randomIndex = Math.floor(1 + (Math.random() * (selectedImage.length - 1)));
+    const [imagePath, solution] = selectedImage; //[randomIndex];
     const randomImage = document.createElement('img');
     randomImage.src = imagePath;
     randomImage.style.maxWidth = '100%';
@@ -211,6 +263,8 @@ function startGame(gameArea) {
     resize();
 
     const mapImage = document.createElement('img');
+
+    let selectedMap = null;
 
     // Create the map selector
     let selection = JSON.parse(JSON.stringify(gameArea));
@@ -232,7 +286,6 @@ function startGame(gameArea) {
     function selectMap() {
         gameState = 2;
         mapSelector.style.display = 'none';
-        console.log(selection);
         displayMap(selection[0]);
 
         // Create a back button
@@ -286,7 +339,8 @@ function startGame(gameArea) {
             button.innerText = key;
             const value = options[key];
             if (!(typeof value === 'object' && !Array.isArray(value))) {
-                button.style.backgroundColor = 'green';
+                button.style.backgroundColor = 'black';
+                button.style.color = 'white';
             }
 
             button.onclick = () => {
@@ -305,10 +359,15 @@ function startGame(gameArea) {
     }
 
     // Start rendering options from the top level
-    renderOptions(selection);
+    if (Array.isArray(selection)) {
+        selectMap();
+    } else {
+        renderOptions(selection);
+    }
 
     function displayMap(map) {
         // Display the map image
+        selectedMap = map
         mapImage.src = map;
         mapImage.style.maxWidth = '100%';
         mapImage.style.height = '50%';
@@ -327,15 +386,17 @@ function startGame(gameArea) {
 
         // Listen for map clicks to place marker
         mapImage.onclick = (event) => {
-            const rect = mapImage.getBoundingClientRect();
-            const x = ((event.clientX - rect.left) + window.scrollX) / rect.width;
-            const y = ((event.clientY - rect.top) + window.scrollY) / rect.height;
-            marker.style.left = `${event.pageX - 5}px`; // subtract half the size of the marker
-            marker.style.top = `${event.pageY - 5}px`;
-            marker.style.display = 'block';
-            marker.dataset.x = x;
-            marker.dataset.y = y;
-            console.log(x, y);
+            if (document.body.contains(submitButton)) {
+                const rect = mapImage.getBoundingClientRect();
+                const x = ((event.clientX - rect.left) + window.scrollX) / rect.width;
+                const y = ((event.clientY - rect.top) + window.scrollY) / rect.height;
+                marker.style.left = `${event.pageX - 5}px`; // subtract half the size of the marker
+                marker.style.top = `${event.pageY - 5}px`;
+                marker.style.display = 'block';
+                marker.dataset.x = x;
+                marker.dataset.y = y;
+                console.log(x, y);
+            }
         };
 
         // Create submit button
@@ -344,7 +405,7 @@ function startGame(gameArea) {
             if (marker.style.display === 'block') {
                 backButton.remove();
                 gameContainer.appendChild(continueButton);
-                if (list[0] === selection[0]) {
+                if (selectedMap === selection[0]) {
                     const userX = parseFloat(marker.dataset.x);
                     const userY = parseFloat(marker.dataset.y);
                     const [solutionX, solutionY] = solution;
