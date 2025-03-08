@@ -1,14 +1,76 @@
 const gameModes = {
     "Portal Series": {
         "Portal 2": {
-            "Chapter 1": {
+            "Chapter 1 - The Courtesy Call": {
                 "Container Ride": [
-                    "images/portal2/chapter1/container-ride/map.jpg",
-                    ["images/portal2/chapter1/container-ride/1.jpg", []]
+                    "images/portal2/chapter1/container_ride/map.jpg",
+                    ["images/portal2/chapter1/container_ride/1.jpg", []]
                 ],
-                "test": [
-                    "images/portal2/chapter1/test/map.jpg",
-                    ["images/portal2/chapter1/test/1.jpg", []]
+                "Portal Carousel": [
+                    "images/portal2/chapter1/portal_carousel/map.jpg",
+                    ["images/portal2/chapter1/portal_carousel/1.jpg", []]
+                ],
+                "Portal Gun": [
+                    "images/portal2/chapter1/portal_gun/map.jpg",
+                    ["images/portal2/chapter1/portal_gun/1.jpg", []]
+                ],
+                "Smooth Jazz": [
+                    "images/portal2/chapter1/smooth_jazz/map.jpg",
+                    ["images/portal2/chapter1/smooth_jazz/1.jpg", []]
+                ],
+                "Cube Momentum": [
+                    "images/portal2/chapter1/cube_momentum/map.jpg",
+                    ["images/portal2/chapter1/cube_momentum/1.jpg", []]
+                ],
+                "Future Starter": [
+                    "images/portal2/chapter1/future_starter/map.jpg",
+                    ["images/portal2/chapter1/future_starter/1.jpg", []]
+                ],
+                "Secret Panel": [
+                    "images/portal2/chapter1/secret_panel/map.jpg",
+                    ["images/portal2/chapter1/secret_panel/1.jpg", []]
+                ],
+                "Wake Up": [
+                    "images/portal2/chapter1/wake_up/map.jpg",
+                    ["images/portal2/chapter1/wake_up/1.jpg", []]
+                ],
+                "Incinerator": [
+                    "images/portal2/chapter1/incinerator/map.jpg",
+                    ["images/portal2/chapter1/incinerator/1.jpg", []]
+                ]
+            },
+            "Chapter 2 - The Cold Boot": {
+                "Laser Intro": [
+                    "images/portal2/chapter2/laser_intro/map.jpg",
+                    ["images/portal2/chapter2/laser_intro/1.jpg", []]
+                ],
+                "Laser Stairs": [
+                    "images/portal2/chapter2/laser_stairs/map.jpg",
+                    ["images/portal2/chapter2/laser_stairs/1.jpg", []]
+                ],
+                "Dual Lasers": [
+                    "images/portal2/chapter2/dual_lasers/map.jpg",
+                    ["images/portal2/chapter2/dual_lasers/1.jpg", []]
+                ],
+                "Laser Over Goo": [
+                    "images/portal2/chapter2/laser_over_goo/map.jpg",
+                    ["images/portal2/chapter2/laser_over_goo/1.jpg", []]
+                ],
+                "Catapult Intro": [
+                    "images/portal2/chapter2/catapult_intro/map.jpg",
+                    ["images/portal2/chapter2/catapult_intro/1.jpg", []]
+                ],
+                "Trust Fling": [
+                    "images/portal2/chapter2/trust_fling/map.jpg",
+                    ["images/portal2/chapter2/trust_fling/1.jpg", []]
+                ],
+                "Pit Flings": [
+                    "images/portal2/chapter2/pit_flings/map.jpg",
+                    ["images/portal2/chapter2/pit_flings/1.jpg", []]
+                ],
+                "Fizzler Intro": [
+                    "images/portal2/chapter2/fizzler_intro/map.jpg",
+                    ["images/portal2/chapter2/fizzler_intro/1.jpg", []]
                 ]
             }
         }
