@@ -12,7 +12,6 @@ const gameModes = {
                         ["images/portal2/chapter1/container_ride/1.png", []],
                         ["images/portal2/chapter1/container_ride/2.png", []],
                         ["images/portal2/chapter1/container_ride/3.png", []],
-                        
                     ],
                     "Container Ride": [
                         "images/portal2/chapter1/container_ride/maps/container_ride.png",
@@ -24,15 +23,15 @@ const gameModes = {
                         ["images/portal2/chapter1/container_ride/6.png", []],
                         ["images/portal2/chapter1/container_ride/7.png", []],
                         ["images/portal2/chapter1/container_ride/8.png", []],
-                    ]
+                    ],
                 },
                 "Portal Carousel": [
-                    "images/portal2/chapter1/portal_carousel/map.png",
+                    "images/portal2/chapter1/portal_carousel/maps/0.png",
                     ["images/portal2/chapter1/portal_carousel/0.png", []],
-                    ["images/portal2/chapter1/portal_carousel/1.png", []]
+                    ["images/portal2/chapter1/portal_carousel/1.png", []],
                 ],
-                "Portal Gun": [
-                    "images/portal2/chapter1/portal_gun/map.png",
+                "Portal Gun": [ // TODO split maps 0-3
+                    "images/portal2/chapter1/portal_gun/maps/0.png",
                     ["images/portal2/chapter1/portal_gun/0.png", []],
                     ["images/portal2/chapter1/portal_gun/1.png", []],
                     ["images/portal2/chapter1/portal_gun/2.png", []],
@@ -41,23 +40,23 @@ const gameModes = {
                     ["images/portal2/chapter1/portal_gun/5.png", []],
                     ["images/portal2/chapter1/portal_gun/6.png", []],
                     ["images/portal2/chapter1/portal_gun/7.png", []],
-                    ["images/portal2/chapter1/portal_gun/8.png", []]
+                    ["images/portal2/chapter1/portal_gun/8.png", []],
                 ],
-                "Smooth Jazz": [
-                    "images/portal2/chapter1/smooth_jazz/map.png",
+                "Smooth Jazz": [ // TODO split maps 0-1
+                    "images/portal2/chapter1/smooth_jazz/maps/0.png",
                     ["images/portal2/chapter1/smooth_jazz/0.png", []],
                     ["images/portal2/chapter1/smooth_jazz/1.png", []],
                     ["images/portal2/chapter1/smooth_jazz/2.png", []],
                     ["images/portal2/chapter1/smooth_jazz/3.png", []]
                 ],
                 "Cube Momentum": [
-                    "images/portal2/chapter1/cube_momentum/map.png",
+                    "images/portal2/chapter1/cube_momentum/maps/0.png",
                     ["images/portal2/chapter1/cube_momentum/0.png", []],
                     ["images/portal2/chapter1/cube_momentum/1.png", []],
                     ["images/portal2/chapter1/cube_momentum/2.png", []]
                 ],
-                "Future Starter": [
-                    "images/portal2/chapter1/future_starter/map.png",
+                "Future Starter": [ // TODO split maps 0-2
+                    "images/portal2/chapter1/future_starter/maps/0.png",
                     ["images/portal2/chapter1/future_starter/0.png", []],
                     ["images/portal2/chapter1/future_starter/1.png", []],
                     ["images/portal2/chapter1/future_starter/2.png", []],
@@ -65,16 +64,16 @@ const gameModes = {
                     ["images/portal2/chapter1/future_starter/4.png", []],
                     ["images/portal2/chapter1/future_starter/5.png", []]
                 ],
-                "Secret Panel": [
-                    "images/portal2/chapter1/secret_panel/map.png",
+                "Secret Panel": [ // TODO split maps 0-1
+                    "images/portal2/chapter1/secret_panel/maps/0.png",
                     ["images/portal2/chapter1/secret_panel/0.png", []],
                     ["images/portal2/chapter1/secret_panel/1.png", []],
                     ["images/portal2/chapter1/secret_panel/2.png", []],
                     ["images/portal2/chapter1/secret_panel/3.png", []],
                     ["images/portal2/chapter1/secret_panel/4.png", []]
                 ],
-                "Wake Up": [
-                    "images/portal2/chapter1/wake_up/map.png",
+                "Wake Up": [ // TODO split maps 0-1
+                    "images/portal2/chapter1/wake_up/maps/0.png",
                     ["images/portal2/chapter1/wake_up/0.png", []],
                     ["images/portal2/chapter1/wake_up/1.png", []],
                     ["images/portal2/chapter1/wake_up/2.png", []],
@@ -82,8 +81,8 @@ const gameModes = {
                     ["images/portal2/chapter1/wake_up/4.png", []],
                     ["images/portal2/chapter1/wake_up/5.png", []]
                 ],
-                "Incinerator": [
-                    "images/portal2/chapter1/incinerator/map.png",
+                "Incinerator": [ // TODO split maps 0-2
+                    "images/portal2/chapter1/incinerator/maps/0.png",
                     ["images/portal2/chapter1/incinerator/0.png", []],
                     ["images/portal2/chapter1/incinerator/1.png", []],
                     ["images/portal2/chapter1/incinerator/2.png", []],
@@ -284,12 +283,19 @@ function startGame(gameArea) {
     let [imagePath, solution] = [null, null];
 
     if (possibleImages[0].length === 2) {
-        actualMap = gameArea[0];
-        const selectedImage = possibleImages.length > 0 ? possibleImages[Math.floor(Math.random() * possibleImages.length)] : [];
-        //const randomIndex = Math.floor(1 + (Math.random() * (selectedImage.length - 1)));
-        [imagePath, solution] = selectedImage; //[randomIndex];
+        if (typeof possibleImages[0][0] !== 'string') {
+            actualMap = Array.isArray(gameArea) ? gameArea[0] : Object.values(gameArea)[0][0];
+            const selectedImage = possibleImages[Math.floor(Math.random() * possibleImages.length)];
+            //const randomIndex = Math.floor(1 + (Math.random() * (selectedImage.length - 1)));
+            [imagePath, solution] = selectedImage; //[randomIndex];
+        } else {
+            const selected_map = possibleImages[Math.floor(Math.random() * possibleImages.length)];
+            actualMap = selected_map[0];
+            const randomIndex = Math.floor(1 + (Math.random() * (selected_map.length - 1)));
+            [imagePath, solution] = selected_map[randomIndex];
+        }
     } else {
-        const selected_map = possibleImages.length > 0 ? possibleImages[Math.floor(Math.random() * possibleImages.length)] : [];
+        const selected_map = possibleImages[Math.floor(Math.random() * possibleImages.length)];
         actualMap = selected_map[0];
         const randomIndex = Math.floor(1 + (Math.random() * (selected_map.length - 1)));
         [imagePath, solution] = selected_map[randomIndex];
@@ -471,7 +477,7 @@ function startGame(gameArea) {
                         alert('You got the map correct!\nThis image has not been assigned a solution yet.');
                     }
                 } else {
-                    const pathToMap = actualMap.split('/').slice(-2).join(' > ');
+                    const pathToMap = actualMap.split('/').slice(1, -2).join(' > ');
                     alert('You have chosen the wrong map. It was ' + pathToMap);
                 }
 
