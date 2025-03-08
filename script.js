@@ -2,19 +2,31 @@ const gameModes = {
     "Portal Series": {
         "Portal 2": {
             "Chapter 1 - The Courtesy Call": {
-                "Container Ride": [
-                    "images/portal2/chapter1/container_ride/map.png",
-                    ["images/portal2/chapter1/container_ride/0.png", []],
-                    ["images/portal2/chapter1/container_ride/1.png", []],
-                    ["images/portal2/chapter1/container_ride/2.png", []],
-                    ["images/portal2/chapter1/container_ride/3.png", []],
-                    ["images/portal2/chapter1/container_ride/4.png", []],
-                    ["images/portal2/chapter1/container_ride/5.png", []],
-                    ["images/portal2/chapter1/container_ride/6.png", []],
-                    ["images/portal2/chapter1/container_ride/7.png", []],
-                    ["images/portal2/chapter1/container_ride/8.png", []],
-                    ["images/portal2/chapter1/container_ride/9.png", []]
-                ],
+                "Container Ride": {
+                    "Intact Room": [
+                        "images/portal2/chapter1/container_ride/maps/intact_room.png",
+                        ["images/portal2/chapter1/container_ride/0.png", []],
+                    ],
+                    "Broken Room": [
+                        "images/portal2/chapter1/container_ride/maps/broken_room.png",
+                        ["images/portal2/chapter1/container_ride/1.png", []],
+                        ["images/portal2/chapter1/container_ride/2.png", []],
+                        ["images/portal2/chapter1/container_ride/3.png", []],
+                        ["images/portal2/chapter1/container_ride/4.png", []],
+                        
+                    ],
+                    "Container Ride": [
+                        "images/portal2/chapter1/container_ride/maps/container_ride.png",
+                        ["images/portal2/chapter1/container_ride/5.png", []],
+                        ["images/portal2/chapter1/container_ride/6.png", []],
+                    ],
+                    "Puzzle": [
+                        "images/portal2/chapter1/container_ride/maps/puzzle.png",
+                        ["images/portal2/chapter1/container_ride/7.png", []],
+                        ["images/portal2/chapter1/container_ride/8.png", []],
+                        ["images/portal2/chapter1/container_ride/9.png", []],
+                    ]
+                },
                 "Portal Carousel": [
                     "images/portal2/chapter1/portal_carousel/map.png",
                     ["images/portal2/chapter1/portal_carousel/0.png", []],
