@@ -478,7 +478,7 @@ function startGame(gameArea) {
                         alert('You got the map correct!\nThis image has not been assigned a solution yet.');
                     }
                 } else {
-                    const pathToMap = actualMap.split('/').slice(-2).join(' > ');
+                    const pathToMap = actualMap.split('/').slice(1, -2).join(' > ');
                     alert('You have chosen the wrong map. It was ' + pathToMap);
                 }
 
