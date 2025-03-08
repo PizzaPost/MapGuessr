@@ -142,14 +142,19 @@ const gameModes = {
                     ["images/portal2/chapter2/laser_stairs/2.png", []],
                     ["images/portal2/chapter2/laser_stairs/3.png", []],
                 ],
-                "Dual Lasers": [
-                    "images/portal2/chapter2/dual_lasers/maps/0.png",
-                    ["images/portal2/chapter2/dual_lasers/0.png", []],
-                    ["images/portal2/chapter2/dual_lasers/1.png", []],
-                    ["images/portal2/chapter2/dual_lasers/2.png", []],
-                    ["images/portal2/chapter2/dual_lasers/3.png", []],
-                    ["images/portal2/chapter2/dual_lasers/4.png", []],
-                ],
+                "Dual Lasers": {
+                    "0": [
+                        "images/portal2/chapter2/dual_lasers/maps/0.png",
+                        ["images/portal2/chapter2/dual_lasers/1.png", []],
+                        ["images/portal2/chapter2/dual_lasers/2.png", []],
+                    ],
+                    "1": [
+                        "images/portal2/chapter2/dual_lasers/maps/1.png",
+                        ["images/portal2/chapter2/dual_lasers/0.png", []],
+                        ["images/portal2/chapter2/dual_lasers/3.png", []],
+                        ["images/portal2/chapter2/dual_lasers/4.png", []],
+                    ],
+                },
                 "Laser Over Goo": [
                     "images/portal2/chapter2/laser_over_goo/maps/0.png",
                     ["images/portal2/chapter2/laser_over_goo/0.png", []],
