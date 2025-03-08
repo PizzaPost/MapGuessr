@@ -224,7 +224,8 @@ function startGame(gameArea) {
             button.innerText = key;
             const value = options[key];
             if (!(typeof value === 'object' && !Array.isArray(value))) {
-                button.style.backgroundColor = 'green';
+                button.style.backgroundColor = 'black';
+                button.style.color = 'white';
             }
 
             button.onclick = () => {
