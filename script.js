@@ -146,6 +146,7 @@ function startGame(gameArea) {
     randomImage.style.maxWidth = '100%';
     randomImage.style.height = '50%';
     gameContainer.appendChild(randomImage);
+    resize();
 
     const mapImage = document.createElement('img');
 
@@ -153,6 +154,8 @@ function startGame(gameArea) {
     let selection = JSON.parse(JSON.stringify(gameArea));
 
     const backButton = document.createElement('button');
+
+    const submitButton = document.createElement('button');
 
     const mapSelector = document.createElement('div');
     mapSelector.id = 'mapSelector';
@@ -178,6 +181,7 @@ function startGame(gameArea) {
             mapSelector.style.display = 'block';
             mapImage.style.display = 'none';
             selection = JSON.parse(JSON.stringify(gameArea));
+            submitButton.remove();
             backButton.remove();
             renderOptions(selection);
         };
@@ -247,6 +251,7 @@ function startGame(gameArea) {
         mapImage.style.maxWidth = '100%';
         mapImage.style.height = '50%';
         gameContainer.appendChild(mapImage);
+        resize();
 
         // Create a marker on the map
         let marker = document.createElement('div');
@@ -268,10 +273,10 @@ function startGame(gameArea) {
             marker.style.display = 'block';
             marker.dataset.x = x;
             marker.dataset.y = y;
+            console.log(x, y);
         };
 
         // Create submit button
-        const submitButton = document.createElement('button');
         submitButton.innerText = 'Submit';
         submitButton.onclick = () => {
             if (marker.style.display === 'block') {
@@ -320,3 +325,16 @@ function startGame(gameArea) {
         };
     }
 }
+
+function resize() {
+    const allImages = document.querySelectorAll('img');
+
+    const width = window.innerWidth;
+    const height = window.innerHeight;
+    const isPortrait = (width < height) || (allImages.length === 1);
+    const imageWidth = isPortrait ? '100%' : '50%';
+
+    allImages.forEach(img => img.style.width = imageWidth);
+}
+
+window.addEventListener('resize', resize);

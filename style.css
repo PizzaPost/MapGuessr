@@ -1,3 +1,15 @@
 .hidden {
     display: none;
 }
+
+/* Style the image to take up 50% of the screen height */
+img {
+    height: auto;
+}
+
+/* Style the game container to take up the remaining 50% of the screen height */
+#gameContainer {
+    height: 100%;
+    overflow-y: auto;
+    font-size: 24px; /* Scale up the text size */
+}
