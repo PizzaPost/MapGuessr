@@ -4,124 +4,114 @@ const gameModes = {
             "Chapter 1 - The Courtesy Call": {
                 "Container Ride": [
                     "images/portal2/chapter1/container_ride/map.jpg",
-                    [
-                        "images/portal2/chapter1/container_ride/1.jpg",
-                        []
-                    ]
+                    ["images/portal2/chapter1/container_ride/0.jpg", []],
+                    ["images/portal2/chapter1/container_ride/1.jpg", []],
+                    ["images/portal2/chapter1/container_ride/2.jpg", []],
+                    ["images/portal2/chapter1/container_ride/3.jpg", []],
+                    ["images/portal2/chapter1/container_ride/4.jpg", []],
+                    ["images/portal2/chapter1/container_ride/5.jpg", []],
+                    ["images/portal2/chapter1/container_ride/6.jpg", []],
+                    ["images/portal2/chapter1/container_ride/7.jpg", []],
+                    ["images/portal2/chapter1/container_ride/8.jpg", []],
+                    ["images/portal2/chapter1/container_ride/9.jpg", []]
                 ],
                 "Portal Carousel": [
                     "images/portal2/chapter1/portal_carousel/map.jpg",
-                    [
-                        "images/portal2/chapter1/portal_carousel/1.jpg",
-                        []
-                    ]
+                    ["images/portal2/chapter1/portal_carousel/0.jpg", []],
+                    ["images/portal2/chapter1/portal_carousel/1.jpg", []]
                 ],
                 "Portal Gun": [
                     "images/portal2/chapter1/portal_gun/map.jpg",
-                    [
-                        "images/portal2/chapter1/portal_gun/1.jpg",
-                        []
-                    ]
+                    ["images/portal2/chapter1/portal_gun/0.jpg", []],
+                    ["images/portal2/chapter1/portal_gun/1.jpg", []],
+                    ["images/portal2/chapter1/portal_gun/2.jpg", []],
+                    ["images/portal2/chapter1/portal_gun/3.jpg", []],
+                    ["images/portal2/chapter1/portal_gun/4.jpg", []],
+                    ["images/portal2/chapter1/portal_gun/5.jpg", []],
+                    ["images/portal2/chapter1/portal_gun/6.jpg", []],
+                    ["images/portal2/chapter1/portal_gun/7.jpg", []],
+                    ["images/portal2/chapter1/portal_gun/8.jpg", []]
                 ],
                 "Smooth Jazz": [
                     "images/portal2/chapter1/smooth_jazz/map.jpg",
-                    [
-                        "images/portal2/chapter1/smooth_jazz/1.jpg",
-                        []
-                    ]
+                    ["images/portal2/chapter1/smooth_jazz/0.jpg", []],
+                    ["images/portal2/chapter1/smooth_jazz/1.jpg", []],
+                    ["images/portal2/chapter1/smooth_jazz/2.jpg", []],
+                    ["images/portal2/chapter1/smooth_jazz/3.jpg", []]
                 ],
                 "Cube Momentum": [
                     "images/portal2/chapter1/cube_momentum/map.jpg",
-                    [
-                        "images/portal2/chapter1/cube_momentum/1.jpg",
-                        []
-                    ]
+                    ["images/portal2/chapter1/cube_momentum/0.jpg", []],
+                    ["images/portal2/chapter1/cube_momentum/1.jpg", []],
+                    ["images/portal2/chapter1/cube_momentum/2.jpg", []]
                 ],
                 "Future Starter": [
                     "images/portal2/chapter1/future_starter/map.jpg",
-                    [
-                        "images/portal2/chapter1/future_starter/1.jpg",
-                        []
-                    ]
+                    ["images/portal2/chapter1/future_starter/0.jpg", []],
+                    ["images/portal2/chapter1/future_starter/1.jpg", []],
+                    ["images/portal2/chapter1/future_starter/2.jpg", []],
+                    ["images/portal2/chapter1/future_starter/3.jpg", []],
+                    ["images/portal2/chapter1/future_starter/4.jpg", []],
+                    ["images/portal2/chapter1/future_starter/5.jpg", []]
                 ],
                 "Secret Panel": [
                     "images/portal2/chapter1/secret_panel/map.jpg",
-                    [
-                        "images/portal2/chapter1/secret_panel/1.jpg",
-                        []
-                    ]
+                    ["images/portal2/chapter1/secret_panel/0.jpg", []],
+                    ["images/portal2/chapter1/secret_panel/1.jpg", []],
+                    ["images/portal2/chapter1/secret_panel/2.jpg", []],
+                    ["images/portal2/chapter1/secret_panel/3.jpg", []],
+                    ["images/portal2/chapter1/secret_panel/4.jpg", []]
                 ],
                 "Wake Up": [
                     "images/portal2/chapter1/wake_up/map.jpg",
-                    [
-                        "images/portal2/chapter1/wake_up/1.jpg",
-                        []
-                    ]
+                    ["images/portal2/chapter1/wake_up/0.jpg", []],
+                    ["images/portal2/chapter1/wake_up/1.jpg", []],
+                    ["images/portal2/chapter1/wake_up/2.jpg", []],
+                    ["images/portal2/chapter1/wake_up/3.jpg", []],
+                    ["images/portal2/chapter1/wake_up/4.jpg", []],
+                    ["images/portal2/chapter1/wake_up/5.jpg", []]
                 ],
                 "Incinerator": [
                     "images/portal2/chapter1/incinerator/map.jpg",
-                    [
-                        "images/portal2/chapter1/incinerator/1.jpg",
-                        []
-                    ]
+                    ["images/portal2/chapter1/incinerator/0.jpg", []],
+                    ["images/portal2/chapter1/incinerator/1.jpg", []],
+                    ["images/portal2/chapter1/incinerator/2.jpg", []],
+                    ["images/portal2/chapter1/incinerator/3.jpg", []],
+                    ["images/portal2/chapter1/incinerator/4.jpg", []]
                 ]
             },
             "Chapter 2 - The Cold Boot": {
                 "Laser Intro": [
                     "images/portal2/chapter2/laser_intro/map.jpg",
-                    [
-                        "images/portal2/chapter2/laser_intro/1.jpg",
-                        []
-                    ]
+                    ["images/portal2/chapter2/laser_intro/1.jpg", []]
                 ],
                 "Laser Stairs": [
                     "images/portal2/chapter2/laser_stairs/map.jpg",
-                    [
-                        "images/portal2/chapter2/laser_stairs/1.jpg",
-                        []
-                    ]
+                    ["images/portal2/chapter2/laser_stairs/1.jpg", []]
                 ],
                 "Dual Lasers": [
                     "images/portal2/chapter2/dual_lasers/map.jpg",
-                    [
-                        "images/portal2/chapter2/dual_lasers/1.jpg",
-                        []
-                    ]
+                    ["images/portal2/chapter2/dual_lasers/1.jpg", []]
                 ],
                 "Laser Over Goo": [
                     "images/portal2/chapter2/laser_over_goo/map.jpg",
-                    [
-                        "images/portal2/chapter2/laser_over_goo/1.jpg",
-                        []
-                    ]
+                    ["images/portal2/chapter2/laser_over_goo/1.jpg", []]
                 ],
                 "Catapult Intro": [
                     "images/portal2/chapter2/catapult_intro/map.jpg",
-                    [
-                        "images/portal2/chapter2/catapult_intro/1.jpg",
-                        []
-                    ]
+                    ["images/portal2/chapter2/catapult_intro/1.jpg", []]
                 ],
                 "Trust Fling": [
                     "images/portal2/chapter2/trust_fling/map.jpg",
-                    [
-                        "images/portal2/chapter2/trust_fling/1.jpg",
-                        []
-                    ]
+                    ["images/portal2/chapter2/trust_fling/1.jpg", []]
                 ],
                 "Pit Flings": [
                     "images/portal2/chapter2/pit_flings/map.jpg",
-                    [
-                        "images/portal2/chapter2/pit_flings/1.jpg",
-                        []
-                    ]
+                    ["images/portal2/chapter2/pit_flings/1.jpg", []]
                 ],
                 "Fizzler Intro": [
                     "images/portal2/chapter2/fizzler_intro/map.jpg",
-                    [
-                        "images/portal2/chapter2/fizzler_intro/1.jpg",
-                        []
-                    ]
+                    ["images/portal2/chapter2/fizzler_intro/1.jpg", []]
                 ]
             }
         }
