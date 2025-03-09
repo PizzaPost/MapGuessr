@@ -193,13 +193,121 @@ const gameModes = {
                     ["images/portal2/chapter2/fizzler_intro/1.png", []],
                     ["images/portal2/chapter2/fizzler_intro/2.png", []],
                 ]
-            }
+            },
+            "Chapter 3 - The Return": {
+                "Ceiling Catapult": {
+                    "0": [
+                        "images/portal2/chapter3/ceiling_catapult/maps/0.png",
+                        ["images/portal2/chapter3/ceiling_catapult/0.png", []],
+                        ["images/portal2/chapter3/ceiling_catapult/1.png", []],
+                        ["images/portal2/chapter3/ceiling_catapult/2.png", []],
+                        ["images/portal2/chapter3/ceiling_catapult/3.png", []],
+                    ],
+                    "1": [
+                        "images/portal2/chapter3/ceiling_catapult/maps/1.png",
+                        ["images/portal2/chapter3/ceiling_catapult/4.png", []],
+                        ["images/portal2/chapter3/ceiling_catapult/5.png", []],
+                        ["images/portal2/chapter3/ceiling_catapult/6.png", []],
+                        ["images/portal2/chapter3/ceiling_catapult/7.png", []],
+                    ],
+                },
+                "Ricochet": [
+                    "images/portal2/chapter3/ricochet/maps/0.png",
+                    ["images/portal2/chapter3/ricochet/0.png", []],
+                    ["images/portal2/chapter3/ricochet/1.png", []],
+                    ["images/portal2/chapter3/ricochet/2.png", []],
+                    ["images/portal2/chapter3/ricochet/3.png", []],
+                    ["images/portal2/chapter3/ricochet/4.png", []],
+                    ["images/portal2/chapter3/ricochet/5.png", []],
+                ],
+                "Bridge Intro": {
+                    "0": [
+                        "images/portal2/chapter3/bridge_intro/maps/0.png",
+                        ["images/portal2/chapter3/bridge_intro/0.png", []],
+                        ["images/portal2/chapter3/bridge_intro/1.png", []],
+                        ["images/portal2/chapter3/bridge_intro/5.png", []],
+                    ],
+                    "1": [
+                        "images/portal2/chapter3/bridge_intro/maps/1.png",
+                        ["images/portal2/chapter3/bridge_intro/2.png", []],
+                        ["images/portal2/chapter3/bridge_intro/3.png", []],
+                        ["images/portal2/chapter3/bridge_intro/4.png", []],
+                    ],
+                },
+                "Bridge The Gap": {
+                    "0": [
+                        "images/portal2/chapter3/bridge_the_gap/maps/0.png",
+                        ["images/portal2/chapter3/bridge_the_gap/0.png", []],
+                        ["images/portal2/chapter3/bridge_the_gap/1.png", []],
+                        ["images/portal2/chapter3/bridge_the_gap/2.png", []],
+                    ],
+                    "1": [
+                        "images/portal2/chapter3/bridge_the_gap/maps/1.png",
+                        ["images/portal2/chapter3/bridge_the_gap/3.png", []],
+                        ["images/portal2/chapter3/bridge_the_gap/4.png", []],
+                    ],
+                    "2": [
+                        "images/portal2/chapter3/bridge_the_gap/maps/2.png",
+                        ["images/portal2/chapter3/bridge_the_gap/5.png", []],
+                        ["images/portal2/chapter3/bridge_the_gap/6.png", []],
+                        ["images/portal2/chapter3/bridge_the_gap/7.png", []],
+                    ],
+                },
+                "Turret Intro": {
+                    "0": [
+                        "images/portal2/chapter3/turret_intro/maps/0.png",
+                        ["images/portal2/chapter3/turret_intro/0.png", []],
+                        ["images/portal2/chapter3/turret_intro/1.png", []],
+                        ["images/portal2/chapter3/turret_intro/2.png", []],
+                    ],
+                    "1": [
+                        "images/portal2/chapter3/turret_intro/maps/1.png",
+                        ["images/portal2/chapter3/turret_intro/3.png", []],
+                        ["images/portal2/chapter3/turret_intro/4.png", []],
+                    ],
+                },
+                "Laser Relays": [
+                    "images/portal2/chapter3/laser_relays/maps/0.png",
+                    ["images/portal2/chapter3/laser_relays/0.png", []],
+                    ["images/portal2/chapter3/laser_relays/1.png", []],
+                    ["images/portal2/chapter3/laser_relays/2.png", []],
+                ],
+                "Turret Blocker": [
+                    "images/portal2/chapter3/turret_blocker/maps/0.png",
+                    ["images/portal2/chapter3/turret_blocker/0.png", []],
+                    ["images/portal2/chapter3/turret_blocker/1.png", []],
+                    ["images/portal2/chapter3/turret_blocker/2.png", []],
+                    ["images/portal2/chapter3/turret_blocker/3.png", []],
+                ],
+                "Laser VS Turret": {
+                    "0": [
+                        "images/portal2/chapter3/laser_vs_turret/maps/0.png",
+                        ["images/portal2/chapter3/laser_vs_turret/2.png", []],
+                        ["images/portal2/chapter3/laser_vs_turret/3.png", []],
+                    ],
+                    "1": [
+                        "images/portal2/chapter3/laser_vs_turret/maps/1.png",
+                        ["images/portal2/chapter3/laser_vs_turret/0.png", []],
+                        ["images/portal2/chapter3/laser_vs_turret/1.png", []],
+                        ["images/portal2/chapter3/laser_vs_turret/4.png", []],
+                    ],
+                },
+                "Pull The Rug": [
+                    "images/portal2/chapter3/pull_the_rug/maps/0.png",
+                    ["images/portal2/chapter3/pull_the_rug/0.png", []],
+                    ["images/portal2/chapter3/pull_the_rug/1.png", []],
+                    ["images/portal2/chapter3/pull_the_rug/2.png", []],
+                ],
+            },
         }
     }
 }
 
 let gameState = 0; // 0 => choose gamemode
 let gameArea = getNestedObject(gameModes, []); // not yet set area to choose locations from
+
+let devMode = 0;
+let altDevMode = 0;
 
 gameModeSelector(); // interface to select gameArea
 
@@ -327,14 +435,39 @@ function startGame(gameArea) {
 
     let [imagePath, solution] = [null, null];
 
-    if (Array.isArray(gameArea)) {
-        actualMap = gameArea[0];
-        [imagePath, solution] = gameArea[1 + Math.floor(Math.random() * (gameArea.length - 1))];
+    if (devMode > -1) {
+        if (Array.isArray(gameArea)) {
+            if (devMode >= gameArea.length) {
+                devMode = 0;
+            }
+            actualMap = gameArea[0];
+            [imagePath, solution] = gameArea[1 + devMode];
+            devMode++;
+        } else {
+            if (devMode >= possibleImages.length) {
+                devMode = 0;
+            }
+            if (altDevMode >= possibleImages[devMode].length - 1) {
+                altDevMode = 0;
+                devMode++;
+            }
+            const possibleImage = possibleImages[devMode][1 + altDevMode];
+            const possibleMaps = possibleImages.find(list => list.includes(possibleImage))
+            actualMap = possibleMaps[0];
+            [imagePath, solution] = possibleImage;
+            altDevMode++;
+        }
     } else {
-        const randomNumber = Math.floor(Math.random() * possibleImages.length);
-        const possibleImage = possibleImages[randomNumber][1 + Math.floor(Math.random() * possibleImages[randomNumber].length)];
-        actualMap = possibleImages.find(list => list.includes(possibleImage))[0];
-        [imagePath, solution] = possibleImage;
+        if (Array.isArray(gameArea)) {
+            actualMap = gameArea[0];
+            [imagePath, solution] = gameArea[1 + Math.floor(Math.random() * (gameArea.length - 1))];
+        } else {
+            const randomNumber = Math.floor(Math.random() * possibleImages.length);
+            const possibleImage = possibleImages[randomNumber][1 + Math.floor(Math.random() * (possibleImages[randomNumber].length - 1))];
+            const possibleMaps = possibleImages.find(list => list.includes(possibleImage))
+            actualMap = possibleMaps[0];
+            [imagePath, solution] = possibleImage;
+        }
     }
 
     const randomImage = document.createElement('img');
@@ -343,6 +476,8 @@ function startGame(gameArea) {
     randomImage.style.height = '50%';
     gameContainer.appendChild(randomImage);
     resize();
+
+    if (devMode > -1) { console.log(`Currently on map ${actualMap} image ${imagePath} with solution ${solution}`); }
 
     const mapImage = document.createElement('img');
 
@@ -370,7 +505,11 @@ function startGame(gameArea) {
     function selectMap() {
         gameState = 2;
         mapSelector.style.display = 'none';
-        displayMap(selection[0]);
+        if (devMode > -1) {
+            displayMap(actualMap)
+        } else {
+            displayMap(selection[0]);
+        }
 
         if (!Array.isArray(gameArea)) {
             // Create a back button
@@ -449,7 +588,7 @@ function startGame(gameArea) {
     }
 
     // Start rendering options from the top level
-    if (Array.isArray(selection)) {
+    if (Array.isArray(selection) || devMode > -1) {
         selectMap();
     } else {
         renderOptions(selection);
@@ -484,7 +623,7 @@ function startGame(gameArea) {
                 marker.style.display = 'block';
                 marker.dataset.x = x;
                 marker.dataset.y = y;
-                console.log(x, y);
+                console.log(`${x}, ${y}`);
             }
         };
 
@@ -532,7 +671,7 @@ function startGame(gameArea) {
         }
         gameContainer.appendChild(submitButton);
 
-        console.log(`Currently on map ${actualMap}, which you think is ${selectedMap}`);
+        if (devMode > -1) { console.log(`Currently on map ${actualMap} (image ${imagePath.split('/').slice(-1).join(' > ')}), which you think is ${selectedMap}`); }
         mapImage.style.display = '';
 
         // Create continue button
