@@ -305,6 +305,7 @@ const gameModes = {
 
 let gameState = 0; // 0 => choose gamemode
 let gameArea = getNestedObject(gameModes, []); // not yet set area to choose locations from
+let totalScore = 0;
 
 let devMode = -1;
 let altDevMode = 0;
@@ -652,6 +653,8 @@ function startGame(gameArea) {
                     const score = Math.max(0, 1000 - distance * 1000);
 
                     if (Array.isArray(solution) && solution.length > 0) {
+                        totalScore += score;
+                        document.title = `MapGuessr | Score: ${totalScore.toFixed(0)}`;
                         alert(`You scored ${score.toFixed(0)} points!`);
                         solutionMarker.style.position = 'absolute';
                         solutionMarker.style.width = '10px';
