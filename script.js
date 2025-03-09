@@ -614,17 +614,26 @@ function startGame(gameArea) {
 
         // Listen for map clicks to place marker
         mapImage.onclick = (event) => {
-            if (document.body.contains(submitButton)) {
-                const rect = mapImage.getBoundingClientRect();
-                const x = ((event.clientX - rect.left) + window.scrollX) / rect.width;
-                const y = ((event.clientY - rect.top) + window.scrollY) / rect.height;
-                marker.style.left = `${event.pageX - 5}px`; // subtract half the size of the marker
-                marker.style.top = `${event.pageY - 5}px`;
-                marker.style.display = 'block';
-                marker.dataset.x = x;
-                marker.dataset.y = y;
-                console.log(`${x}, ${y}`);
-            }
+            setMarker(event);
+        };
+
+        marker.onclick = (event) => {
+            setMarker(event);
+        };
+
+        mapImage.onwheel = (event) => {
+            event.preventDefault();
+            const scrollDelta = event.deltaY;
+            const rect = mapImage.getBoundingClientRect();
+            const oldScale = mapImage.style.transform ? parseFloat(mapImage.style.transform.match(/scale\((\d*\.\d+|\d+)\)/)[1]) : 1;
+            const newScale = Math.min(5, Math.max(1, oldScale - scrollDelta / 1000));
+            const randomImageRect = randomImage.getBoundingClientRect();
+            mapImage.style.transform = `scale(${newScale})`;
+            updateMarker(event);
+        };
+
+        gameContainer.onscroll = (event) => {
+            updateMarker(event);
         };
 
         // Create submit button
@@ -681,6 +690,30 @@ function startGame(gameArea) {
             marker.remove();
             startGame(gameArea); // Restart game with current area
         };
+
+        function setMarker(event) {
+            if (document.body.contains(submitButton)) {
+                const rect = mapImage.getBoundingClientRect();
+                const x = ((event.clientX - rect.left) + window.scrollX) / rect.width;
+                const y = ((event.clientY - rect.top) + window.scrollY) / rect.height;
+                console.log(`${x}, ${y}`);
+                marker.dataset.x = x;
+                marker.dataset.y = y;
+
+                marker.style.left = `${rect.left + x * rect.width - 5}px`; // subtract half the size of the marker
+                marker.style.top = `${rect.top + y * rect.height - 5}px`;
+                marker.style.display = 'block';
+            }
+        }
+
+        function updateMarker(event) {
+            if (marker.style.display === 'block') {
+                const rect = mapImage.getBoundingClientRect();
+                [x, y] = [marker.dataset.x, marker.dataset.y];
+                marker.style.left = `${rect.left + x * rect.width - 5}px`; // subtract half the size of the marker
+                marker.style.top = `${rect.top + y * rect.height - 5}px`;
+            }
+        }
     }
 }
 
