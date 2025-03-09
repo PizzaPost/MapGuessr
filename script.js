@@ -305,8 +305,9 @@ const gameModes = {
 
 let gameState = 0; // 0 => choose gamemode
 let gameArea = getNestedObject(gameModes, []); // not yet set area to choose locations from
+let totalScore = 0;
 
-let devMode = 0;
+let devMode = -1;
 let altDevMode = 0;
 
 gameModeSelector(); // interface to select gameArea
@@ -458,15 +459,15 @@ function startGame(gameArea) {
             altDevMode++;
         }
     } else {
-    if (Array.isArray(gameArea)) {
-        actualMap = gameArea[0];
-        [imagePath, solution] = gameArea[1 + Math.floor(Math.random() * (gameArea.length - 1))];
-    } else {
-        const randomNumber = Math.floor(Math.random() * possibleImages.length);
+        if (Array.isArray(gameArea)) {
+            actualMap = gameArea[0];
+            [imagePath, solution] = gameArea[1 + Math.floor(Math.random() * (gameArea.length - 1))];
+        } else {
+            const randomNumber = Math.floor(Math.random() * possibleImages.length);
             const possibleImage = possibleImages[randomNumber][1 + Math.floor(Math.random() * (possibleImages[randomNumber].length - 1))];
             const possibleMaps = possibleImages.find(list => list.includes(possibleImage))
             actualMap = possibleMaps[0];
-        [imagePath, solution] = possibleImage;
+            [imagePath, solution] = possibleImage;
         }
     }
 
@@ -492,6 +493,8 @@ function startGame(gameArea) {
 
     let marker = document.createElement('div');
 
+    const solutionMarker = document.createElement('div');
+
     const mapSelector = document.createElement('div');
     mapSelector.id = 'mapSelector';
     gameContainer.appendChild(mapSelector);
@@ -508,7 +511,7 @@ function startGame(gameArea) {
         if (devMode > -1) {
             displayMap(actualMap)
         } else {
-        displayMap(selection[0]);
+            displayMap(selection[0]);
         }
 
         if (!Array.isArray(gameArea)) {
@@ -650,13 +653,16 @@ function startGame(gameArea) {
                     const score = Math.max(0, 1000 - distance * 1000);
 
                     if (Array.isArray(solution) && solution.length > 0) {
+                        totalScore += score;
+                        document.title = `MapGuessr | Score: ${totalScore.toFixed(0)}`;
                         alert(`You scored ${score.toFixed(0)} points!`);
-                        const solutionMarker = document.createElement('div');
                         solutionMarker.style.position = 'absolute';
                         solutionMarker.style.width = '10px';
                         solutionMarker.style.height = '10px';
                         solutionMarker.style.backgroundColor = 'green';
                         solutionMarker.style.borderRadius = '50%';
+                        solutionMarker.dataset.x = solutionX;
+                        solutionMarker.dataset.y = solutionY;
                         solutionMarker.style.left = `${mapImage.offsetLeft + solutionX * mapImage.offsetWidth - 5}px`; // subtract half the size of the marker
                         solutionMarker.style.top = `${mapImage.offsetTop + solutionY * mapImage.offsetHeight - 5}px`;
                         document.body.appendChild(solutionMarker);
@@ -688,6 +694,7 @@ function startGame(gameArea) {
         continueButton.innerText = 'Continue';
         continueButton.onclick = () => {
             marker.remove();
+            solutionMarker.remove();
             startGame(gameArea); // Restart game with current area
         };
 
@@ -709,9 +716,12 @@ function startGame(gameArea) {
         function updateMarker(event) {
             if (marker.style.display === 'block') {
                 const rect = mapImage.getBoundingClientRect();
-                [x, y] = [marker.dataset.x, marker.dataset.y];
+                let [x, y] = [marker.dataset.x, marker.dataset.y];
+                let [sx, sy] = [solutionMarker.dataset.x, solutionMarker.dataset.y];
                 marker.style.left = `${rect.left + x * rect.width - 5}px`; // subtract half the size of the marker
                 marker.style.top = `${rect.top + y * rect.height - 5}px`;
+                solutionMarker.style.left = `${rect.left + sx * rect.width - 5}px`; // subtract half the size of the marker
+                solutionMarker.style.top = `${rect.top + sy * rect.height - 5}px`;
             }
         }
     }
