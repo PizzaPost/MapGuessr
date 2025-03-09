@@ -331,7 +331,8 @@ function startGame(gameArea) {
         actualMap = gameArea[0];
         [imagePath, solution] = gameArea[1 + Math.floor(Math.random() * (gameArea.length - 1))];
     } else {
-        const possibleImage = possibleImages[Math.floor(Math.random() * possibleImages.length)][Math.floor(Math.random() * possibleImages[0].length)];
+        const randomNumber = Math.floor(Math.random() * possibleImages.length);
+        const possibleImage = possibleImages[randomNumber][1 + Math.floor(Math.random() * possibleImages[randomNumber].length)];
         actualMap = possibleImages.find(list => list.includes(possibleImage))[0];
         [imagePath, solution] = possibleImage;
     }
@@ -369,19 +370,19 @@ function startGame(gameArea) {
         mapSelector.style.display = 'none';
         displayMap(selection[0]);
 
-        // Create a back button
-        backButton.innerText = 'Back';
-        backButton.onclick = () => {
-            // Go back to the map selection screen
-            gameState = 1;
-            mapSelector.style.display = 'block';
-            mapImage.style.display = 'none';
-            selection = JSON.parse(JSON.stringify(gameArea));
-            submitButton.remove();
-            backButton.remove();
-            renderOptions(selection, selection.parentKeys);
-        };
-        gameContainer.appendChild(backButton);
+        if (!Array.isArray(gameArea)) {
+            // Create a back button
+            backButton.innerText = 'Back';
+            backButton.onclick = () => {
+                // Go back to the map selection screen
+                gameState = 1;
+                mapSelector.style.display = 'block';
+                mapImage.style.display = 'none';
+                submitButton.remove();
+                backButton.remove();
+            };
+            gameContainer.appendChild(backButton);
+        }
     }
 
     // Helper function to render options
