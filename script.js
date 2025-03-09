@@ -332,8 +332,9 @@ function startGame(gameArea) {
         [imagePath, solution] = gameArea[1 + Math.floor(Math.random() * (gameArea.length - 1))];
     } else {
         const randomNumber = Math.floor(Math.random() * possibleImages.length);
-        const possibleImage = possibleImages[randomNumber][1 + Math.floor(Math.random() * possibleImages[randomNumber].length)];
-        actualMap = possibleImages.find(list => list.includes(possibleImage))[0];
+        const possibleImage = possibleImages[randomNumber][1 + Math.floor(Math.random() * (possibleImages[randomNumber].length - 1))];
+        const possibleMaps = possibleImages.find(list => list.includes(possibleImage))
+        actualMap = possibleMaps[0];
         [imagePath, solution] = possibleImage;
     }
 
