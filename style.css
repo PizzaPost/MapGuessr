@@ -13,3 +13,11 @@ img {
     overflow-y: auto;
     font-size: 24px; /* Scale up the text size */
 }
+
+#mapImage {
+    transition:
+        transform 0.3s ease-in-out,
+        translate 0.3s ease-in-out,
+        scale 0.3s ease-in-out;
+}
+
