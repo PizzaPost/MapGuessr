@@ -458,15 +458,15 @@ function startGame(gameArea) {
             altDevMode++;
         }
     } else {
-    if (Array.isArray(gameArea)) {
-        actualMap = gameArea[0];
-        [imagePath, solution] = gameArea[1 + Math.floor(Math.random() * (gameArea.length - 1))];
-    } else {
-        const randomNumber = Math.floor(Math.random() * possibleImages.length);
+        if (Array.isArray(gameArea)) {
+            actualMap = gameArea[0];
+            [imagePath, solution] = gameArea[1 + Math.floor(Math.random() * (gameArea.length - 1))];
+        } else {
+            const randomNumber = Math.floor(Math.random() * possibleImages.length);
             const possibleImage = possibleImages[randomNumber][1 + Math.floor(Math.random() * (possibleImages[randomNumber].length - 1))];
             const possibleMaps = possibleImages.find(list => list.includes(possibleImage))
             actualMap = possibleMaps[0];
-        [imagePath, solution] = possibleImage;
+            [imagePath, solution] = possibleImage;
         }
     }
 
@@ -508,7 +508,7 @@ function startGame(gameArea) {
         if (devMode > -1) {
             displayMap(actualMap)
         } else {
-        displayMap(selection[0]);
+            displayMap(selection[0]);
         }
 
         if (!Array.isArray(gameArea)) {
