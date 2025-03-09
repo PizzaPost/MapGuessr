@@ -355,6 +355,8 @@ function startGame(gameArea) {
 
     const submitButton = document.createElement('button');
 
+    let marker = document.createElement('div');
+
     const mapSelector = document.createElement('div');
     mapSelector.id = 'mapSelector';
     gameContainer.appendChild(mapSelector);
@@ -378,6 +380,7 @@ function startGame(gameArea) {
                 gameState = 1;
                 mapSelector.style.display = 'block';
                 mapImage.style.display = 'none';
+                marker.remove();
                 submitButton.remove();
                 backButton.remove();
             };
@@ -462,7 +465,6 @@ function startGame(gameArea) {
         resize();
 
         // Create a marker on the map
-        let marker = document.createElement('div');
         marker.style.position = 'absolute';
         marker.style.width = '10px';
         marker.style.height = '10px';
@@ -523,10 +525,15 @@ function startGame(gameArea) {
                 alert('Please place a marker on the map');
             }
         };
-        gameContainer.appendChild(document.createElement('br'));
+
+        const breakElements = gameContainer.querySelectorAll('br');
+        if (breakElements.length === 0) {
+            gameContainer.appendChild(document.createElement('br'));
+        }
         gameContainer.appendChild(submitButton);
 
         console.log(`Currently on map ${actualMap}, which you think is ${selectedMap}`);
+        mapImage.style.display = '';
 
         // Create continue button
         const continueButton = document.createElement('button');
