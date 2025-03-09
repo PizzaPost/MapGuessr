@@ -193,7 +193,7 @@ const gameModes = {
                     ["images/portal2/chapter2/fizzler_intro/1.png", []],
                     ["images/portal2/chapter2/fizzler_intro/2.png", []],
                 ]
-            }
+            },
         }
     }
 }
