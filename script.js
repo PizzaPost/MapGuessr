@@ -413,7 +413,7 @@ function getNestedObject(obj, keys) {
  */
 function getParentObject(obj, child) {
     for (const key of Object.keys(obj)) {
-        if (obj[key] === child) {
+        if (JSON.stringify(obj[key]) === JSON.stringify(child)) {
             return obj;
         } else if (typeof obj[key] === 'object' && !Array.isArray(obj[key])) {
             const result = getParentObject(obj[key], child);
@@ -565,13 +565,13 @@ function startGame(gameArea) {
             backButton.innerText = 'Back';
             backButton.onclick = () => {
                 parentKeys.pop();
-                selection = getNestedObject(gameModes, parentKeys);
+                selection = getParentObject(gameModes, getParentObject(gameModes, selection));
                 const selectedPath = parentKeys.join(' > ');
                 selectedPathElement.innerText = selectedPath;
                 if (parentKeys.length === 0) {
                     selectedPathElement.innerText = 'All Games / ';
                 }
-                renderOptions(getNestedObject(gameModes, parentKeys), parentKeys);
+                renderOptions(selection, parentKeys);
             };
             mapSelector.appendChild(backButton);
         }
