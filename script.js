@@ -30,123 +30,168 @@ const gameModes = {
                     ["images/portal2/chapter1/portal_carousel/0.png", []],
                     ["images/portal2/chapter1/portal_carousel/1.png", []],
                 ],
-                "Portal Gun": [ // TODO split maps 0-3
-                    "images/portal2/chapter1/portal_gun/maps/0.png",
-                    ["images/portal2/chapter1/portal_gun/0.png", []],
-                    ["images/portal2/chapter1/portal_gun/1.png", []],
-                    ["images/portal2/chapter1/portal_gun/2.png", []],
-                    ["images/portal2/chapter1/portal_gun/3.png", []],
-                    ["images/portal2/chapter1/portal_gun/4.png", []],
-                    ["images/portal2/chapter1/portal_gun/5.png", []],
-                    ["images/portal2/chapter1/portal_gun/6.png", []],
-                    ["images/portal2/chapter1/portal_gun/7.png", []],
-                    ["images/portal2/chapter1/portal_gun/8.png", []],
-                ],
-                "Smooth Jazz": [ // TODO split maps 0-1
-                    "images/portal2/chapter1/smooth_jazz/maps/0.png",
-                    ["images/portal2/chapter1/smooth_jazz/0.png", []],
-                    ["images/portal2/chapter1/smooth_jazz/1.png", []],
-                    ["images/portal2/chapter1/smooth_jazz/2.png", []],
-                    ["images/portal2/chapter1/smooth_jazz/3.png", []]
-                ],
+                "Portal Gun": {
+                    "0": [
+                        "images/portal2/chapter1/portal_gun/maps/0.png",
+                        ["images/portal2/chapter1/portal_gun/0.png", []],
+                        ["images/portal2/chapter1/portal_gun/1.png", []],
+                        ["images/portal2/chapter1/portal_gun/2.png", []],
+                    ],
+                    "1": [
+                        "images/portal2/chapter1/portal_gun/maps/1.png",
+                        ["images/portal2/chapter1/portal_gun/3.png", []],
+                        ["images/portal2/chapter1/portal_gun/4.png", []],
+                    ],
+                    "2": [
+                        "images/portal2/chapter1/portal_gun/maps/2.png",
+                        ["images/portal2/chapter1/portal_gun/5.png", []],
+                    ],
+                    "3": [
+                        "images/portal2/chapter1/portal_gun/maps/3.png",
+                        ["images/portal2/chapter1/portal_gun/6.png", []],
+                        ["images/portal2/chapter1/portal_gun/7.png", []],
+                        ["images/portal2/chapter1/portal_gun/8.png", []],
+                    ],
+                },
+                "Smooth Jazz": {
+                    "0": [
+                        "images/portal2/chapter1/smooth_jazz/maps/0.png",
+                        ["images/portal2/chapter1/smooth_jazz/0.png", []],
+                        ["images/portal2/chapter1/smooth_jazz/1.png", []],
+                    ],
+                    "1": [
+                        "images/portal2/chapter1/smooth_jazz/maps/1.png",
+                        ["images/portal2/chapter1/smooth_jazz/2.png", []],
+                        ["images/portal2/chapter1/smooth_jazz/3.png", []],
+                    ],
+                },
                 "Cube Momentum": [
                     "images/portal2/chapter1/cube_momentum/maps/0.png",
                     ["images/portal2/chapter1/cube_momentum/0.png", []],
                     ["images/portal2/chapter1/cube_momentum/1.png", []],
-                    ["images/portal2/chapter1/cube_momentum/2.png", []]
+                    ["images/portal2/chapter1/cube_momentum/2.png", []],
                 ],
-                "Future Starter": [ // TODO split maps 0-2
-                    "images/portal2/chapter1/future_starter/maps/0.png",
-                    ["images/portal2/chapter1/future_starter/0.png", []],
-                    ["images/portal2/chapter1/future_starter/1.png", []],
-                    ["images/portal2/chapter1/future_starter/2.png", []],
-                    ["images/portal2/chapter1/future_starter/3.png", []],
-                    ["images/portal2/chapter1/future_starter/4.png", []],
-                    ["images/portal2/chapter1/future_starter/5.png", []]
-                ],
-                "Secret Panel": [ // TODO split maps 0-1
-                    "images/portal2/chapter1/secret_panel/maps/0.png",
-                    ["images/portal2/chapter1/secret_panel/0.png", []],
-                    ["images/portal2/chapter1/secret_panel/1.png", []],
-                    ["images/portal2/chapter1/secret_panel/2.png", []],
-                    ["images/portal2/chapter1/secret_panel/3.png", []],
-                    ["images/portal2/chapter1/secret_panel/4.png", []]
-                ],
-                "Wake Up": [ // TODO split maps 0-1
-                    "images/portal2/chapter1/wake_up/maps/0.png",
-                    ["images/portal2/chapter1/wake_up/0.png", []],
-                    ["images/portal2/chapter1/wake_up/1.png", []],
-                    ["images/portal2/chapter1/wake_up/2.png", []],
-                    ["images/portal2/chapter1/wake_up/3.png", []],
-                    ["images/portal2/chapter1/wake_up/4.png", []],
-                    ["images/portal2/chapter1/wake_up/5.png", []]
-                ],
-                "Incinerator": [ // TODO split maps 0-2
-                    "images/portal2/chapter1/incinerator/maps/0.png",
-                    ["images/portal2/chapter1/incinerator/0.png", []],
-                    ["images/portal2/chapter1/incinerator/1.png", []],
-                    ["images/portal2/chapter1/incinerator/2.png", []],
-                    ["images/portal2/chapter1/incinerator/3.png", []],
-                    ["images/portal2/chapter1/incinerator/4.png", []]
-                ]
+                "Future Starter": {
+                    "0": [
+                        "images/portal2/chapter1/future_starter/maps/0.png",
+                        ["images/portal2/chapter1/future_starter/0.png", []],
+                        ["images/portal2/chapter1/future_starter/1.png", []],
+                        ["images/portal2/chapter1/future_starter/2.png", []],
+                    ],
+                    "1": [
+                        "images/portal2/chapter1/future_starter/maps/1.png",
+                        ["images/portal2/chapter1/future_starter/3.png", []],
+                        ["images/portal2/chapter1/future_starter/4.png", []],
+                        ["images/portal2/chapter1/future_starter/5.png", []],
+                    ],
+                },
+                "Secret Panel": {
+                    "0": [
+                        "images/portal2/chapter1/secret_panel/maps/0.png",
+                        ["images/portal2/chapter1/secret_panel/0.png", []],
+                        ["images/portal2/chapter1/secret_panel/1.png", []],
+                        ["images/portal2/chapter1/secret_panel/3.png", []],
+                        ["images/portal2/chapter1/secret_panel/4.png", []],
+                    ],
+                    "1": [
+                        "images/portal2/chapter1/secret_panel/maps/1.png",
+                        ["images/portal2/chapter1/secret_panel/2.png", []],
+                    ]
+                },
+                "Wake Up": {
+                    "0": [
+                        "images/portal2/chapter1/wake_up/maps/0.png",
+                        ["images/portal2/chapter1/wake_up/0.png", []],
+                        ["images/portal2/chapter1/wake_up/1.png", []],
+                        ["images/portal2/chapter1/wake_up/2.png", []],
+                        ["images/portal2/chapter1/wake_up/4.png", []],
+                        ["images/portal2/chapter1/wake_up/5.png", []],
+                    ],
+                    "1": [
+                        "images/portal2/chapter1/wake_up/maps/1.png",
+                        ["images/portal2/chapter1/wake_up/3.png", []],
+                    ]
+                },
+                "Incinerator": {
+                    "0": [
+                        "images/portal2/chapter1/incinerator/maps/0.png",
+                        ["images/portal2/chapter1/incinerator/0.png", []],
+                    ],
+                    "1": [
+                        "images/portal2/chapter1/incinerator/maps/1.png",
+                        ["images/portal2/chapter1/incinerator/1.png", []],
+
+                    ],
+                    "2": [
+                        "images/portal2/chapter1/incinerator/maps/2.png",
+                        ["images/portal2/chapter1/incinerator/2.png", []],
+                        ["images/portal2/chapter1/incinerator/3.png", []],
+                        ["images/portal2/chapter1/incinerator/4.png", []],
+                    ],
+                }
             },
             "Chapter 2 - The Cold Boot": {
                 "Laser Intro": [
-                    "images/portal2/chapter2/laser_intro/map.png",
+                    "images/portal2/chapter2/laser_intro/maps/0.png",
                     ["images/portal2/chapter2/laser_intro/0.png", []],
                     ["images/portal2/chapter2/laser_intro/1.png", []],
-                    ["images/portal2/chapter2/laser_intro/2.png", []]
+                    ["images/portal2/chapter2/laser_intro/2.png", []],
                 ],
                 "Laser Stairs": [
-                    "images/portal2/chapter2/laser_stairs/map.png",
+                    "images/portal2/chapter2/laser_stairs/maps/0.png",
                     ["images/portal2/chapter2/laser_stairs/0.png", []],
                     ["images/portal2/chapter2/laser_stairs/1.png", []],
                     ["images/portal2/chapter2/laser_stairs/2.png", []],
-                    ["images/portal2/chapter2/laser_stairs/3.png", []]
+                    ["images/portal2/chapter2/laser_stairs/3.png", []],
                 ],
-                "Dual Lasers": [
-                    "images/portal2/chapter2/dual_lasers/map.png",
-                    ["images/portal2/chapter2/dual_lasers/0.png", []],
-                    ["images/portal2/chapter2/dual_lasers/1.png", []],
-                    ["images/portal2/chapter2/dual_lasers/2.png", []],
-                    ["images/portal2/chapter2/dual_lasers/3.png", []],
-                    ["images/portal2/chapter2/dual_lasers/4.png", []]
-                ],
+                "Dual Lasers": {
+                    "0": [
+                        "images/portal2/chapter2/dual_lasers/maps/0.png",
+                        ["images/portal2/chapter2/dual_lasers/1.png", []],
+                        ["images/portal2/chapter2/dual_lasers/2.png", []],
+                    ],
+                    "1": [
+                        "images/portal2/chapter2/dual_lasers/maps/1.png",
+                        ["images/portal2/chapter2/dual_lasers/0.png", []],
+                        ["images/portal2/chapter2/dual_lasers/3.png", []],
+                        ["images/portal2/chapter2/dual_lasers/4.png", []],
+                    ],
+                },
                 "Laser Over Goo": [
-                    "images/portal2/chapter2/laser_over_goo/map.png",
+                    "images/portal2/chapter2/laser_over_goo/maps/0.png",
                     ["images/portal2/chapter2/laser_over_goo/0.png", []],
                     ["images/portal2/chapter2/laser_over_goo/1.png", []],
                     ["images/portal2/chapter2/laser_over_goo/2.png", []],
                     ["images/portal2/chapter2/laser_over_goo/3.png", []],
-                    ["images/portal2/chapter2/laser_over_goo/4.png", []]
+                    ["images/portal2/chapter2/laser_over_goo/4.png", []],
                 ],
                 "Catapult Intro": [
-                    "images/portal2/chapter2/catapult_intro/map.png",
+                    "images/portal2/chapter2/catapult_intro/maps/0.png",
                     ["images/portal2/chapter2/catapult_intro/0.png", []],
                     ["images/portal2/chapter2/catapult_intro/1.png", []],
                     ["images/portal2/chapter2/catapult_intro/2.png", []],
-                    ["images/portal2/chapter2/catapult_intro/3.png", []]
+                    ["images/portal2/chapter2/catapult_intro/3.png", []],
                 ],
                 "Trust Fling": [
-                    "images/portal2/chapter2/trust_fling/map.png",
+                    "images/portal2/chapter2/trust_fling/maps/0.png",
                     ["images/portal2/chapter2/trust_fling/0.png", []],
                     ["images/portal2/chapter2/trust_fling/1.png", []],
                     ["images/portal2/chapter2/trust_fling/2.png", []],
                     ["images/portal2/chapter2/trust_fling/3.png", []],
-                    ["images/portal2/chapter2/trust_fling/4.png", []]
+                    ["images/portal2/chapter2/trust_fling/4.png", []],
                 ],
                 "Pit Flings": [
-                    "images/portal2/chapter2/pit_flings/map.png",
+                    "images/portal2/chapter2/pit_flings/maps/0.png",
                     ["images/portal2/chapter2/pit_flings/0.png", []],
                     ["images/portal2/chapter2/pit_flings/1.png", []],
                     ["images/portal2/chapter2/pit_flings/2.png", []],
-                    ["images/portal2/chapter2/pit_flings/3.png", []]
+                    ["images/portal2/chapter2/pit_flings/3.png", []],
                 ],
                 "Fizzler Intro": [
-                    "images/portal2/chapter2/fizzler_intro/map.png",
+                    "images/portal2/chapter2/fizzler_intro/maps/0.png",
                     ["images/portal2/chapter2/fizzler_intro/0.png", []],
                     ["images/portal2/chapter2/fizzler_intro/1.png", []],
-                    ["images/portal2/chapter2/fizzler_intro/2.png", []]
+                    ["images/portal2/chapter2/fizzler_intro/2.png", []],
                 ]
             }
         }
@@ -282,24 +327,16 @@ function startGame(gameArea) {
 
     let [imagePath, solution] = [null, null];
 
-    if (possibleImages[0].length === 2) {
-        if (typeof possibleImages[0][0] !== 'string') {
-            actualMap = Array.isArray(gameArea) ? gameArea[0] : Object.values(gameArea)[0][0];
-            const selectedImage = possibleImages[Math.floor(Math.random() * possibleImages.length)];
-            //const randomIndex = Math.floor(1 + (Math.random() * (selectedImage.length - 1)));
-            [imagePath, solution] = selectedImage; //[randomIndex];
-        } else {
-            const selected_map = possibleImages[Math.floor(Math.random() * possibleImages.length)];
-            actualMap = selected_map[0];
-            const randomIndex = Math.floor(1 + (Math.random() * (selected_map.length - 1)));
-            [imagePath, solution] = selected_map[randomIndex];
-        }
+    if (Array.isArray(gameArea)) {
+        actualMap = gameArea[0];
+        [imagePath, solution] = gameArea[1 + Math.floor(Math.random() * (gameArea.length - 1))];
     } else {
-        const selected_map = possibleImages[Math.floor(Math.random() * possibleImages.length)];
-        actualMap = selected_map[0];
-        const randomIndex = Math.floor(1 + (Math.random() * (selected_map.length - 1)));
-        [imagePath, solution] = selected_map[randomIndex];
+        const randomNumber = Math.floor(Math.random() * possibleImages.length);
+        const possibleImage = possibleImages[randomNumber][1 + Math.floor(Math.random() * possibleImages[randomNumber].length)];
+        actualMap = possibleImages.find(list => list.includes(possibleImage))[0];
+        [imagePath, solution] = possibleImage;
     }
+
     const randomImage = document.createElement('img');
     randomImage.src = imagePath;
     randomImage.style.maxWidth = '100%';
@@ -318,6 +355,8 @@ function startGame(gameArea) {
 
     const submitButton = document.createElement('button');
 
+    let marker = document.createElement('div');
+
     const mapSelector = document.createElement('div');
     mapSelector.id = 'mapSelector';
     gameContainer.appendChild(mapSelector);
@@ -333,19 +372,20 @@ function startGame(gameArea) {
         mapSelector.style.display = 'none';
         displayMap(selection[0]);
 
-        // Create a back button
-        backButton.innerText = 'Back';
-        backButton.onclick = () => {
-            // Go back to the map selection screen
-            gameState = 1;
-            mapSelector.style.display = 'block';
-            mapImage.style.display = 'none';
-            selection = JSON.parse(JSON.stringify(gameArea));
-            submitButton.remove();
-            backButton.remove();
-            renderOptions(selection, selection.parentKeys);
-        };
-        gameContainer.appendChild(backButton);
+        if (!Array.isArray(gameArea)) {
+            // Create a back button
+            backButton.innerText = 'Back';
+            backButton.onclick = () => {
+                // Go back to the map selection screen
+                gameState = 1;
+                mapSelector.style.display = 'block';
+                mapImage.style.display = 'none';
+                marker.remove();
+                submitButton.remove();
+                backButton.remove();
+            };
+            gameContainer.appendChild(backButton);
+        }
     }
 
     // Helper function to render options
@@ -425,7 +465,6 @@ function startGame(gameArea) {
         resize();
 
         // Create a marker on the map
-        let marker = document.createElement('div');
         marker.style.position = 'absolute';
         marker.style.width = '10px';
         marker.style.height = '10px';
@@ -486,10 +525,15 @@ function startGame(gameArea) {
                 alert('Please place a marker on the map');
             }
         };
-        gameContainer.appendChild(document.createElement('br'));
+
+        const breakElements = gameContainer.querySelectorAll('br');
+        if (breakElements.length === 0) {
+            gameContainer.appendChild(document.createElement('br'));
+        }
         gameContainer.appendChild(submitButton);
 
         console.log(`Currently on map ${actualMap}, which you think is ${selectedMap}`);
+        mapImage.style.display = '';
 
         // Create continue button
         const continueButton = document.createElement('button');
