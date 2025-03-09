@@ -405,6 +405,25 @@ function getNestedObject(obj, keys) {
     return keys.reduce((o, k) => o && o[k], obj);
 }
 
+/**
+ * Finds the parent object of a given child object in a nested object
+ * @param {object} obj - The nested object to search in
+ * @param {object} child - The child object to find the parent of
+ * @returns {object} The parent object of the child object, or undefined if not found
+ */
+function getParentObject(obj, child) {
+    for (const key of Object.keys(obj)) {
+        if (obj[key] === child) {
+            return obj;
+        } else if (typeof obj[key] === 'object' && !Array.isArray(obj[key])) {
+            const result = getParentObject(obj[key], child);
+            if (result) {
+                return result;
+            }
+        }
+    }
+}
+
 function startGame(gameArea) {
     let gameContainer = document.getElementById('gameContainer');
 
