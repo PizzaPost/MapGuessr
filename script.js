@@ -570,15 +570,12 @@ function startGame(gameArea) {
                 button.style.color = 'white';
             }
 
+            button.dataset.value = JSON.stringify(selection[key]);
+
             button.onclick = () => {
                 const selectedPath = parentKeys.concat([key]).join(' > ');
                 selectedPathElement.innerText = selectedPath;
-                const newSelected = getNestedObject(gameModes, parentKeys.concat([key]));
-                if (!newSelected) {
-                    selection = selection[key];
-                } else {
-                    selection = newSelected;
-                }
+                selection = JSON.parse(button.dataset.value);
                 if (typeof value === 'object' && !Array.isArray(value)) {
                     parentKeys.push(key);
                     renderOptions(value, parentKeys);
