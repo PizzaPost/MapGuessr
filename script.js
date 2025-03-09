@@ -524,13 +524,13 @@ function startGame(gameArea) {
     mapSelector.appendChild(selectedPathElement);
 
     // Helper function to select a map
-    function selectMap() {
+    function selectMap(selected) {
         gameState = 2;
         mapSelector.style.display = 'none';
         if (devMode > -1) {
             displayMap(actualMap)
         } else {
-            displayMap(selection[0]);
+            displayMap(selected[0]);
         }
 
         if (!Array.isArray(gameArea)) {
@@ -565,7 +565,7 @@ function startGame(gameArea) {
             backButton.innerText = 'Back';
             backButton.onclick = () => {
                 parentKeys.pop();
-                selection = getParentObject(gameModes, getParentObject(gameModes, selection));
+                selection = getParentObject(gameModes, selection);
                 const selectedPath = parentKeys.join(' > ');
                 selectedPathElement.innerText = selectedPath;
                 if (parentKeys.length === 0) {
@@ -594,12 +594,12 @@ function startGame(gameArea) {
             button.onclick = () => {
                 const selectedPath = parentKeys.concat([key]).join(' > ');
                 selectedPathElement.innerText = selectedPath;
-                selection = JSON.parse(button.dataset.value);
                 if (typeof value === 'object' && !Array.isArray(value)) {
+                    selection = JSON.parse(button.dataset.value);
                     parentKeys.push(key);
                     renderOptions(value, parentKeys);
                 } else {
-                    selectMap();
+                    selectMap(JSON.parse(button.dataset.value));
                 }
             };
             mapSelector.appendChild(button);
@@ -608,7 +608,7 @@ function startGame(gameArea) {
 
     // Start rendering options from the top level
     if (Array.isArray(selection) || devMode > -1) {
-        selectMap();
+        selectMap(selection);
     } else {
         renderOptions(selection);
     }
