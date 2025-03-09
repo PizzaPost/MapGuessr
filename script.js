@@ -648,6 +648,7 @@ function startGame(gameArea) {
             const newScale = Math.min(5, Math.max(1, oldScale - scrollDelta / 1000));
             const randomImageRect = randomImage.getBoundingClientRect();
             mapImage.style.transform = `scale(${newScale})`;
+            mapImage.style.overflow = 'hidden';
             updateMarker(event);
         };
 
