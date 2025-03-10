@@ -348,10 +348,10 @@ const gameModes = {
                         ["images/portal_series/portal2/chapter4/escape/1.png", [0.7318467497174616, 0.5605871644240419]],
                         ["images/portal_series/portal2/chapter4/escape/2.png", [0.5417097884842262, 0.367867893092837]],
                     ],
-                }
+                },
             },
-        }
-    }
+        },
+    },
 }
 
 let gameState = 0; // 0 => choose gamemode
