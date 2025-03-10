@@ -505,8 +505,16 @@ function getParentObject(obj, child) {
 
 function startGame(gameArea) {
     let gameContainer = document.getElementById('gameContainer');
+    
+    // Add the CSS transition here
+    const style = document.createElement('style');
+    style.textContent = `
+        #gameContainer img {
+            transition: transform 0.2s ease-out;
+        }
+    `;
+    document.head.appendChild(style);
 
-    // Create the gameContainer div if it doesn't exist
     if (!gameContainer) {
         gameContainer = document.createElement('div');
         gameContainer.id = 'gameContainer';
@@ -721,13 +729,43 @@ function startGame(gameArea) {
 
         mapImage.onwheel = (event) => {
             event.preventDefault();
-            const scrollDelta = event.deltaY;
             const rect = mapImage.getBoundingClientRect();
-            const oldScale = mapImage.style.transform ? parseFloat(mapImage.style.transform.match(/scale\((\d*\.\d+|\d+)\)/)[1]) : 1;
-            const newScale = Math.min(5, Math.max(1, oldScale - scrollDelta / 1000));
-            const randomImageRect = randomImage.getBoundingClientRect();
+            const scrollDelta = event.deltaY;
+            
+            // Current scale and position
+            const oldScale = parseFloat(mapImage.style.transform?.match(/scale\(([^)]+)\)/)?.[1]) || 1;
+            let newScale = oldScale - scrollDelta / 500;
+            
+            // Enforce minimum scale of 1 (original size)
+            newScale = Math.min(5, Math.max(1, newScale));
+            
+            // Calculate mouse position relative to image
+            const mouseX = event.clientX - rect.left;
+            const mouseY = event.clientY - rect.top;
+            
+            // Smooth centering interpolation
+            const scaleAboveOne = newScale - 1;
+            const centeringFactor = Math.max(0, 1 - scaleAboveOne);
+            
+            // Calculate transform origin
+            const mouseOriginX = (mouseX / rect.width) * 100;
+            const mouseOriginY = (mouseY / rect.height) * 100;
+            const originX = mouseOriginX * (1 - centeringFactor) + 50 * centeringFactor;
+            const originY = mouseOriginY * (1 - centeringFactor) + 50 * centeringFactor;
+            
+            // Apply transformations
+            mapImage.style.transformOrigin = `${originX}% ${originY}%`;
             mapImage.style.transform = `scale(${newScale})`;
-            mapImage.style.overflow = 'hidden';
+            
+            // Smooth centering animation when returning to original size
+            if (newScale === 1 && oldScale !== 1) {
+                mapImage.style.transition = 'transform 0.3s ease-out, transform-origin 0.3s ease-out';
+                setTimeout(() => {
+                    mapImage.style.transformOrigin = '50% 50%';
+                    mapImage.style.transition = '';
+                }, 10);
+            }
+            
             updateMarker(event);
         };
 
@@ -761,6 +799,12 @@ function startGame(gameArea) {
                         solutionMarker.dataset.y = solutionY;
                         solutionMarker.style.left = `${mapImage.offsetLeft + solutionX * mapImage.offsetWidth - 5}px`; // subtract half the size of the marker
                         solutionMarker.style.top = `${mapImage.offsetTop + solutionY * mapImage.offsetHeight - 5}px`;
+                        const mapRect = mapImage.getBoundingClientRect();
+                        const scaleX = mapImage.naturalWidth / mapRect.width;
+                        const scaleY = mapImage.naturalHeight / mapRect.height;
+                        solutionMarker.style.left = `${mapRect.left + (solutionX * mapImage.naturalWidth / scaleX) - 5 + window.scrollX}px`;
+                        solutionMarker.style.top = `${mapRect.top + (solutionY * mapImage.naturalHeight / scaleY) - 5 + window.scrollY}px`;
+                        solutionMarker.style.display = 'block';
                         document.body.appendChild(solutionMarker);
                     } else {
                         alert('You got the map correct!\nThis image has not been assigned a solution yet.');
@@ -797,28 +841,50 @@ function startGame(gameArea) {
         function setMarker(event) {
             if (document.body.contains(submitButton)) {
                 const rect = mapImage.getBoundingClientRect();
-                const x = ((event.clientX - rect.left) + window.scrollX) / rect.width;
-                const y = ((event.clientY - rect.top) + window.scrollY) / rect.height;
-                console.log(`${x}, ${y}`);
+                const x = (event.clientX - rect.left) / rect.width;
+                const y = (event.clientY - rect.top) / rect.height;
+                
                 marker.dataset.x = x;
                 marker.dataset.y = y;
-
-                marker.style.left = `${rect.left + x * rect.width - 5}px`; // subtract half the size of the marker
-                marker.style.top = `${rect.top + y * rect.height - 5}px`;
                 marker.style.display = 'block';
+                updateMarker(event);
             }
         }
 
         function updateMarker(event) {
-            if (marker.style.display === 'block') {
-                const rect = mapImage.getBoundingClientRect();
-                let [x, y] = [marker.dataset.x, marker.dataset.y];
-                let [sx, sy] = [solutionMarker.dataset.x, solutionMarker.dataset.y];
-                marker.style.left = `${rect.left + x * rect.width - 5}px`; // subtract half the size of the marker
-                marker.style.top = `${rect.top + y * rect.height - 5}px`;
-                solutionMarker.style.left = `${rect.left + sx * rect.width - 5}px`; // subtract half the size of the marker
-                solutionMarker.style.top = `${rect.top + sy * rect.height - 5}px`;
-            }
+            const rect = mapImage.getBoundingClientRect();
+            const gameContainer = document.getElementById('gameContainer');
+            const containerRect = gameContainer.getBoundingClientRect();
+
+            // Update marker positions
+            const updatePosition = (marker) => {
+                if (!marker.dataset.x || !marker.dataset.y) return;
+                
+                const x = parseFloat(marker.dataset.x);
+                const y = parseFloat(marker.dataset.y);
+                
+                // Calculate expected position regardless of current visibility
+                const markerLeft = rect.left + (x * rect.width) - 5;
+                const markerTop = rect.top + (y * rect.height) - 5;
+                
+                // Update marker position
+                marker.style.left = `${markerLeft}px`;
+                marker.style.top = `${markerTop}px`;
+                
+                // Calculate visibility using predicted position instead of actual rect
+                const isVisible = 
+                    markerLeft + 10 > containerRect.left && // 10px width
+                    markerLeft < containerRect.right &&
+                    markerTop + 10 > containerRect.top &&
+                    markerTop < containerRect.bottom;
+            
+                // Always update display state
+                marker.style.display = isVisible ? 'block' : 'none';
+                marker.style.pointerEvents = isVisible ? 'auto' : 'none';
+            };            
+
+            updatePosition(marker);
+            updatePosition(solutionMarker);
         }
     }
 }

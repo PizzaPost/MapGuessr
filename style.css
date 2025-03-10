@@ -1,23 +1,214 @@
-.hidden {
+/* Modern CSS Reset */
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Smooth transitions and modern font stack */
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    color: #333;
+    line-height: 1.6;
+    min-height: 100vh;
+    padding: 2rem;
+}
+
+/* Glassmorphism container styling */
+#gameModeSelector,
+#gameContainer,
+#mapSelector {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+    margin: 1.5rem auto;
+    transition: transform 0.3s ease;
+}
+
+#gameModeSelector {
+    max-width: 720px;
+}
+
+#gameContainer {
+    max-width: 1600px;
+    padding: 2.5rem;
+    margin: 2rem auto;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Hover effect for containers */
+#gameModeSelector:hover,
+#gameContainer:hover,
+#mapSelector:hover {
+    transform: translateY(-2px);
+}
+
+/* Add marker containment */
+.marker {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    pointer-events: none;
+    transition: transform 0.2s ease;
+    z-index: 1000;
     display: none;
 }
 
-/* Style the image to take up 50% of the screen height */
-img {
-    height: auto;
+marker.style.pointerEvents = 'auto';
+solutionMarker.style.pointerEvents = 'auto';
+
+/* Add zoom cursor feedback */
+.map-image {
+    cursor: zoom-in;
+    transition: transform 0.3s ease-in-out(0.25, 0.46, 0.45, 0.94);
 }
 
-/* Style the game container to take up the remaining 50% of the screen height */
+/* Enhanced button styling */
+button {
+    background: linear-gradient(135deg, #007BFF 0%, #0056b3 100%);
+    color: #fff;
+    border: none;
+    padding: 12px 24px;
+    margin: 8px;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 15px rgba(0, 123, 255, 0.2);
+}
+
+button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 123, 255, 0.3);
+}
+
+button:active {
+    transform: translateY(1px);
+}
+
+/* Modern image arrangement */
+.images-wrapper {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    width: 100%;
+    margin: 2rem 0;
+    position: relative;
+}
+
+.images-wrapper img {
+    width: 100%;
+    height: 400px;
+    border-radius: 15px;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.images-wrapper img:hover {
+    transform: scale(1.02);
+    z-index: 2;
+}
+
+/* Right-aligned map specific styling */
+.images-wrapper img:last-child {
+    order: 2; /* Ensures map stays on right side */
+}
+
+/* Typography enhancements */
+#selectedPath {
+    font-size: 1.2rem;
+    color: #2c3e50;
+    font-weight: 500;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid #007BFF;
+    display: inline-block;
+}
+
+/* Responsive design improvements */
+@media (max-width: 1200px) {
+    body {
+        padding: 1.5rem;
+    }
+    
+    .images-wrapper {
+        gap: 1.5rem;
+    }
+    
+    .images-wrapper img {
+        height: 350px;
+    }
+}
+
+@media (max-width: 768px) {
+    .images-wrapper {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .images-wrapper img {
+        height: 300px;
+        width: 100%;
+        margin: 0;
+    }
+    
+    .images-wrapper img:last-child {
+        order: initial;
+    }
+    
+    #gameContainer {
+        padding: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        padding: 1rem;
+    }
+    
+    .images-wrapper img {
+        height: 250px;
+    }
+    
+    button {
+        width: 100%;
+        margin: 8px 0;
+    }
+}
+
+/* Loading animation */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
 #gameContainer {
-    height: 100%;
-    overflow-y: auto;
-    font-size: 24px; /* Scale up the text size */
+    animation: fadeIn 0.6s ease-out;
 }
 
-#mapImage {
-    transition:
-        transform 0.3s ease-in-out,
-        translate 0.3s ease-in-out,
-        scale 0.3s ease-in-out;
+/* Perfect scrollbar styling */
+::-webkit-scrollbar {
+    width: 8px;
 }
 
+::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.05);
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(0, 123, 255, 0.4);
+    border-radius: 4px;
+}
