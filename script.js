@@ -405,6 +405,25 @@ function getNestedObject(obj, keys) {
     return keys.reduce((o, k) => o && o[k], obj);
 }
 
+/**
+ * Finds the parent object of a given child object in a nested object
+ * @param {object} obj - The nested object to search in
+ * @param {object} child - The child object to find the parent of
+ * @returns {object} The parent object of the child object, or undefined if not found
+ */
+function getParentObject(obj, child) {
+    for (const key of Object.keys(obj)) {
+        if (JSON.stringify(obj[key]) === JSON.stringify(child)) {
+            return obj;
+        } else if (typeof obj[key] === 'object' && !Array.isArray(obj[key])) {
+            const result = getParentObject(obj[key], child);
+            if (result) {
+                return result;
+            }
+        }
+    }
+}
+
 function startGame(gameArea) {
     let gameContainer = document.getElementById('gameContainer');
 
@@ -505,13 +524,13 @@ function startGame(gameArea) {
     mapSelector.appendChild(selectedPathElement);
 
     // Helper function to select a map
-    function selectMap() {
+    function selectMap(selected) {
         gameState = 2;
         mapSelector.style.display = 'none';
         if (devMode > -1) {
             displayMap(actualMap)
         } else {
-            displayMap(selection[0]);
+            displayMap(selected[0]);
         }
 
         if (!Array.isArray(gameArea)) {
@@ -546,13 +565,13 @@ function startGame(gameArea) {
             backButton.innerText = 'Back';
             backButton.onclick = () => {
                 parentKeys.pop();
-                selection = getNestedObject(gameModes, parentKeys);
+                selection = getParentObject(gameModes, selection);
                 const selectedPath = parentKeys.join(' > ');
                 selectedPathElement.innerText = selectedPath;
                 if (parentKeys.length === 0) {
                     selectedPathElement.innerText = 'All Games / ';
                 }
-                renderOptions(getNestedObject(gameModes, parentKeys), parentKeys);
+                renderOptions(selection, parentKeys);
             };
             mapSelector.appendChild(backButton);
         }
@@ -575,12 +594,12 @@ function startGame(gameArea) {
             button.onclick = () => {
                 const selectedPath = parentKeys.concat([key]).join(' > ');
                 selectedPathElement.innerText = selectedPath;
-                selection = JSON.parse(button.dataset.value);
                 if (typeof value === 'object' && !Array.isArray(value)) {
+                    selection = JSON.parse(button.dataset.value);
                     parentKeys.push(key);
                     renderOptions(value, parentKeys);
                 } else {
-                    selectMap();
+                    selectMap(JSON.parse(button.dataset.value));
                 }
             };
             mapSelector.appendChild(button);
@@ -589,7 +608,7 @@ function startGame(gameArea) {
 
     // Start rendering options from the top level
     if (Array.isArray(selection) || devMode > -1) {
-        selectMap();
+        selectMap(selection);
     } else {
         renderOptions(selection);
     }
@@ -629,6 +648,7 @@ function startGame(gameArea) {
             const newScale = Math.min(5, Math.max(1, oldScale - scrollDelta / 1000));
             const randomImageRect = randomImage.getBoundingClientRect();
             mapImage.style.transform = `scale(${newScale})`;
+            mapImage.style.overflow = 'hidden';
             updateMarker(event);
         };
 
