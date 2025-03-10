@@ -352,6 +352,34 @@ const gameModes = {
             },
         },
     },
+    "Subnautica": {
+        "Aurora": [
+            "images/subnautica/aurora/map.jpg",
+            ["images/subnautica/aurora/genroom.jpg", [0.7121464226289518, 0.1543512626160269]],
+            ["images/subnautica/aurora/prawnroom.jpg", [0.23460898502495842, 0.43192412143812575]],
+        ],
+        // TODO add biomes folder and map.jpg once pictures have been taken
+        "Caves": {
+            "Jellyshroom Cave": [
+                "images/subnautica/caves/jellyshroom_cave/map.png",
+                ["images/subnautica/caves/jellyshroom_cave/base2.jpg", [0.9079704190632704, 0.8195121951219512]],
+            ],
+            // TODO add lava_zones including inactive_lava_zone, lava_lakes and their respective map.png once pictures have been taken
+            "Lost River": [
+                "images/subnautica/caves/lost_river/map.png",
+                ["images/subnautica/caves/lost_river/base3.jpg", [0.31306491372226786, 0.8489212528085325]],
+            ],
+        },
+        "Islands": {
+            "Floating Island": [
+                "images/subnautica/islands/floating_island/map.jpg",
+                ["images/subnautica/islands/floating_island/base1.jpg", [0.49548069022185703, 0.41745389113810166]],
+                ["images/subnautica/islands/floating_island/base1a.jpg", [0.6055875102711585, 0.5991902834008097]],
+                ["images/subnautica/islands/floating_island/base1b.jpg", [0.3492193919474117, 0.24471434997750788]],
+            ],
+            // TODO add mountain_island once map exists and pictures have been taken
+        },
+    },
 }
 
 let gameState = 0; // 0 => choose gamemode
@@ -515,12 +543,12 @@ function startGame(gameArea) {
             [imagePath, solution] = gameArea[1 + devMode];
             devMode++;
         } else {
-            if (devMode >= possibleImages.length) {
-                devMode = 0;
-            }
             if (altDevMode >= possibleImages[devMode].length - 1) {
                 altDevMode = 0;
                 devMode++;
+            }
+            if (devMode >= possibleImages.length) {
+                devMode = 0;
             }
             const possibleImage = possibleImages[devMode][1 + altDevMode];
             const possibleMaps = possibleImages.find(list => list.includes(possibleImage))
