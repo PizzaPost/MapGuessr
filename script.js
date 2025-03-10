@@ -299,6 +299,57 @@ const gameModes = {
                     ["images/portal2/chapter3/pull_the_rug/2.png", [0.7468487394957983, 0.8179271708683473]],
                 ],
             },
+            "Chapter 4 - The Surprise": {
+                "Column Blocker": [
+                    "images/portal2/chapter4/column_blocker/maps/0.png",
+                    ["images/portal2/chapter4/column_blocker/0.png", [0.7478991596638656, 0.5635854341736695]],
+                    ["images/portal2/chapter4/column_blocker/1.png", [0.6534498103790612, 0.5759020213360565]],
+                    ["images/portal2/chapter4/column_blocker/2.png", [0.3172268907563025, 0.6013071895424836]],
+                    ["images/portal2/chapter4/column_blocker/3.png", [0.2751761335228111, 0.3767860580209921]],
+                    ["images/portal2/chapter4/column_blocker/4.png", [0.5978578270711468, 0.37133605443669815]],
+                ],
+                "Laser Chaining": [
+                    "images/portal2/chapter4/laser_chaining/maps/0.png",
+                    ["images/portal2/chapter4/laser_chaining/0.png", [0.6597292724196278, 0.18866563308609358]],
+                    ["images/portal2/chapter4/laser_chaining/1.png", [0.21743697478991597, 0.450046685340803]],
+                    ["images/portal2/chapter4/laser_chaining/2.png", [0.3363940289497098, 0.3761392888571928]],
+                    ["images/portal2/chapter4/laser_chaining/3.png", [0.5481553669993442, 0.6003088831732111]],
+                ],
+                "Triple Laser": [
+                    "images/portal2/chapter4/triple_laser/maps/0.png",
+                    ["images/portal2/chapter4/triple_laser/0.png", [0.4719193633867393, 0.3560081998117007]],
+                    ["images/portal2/chapter4/triple_laser/1.png", [0.7768721845603686, 0.4285802788957996]],
+                    ["images/portal2/chapter4/triple_laser/2.png", [0.4369747899159664, 0.715219421101774]],
+                    ["images/portal2/chapter4/triple_laser/3.png", [0.5945378151260504, 0.7712418300653595]],
+                ],
+                "Jailbreak": {
+                    "0": [
+                        "images/portal2/chapter4/jailbreak/maps/0.png",
+                        ["images/portal2/chapter4/jailbreak/0.png", [0.6368797857638777, 0.05701925393610479]],
+                        ["images/portal2/chapter4/jailbreak/1.png", [0.5073529411764706, 0.5957049486461251]],
+                        ["images/portal2/chapter4/jailbreak/2.png", [0.6456716498301258, 0.9212370531760586]],
+                    ],
+                    "1": [
+                        "images/portal2/chapter4/jailbreak/maps/1.png",
+                        ["images/portal2/chapter4/jailbreak/3.png", [0.37289915966386555, 0.7301587301587301]],
+                    ],
+                    "2": [
+                        "images/portal2/chapter4/jailbreak/maps/2.png",
+                        ["images/portal2/chapter4/jailbreak/4.png", [0.7824807312942812, 0.37199137295562457]],
+                    ],
+                },
+                "Escape": {
+                    "0": [
+                        "images/portal2/chapter4/escape/maps/0.png",
+                        ["images/portal2/chapter4/escape/0.png", [0.7804621848739496, 0.5247432306255836]],
+                    ],
+                    "1": [
+                        "images/portal2/chapter4/escape/maps/1.png",
+                        ["images/portal2/chapter4/escape/1.png", [0.7318467497174616, 0.5605871644240419]],
+                        ["images/portal2/chapter4/escape/2.png", [0.5417097884842262, 0.367867893092837]],
+                    ],
+                }
+            },
         }
     }
 }
