@@ -358,7 +358,7 @@ let gameState = 0; // 0 => choose gamemode
 let gameArea = getNestedObject(gameModes, []); // not yet set area to choose locations from
 let totalScore = 0;
 
-let devMode = 0;
+let devMode = -1;
 let altDevMode = 0;
 
 gameModeSelector(); // interface to select gameArea
