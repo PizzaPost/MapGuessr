@@ -1,52 +1,196 @@
-/* Modern CSS Reset */
+/* CSS Reset and Base Styles */
 *, *::before, *::after {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-}
-
-/* Smooth transitions and modern font stack */
-html {
+  }
+  
+  html {
     scroll-behavior: smooth;
-}
-
-body {
+  }
+  
+  /* CSS Variables */
+  :root {
+    --bg-gradient-start: #f8f9fa;
+    --bg-gradient-end: #e9ecef;
+    --text-color: #333;
+    --container-bg: rgba(255, 255, 255, 0.95);
+    --accent-color: #007BFF;
+    --image-border: rgba(255, 255, 255, 0.3);
+    --scrollbar-thumb: rgba(0, 123, 255, 0.4);
+  }
+  
+  [data-theme="dark"] {
+    --bg-gradient-start: #1a1a1a;
+    --bg-gradient-end: #2d2d2d;
+    --text-color: #f8f9fa;
+    --container-bg: rgba(0, 0, 0, 0.7);
+    --accent-color: #4dabff;
+    --image-border: rgba(0, 0, 0, 0.3);
+    --scrollbar-thumb: rgba(78, 171, 255, 0.4);
+  }
+  
+  /* Animate gradient change via pseudo-element */
+  body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -2;
+    background: linear-gradient(135deg, var(--bg-gradient-start), var(--bg-gradient-end));
+    transition: background 1s ease;
+  }
+  
+  /* Base Body Styles */
+  body {
     font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-    color: #333;
+    background: transparent; /* Now handled by ::before */
+    color: var(--text-color);
     line-height: 1.6;
     min-height: 100vh;
     padding: 2rem;
-}
-
-/* Glassmorphism container styling */
-#gameModeSelector,
-#gameContainer,
-#mapSelector {
-    background: rgba(255, 255, 255, 0.95);
+    transition: color 1s ease;
+  }
+  
+  /* Glassmorphism Container Styling */
+  #gameModeSelector,
+  #gameContainer,
+  #mapSelector {
+    background: var(--container-bg);
     backdrop-filter: blur(10px);
     border-radius: 20px;
     border: 1px solid rgba(255, 255, 255, 0.2);
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
     padding: 2rem;
     margin: 1.5rem auto;
-    transition: transform 0.3s ease;
-}
-
-#gameModeSelector {
-    max-width: 720px;
-}
-
-#gameContainer {
-    max-width: 1600px;
-    padding: 2.5rem;
-    margin: 2rem auto;
+    transition: background 1s ease, border 1s ease, box-shadow 1s ease;
+  }
+  
+  /* Text Styling */
+  #selectedPath {
+    font-size: 1.2rem;
+    color: var(--text-color);
+    font-weight: 500;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--accent-color);
+    display: inline-block;
+    transition: color 1s ease, border-color 1s ease;
+  }
+  
+  /* Image Arrangement and Effects */
+  .images-wrapper {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    width: 100%;
+    margin: 2rem 0;
+    position: relative;
+  }
+  
+  .images-wrapper img {
+    width: 100%;
+    height: 400px;
+    border-radius: 15px;
+    object-fit: cover;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+    border: 2px solid var(--image-border);
+  }
+  
+  .images-wrapper img:hover {
+    transform: scale(1.02) rotate(0.5deg);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+    z-index: 10;
+  }
+  
+  /* Scrollbar Styling */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.05);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--scrollbar-thumb);
+    border-radius: 4px;
+  }
+  
+  /* Theme Toggle Button */
+  #themeToggle {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: transform 0.5s ease, box-shadow 0.5s ease;
+    z-index: 9999;
+    padding: 0;
+    border: none;
+    font-size: 20px;
+    line-height: 1;
+    background: linear-gradient(135deg, var(--accent-color) 0%, var(--accent-color) 100%);
+    box-shadow: 0 4px 15px rgba(0, 123, 255, 0.2);
+  }
+  
+  #themeToggle:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 20px rgba(0, 123, 255, 0.3);
+    animation: pulse 1s ease infinite;
+  }
+  
+  /* Button Styling */
+  button {
+    background: linear-gradient(135deg, #007BFF 0%, #0056b3 100%);
+    color: #fff;
+    border: none;
+    padding: 12px 24px;
+    margin: 8px;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 15px rgba(0, 123, 255, 0.2);
     position: relative;
     overflow: hidden;
-}
-
-/* Add marker containment */
-.marker {
+  }
+  
+  button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 123, 255, 0.3);
+  }
+  
+  button:active {
+    transform: translateY(1px);
+  }
+  
+  button::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 300px;
+    height: 300px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    transition: transform 0.5s ease;
+  }
+  
+  button:hover::after {
+    transform: translate(-50%, -50%) scale(1);
+  }
+  
+  /* Marker Styling */
+  .marker {
     position: absolute;
     width: 10px;
     height: 10px;
@@ -55,145 +199,174 @@ body {
     transition: transform 0.2s ease;
     z-index: 1000;
     display: none;
-}
-
-/* Add zoom cursor feedback */
-.map-image {
+    animation: pulse 1.5s ease-in-out infinite;
+  }
+  
+  .marker::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border: 2px solid var(--accent-color);
+    border-radius: 50%;
+    animation: ripple 1.5s ease-out infinite;
+  }
+  
+  /* Map Image Cursor */
+  .map-image {
     cursor: zoom-in;
-    transition: transform 0.3s ease-in-out(0.25, 0.46, 0.45, 0.94);
-}
-
-/* Enhanced button styling */
-button {
-    background: linear-gradient(135deg, #007BFF 0%, #0056b3 100%);
-    color: #fff;
-    border: none;
-    padding: 12px 24px;
-    margin: 8px;
-    border-radius: 12px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    font-weight: 600;
-    letter-spacing: 0.5px;
-    box-shadow: 0 4px 15px rgba(0, 123, 255, 0.2);
-}
-
-button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(0, 123, 255, 0.3);
-}
-
-button:active {
-    transform: translateY(1px);
-}
-
-/* Modern image arrangement */
-.images-wrapper {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 2rem;
-    width: 100%;
-    margin: 2rem 0;
-    position: relative;
-}
-
-.images-wrapper img {
-    width: 100%;
-    height: 400px;
-    border-radius: 15px;
-    object-fit: cover;
-    transition: transform 0.3s ease;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
-    border: 2px solid rgba(255, 255, 255, 0.3);
-}
-
-/* Right-aligned map specific styling */
-.images-wrapper img:last-child {
-    order: 2; /* Ensures map stays on right side */
-}
-
-/* Typography enhancements */
-#selectedPath {
-    font-size: 1.2rem;
-    color: #2c3e50;
-    font-weight: 500;
-    margin-bottom: 1.5rem;
-    padding-bottom: 0.5rem;
-    border-bottom: 2px solid #007BFF;
-    display: inline-block;
-}
-
-/* Responsive design improvements */
-@media (max-width: 1200px) {
-    body {
-        padding: 1.5rem;
-    }
-    
-    .images-wrapper {
-        gap: 1.5rem;
-    }
-    
-    .images-wrapper img {
-        height: 350px;
-    }
-}
-
-@media (max-width: 768px) {
-    .images-wrapper {
-        grid-template-columns: 1fr;
-        gap: 1rem;
-    }
-    
-    .images-wrapper img {
-        height: 300px;
-        width: 100%;
-        margin: 0;
-    }
-    
-    .images-wrapper img:last-child {
-        order: initial;
-    }
-    
-    #gameContainer {
-        padding: 1.5rem;
-    }
-}
-
-@media (max-width: 480px) {
-    body {
-        padding: 1rem;
-    }
-    
-    .images-wrapper img {
-        height: 250px;
-    }
-    
-    button {
-        width: 100%;
-        margin: 8px 0;
-    }
-}
-
-/* Loading animation */
-@keyframes fadeIn {
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  /* Loading Animation */
+  .loading-placeholder {
+    animation: shimmer 2s infinite linear;
+    background: linear-gradient(
+      to right,
+      rgba(255,255,255,0.1) 0%,
+      rgba(255,255,255,0.3) 50%,
+      rgba(255,255,255,0.1) 100%
+    );
+    background-size: 200% auto;
+  }
+  
+  /* Scroll Animation for Containers */
+  .scroll-animate {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  
+  .scroll-animate.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  /* Animations */
+  @keyframes fadeIn {
     from { opacity: 0; transform: translateY(20px); }
     to { opacity: 1; transform: translateY(0); }
-}
-
-#gameContainer {
+  }
+  
+  @keyframes slideIn {
+    from { transform: translateY(20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+  }
+  
+  @keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+  }
+  
+  @keyframes ripple {
+    from { transform: scale(0); opacity: 1; }
+    to { transform: scale(2); opacity: 0; }
+  }
+  
+  @keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+  }
+  
+  @keyframes fadeInLeft {
+    from { opacity: 0; transform: translateX(-20px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+  
+  @keyframes fadeInRight {
+    from { opacity: 0; transform: translateX(20px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+  
+  @keyframes scoreBounce {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1); }
+  }
+  
+  @keyframes zoomIn {
+    from { transform: scale(0.9); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+  }
+  
+  @keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-8px); }
+    75% { transform: translateX(8px); }
+  }
+  
+  /* Element Specific Animations */
+  #gameContainer {
     animation: fadeIn 0.6s ease-out;
-}
-
-/* Perfect scrollbar styling */
-::-webkit-scrollbar {
-    width: 8px;
-}
-
-::-webkit-scrollbar-track {
-    background: rgba(0, 0, 0, 0.05);
-}
-
-::-webkit-scrollbar-thumb {
-    background: rgba(0, 123, 255, 0.4);
-    border-radius: 4px;
-}
+  }
+  
+  #gameModeSelector {
+    animation: fadeInLeft 0.6s ease-out;
+  }
+  
+  #mapSelector {
+    animation: fadeInRight 0.6s ease-out;
+  }
+  
+  .score-update {
+    animation: scoreBounce 0.4s ease;
+  }
+  
+  .map-zoom-enter {
+    animation: zoomIn 0.3s ease-out;
+  }
+  
+  .error-animation {
+    animation: shake 0.4s ease-in-out;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 1200px) {
+    body {
+      padding: 1.5rem;
+    }
+    .images-wrapper {
+      gap: 1.5rem;
+    }
+    .images-wrapper img {
+      height: 350px;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .images-wrapper {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+    .images-wrapper img {
+      height: 300px;
+      width: 100%;
+      margin: 0;
+    }
+    #gameContainer {
+      padding: 1.5rem;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    body {
+      padding: 1rem;
+    }
+    .images-wrapper img {
+      height: 250px;
+    }
+    button {
+      width: 100%;
+      margin: 8px 0;
+    }
+  }
+  
+  /* Enhanced Dark/Light Mode Transitions */
+  body,
+  #gameModeSelector,
+  #gameContainer,
+  #mapSelector {
+    transition: background 1s ease, color 1s ease, border 1s ease, box-shadow 1s ease;
+  }
+  

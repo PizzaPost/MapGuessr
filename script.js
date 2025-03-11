@@ -528,6 +528,86 @@ function getParentObject(obj, child) {
     }
 }
 
+// Theme toggle functionality
+function createThemeToggle() {
+    const toggle = document.createElement('button');
+    toggle.id = 'themeToggle';
+    
+    // Create a span for the emoji
+    const emojiSpan = document.createElement('span');
+    emojiSpan.style.display = 'block';
+    emojiSpan.style.transform = 'translateY(1px)'; // Fine-tune emoji position
+    toggle.appendChild(emojiSpan);
+  
+    // Function to update the emoji
+    const updateEmoji = () => {
+      const currentTheme = document.body.getAttribute('data-theme');
+      emojiSpan.textContent = currentTheme === 'dark' ? '☀️' : '🌙';
+    };
+  
+    toggle.addEventListener('click', () => {
+      const currentTheme = document.body.getAttribute('data-theme');
+      if (currentTheme === 'dark') {
+        document.body.removeAttribute('data-theme');
+        localStorage.setItem('theme', 'light');
+      } else {
+        document.body.setAttribute('data-theme', 'dark');
+        localStorage.setItem('theme', 'dark');
+      }
+      updateEmoji();
+    });
+  
+    // Check for saved theme
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark') {
+      document.body.setAttribute('data-theme', 'dark');
+    }
+    updateEmoji();
+  
+    // Add toggle to page
+    document.body.appendChild(toggle);
+  }
+
+// Theme toggle functionality
+function createThemeToggle() {
+    const toggle = document.createElement('button');
+    toggle.id = 'themeToggle';
+    
+    // Create a span for the emoji
+    const emojiSpan = document.createElement('span');
+    emojiSpan.style.display = 'block';
+    emojiSpan.style.transform = 'translateY(1px)'; // Fine-tune emoji position
+    toggle.appendChild(emojiSpan);
+  
+    // Function to update the emoji
+    const updateEmoji = () => {
+      const currentTheme = document.body.getAttribute('data-theme');
+      emojiSpan.textContent = currentTheme === 'dark' ? '☀️' : '🌙';
+    };
+  
+    toggle.addEventListener('click', () => {
+      const currentTheme = document.body.getAttribute('data-theme');
+      if (currentTheme === 'dark') {
+        document.body.removeAttribute('data-theme');
+        localStorage.setItem('theme', 'light');
+      } else {
+        document.body.setAttribute('data-theme', 'dark');
+        localStorage.setItem('theme', 'dark');
+      }
+      updateEmoji();
+    });
+  
+    // Check for saved theme
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark') {
+      document.body.setAttribute('data-theme', 'dark');
+    }
+    updateEmoji();
+  
+    // Add toggle to page
+    document.body.appendChild(toggle);
+  }
+
 function startGame(gameArea) {
     let gameContainer = document.getElementById('gameContainer');
 
@@ -576,12 +656,12 @@ function startGame(gameArea) {
             [imagePath, solution] = gameArea[1 + devMode];
             devMode++;
         } else {
+            if (devMode >= possibleImages.length) {
+                devMode = 0;
+            }
             if (altDevMode >= possibleImages[devMode].length - 1) {
                 altDevMode = 0;
                 devMode++;
-            }
-            if (devMode >= possibleImages.length) {
-                devMode = 0;
             }
             const possibleImage = possibleImages[devMode][1 + altDevMode];
             const possibleMaps = possibleImages.find(list => list.includes(possibleImage))
@@ -681,7 +761,7 @@ function startGame(gameArea) {
                 const selectedPath = parentKeys.join(' > ');
                 selectedPathElement.innerText = selectedPath;
                 if (parentKeys.length === 0) {
-                    selectedPathElement.innerText = 'All Possible Games / ';
+                    selectedPathElement.innerText = 'All Games / ';
                 }
                 renderOptions(selection, parentKeys);
             };
@@ -794,11 +874,9 @@ function startGame(gameArea) {
             updateMarker(event, true);
         };
 
-        // // this was called when the user moved the zoomed image around
-        // // which is not possible anymore
-        // gameContainer.onscroll = (event) => {
-        //     updateMarker(event);
-        // };
+        gameContainer.onscroll = (event) => {
+            updateMarker(event);
+        };
 
         // Create submit button
         submitButton.innerText = 'Submit';
@@ -824,8 +902,8 @@ function startGame(gameArea) {
                         solutionMarker.style.borderRadius = '50%';
                         solutionMarker.dataset.x = solutionX;
                         solutionMarker.dataset.y = solutionY;
-                        //solutionMarker.style.left = `${mapImage.offsetLeft + solutionX * mapImage.offsetWidth - 5}px`; // subtract half the size of the marker
-                        //solutionMarker.style.top = `${mapImage.offsetTop + solutionY * mapImage.offsetHeight - 5}px`;
+                        solutionMarker.style.left = `${mapImage.offsetLeft + solutionX * mapImage.offsetWidth - 5}px`; // subtract half the size of the marker
+                        solutionMarker.style.top = `${mapImage.offsetTop + solutionY * mapImage.offsetHeight - 5}px`;
                         const mapRect = mapImage.getBoundingClientRect();
                         const scaleX = mapImage.naturalWidth / mapRect.width;
                         const scaleY = mapImage.naturalHeight / mapRect.height;
@@ -933,3 +1011,4 @@ function resize() {
 }
 
 window.addEventListener('resize', resize);
+document.addEventListener('DOMContentLoaded', createThemeToggle);
