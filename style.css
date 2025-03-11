@@ -1,3 +1,82 @@
+:root {
+    --bg-gradient-start: #f8f9fa;
+    --bg-gradient-end: #e9ecef;
+    --text-color: #333;
+    --container-bg: rgba(255, 255, 255, 0.95);
+    --accent-color: #007BFF;
+    --image-border: rgba(255, 255, 255, 0.3);
+    --scrollbar-thumb: rgba(0, 123, 255, 0.4);
+  }
+  
+  [data-theme="dark"] {
+    --bg-gradient-start: #1a1a1a;
+    --bg-gradient-end: #2d2d2d;
+    --text-color: #f8f9fa;
+    --container-bg: rgba(0, 0, 0, 0.7);
+    --accent-color: #4dabff;
+    --image-border: rgba(0, 0, 0, 0.3);
+    --scrollbar-thumb: rgba(78, 171, 255, 0.4);
+  }
+  
+  /* Modify existing body rule */
+  body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background: linear-gradient(135deg, var(--bg-gradient-start) 0%, var(--bg-gradient-end) 100%);
+    color: var(--text-color);
+    /* rest of existing body styles */
+  }
+  
+  /* Update container backgrounds */
+  #gameModeSelector,
+  #gameContainer,
+  #mapSelector {
+    background: var(--container-bg);
+    /* rest of existing styles */
+  }
+  
+  /* Update text elements */
+  #selectedPath {
+    color: var(--text-color);
+    border-bottom: 2px solid var(--accent-color);
+  }
+  
+  /* Update image borders */
+  .images-wrapper img {
+    border: 2px solid var(--image-border);
+  }
+  
+  /* Update scrollbar */
+  ::-webkit-scrollbar-thumb {
+    background: var(--scrollbar-thumb);
+  }
+  
+  /* Add theme toggle button styles */
+  #themeToggle {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 9999;
+    padding: 0; /* Ensure no padding */
+    border: none; /* Remove default button border */
+    font-size: 20px; /* Adjust emoji size */
+    line-height: 1; /* Ensure emoji is centered vertically */
+    background: linear-gradient(135deg, var(--accent-color) 0%, var(--accent-color) 100%);
+    box-shadow: 0 4px 15px rgba(0, 123, 255, 0.2);
+  }
+  
+  #themeToggle:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 20px rgba(0, 123, 255, 0.3);
+  }
+  
 /* Modern CSS Reset */
 *, *::before, *::after {
     margin: 0;
@@ -196,4 +275,73 @@ button:active {
 ::-webkit-scrollbar-thumb {
     background: rgba(0, 123, 255, 0.4);
     border-radius: 4px;
+}
+
+/* Add these at the top of your CSS */
+:root {
+  --bg-gradient-start: #f8f9fa;
+  --bg-gradient-end: #e9ecef;
+  --text-color: #333;
+  --container-bg: rgba(255, 255, 255, 0.95);
+  --accent-color: #007BFF;
+  --image-border: rgba(255, 255, 255, 0.3);
+  --scrollbar-thumb: rgba(0, 123, 255, 0.4);
+}
+
+[data-theme="dark"] {
+  --bg-gradient-start: #1a1a1a;
+  --bg-gradient-end: #2d2d2d;
+  --text-color: #f8f9fa;
+  --container-bg: rgba(0, 0, 0, 0.7);
+  --accent-color: #4dabff;
+  --image-border: rgba(0, 0, 0, 0.3);
+  --scrollbar-thumb: rgba(78, 171, 255, 0.4);
+}
+
+/* Modify existing body rule */
+body {
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  background: linear-gradient(135deg, var(--bg-gradient-start) 0%, var(--bg-gradient-end) 100%);
+  color: var(--text-color);
+  /* rest of existing body styles */
+}
+
+/* Update container backgrounds */
+#gameModeSelector,
+#gameContainer,
+#mapSelector {
+  background: var(--container-bg);
+  /* rest of existing styles */
+}
+
+/* Update text elements */
+#selectedPath {
+  color: var(--text-color);
+  border-bottom: 2px solid var(--accent-color);
+}
+
+/* Update image borders */
+.images-wrapper img {
+  border: 2px solid var(--image-border);
+}
+
+/* Update scrollbar */
+::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb);
+}
+
+/* Add theme toggle button styles */
+#themeToggle {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 9999;
 }
