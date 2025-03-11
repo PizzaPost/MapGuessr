@@ -568,46 +568,6 @@ function createThemeToggle() {
     document.body.appendChild(toggle);
   }
 
-// Theme toggle functionality
-function createThemeToggle() {
-    const toggle = document.createElement('button');
-    toggle.id = 'themeToggle';
-    
-    // Create a span for the emoji
-    const emojiSpan = document.createElement('span');
-    emojiSpan.style.display = 'block';
-    emojiSpan.style.transform = 'translateY(1px)'; // Fine-tune emoji position
-    toggle.appendChild(emojiSpan);
-  
-    // Function to update the emoji
-    const updateEmoji = () => {
-      const currentTheme = document.body.getAttribute('data-theme');
-      emojiSpan.textContent = currentTheme === 'dark' ? '☀️' : '🌙';
-    };
-  
-    toggle.addEventListener('click', () => {
-      const currentTheme = document.body.getAttribute('data-theme');
-      if (currentTheme === 'dark') {
-        document.body.removeAttribute('data-theme');
-        localStorage.setItem('theme', 'light');
-      } else {
-        document.body.setAttribute('data-theme', 'dark');
-        localStorage.setItem('theme', 'dark');
-      }
-      updateEmoji();
-    });
-  
-    // Check for saved theme
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme === 'dark') {
-      document.body.setAttribute('data-theme', 'dark');
-    }
-    updateEmoji();
-  
-    // Add toggle to page
-    document.body.appendChild(toggle);
-  }
-
 function startGame(gameArea) {
     let gameContainer = document.getElementById('gameContainer');
 
