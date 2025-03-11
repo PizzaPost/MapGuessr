@@ -352,6 +352,34 @@ const gameModes = {
             },
         },
     },
+    "Subnautica": {
+        "Aurora": [
+            "images/subnautica/aurora/map.jpg",
+            ["images/subnautica/aurora/genroom.jpg", [0.7121464226289518, 0.1543512626160269]],
+            ["images/subnautica/aurora/prawnroom.jpg", [0.23460898502495842, 0.43192412143812575]],
+        ],
+        // TODO add biomes folder and map.jpg once pictures have been taken
+        "Caves": {
+            "Jellyshroom Cave": [
+                "images/subnautica/caves/jellyshroom_cave/map.png",
+                ["images/subnautica/caves/jellyshroom_cave/base2.jpg", [0.9079704190632704, 0.8195121951219512]],
+            ],
+            // TODO add lava_zones including inactive_lava_zone, lava_lakes and their respective map.png once pictures have been taken
+            "Lost River": [
+                "images/subnautica/caves/lost_river/map.png",
+                ["images/subnautica/caves/lost_river/base3.jpg", [0.31306491372226786, 0.8489212528085325]],
+            ],
+        },
+        "Islands": {
+            "Floating Island": [
+                "images/subnautica/islands/floating_island/map.jpg",
+                ["images/subnautica/islands/floating_island/base1.jpg", [0.49548069022185703, 0.41745389113810166]],
+                ["images/subnautica/islands/floating_island/base1a.jpg", [0.6055875102711585, 0.5991902834008097]],
+                ["images/subnautica/islands/floating_island/base1b.jpg", [0.3492193919474117, 0.24471434997750788]],
+            ],
+            // TODO add mountain_island once map exists and pictures have been taken
+        },
+    },
 }
 
 let gameState = 0; // 0 => choose gamemode
@@ -375,7 +403,7 @@ function gameModeSelector() {
     // Create the selectedPathElement and the selectButton
     const selectedPathElement = document.createElement('p');
     selectedPathElement.id = 'selectedPath';
-    selectedPathElement.innerText = 'All Games / ';
+    selectedPathElement.innerText = 'Choose which game you want to MapGuess in (select -> for all games)';
     const selectButton = document.createElement('button');
     selectButton.id = 'selectButton';
     selectButton.innerText = 'Select';
@@ -523,12 +551,12 @@ function startGame(gameArea) {
             [imagePath, solution] = gameArea[1 + devMode];
             devMode++;
         } else {
-            if (devMode >= possibleImages.length) {
-                devMode = 0;
-            }
             if (altDevMode >= possibleImages[devMode].length - 1) {
                 altDevMode = 0;
                 devMode++;
+            }
+            if (devMode >= possibleImages.length) {
+                devMode = 0;
             }
             const possibleImage = possibleImages[devMode][1 + altDevMode];
             const possibleMaps = possibleImages.find(list => list.includes(possibleImage))
@@ -579,7 +607,7 @@ function startGame(gameArea) {
 
     const selectedPathElement = document.createElement('p');
     selectedPathElement.id = 'selectedPath';
-    selectedPathElement.innerText = 'All Games / ';
+    selectedPathElement.innerText = 'Choose which game you think this image was taken in';
     mapSelector.appendChild(selectedPathElement);
 
     // Helper function to select a map
@@ -628,7 +656,7 @@ function startGame(gameArea) {
                 const selectedPath = parentKeys.join(' > ');
                 selectedPathElement.innerText = selectedPath;
                 if (parentKeys.length === 0) {
-                    selectedPathElement.innerText = 'All Games / ';
+                    selectedPathElement.innerText = 'All Possible Games / ';
                 }
                 renderOptions(selection, parentKeys);
             };
@@ -738,12 +766,14 @@ function startGame(gameArea) {
                 }, 10);
             }
             
-            updateMarker(event);
+            updateMarker(event, true);
         };
 
-        gameContainer.onscroll = (event) => {
-            updateMarker(event);
-        };
+        // // this was called when the user moved the zoomed image around
+        // // which is not possible anymore
+        // gameContainer.onscroll = (event) => {
+        //     updateMarker(event);
+        // };
 
         // Create submit button
         submitButton.innerText = 'Submit';
@@ -769,8 +799,8 @@ function startGame(gameArea) {
                         solutionMarker.style.borderRadius = '50%';
                         solutionMarker.dataset.x = solutionX;
                         solutionMarker.dataset.y = solutionY;
-                        solutionMarker.style.left = `${mapImage.offsetLeft + solutionX * mapImage.offsetWidth - 5}px`; // subtract half the size of the marker
-                        solutionMarker.style.top = `${mapImage.offsetTop + solutionY * mapImage.offsetHeight - 5}px`;
+                        //solutionMarker.style.left = `${mapImage.offsetLeft + solutionX * mapImage.offsetWidth - 5}px`; // subtract half the size of the marker
+                        //solutionMarker.style.top = `${mapImage.offsetTop + solutionY * mapImage.offsetHeight - 5}px`;
                         const mapRect = mapImage.getBoundingClientRect();
                         const scaleX = mapImage.naturalWidth / mapRect.width;
                         const scaleY = mapImage.naturalHeight / mapRect.height;
@@ -823,21 +853,20 @@ function startGame(gameArea) {
             }
         }
 
-        function updateMarker(event) {
-            const rect = mapImage.getBoundingClientRect();
-            const gameContainer = document.getElementById('gameContainer');
-            const containerRect = gameContainer.getBoundingClientRect();
-
-            // Update marker positions
+        function updateMarker(event, delay=false) {
             const updatePosition = (marker) => {
                 if (!marker.dataset.x || !marker.dataset.y) return;
+
+                const rect = mapImage.getBoundingClientRect();
+                const gameContainer = document.getElementById('gameContainer');
+                const containerRect = gameContainer.getBoundingClientRect();
                 
                 const x = parseFloat(marker.dataset.x);
                 const y = parseFloat(marker.dataset.y);
                 
                 // Calculate expected position regardless of current visibility
-                const markerLeft = rect.left + (x * rect.width) - 5;
-                const markerTop = rect.top + (y * rect.height) - 5;
+                const markerLeft = rect.left + (x * rect.width) - 5 + window.scrollX;
+                const markerTop = rect.top + (y * rect.height) - 5 + window.scrollY;
                 
                 // Update marker position
                 marker.style.left = `${markerLeft}px`;
@@ -855,8 +884,12 @@ function startGame(gameArea) {
                 marker.style.pointerEvents = isVisible ? 'auto' : 'none';
             };            
 
-            updatePosition(marker);
-            updatePosition(solutionMarker);
+            if (delay) {
+                setTimeout(() => {updatePosition(marker); updatePosition(solutionMarker);}, 200);
+            } else {
+                updatePosition(marker);
+                updatePosition(solutionMarker);
+            }
         }
     }
 }
