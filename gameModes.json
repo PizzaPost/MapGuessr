@@ -1254,6 +1254,153 @@
                         ]
                     ]
                 }
+            },
+            "Chapter 5 - The Escape": {
+                "Turret Factory": {
+                    "0": [
+                        "images/portal_series/portal2/chapter5/turret_factory/maps/0.png",
+                        [
+                            "images/portal_series/portal2/chapter5/turret_factory/0.png",
+                            [
+                                0.6493051361994391,
+                                0.9068448087579039
+                            ]
+                        ],
+                        [
+                            "images/portal_series/portal2/chapter5/turret_factory/1.png",
+                            [
+                                0.4112178798228003,
+                                0.3272197551675191
+                            ]
+                        ]
+                    ],
+                    "1": [
+                        "images/portal_series/portal2/chapter5/turret_factory/maps/1.png",
+                        [
+                            "images/portal_series/portal2/chapter5/turret_factory/2.png",
+                            [
+                                0.43653258936365225,
+                                0.24780506221196927
+                            ]
+                        ],
+                        [
+                            "images/portal_series/portal2/chapter5/turret_factory/3.png",
+                            [
+                                0.6729447847498767,
+                                0.4144793285230743
+                            ]
+                        ]
+                    ]
+                },
+                "Turret Sabotage": {
+                    "0": [
+                        "images/portal_series/portal2/chapter5/turret_sabotage/maps/0.png",
+                        [
+                            "images/portal_series/portal2/chapter5/turret_sabotage/0.png",
+                            [
+                                0.49701936718021106,
+                                0.3824438363580325
+                            ]
+                        ],
+                        [
+                            "images/portal_series/portal2/chapter5/turret_sabotage/1.png",
+                            [
+                                0.6614134695714914,
+                                0.5614978382127584
+                            ]
+                        ]
+                    ],
+                    "1": [
+                        "images/portal_series/portal2/chapter5/turret_sabotage/maps/1.png",
+                        [
+                            "images/portal_series/portal2/chapter5/turret_sabotage/2.png",
+                            [
+                                0.6698556442682233,
+                                0.43335850324701947
+                            ]
+                        ]
+                    ],
+                    "2": [
+                        "images/portal_series/portal2/chapter5/turret_sabotage/maps/2.png",
+                        [
+                            "images/portal_series/portal2/chapter5/turret_sabotage/3.png",
+                            [
+                                0.4663916390478486,
+                                0.4830390076796338
+                            ]
+                        ],
+                        [
+                            "images/portal_series/portal2/chapter5/turret_sabotage/4.png",
+                            [
+                                0.7958764941213434,
+                                0.5342035692852785
+                            ]
+                        ]
+                    ]
+                },
+                "Neurotoxin Sabotage": [
+                    "images/portal_series/portal2/chapter5/neurotoxin_sabotage/maps/0.png",
+                    [
+                        "images/portal_series/portal2/chapter5/neurotoxin_sabotage/0.png",
+                        [
+                            0.5848135099819315,
+                            0.4804235074716193
+                        ]
+                    ],
+                    [
+                        "images/portal_series/portal2/chapter5/neurotoxin_sabotage/1.png",
+                        [
+                            0.501794912081884,
+                            0.6810319717500489
+                        ]
+                    ],
+                    [
+                        "images/portal_series/portal2/chapter5/neurotoxin_sabotage/2.png",
+                        [
+                            0.9111106908700399,
+                            0.4178555048890073
+                        ]
+                    ]
+                ],
+                "Core": {
+                    "0": [
+                        "images/portal_series/portal2/chapter5/core/maps/0.png",
+                        [
+                            "images/portal_series/portal2/chapter5/core/0.png",
+                            [
+                                0.4183675474333196,
+                                0.666218686072437
+                            ]
+                        ]
+                    ],
+                    "1": [
+                        "images/portal_series/portal2/chapter5/core/maps/1.png",
+                        [
+                            "images/portal_series/portal2/chapter5/core/1.png",
+                            [
+                                0.4753227548658262,
+                                0.6453859384854553
+                            ]
+                        ]
+                    ],
+                    "2": [
+                        "images/portal_series/portal2/chapter5/core/maps/2.png",
+                        [
+                            "images/portal_series/portal2/chapter5/core/2.png",
+                            [
+                                0.6664916310230447,
+                                0.41241475163464936
+                            ]
+                        ],
+                        [
+                            "images/portal_series/portal2/chapter5/core/3.png",
+                            [
+                                0.4119293781143687,
+                                0.5443277752561454
+                            ]
+                        ]
+                    ]
+                }
             }
         }
     },
