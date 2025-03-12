@@ -19,8 +19,8 @@ html {
     --accent-color: #007BFF;
     --image-border: rgba(255, 255, 255, 0.3);
     --scrollbar-thumb: rgba(0, 123, 255, 0.4);
-    --button-bg: linear-gradient(135deg, #007BFF, #0056b3);
-    --button-bg-alt: linear-gradient(135deg, #381bdf, #1520b3);
+    --button-bg: linear-gradient(135deg, #007BFF, #004691);
+    --button-bg-alt: linear-gradient(135deg, #0400e9, #000879);
     --button-color: #fff;
     --button-color-alt: #fff;
     --button-shadow: rgba(0, 123, 255, 0.5);
@@ -35,8 +35,8 @@ html {
     --accent-color: #0205c2;
     --image-border: rgba(0, 0, 0, 0.3);
     --scrollbar-thumb: rgba(78, 171, 255, 0.4);
-    --button-bg: linear-gradient(135deg, #0767bb, #025cbb);
-    --button-bg-alt: linear-gradient(135deg, #0604aa, #080050);
+    --button-bg: linear-gradient(135deg, #007BFF, #0056b3);
+    --button-bg-alt: linear-gradient(135deg, #0400e0, #0d007e);
     --button-color: #fff;
     --button-color-alt: #fff;
     --button-shadow: rgba(5, 50, 252, 0.2);
