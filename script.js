@@ -104,8 +104,7 @@ function gameModeSelector() {
             button.innerText = key;
             const value = options[key];
             if (!(typeof value === 'object' && !Array.isArray(value))) {
-                button.style.backgroundColor = 'black';
-                button.style.color = 'white';
+                toAltButton(button);
             }
 
             button.onclick = () => {
@@ -125,6 +124,12 @@ function gameModeSelector() {
 
     // Start rendering options from the top level
     renderOptions(gameModes);
+}
+
+function toAltButton(button) {
+    button.style.background = 'var(--button-bg-alt)';
+    button.style.color = 'var(--button-color-alt)';
+    button.style.boxShadow = '0 4px 15px var(--button-shadow-alt)';
 }
 
 // Helper function to navigate the nested object
@@ -360,8 +365,7 @@ function startGame(gameArea) {
             button.innerText = key;
             const value = options[key];
             if (!(typeof value === 'object' && !Array.isArray(value))) {
-                button.style.backgroundColor = 'black';
-                button.style.color = 'white';
+                toAltButton(button);
             }
 
             button.dataset.value = JSON.stringify(selection[key]);
