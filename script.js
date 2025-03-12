@@ -7,6 +7,31 @@ let totalScore = 0;
 let devMode = -1;
 let altDevMode = 0;
 
+// Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+    apiKey: "AIzaSyBDDQ-mIDOwBabaArd7NTW3bna92zhKifA",
+    authDomain: "mocoxiii-mapguessr.firebaseapp.com",
+    projectId: "mocoxiii-mapguessr",
+    storageBucket: "mocoxiii-mapguessr.firebasestorage.app",
+    messagingSenderId: "159195403147",
+    appId: "1:159195403147:web:b0fdb670cabc24680c158e",
+    measurementId: "G-DNV45FQ36B"
+};
+
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+
+// Initialize Firestore (for real-time messaging)
+const db = firebase.firestore();
+
+// Initialize Firebase Authentication
+const auth = firebase.auth();
+
+auth.signInAnonymously().catch(error => {
+    console.error('Authentication failed:', error);
+});
+
 // Function to load the JSON file
 async function loadGameModes() {
     try {
@@ -394,13 +419,13 @@ function startGame(gameArea) {
 
     function showCustomAlert(message, mode) {
         if (document.getElementById('custom-alert')) return; // Prevent multiple alerts
-        if (mode===0) {
+        if (mode === 0) {
             const cont = document.getElementById('gameContainer');
             if (cont) {
                 cont.animate([
-                    { transform: 'translateX(0)' },  
-                    { transform: 'translateX(-12px)' },  
-                    { transform: 'translateX(12px)' },  
+                    { transform: 'translateX(0)' },
+                    { transform: 'translateX(-12px)' },
+                    { transform: 'translateX(12px)' },
                     { transform: 'translateX(0)' }
                 ], {
                     duration: 400,  // Total duration of the shake
@@ -409,7 +434,7 @@ function startGame(gameArea) {
                 });
             }
         }
-        
+
         // Create overlay to block interactions
         const overlay = document.createElement('div');
         overlay.style.position = 'fixed';
@@ -421,7 +446,7 @@ function startGame(gameArea) {
         overlay.style.zIndex = '999';
         overlay.style.pointerEvents = 'auto'; // Blocks interactions
         document.body.appendChild(overlay);
-        
+
         // Create the alert box
         const alertBox = document.createElement('div');
         alertBox.id = 'custom-alert'; // Unique ID to prevent duplicates
@@ -437,7 +462,7 @@ function startGame(gameArea) {
         alertBox.style.zIndex = '1001';
         alertBox.style.borderRadius = '8px';
         alertBox.style.textAlign = 'center';
-    
+
         // Create the close button
         const closeButton = document.createElement('button');
         closeButton.innerText = 'OK';
@@ -448,20 +473,20 @@ function startGame(gameArea) {
         closeButton.style.cursor = 'pointer';
         closeButton.style.borderRadius = '4px';
 
-        if (mode===0) {
+        if (mode === 0) {
             alertBox.style.border = '2px solid red';
             closeButton.style.background = 'red';
         } else {
             alertBox.style.border = '2px solid green';
             closeButton.style.background = 'green';
         }
-    
+
         function closeAlert() {
             alertBox.remove();
             overlay.remove();
             document.removeEventListener('keydown', keyHandler); // Remove key listener
         }
-    
+
         closeButton.onclick = closeAlert;
         overlay.onclick = closeAlert;
 
@@ -471,14 +496,14 @@ function startGame(gameArea) {
                 closeAlert();
             }
         }
-    
+
         document.addEventListener('keydown', keyHandler);
-    
+
         alertBox.appendChild(closeButton);
         document.body.appendChild(alertBox);
         closeButton.focus(); // Focus on button so Enter works immediately
     }
-    
+
 
     function displayMap(map) {
         // Display the map image
