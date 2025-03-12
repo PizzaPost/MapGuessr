@@ -388,6 +388,81 @@ function startGame(gameArea) {
         renderOptions(selection);
     }
 
+    function showCustomAlert(message, mode) {
+        if (document.getElementById('custom-alert')) return; // Prevent multiple alerts
+        document.body.classList.add('error-animation');
+        setTimeout(() => document.body.classList.remove('error-animation'), 600);
+
+        // Create overlay to block interactions
+        const overlay = document.createElement('div');
+        overlay.style.position = 'fixed';
+        overlay.style.top = '0';
+        overlay.style.left = '0';
+        overlay.style.width = '100vw';
+        overlay.style.height = '100vh';
+        overlay.style.background = 'rgba(0, 0, 0, 0)';
+        overlay.style.zIndex = '999';
+        overlay.style.pointerEvents = 'auto'; // Blocks interactions
+        document.body.appendChild(overlay);
+        
+        // Create the alert box
+        const alertBox = document.createElement('div');
+        alertBox.id = 'custom-alert'; // Unique ID to prevent duplicates
+        alertBox.innerText = message;
+        alertBox.style.position = 'fixed';
+        alertBox.style.top = '50%';
+        alertBox.style.left = '50%';
+        alertBox.style.transform = 'translate(-50%, -50%)';
+        alertBox.style.background = 'rgb(40, 40, 40)';
+        alertBox.style.color = 'white';
+        alertBox.style.padding = '20px';
+        alertBox.style.boxShadow = '0 0 10px rgba(0, 0, 0, 0.3)';
+        alertBox.style.zIndex = '1001';
+        alertBox.style.borderRadius = '8px';
+        alertBox.style.textAlign = 'center';
+    
+        // Create the close button
+        const closeButton = document.createElement('button');
+        closeButton.innerText = 'OK';
+        closeButton.style.marginTop = '10px';
+        closeButton.style.padding = '5px 10px';
+        closeButton.style.border = 'none';
+        closeButton.style.color = 'white';
+        closeButton.style.cursor = 'pointer';
+        closeButton.style.borderRadius = '4px';
+
+        if (mode===0) {
+            alertBox.style.border = '2px solid red';
+            closeButton.style.background = 'red';
+        } else {
+            alertBox.style.border = '2px solid green';
+            closeButton.style.background = 'green';
+        }
+    
+        function closeAlert() {
+            document.body.classList.remove('error-animation');
+            alertBox.remove();
+            overlay.remove();
+            document.removeEventListener('keydown', keyHandler); // Remove key listener
+        }
+    
+        closeButton.onclick = closeAlert;
+    
+        // Close on Enter key
+        function keyHandler(event) {
+            if (event.key === 'Enter') {
+                closeAlert();
+            }
+        }
+    
+        document.addEventListener('keydown', keyHandler);
+    
+        alertBox.appendChild(closeButton);
+        document.body.appendChild(alertBox);
+        closeButton.focus(); // Focus on button so Enter works immediately
+    }
+    
+
     function displayMap(map) {
         // Display the map image
         selectedMap = map
@@ -477,7 +552,7 @@ function startGame(gameArea) {
                     if (Array.isArray(solution) && solution.length > 0) {
                         totalScore += score;
                         document.title = `MapGuessr | Score: ${totalScore.toFixed(0)}`;
-                        alert(`You scored ${score.toFixed(0)} points!`);
+                        showCustomAlert(`You scored ${score.toFixed(0)} points!`, 1);
                         solutionMarker.style.position = 'absolute';
                         solutionMarker.style.width = '10px';
                         solutionMarker.style.height = '10px';
@@ -495,16 +570,16 @@ function startGame(gameArea) {
                         solutionMarker.style.display = 'block';
                         document.body.appendChild(solutionMarker);
                     } else {
-                        alert('You got the map correct!\nThis image has not been assigned a solution yet.');
+                        showCustomAlert('You got the map correct!\nThis image has not been assigned a solution yet.', 1);
                     }
                 } else {
                     const pathToMap = actualMap.split('/').slice(1, -2).join(' > ');
-                    alert('You have chosen the wrong map. It was ' + pathToMap);
+                    showCustomAlert('You have chosen the wrong map. It was ' + pathToMap, 0);
                 }
 
                 submitButton.remove();
             } else {
-                alert('Please place a marker on the map');
+                showCustomAlert('Please place a marker on the map', 0);
             }
         };
 

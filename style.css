@@ -292,8 +292,8 @@
   
   @keyframes shake {
     0%, 100% { transform: translateX(0); }
-    25% { transform: translateX(-8px); }
-    75% { transform: translateX(8px); }
+    25% { transform: translateX(-12px); }
+    75% { transform: translateX(12px); }
   }
   
   /* Element Specific Animations */
@@ -302,7 +302,7 @@
   }
   
   #gameModeSelector {
-    animation: fadeInLeft 0.6s ease-out;
+    animation: fadeInLeft 3.6s ease-out;
   }
   
   #mapSelector {
