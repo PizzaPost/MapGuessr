@@ -350,6 +350,105 @@ const gameModes = {
                     ],
                 },
             },
+            "Chapter 5 - The Escape": {
+                "Turret Factory": {
+                    "0": [
+                        "images/portal_series/portal2/chapter5/turret_factory/maps/0.png",
+                        ["images/portal_series/portal2/chapter5/turret_factory/0.png", [0.6493051361994391, 0.9068448087579039]],
+                        ["images/portal_series/portal2/chapter5/turret_factory/1.png", [0.4112178798228003, 0.3272197551675191]],
+                    ],
+                    "1": ["images/portal_series/portal2/chapter5/turret_factory/maps/1.png",
+                        ["images/portal_series/portal2/chapter5/turret_factory/2.png", [0.43653258936365225, 0.24780506221196927]],
+                        ["images/portal_series/portal2/chapter5/turret_factory/3.png", [0.6729447847498767, 0.4144793285230743]],
+                    ]
+                },
+                "Turret Sabotage": {
+                    "0": [
+                        "images/portal_series/portal2/chapter5/turret_sabotage/maps/0.png",
+                        ["images/portal_series/portal2/chapter5/turret_sabotage/0.png", [0.49701936718021106, 0.3824438363580325]],
+                        ["images/portal_series/portal2/chapter5/turret_sabotage/1.png", [0.6614134695714914, 0.5614978382127584]],
+                    ],
+                    "1": ["images/portal_series/portal2/chapter5/turret_sabotage/maps/1.png",
+                        ["images/portal_series/portal2/chapter5/turret_sabotage/2.png", [0.6698556442682233, 0.43335850324701947]],
+                    ],
+                    "2": ["images/portal_series/portal2/chapter5/turret_sabotage/maps/2.png",
+                        ["images/portal_series/portal2/chapter5/turret_sabotage/3.png", [0.4663916390478486, 0.4830390076796338]],
+                        ["images/portal_series/portal2/chapter5/turret_sabotage/4.png", [0.7958764941213434, 0.5342035692852785]],
+                    ]
+                },
+                "Neurotoxin Sabotage": [
+                    "images/portal_series/portal2/chapter5/neurotoxin_sabotage/maps/0.png",
+                    ["images/portal_series/portal2/chapter5/neurotoxin_sabotage/0.png", [0.5848135099819315, 0.4804235074716193]],
+                    ["images/portal_series/portal2/chapter5/neurotoxin_sabotage/1.png", [0.501794912081884, 0.6810319717500489]],
+                    ["images/portal_series/portal2/chapter5/neurotoxin_sabotage/2.png", [0.9111106908700399, 0.4178555048890073]],
+                ],
+                "Core": {
+                    "0": [
+                        "images/portal_series/portal2/chapter5/core/maps/0.png",
+                        ["images/portal_series/portal2/chapter5/core/0.png", [0.4183675474333196, 0.666218686072437]],
+                    ],
+                    "1": ["images/portal_series/portal2/chapter5/core/maps/1.png",
+                        ["images/portal_series/portal2/chapter5/core/1.png", [0.4753227548658262, 0.6453859384854553]],
+                    ],
+                    "2": ["images/portal_series/portal2/chapter5/core/maps/2.png",
+                        ["images/portal_series/portal2/chapter5/core/2.png", [0.6664916310230447, 0.41241475163464936]],
+                        ["images/portal_series/portal2/chapter5/core/3.png", [0.4119293781143687, 0.5443277752561454]],
+                    ]
+                },
+            },
+        },
+    },
+    "Subnautica": {
+        "Aurora": [
+            "images/subnautica/aurora/map.jpg",
+            ["images/subnautica/aurora/genroom.jpg", [0.7121464226289518, 0.1543512626160269]],
+            ["images/subnautica/aurora/prawnroom.jpg", [0.23460898502495842, 0.43192412143812575]],
+        ],
+        "Islands": {
+            "Floating Island": [
+                "images/subnautica/islands/floating_island/map.jpg",
+                ["images/subnautica/islands/floating_island/base1.jpg", [0.49548069022185703, 0.41745389113810166]],
+                ["images/subnautica/islands/floating_island/base1a.jpg", [0.6055875102711585, 0.5991902834008097]],
+                ["images/subnautica/islands/floating_island/base1b.jpg", [0.3492193919474117, 0.24471434997750788]],
+            ],
+            "Mountain Island": [
+                "images/subnautica/islands/mountain_island/map.jpg",
+                ["images/subnautica/islands/mountain_island/precursorgunaim.jpg", [0.3832258064516129, 0.13587148338323865]],
+            ],
+        },
+        "Surface Biomes": [
+            "images/subnautica/surface_biomes/map.jpg",
+            ["images/subnautica/surface_biomes/crash_zone.jpg", [0.6103225806451613, 0.6341532258064516]],
+            ["images/subnautica/surface_biomes/cuddlefish.jpg", [0.14152710748487904, 0.3806514616935484]],
+            ["images/subnautica/surface_biomes/largest_tree.jpg", [0.2778276800340222, 0.3637078660534274]],
+            ["images/subnautica/surface_biomes/base3.jpg", [0.3453279428361676, 0.7347478879952665]],
+        ],
+        "Caves": {
+            "Jellyshroom Cave": [
+                "images/subnautica/caves/jellyshroom_cave/map.png",
+                ["images/subnautica/caves/jellyshroom_cave/base2.jpg", [0.9079704190632704, 0.8195121951219512]],
+            ],
+            // "Deep Grand Reef": [ // folder nonexistent, no maps available -> select in surface biomes instead
+            //     "images/subnautica/caves/deep_grand_reef/....png",
+            //     ["images/subnautica/caves/deep_grand_reef/base3.jpg", []],
+            // ],
+            "Lost River": [
+                "images/subnautica/caves/lost_river/map.png",
+                ["images/subnautica/caves/lost_river/gargantua_skeleton.jpg", [0.2659813980594758, 0.6173044658228656]],
+                ["images/subnautica/caves/lost_river/ghost_tree.jpg", [0.17252581590221774, 0.31321428191885053]],
+            ],
+            "Lava Zones": {
+                "Inactive Lava Zone": [
+                    "images/subnautica/caves/lava_zones/inactive_lava_zone/map.png",
+                    ["images/subnautica/caves/lava_zones/inactive_lava_zone/lava_castle.jpg", [0.6851612903225807, 0.77285573447256]],
+                ],
+                "Lava Lakes": [
+                    "images/subnautica/caves/lava_zones/lava_lakes/map.png",
+                    ["images/subnautica/caves/lava_zones/lava_lakes/prison.jpg", [0.5948387096774194, 0.5313075348004886]],
+                    ["images/subnautica/caves/lava_zones/lava_lakes/sea_emperor_lean.jpg", [0.727741935483871, 0.5335099884715315]],
+                    ["images/subnautica/caves/lava_zones/lava_lakes/sea_emperor_sit.jpg", [0.7083870967741935, 0.6887829722800557]],
+                ],
+            },
         },
     },
 }
@@ -375,7 +474,7 @@ function gameModeSelector() {
     // Create the selectedPathElement and the selectButton
     const selectedPathElement = document.createElement('p');
     selectedPathElement.id = 'selectedPath';
-    selectedPathElement.innerText = 'All Games / ';
+    selectedPathElement.innerText = 'Choose a game (or all in this directory ->)';
     const selectButton = document.createElement('button');
     selectButton.id = 'selectButton';
     selectButton.innerText = 'Select';
@@ -517,6 +616,7 @@ function createThemeToggle() {
 
 function startGame(gameArea) {
     let gameContainer = document.getElementById('gameContainer');
+
     // Add the CSS transition here
     const style = document.createElement('style');
     style.textContent = `
@@ -555,7 +655,7 @@ function startGame(gameArea) {
 
     if (devMode > -1) {
         if (Array.isArray(gameArea)) {
-            if (devMode >= gameArea.length) {
+            if (devMode >= gameArea.length - 1) {
                 devMode = 0;
             }
             actualMap = gameArea[0];
@@ -618,7 +718,7 @@ function startGame(gameArea) {
 
     const selectedPathElement = document.createElement('p');
     selectedPathElement.id = 'selectedPath';
-    selectedPathElement.innerText = 'All Games / ';
+    selectedPathElement.innerText = 'Choose where you think this image was taken';
     mapSelector.appendChild(selectedPathElement);
 
     // Helper function to select a map
@@ -742,32 +842,32 @@ function startGame(gameArea) {
             event.preventDefault();
             const rect = mapImage.getBoundingClientRect();
             const scrollDelta = event.deltaY;
-            
+
             // Current scale and position
             const oldScale = parseFloat(mapImage.style.transform?.match(/scale\(([^)]+)\)/)?.[1]) || 1;
             let newScale = oldScale - scrollDelta / 500;
-            
+
             // Enforce minimum scale of 1 (original size)
             newScale = Math.min(5, Math.max(1, newScale));
-            
+
             // Calculate mouse position relative to image
             const mouseX = event.clientX - rect.left;
             const mouseY = event.clientY - rect.top;
-            
+
             // Smooth centering interpolation
             const scaleAboveOne = newScale - 1;
             const centeringFactor = Math.max(0, 1 - scaleAboveOne);
-            
+
             // Calculate transform origin
             const mouseOriginX = (mouseX / rect.width) * 100;
             const mouseOriginY = (mouseY / rect.height) * 100;
             const originX = mouseOriginX * (1 - centeringFactor) + 50 * centeringFactor;
             const originY = mouseOriginY * (1 - centeringFactor) + 50 * centeringFactor;
-            
+
             // Apply transformations
             mapImage.style.transformOrigin = `${originX}% ${originY}%`;
             mapImage.style.transform = `scale(${newScale})`;
-            
+
             // Smooth centering animation when returning to original size
             if (newScale === 1 && oldScale !== 1) {
                 mapImage.style.transition = 'transform 0.3s ease-out, transform-origin 0.3s ease-out';
@@ -776,8 +876,8 @@ function startGame(gameArea) {
                     mapImage.style.transition = '';
                 }, 10);
             }
-            
-            updateMarker(event);
+
+            updateMarker(event, true);
         };
 
         gameContainer.onscroll = (event) => {
@@ -854,7 +954,9 @@ function startGame(gameArea) {
                 const rect = mapImage.getBoundingClientRect();
                 const x = (event.clientX - rect.left) / rect.width;
                 const y = (event.clientY - rect.top) / rect.height;
-                
+
+                if (devMode > -1) { console.log(`${x}, ${y}`); }
+
                 marker.dataset.x = x;
                 marker.dataset.y = y;
                 marker.style.display = 'block';
@@ -862,40 +964,43 @@ function startGame(gameArea) {
             }
         }
 
-        function updateMarker(event) {
-            const rect = mapImage.getBoundingClientRect();
-            const gameContainer = document.getElementById('gameContainer');
-            const containerRect = gameContainer.getBoundingClientRect();
-
-            // Update marker positions
+        function updateMarker(event, delay = false) {
             const updatePosition = (marker) => {
                 if (!marker.dataset.x || !marker.dataset.y) return;
-                
+
+                const rect = mapImage.getBoundingClientRect();
+                const gameContainer = document.getElementById('gameContainer');
+                const containerRect = gameContainer.getBoundingClientRect();
+
                 const x = parseFloat(marker.dataset.x);
                 const y = parseFloat(marker.dataset.y);
-                
+
                 // Calculate expected position regardless of current visibility
-                const markerLeft = rect.left + (x * rect.width) - 5;
-                const markerTop = rect.top + (y * rect.height) - 5;
-                
+                const markerLeft = rect.left + (x * rect.width) - 5 + window.scrollX;
+                const markerTop = rect.top + (y * rect.height) - 5 + window.scrollY;
+
                 // Update marker position
                 marker.style.left = `${markerLeft}px`;
                 marker.style.top = `${markerTop}px`;
-                
-                // Calculate visibility using predicted position instead of actual rect
-                const isVisible = 
-                    markerLeft + 10 > containerRect.left && // 10px width
-                    markerLeft < containerRect.right &&
-                    markerTop + 10 > containerRect.top &&
-                    markerTop < containerRect.bottom;
-            
-                // Always update display state
-                marker.style.display = isVisible ? 'block' : 'none';
-                marker.style.pointerEvents = isVisible ? 'auto' : 'none';
-            };            
 
-            updatePosition(marker);
-            updatePosition(solutionMarker);
+                // // Calculate visibility using predicted position instead of actual rect
+                // const isVisible =
+                //     markerLeft + 10 > containerRect.left && // 10px width
+                //     markerLeft < containerRect.right &&
+                //     markerTop + 10 > containerRect.top &&
+                //     markerTop < containerRect.bottom;
+
+                // // Always update display state
+                // marker.style.display = isVisible ? 'block' : 'none';
+                // marker.style.pointerEvents = isVisible ? 'auto' : 'none';
+            };
+
+            if (delay) {
+                setTimeout(() => { updatePosition(marker); updatePosition(solutionMarker); }, 200);
+            } else {
+                updatePosition(marker);
+                updatePosition(solutionMarker);
+            }
         }
     }
 }
