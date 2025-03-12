@@ -394,9 +394,22 @@ function startGame(gameArea) {
 
     function showCustomAlert(message, mode) {
         if (document.getElementById('custom-alert')) return; // Prevent multiple alerts
-        document.body.classList.add('error-animation');
-        setTimeout(() => document.body.classList.remove('error-animation'), 600);
-
+        if (mode===0) {
+            const cont = document.getElementById('gameContainer');
+            if (cont) {
+                cont.animate([
+                    { transform: 'translateX(0)' },  
+                    { transform: 'translateX(-12px)' },  
+                    { transform: 'translateX(12px)' },  
+                    { transform: 'translateX(0)' }
+                ], {
+                    duration: 400,  // Total duration of the shake
+                    easing: 'ease-in-out',
+                    iterations: 1  // Runs only once
+                });
+            }
+        }
+        
         // Create overlay to block interactions
         const overlay = document.createElement('div');
         overlay.style.position = 'fixed';
@@ -444,14 +457,14 @@ function startGame(gameArea) {
         }
     
         function closeAlert() {
-            document.body.classList.remove('error-animation');
             alertBox.remove();
             overlay.remove();
             document.removeEventListener('keydown', keyHandler); // Remove key listener
         }
     
         closeButton.onclick = closeAlert;
-    
+        overlay.onclick = closeAlert;
+
         // Close on Enter key
         function keyHandler(event) {
             if (event.key === 'Enter') {
