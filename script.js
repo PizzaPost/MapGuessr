@@ -772,8 +772,8 @@ function startGame(gameArea) {
                         if (isOnline) {
                             db.collection('lobbies').doc(lobbyName).update({
                                 gameStarted: false,
-                                [`players.${auth.currentUser.uid}.score`]: firebase.firestore.FieldValue.increment(score),
-                                [`players.${auth.currentUser.uid}.totalScore`]: firebase.firestore.FieldValue.increment(totalScore)
+                                [`players.${auth.currentUser.uid}.score`]: score,
+                                [`players.${auth.currentUser.uid}.totalScore`]: totalScore
                             });
                         }
 
