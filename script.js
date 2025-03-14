@@ -1,11 +1,49 @@
 let gameModes;
 
-let gameState = 0; // 0 => choose gamemode
-let gameArea; // not yet set area to choose locations from
+let gameState = 0; // 0 => choose gamemode; 1 => startGame; 2 => selectMap
 let totalScore = 0;
+let gameArea; // not yet set area to choose locations from
+let isOnline = false;
+let isHost = false;
+let syncRandomImage = "";
+let syncActualMap = "";
+let reload = false;
 
 let devMode = -1;
 let altDevMode = 0;
+
+// Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+    apiKey: "AIzaSyBDDQ-mIDOwBabaArd7NTW3bna92zhKifA",
+    authDomain: "mocoxiii-mapguessr.firebaseapp.com",
+    projectId: "mocoxiii-mapguessr",
+    storageBucket: "mocoxiii-mapguessr.firebasestorage.app",
+    messagingSenderId: "159195403147",
+    appId: "1:159195403147:web:b0fdb670cabc24680c158e",
+    measurementId: "G-DNV45FQ36B"
+};
+
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+
+// Initialize Firestore (for real-time messaging)
+const db = firebase.firestore();
+
+// Initialize Firebase Authentication
+const auth = firebase.auth();
+
+auth.signInAnonymously().catch(error => {
+    console.error('Authentication failed:', error);
+});
+
+function resetDatabase() {
+    db.collection('lobbies').get().then(querySnapshot => {
+        querySnapshot.forEach(doc => {
+            doc.ref.delete();
+        });
+    });
+}
 
 // Function to load the JSON file
 async function loadGameModes() {
@@ -29,7 +67,7 @@ function initializeGame() {
         console.log('Initializing game with:', gameModes);
         // Your game initialization logic here
         gameArea = getNestedObject(gameModes, []);
-        gameModeSelector();
+        chooseVersion();
     } else {
         console.error('Game modes not loaded yet.');
     }
@@ -38,6 +76,111 @@ function initializeGame() {
 // Load the game modes when the script runs
 loadGameModes();
 
+const gameVersionDiv = document.createElement('div');
+const lobbyInput = document.createElement('input');
+let lobbyName = "defaultlobby";
+
+function chooseVersion() {
+    gameVersionDiv.id = 'gameVersion';
+    document.body.appendChild(gameVersionDiv);
+
+
+    // Create the text input for lobby name
+    lobbyInput.type = 'text';
+    lobbyInput.placeholder = 'Lobby Name';
+
+    // Create the join lobby button
+    const joinLobbyButton = document.createElement('button');
+    joinLobbyButton.innerText = 'Join Lobby';
+    joinLobbyButton.onclick = () => {
+        isOnline = true;
+        lobbyName = lobbyInput.value.trim();
+        if (lobbyName) {
+            joinLobby(lobbyName);
+        } else {
+            alert('No lobby name provided.');
+        }
+    };
+
+    gameVersionDiv.appendChild(joinLobbyButton);
+    gameVersionDiv.appendChild(lobbyInput);
+    gameVersionDiv.appendChild(document.createElement('br'));
+
+    // Create the play single player button
+    const singlePlayerButton = document.createElement('button');
+    singlePlayerButton.innerText = 'Play Single Player';
+    singlePlayerButton.onclick = () => {
+        console.log('Starting single player game...');
+        gameVersionDiv.style.display = 'none';
+        gameModeSelector();
+    };
+    gameVersionDiv.appendChild(singlePlayerButton);
+}
+
+function joinLobby(lobbyName) {
+    console.log(`Joining lobby: ${lobbyName}`);
+    gameVersionDiv.style.display = 'none';
+    db.collection('lobbies').doc(lobbyName).get().then(doc => {
+        if (doc.exists) {
+            console.log('Lobby exists, joining...');
+            // Join the lobby
+            doc.ref.update({
+                players: firebase.firestore.FieldValue.arrayUnion(auth.currentUser.uid)
+            });
+            playAsMember();
+        } else {
+            console.log('Lobby does not exist, creating...');
+            // Create the lobby
+            db.collection('lobbies').doc(lobbyName).set({
+                players: [auth.currentUser.uid]
+            });
+            playAsHost();
+        }
+    });
+}
+
+function playAsMember() {
+    gameVersionDiv.style.display = 'none';
+    lobbyName = lobbyInput.value;
+    const playerListDiv = document.createElement('div');
+    playerListDiv.id = 'playerList';
+    gameVersionDiv.appendChild(playerListDiv);
+    const playerListText = document.createElement('p');
+    playerListText.innerText = 'The host is choosing a map.';
+    playerListDiv.appendChild(playerListText);
+    db.collection('lobbies').doc(lobbyName).onSnapshot(doc => {
+        if (!doc.exists) {
+            alert('Lobby no longer exists. The page will reload now.');
+            window.location.reload();
+            return;
+        }
+        setTimeout(() => {
+            db.collection('lobbies').doc(lobbyName).get().then(doc => {
+                if (doc.data().gameStarted) {
+                    syncActualMap = doc.data().actualMap;
+                    syncRandomImage = doc.data().randomImage;
+                    reload = doc.data().reload;
+                    playerListDiv.style.display = 'none';
+                    startGame(JSON.parse(doc.data().gameArea));
+                } else {
+                    const waitingText = document.createElement('p');
+                    waitingText.innerText = 'Waiting for the host to start the game.';
+                    playerListDiv.appendChild(waitingText);
+                    document.body.appendChild(playerListDiv);
+                }
+                if (reload) {
+                    location.reload();
+                }
+            });
+        }, 1000); // IMPORTANT: gives the server some time to transfer the data
+    });
+}
+
+function playAsHost() {
+    gameVersionDiv.style.display = 'none';
+    isHost = true;
+    gameModeSelector();
+}
 
 function gameModeSelector() {
     // Create the gameModeSelector div if it doesn't exist
@@ -65,6 +208,11 @@ function gameModeSelector() {
     function selectGameMode() {
         gameState = 1;
         gameModeSelector.remove();
+
+        if (isHost) {
+            syncChanges(true, gameArea, syncActualMap, syncRandomImage);
+        }
+
         startGame(gameArea);
     }
 
@@ -124,6 +272,16 @@ function gameModeSelector() {
 
     // Start rendering options from the top level
     renderOptions(gameModes);
+}
+
+function syncChanges(gS = false, gA = gameArea, aM = syncActualMap, rI = syncRandomImage) {
+    db.collection('lobbies').doc(lobbyName).update({
+        gameStarted: gS,
+        gameArea: JSON.stringify(gA),
+        actualMap: aM,
+        randomImage: rI,
+        reload: false
+    });
 }
 
 function toAltButton(button) {
@@ -199,6 +357,10 @@ function createThemeToggle() {
 function startGame(gameArea) {
     let gameContainer = document.getElementById('gameContainer');
 
+    // Remove any existing objects with id marker or solutionMarker
+    const markerObjects = document.querySelectorAll('[id="marker"], [id="solutionMarker"]');
+    markerObjects.forEach(object => object.remove());
+
     // Add the CSS transition here
     const style = document.createElement('style');
     style.textContent = `
@@ -258,7 +420,34 @@ function startGame(gameArea) {
             altDevMode++;
         }
     } else {
-        if (Array.isArray(gameArea)) {
+        if (isOnline) {
+            if (!isHost) {
+                if (syncActualMap === "" || syncRandomImage === "") {
+                    alert('No image or map received from the host.\nThis should not happen.\nWe will reload this page for you.\nRe-entering this lobby will fix this.');
+                    window.location.reload();
+                    return;
+                }
+                actualMap = syncActualMap;
+                [imagePath, solution] = JSON.parse(syncRandomImage);
+            } else {
+                if (Array.isArray(gameArea)) {
+                    actualMap = gameArea[0];
+                    syncActualMap = actualMap;
+                    const possibleImage = gameArea[1 + Math.floor(Math.random() * (gameArea.length - 1))];
+                    [imagePath, solution] = possibleImage;
+                    syncRandomImage = JSON.stringify(possibleImage);
+                } else {
+                    const randomNumber = Math.floor(Math.random() * possibleImages.length);
+                    const possibleImage = possibleImages[randomNumber][1 + Math.floor(Math.random() * (possibleImages[randomNumber].length - 1))];
+                    const possibleMaps = possibleImages.find(list => list.includes(possibleImage))
+                    actualMap = possibleMaps[0];
+                    syncActualMap = actualMap;
+                    [imagePath, solution] = possibleImage;
+                    syncRandomImage = JSON.stringify(possibleImage);
+                }
+                syncChanges(gS = true, gA = gameArea, aM = syncActualMap, rI = syncRandomImage);
+            }
+        } else if (Array.isArray(gameArea)) {
             actualMap = gameArea[0];
             [imagePath, solution] = gameArea[1 + Math.floor(Math.random() * (gameArea.length - 1))];
         } else {
@@ -291,8 +480,10 @@ function startGame(gameArea) {
     const submitButton = document.createElement('button');
 
     let marker = document.createElement('div');
+    marker.id = 'marker';
 
     const solutionMarker = document.createElement('div');
+    solutionMarker.id = 'solutionMarker';
 
     const mapSelector = document.createElement('div');
     mapSelector.id = 'mapSelector';
@@ -394,13 +585,13 @@ function startGame(gameArea) {
 
     function showCustomAlert(message, mode) {
         if (document.getElementById('custom-alert')) return; // Prevent multiple alerts
-        if (mode===0) {
+        if (mode === 0) {
             const cont = document.getElementById('gameContainer');
             if (cont) {
                 cont.animate([
-                    { transform: 'translateX(0)' },  
-                    { transform: 'translateX(-12px)' },  
-                    { transform: 'translateX(12px)' },  
+                    { transform: 'translateX(0)' },
+                    { transform: 'translateX(-12px)' },
+                    { transform: 'translateX(12px)' },
                     { transform: 'translateX(0)' }
                 ], {
                     duration: 400,  // Total duration of the shake
@@ -409,7 +600,7 @@ function startGame(gameArea) {
                 });
             }
         }
-        
+
         // Create overlay to block interactions
         const overlay = document.createElement('div');
         overlay.style.position = 'fixed';
@@ -421,7 +612,7 @@ function startGame(gameArea) {
         overlay.style.zIndex = '999';
         overlay.style.pointerEvents = 'auto'; // Blocks interactions
         document.body.appendChild(overlay);
-        
+
         // Create the alert box
         const alertBox = document.createElement('div');
         alertBox.id = 'custom-alert'; // Unique ID to prevent duplicates
@@ -437,7 +628,7 @@ function startGame(gameArea) {
         alertBox.style.zIndex = '1001';
         alertBox.style.borderRadius = '8px';
         alertBox.style.textAlign = 'center';
-    
+
         // Create the close button
         const closeButton = document.createElement('button');
         closeButton.innerText = 'OK';
@@ -448,20 +639,20 @@ function startGame(gameArea) {
         closeButton.style.cursor = 'pointer';
         closeButton.style.borderRadius = '4px';
 
-        if (mode===0) {
+        if (mode === 0) {
             alertBox.style.border = '2px solid red';
             closeButton.style.background = 'red';
         } else {
             alertBox.style.border = '2px solid green';
             closeButton.style.background = 'green';
         }
-    
+
         function closeAlert() {
             alertBox.remove();
             overlay.remove();
             document.removeEventListener('keydown', keyHandler); // Remove key listener
         }
-    
+
         closeButton.onclick = closeAlert;
         overlay.onclick = closeAlert;
 
@@ -471,14 +662,14 @@ function startGame(gameArea) {
                 closeAlert();
             }
         }
-    
+
         document.addEventListener('keydown', keyHandler);
-    
+
         alertBox.appendChild(closeButton);
         document.body.appendChild(alertBox);
         closeButton.focus(); // Focus on button so Enter works immediately
     }
-    
+
 
     function displayMap(map) {
         // Display the map image
@@ -558,7 +749,15 @@ function startGame(gameArea) {
         submitButton.onclick = () => {
             if (marker.style.display === 'block') {
                 backButton.remove();
-                gameContainer.appendChild(continueButton);
+
+                if (isOnline) {
+                    if (isHost) {
+                        gameContainer.appendChild(continueButton);
+                    }
+                } else {
+                    gameContainer.appendChild(continueButton);
+                }
+
                 if (selectedMap === actualMap) {
                     const userX = parseFloat(marker.dataset.x);
                     const userY = parseFloat(marker.dataset.y);
@@ -569,6 +768,15 @@ function startGame(gameArea) {
 
                     if (Array.isArray(solution) && solution.length > 0) {
                         totalScore += score;
+
+                        if (isOnline) {
+                            db.collection('lobbies').doc(lobbyName).update({
+                                gameStarted: false,
+                                [`players.${auth.currentUser.uid}.score`]: score,
+                                [`players.${auth.currentUser.uid}.totalScore`]: totalScore
+                            });
+                        }
+
                         document.title = `MapGuessr | Score: ${totalScore.toFixed(0)}`;
                         showCustomAlert(`You scored ${score.toFixed(0)} points!`, 1);
                         solutionMarker.style.position = 'absolute';
@@ -616,6 +824,7 @@ function startGame(gameArea) {
         continueButton.onclick = () => {
             marker.remove();
             solutionMarker.remove();
+            db.collection('lobbies').doc(lobbyName).update({ gameStarted: true });
             startGame(gameArea); // Restart game with current area
         };
 
@@ -688,3 +897,9 @@ function resize() {
 
 window.addEventListener('resize', resize);
 document.addEventListener('DOMContentLoaded', createThemeToggle);
+
+window.addEventListener('beforeunload', event => {
+    if (isHost) {
+        db.collection('lobbies').doc(lobbyName).delete();
+    }
+});
