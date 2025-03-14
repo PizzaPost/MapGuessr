@@ -103,8 +103,10 @@ function chooseVersion() {
     // Create the text input for lobby name
     lobbyInput.type = 'text';
     lobbyInput.placeholder = 'Lobby Name';
+    lobbyInput.classList.add('input-field-1');
     nameInput.type = 'text';
     nameInput.placeholder = 'Your Name';
+    nameInput.classList.add('input-field-2');
 
     // Create loading animation element
     loadingDiv = document.createElement('div');
