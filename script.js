@@ -3,6 +3,7 @@ let gameModes;
 let gameState = 0; // 0 => choose gamemode; 1 => startGame; 2 => selectMap
 let totalScore = 0;
 let gameArea; // not yet set area to choose locations from
+let gameStarted = false;
 let isOnline = false;
 let isHost = false;
 let syncRandomImage = "";
@@ -39,10 +40,20 @@ auth.signInAnonymously().catch(error => {
     console.error('Authentication failed:', error);
 });
 
-function resetDatabase() {
+function closeAllLobbies() {
     db.collection('lobbies').get().then(querySnapshot => {
         querySnapshot.forEach(doc => {
             doc.ref.delete();
+        });
+    });
+}
+
+function clearHosts() {
+    db.collection('lobbies').get().then(querySnapshot => {
+        querySnapshot.forEach(doc => {
+            doc.ref.update({
+                players: doc.data().players.filter(player => !player.host)
+            });
         });
     });
 }
@@ -80,7 +91,9 @@ loadGameModes();
 
 const gameVersionDiv = document.createElement('div');
 const lobbyInput = document.createElement('input');
+const nameInput = document.createElement('input');
 let lobbyName = "defaultlobby";
+let userName = "defaultuser";
 
 function chooseVersion() {
     gameVersionDiv.id = 'gameVersion';
@@ -90,6 +103,8 @@ function chooseVersion() {
     // Create the text input for lobby name
     lobbyInput.type = 'text';
     lobbyInput.placeholder = 'Lobby Name';
+    nameInput.type = 'text';
+    nameInput.placeholder = 'Your Name';
 
     // Create loading animation element
     loadingDiv = document.createElement('div');
@@ -104,16 +119,22 @@ function chooseVersion() {
     joinLobbyButton.onclick = () => {
         isOnline = true;
         lobbyName = lobbyInput.value.trim();
+        userName = nameInput.value.trim();
         if (lobbyName) {
-            loadingDiv.style.display = 'flex';
-            joinLobby(lobbyName);
+            if (userName) {
+                loadingDiv.style.display = 'flex';
+                joinLobby();
+            } else {
+                showCustomAlert('No user name provided.', undefined, gameVersionDiv);
+            }
         } else {
-            showCustomAlert('No lobby name provided.', 0, "gameVersion");
+            showCustomAlert('No lobby name provided.', undefined, gameVersionDiv);
         }
     };
 
     gameVersionDiv.appendChild(joinLobbyButton);
     gameVersionDiv.appendChild(lobbyInput);
+    gameVersionDiv.appendChild(nameInput);
     gameVersionDiv.appendChild(document.createElement('br'));
 
     // Create the play single player button
@@ -122,29 +143,57 @@ function chooseVersion() {
     singlePlayerButton.onclick = () => {
         console.log('Starting single player game...');
         gameVersionDiv.style.display = 'none';
-        gameModeSelector();
+        startGameModeSelector();
     };
     gameVersionDiv.appendChild(singlePlayerButton);
 }
 
-function joinLobby(lobbyName) {
+function joinLobby() {
     console.log(`Joining lobby: ${lobbyName}`);
     gameVersionDiv.style.display = 'none';
     db.collection('lobbies').doc(lobbyName).get().then(doc => {
         if (doc.exists) {
-            console.log('Lobby exists, joining...');
+            const existingPlayers = doc.data().players;
+            const existingPlayerNames = existingPlayers.map(player => player.name);
+            let newUserName = userName;
+            let number = 1;
+            const existingUID = existingPlayers.find(player => player.uid === auth.currentUser.uid);
+            const existingUserName = existingPlayers.find(player => player.name === userName);
+            if (existingUID && existingPlayerNames.includes(newUserName)) {
+                newUserName = userName;
+            } else {
+                while (existingPlayerNames.includes(newUserName)) {
+                    newUserName = `${userName}(${number})`;
+                    number++;
+                }
+            }
+            userName = newUserName;
+            console.log(`Lobby exists, joining as ${userName}`);
+            isHost = existingUserName ? existingUserName.host : false;
             // Join the lobby
             doc.ref.update({
-                players: firebase.firestore.FieldValue.arrayUnion(auth.currentUser.uid)
+                players: firebase.firestore.FieldValue.arrayUnion({
+                    uid: auth.currentUser.uid,
+                    name: userName,
+                    host: isHost
+                })
             }).then(() => {
                 loadingDiv.style.display = 'none';
-                playAsMember();
+                if (isHost) {
+                    playAsHost();
+                } else {
+                    playAsMember();
+                }
             });
         } else {
             console.log('Lobby does not exist, creating...');
             // Create the lobby
             db.collection('lobbies').doc(lobbyName).set({
-                players: [auth.currentUser.uid]
+                players: [{
+                    uid: auth.currentUser.uid,
+                    name: userName,
+                    host: true
+                }]
             }).then(() => {
                 loadingDiv.style.display = 'none';
                 playAsHost();
@@ -153,7 +202,7 @@ function joinLobby(lobbyName) {
     }).catch(error => {
         console.error('Error joining lobby:', error);
         loadingDiv.style.display = 'none';
-        showCustomAlert('An error occurred. Please try again.', 0, "gameVersion");
+        showCustomAlert('An error occurred. Please try again.', undefined, gameVersionDiv);
     });
 }
 
@@ -162,26 +211,60 @@ function playAsMember() {
     lobbyName = lobbyInput.value;
     const playerListDiv = document.createElement('div');
     playerListDiv.id = 'playerList';
-    gameVersionDiv.appendChild(playerListDiv);
+    const claimHostButton = document.createElement('button');
     const playerListText = document.createElement('p');
-    playerListText.innerText = 'The host is choosing a map.';
+    const waitingText = document.createElement('p');
+    playerListText.innerText = 'Players:';
     playerListDiv.appendChild(playerListText);
     db.collection('lobbies').doc(lobbyName).onSnapshot(doc => {
         if (!doc.exists) {
-            showCustomAlert('Lobby no longer exists. The page will reload now.', 0, "playerList");
+            showCustomAlert('Lobby no longer exists. The page will reload now.', undefined, [gameVersionDiv, playerListDiv, gameModeSelector, gameContainer]);
+            window.location.reload();
+            return;
+        }
+        const players = doc.data().players || [];
+        const userInLobby = players.filter(player => player.uid === auth.currentUser.uid)[0];
+        if (!userInLobby) {
+            showCustomAlert('You have been kicked from this lobby. The page will reload now.', undefined, [gameVersionDiv, playerListDiv, gameModeSelector, gameContainer]);
             window.location.reload();
             return;
         }
         setTimeout(() => {
             db.collection('lobbies').doc(lobbyName).get().then(doc => {
-                if (doc.data().gameStarted) {
+                const hostPlayers = doc.data().players.filter(player => player.host);
+                if (hostPlayers.length === 0) {
+                    claimHostButton.id = 'claimHostButton';
+                    claimHostButton.innerText = 'Claim Host Position';
+                    claimHostButton.style.position = 'fixed';
+                    claimHostButton.style.bottom = '0';
+                    claimHostButton.style.left = '0';
+                    claimHostButton.onclick = () => {
+                        doc.ref.update({
+                            players: doc.data().players.map(player => {
+                                if (player.name === userName) {
+                                    player.host = true;
+                                }
+                                return player;
+                            })
+                        });
+                        playAsHost();
+                    };
+                    document.body.appendChild(claimHostButton);
+                } else {
+                    const claimHostButton = document.getElementById('claimHostButton');
+                    if (claimHostButton) {
+                        claimHostButton.remove();
+                    }
+                }
+                if (doc.data().gameStarted && syncRandomImage != doc.data().randomImage) {
                     syncActualMap = doc.data().actualMap;
                     syncRandomImage = doc.data().randomImage;
                     reload = doc.data().reload;
                     playerListDiv.style.display = 'none';
                     startGame(JSON.parse(doc.data().gameArea));
                 } else {
-                    const waitingText = document.createElement('p');
+                    const playerNames = doc.data().players.map(player => player.name);
+                    playerListText.innerText = `Players: ${playerNames.join(', ')}`;
                     waitingText.innerText = 'Waiting for the host to start the game.';
                     playerListDiv.appendChild(waitingText);
                     document.body.appendChild(playerListDiv);
@@ -196,15 +279,69 @@ function playAsMember() {
 
 function playAsHost() {
     gameVersionDiv.style.display = 'none';
+    const playerListDiv = document.getElementById('playerList');
+    if (playerListDiv) {
+        playerListDiv.style.display = 'none';
+    }
+    const giveUpHostButton = document.createElement('button');
+    giveUpHostButton.id = 'giveUpHostButton';
+    giveUpHostButton.innerText = 'Give up host position';
+    giveUpHostButton.style.position = 'fixed';
+    giveUpHostButton.style.bottom = '0';
+    giveUpHostButton.style.left = '0';
+    giveUpHostButton.onclick = () => {
+        db.collection('lobbies').doc(lobbyName).get().then(doc => {
+            if (doc.exists) {
+                doc.ref.update({
+                    players: doc.data().players.map(player => {
+                        if (player.uid === auth.currentUser.uid) {
+                            player.host = false;
+                        }
+                        return player;
+                    })
+                });
+                giveUpHostButton.remove();
+                gameModeSelector.style.display = 'none';
+                isHost = false;
+                playAsMember();
+            }
+        });
+    };
+    document.body.appendChild(giveUpHostButton);
+
     isHost = true;
-    gameModeSelector();
+    if (!gameStarted) {
+        startGameModeSelector();
+    }
 }
 
-function showCustomAlert(message, mode, shakingObjectID) {
+/**
+ * Shows a custom alert box with a message and a close button. If mode is 0, the box will shake and have a red border, indicating an error. If mode is not 0, the box will have a green border.
+ * @param {string} message The message to show in the alert box.
+ * @param {number} mode The mode of the alert box. Only supports 0 for now.
+ * @param {HTMLElement} cont The container element to shake if mode is 0. If not provided, the game container will be used.
+ */
+function showCustomAlert(message, mode = 0, cont = null) {
     if (document.getElementById('custom-alert')) return; // Prevent multiple alerts
     if (mode === 0) {
-        const cont = document.getElementById(shakingObjectID);
-        if (cont) {
+        if (cont === null) {
+            cont = document.getElementById('gameContainer');
+        }
+
+        if (Array.isArray(cont)) {
+            cont.forEach(element => {
+                element.animate([
+                    { transform: 'translateX(0)' },
+                    { transform: 'translateX(-12px)' },
+                    { transform: 'translateX(12px)' },
+                    { transform: 'translateX(0)' }
+                ], {
+                    duration: 400,  // Total duration of the shake
+                    easing: 'ease-in-out',
+                    iterations: 1  // Runs only once
+                });
+            });
+        } else if (cont) {
             cont.animate([
                 { transform: 'translateX(0)' },
                 { transform: 'translateX(-12px)' },
@@ -287,20 +424,23 @@ function showCustomAlert(message, mode, shakingObjectID) {
     closeButton.focus(); // Focus on button so Enter works immediately
 }
 
-function gameModeSelector() {
+let gameModeSelector;
+const selectedPathElement = document.createElement('p');
+const selectButton = document.createElement('button');
+
+function startGameModeSelector() {
     // Create the gameModeSelector div if it doesn't exist
-    let gameModeSelector = document.getElementById('gameModeSelector');
+    gameModeSelector = document.getElementById('gameModeSelector');
     if (!gameModeSelector) {
         gameModeSelector = document.createElement('div');
         gameModeSelector.id = 'gameModeSelector';
         document.body.appendChild(gameModeSelector);
     }
+    gameModeSelector.style.display = 'block';
 
     // Create the selectedPathElement and the selectButton
-    const selectedPathElement = document.createElement('p');
     selectedPathElement.id = 'selectedPath';
     selectedPathElement.innerText = 'Choose a game (or all in this directory ->)';
-    const selectButton = document.createElement('button');
     selectButton.id = 'selectButton';
     selectButton.innerText = 'Select';
     selectButton.onclick = () => {
@@ -315,6 +455,7 @@ function gameModeSelector() {
         gameModeSelector.remove();
 
         if (isHost) {
+            gameStarted = true;
             syncChanges(true, gameArea, syncActualMap, syncRandomImage);
         }
 
@@ -417,6 +558,23 @@ function getParentObject(obj, child) {
             }
         }
     }
+}
+
+function findPathToItem(obj, item) {
+    let result = '';
+    for (const key in obj) {
+        if (obj[key] === item || (Array.isArray(obj[key]) && obj[key].includes(item))) {
+            result = key;
+            break;
+        } else if (typeof obj[key] === 'object' && !Array.isArray(obj[key])) {
+            const subResult = findPathToItem(obj[key], item);
+            if (subResult) {
+                result = `${key} > ${subResult}`;
+                break;
+            }
+        }
+    }
+    return result;
 }
 
 // Theme toggle functionality
@@ -528,7 +686,7 @@ function startGame(gameArea) {
         if (isOnline) {
             if (!isHost) {
                 if (syncActualMap === "" || syncRandomImage === "") {
-                    showCustomAlert('No image or map received from the host.\nThis should not happen.\nWe will reload this page for you.\nRe-entering this lobby will fix this.', 0, "gameContainer");
+                    showCustomAlert('No image or map received from the host.\nThis should not happen.\nWe will reload this page for you.\nRe-entering this lobby will fix this.', undefined, [gameVersionDiv, playerListDiv, gameModeSelector, gameContainer]);
                     window.location.reload();
                     return;
                 }
@@ -550,7 +708,7 @@ function startGame(gameArea) {
                     [imagePath, solution] = possibleImage;
                     syncRandomImage = JSON.stringify(possibleImage);
                 }
-                syncChanges(gS = true, gA = gameArea, aM = syncActualMap, rI = syncRandomImage);
+                syncChanges(true, gameArea, syncActualMap, syncRandomImage);
             }
         } else if (Array.isArray(gameArea)) {
             actualMap = gameArea[0];
@@ -795,7 +953,7 @@ function startGame(gameArea) {
                         }
 
                         document.title = `MapGuessr | Score: ${totalScore.toFixed(0)}`;
-                        showCustomAlert(`You scored ${score.toFixed(0)} points!`, 1, "gameContainer");
+                        showCustomAlert(`You scored ${score.toFixed(0)} points!`, 1);
                         solutionMarker.style.position = 'absolute';
                         solutionMarker.style.width = '10px';
                         solutionMarker.style.height = '10px';
@@ -813,16 +971,16 @@ function startGame(gameArea) {
                         solutionMarker.style.display = 'block';
                         document.body.appendChild(solutionMarker);
                     } else {
-                        showCustomAlert('You got the map correct!\nThis image has not been assigned a solution yet.', 1, "gameContainer");
+                        showCustomAlert('You got the map correct!\nThis image has not been assigned a solution yet.', 1);
                     }
                 } else {
-                    const pathToMap = actualMap.split('/').slice(1, -2).join(' > ');
-                    showCustomAlert('You have chosen the wrong map. It was ' + pathToMap, 0, "gameContainer");
+                    const pathToMap = findPathToItem(gameModes, actualMap);
+                    showCustomAlert('You have chosen the wrong map. It was ' + pathToMap);
                 }
 
                 submitButton.remove();
             } else {
-                showCustomAlert('Please place a marker on the map', 0, "gameContainer");
+                showCustomAlert('Please place a marker on the map');
             }
         };
 
@@ -916,7 +1074,22 @@ window.addEventListener('resize', resize);
 document.addEventListener('DOMContentLoaded', createThemeToggle);
 
 window.addEventListener('beforeunload', event => {
-    if (isHost) {
-        db.collection('lobbies').doc(lobbyName).delete();
-    }
+    db.collection('lobbies').doc(lobbyName).get().then(doc => {
+        if (doc.exists) {
+            doc.ref.update({
+                players: firebase.firestore.FieldValue.arrayRemove({ uid: auth.currentUser.uid, name: userName })
+            }).then(() => {
+                console.log(`User ${userName} removed from lobby ${lobbyName}`);
+            }).catch(error => {
+                console.error('Error updating lobby:', error);
+                showCustomAlert('An error occurred while removing the user. Please try again.', undefined, [gameVersionDiv, playerListDiv, gameModeSelector, gameContainer]);
+            });
+        } else {
+            console.log('Lobby does not exist.');
+            showCustomAlert('Lobby does not exist.', undefined, [gameVersionDiv, playerListDiv, gameModeSelector, gameContainer]);
+        }
+    }).catch(error => {
+        console.error('Error accessing lobby:', error);
+        showCustomAlert('An error occurred. Please try again.', undefined, [gameVersionDiv, playerListDiv, gameModeSelector, gameContainer]);
+    });
 });
