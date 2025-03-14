@@ -202,7 +202,7 @@ function joinLobby() {
     }).catch(error => {
         console.error('Error joining lobby:', error);
         loadingDiv.style.display = 'none';
-        showCustomAlert('An error occurred. Please try again.');
+        showCustomAlert('An error occurred. Please try again.', undefined, gameVersionDiv);
     });
 }
 
@@ -218,14 +218,14 @@ function playAsMember() {
     playerListDiv.appendChild(playerListText);
     db.collection('lobbies').doc(lobbyName).onSnapshot(doc => {
         if (!doc.exists) {
-            showCustomAlert('Lobby no longer exists. The page will reload now.');
+            showCustomAlert('Lobby no longer exists. The page will reload now.', undefined, [gameVersionDiv, playerListDiv, gameModeSelector, gameContainer]);
             window.location.reload();
             return;
         }
         const players = doc.data().players || [];
         const userInLobby = players.filter(player => player.uid === auth.currentUser.uid)[0];
         if (!userInLobby) {
-            showCustomAlert('You have been kicked from this lobby. The page will reload now.');
+            showCustomAlert('You have been kicked from this lobby. The page will reload now.', undefined, [gameVersionDiv, playerListDiv, gameModeSelector, gameContainer]);
             window.location.reload();
             return;
         }
@@ -327,7 +327,21 @@ function showCustomAlert(message, mode = 0, cont = null) {
         if (cont === null) {
             cont = document.getElementById('gameContainer');
         }
-        if (cont) {
+
+        if (Array.isArray(cont)) {
+            cont.forEach(element => {
+                element.animate([
+                    { transform: 'translateX(0)' },
+                    { transform: 'translateX(-12px)' },
+                    { transform: 'translateX(12px)' },
+                    { transform: 'translateX(0)' }
+                ], {
+                    duration: 400,  // Total duration of the shake
+                    easing: 'ease-in-out',
+                    iterations: 1  // Runs only once
+                });
+            });
+        } else if (cont) {
             cont.animate([
                 { transform: 'translateX(0)' },
                 { transform: 'translateX(-12px)' },
@@ -672,7 +686,7 @@ function startGame(gameArea) {
         if (isOnline) {
             if (!isHost) {
                 if (syncActualMap === "" || syncRandomImage === "") {
-                    showCustomAlert('No image or map received from the host.\nThis should not happen.\nWe will reload this page for you.\nRe-entering this lobby will fix this.');
+                    showCustomAlert('No image or map received from the host.\nThis should not happen.\nWe will reload this page for you.\nRe-entering this lobby will fix this.', undefined, [gameVersionDiv, playerListDiv, gameModeSelector, gameContainer]);
                     window.location.reload();
                     return;
                 }
@@ -939,7 +953,7 @@ function startGame(gameArea) {
                         }
 
                         document.title = `MapGuessr | Score: ${totalScore.toFixed(0)}`;
-                        showCustomAlert(`You scored ${score.toFixed(0)} points!`, mode = 1);
+                        showCustomAlert(`You scored ${score.toFixed(0)} points!`, 1);
                         solutionMarker.style.position = 'absolute';
                         solutionMarker.style.width = '10px';
                         solutionMarker.style.height = '10px';
@@ -957,7 +971,7 @@ function startGame(gameArea) {
                         solutionMarker.style.display = 'block';
                         document.body.appendChild(solutionMarker);
                     } else {
-                        showCustomAlert('You got the map correct!\nThis image has not been assigned a solution yet.', mode = 1);
+                        showCustomAlert('You got the map correct!\nThis image has not been assigned a solution yet.', 1);
                     }
                 } else {
                     const pathToMap = findPathToItem(gameModes, actualMap);
@@ -1068,14 +1082,14 @@ window.addEventListener('beforeunload', event => {
                 console.log(`User ${userName} removed from lobby ${lobbyName}`);
             }).catch(error => {
                 console.error('Error updating lobby:', error);
-                showCustomAlert('An error occurred while removing the user. Please try again.');
+                showCustomAlert('An error occurred while removing the user. Please try again.', undefined, [gameVersionDiv, playerListDiv, gameModeSelector, gameContainer]);
             });
         } else {
             console.log('Lobby does not exist.');
-            showCustomAlert('Lobby does not exist.');
+            showCustomAlert('Lobby does not exist.', undefined, [gameVersionDiv, playerListDiv, gameModeSelector, gameContainer]);
         }
     }).catch(error => {
         console.error('Error accessing lobby:', error);
-        showCustomAlert('An error occurred. Please try again.');
+        showCustomAlert('An error occurred. Please try again.', undefined, [gameVersionDiv, playerListDiv, gameModeSelector, gameContainer]);
     });
 });
