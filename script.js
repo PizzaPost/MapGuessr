@@ -12,6 +12,8 @@ let reload = false;
 let devMode = -1;
 let altDevMode = 0;
 
+let loadingDiv;
+
 // Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
@@ -89,6 +91,13 @@ function chooseVersion() {
     lobbyInput.type = 'text';
     lobbyInput.placeholder = 'Lobby Name';
 
+    // Create loading animation element
+    loadingDiv = document.createElement('div');
+    loadingDiv.id = 'loading-animation';
+    loadingDiv.innerHTML = '<div class="spinner"></div>';
+    document.body.appendChild(loadingDiv);
+    loadingDiv.style.display = 'none'; // Initially hidden
+
     // Create the join lobby button
     const joinLobbyButton = document.createElement('button');
     joinLobbyButton.innerText = 'Join Lobby';
@@ -96,9 +105,10 @@ function chooseVersion() {
         isOnline = true;
         lobbyName = lobbyInput.value.trim();
         if (lobbyName) {
+            loadingDiv.style.display = 'flex';
             joinLobby(lobbyName);
         } else {
-            alert('No lobby name provided.');
+            showCustomAlert('No lobby name provided.', 0);
         }
     };
 
@@ -126,16 +136,24 @@ function joinLobby(lobbyName) {
             // Join the lobby
             doc.ref.update({
                 players: firebase.firestore.FieldValue.arrayUnion(auth.currentUser.uid)
+            }).then(() => {
+                loadingDiv.style.display = 'none';
+                playAsMember();
             });
-            playAsMember();
         } else {
             console.log('Lobby does not exist, creating...');
             // Create the lobby
             db.collection('lobbies').doc(lobbyName).set({
                 players: [auth.currentUser.uid]
+            }).then(() => {
+                loadingDiv.style.display = 'none';
+                playAsHost();
             });
-            playAsHost();
         }
+    }).catch(error => {
+        console.error('Error joining lobby:', error);
+        loadingDiv.style.display = 'none';
+        showCustomAlert('An error occurred. Please try again.', 0);
     });
 }
 
@@ -150,7 +168,7 @@ function playAsMember() {
     playerListDiv.appendChild(playerListText);
     db.collection('lobbies').doc(lobbyName).onSnapshot(doc => {
         if (!doc.exists) {
-            alert('Lobby no longer exists. The page will reload now.');
+            showCustomAlert('Lobby no longer exists. The page will reload now.', 0);
             window.location.reload();
             return;
         }
@@ -180,6 +198,93 @@ function playAsHost() {
     gameVersionDiv.style.display = 'none';
     isHost = true;
     gameModeSelector();
+}
+
+function showCustomAlert(message, mode) {
+    if (document.getElementById('custom-alert')) return; // Prevent multiple alerts
+    if (mode === 0) {
+        const cont = document.getElementById('gameContainer');
+        if (cont) {
+            cont.animate([
+                { transform: 'translateX(0)' },
+                { transform: 'translateX(-12px)' },
+                { transform: 'translateX(12px)' },
+                { transform: 'translateX(0)' }
+            ], {
+                duration: 400,  // Total duration of the shake
+                easing: 'ease-in-out',
+                iterations: 1  // Runs only once
+            });
+        }
+    }
+
+    // Create overlay to block interactions
+    const overlay = document.createElement('div');
+    overlay.style.position = 'fixed';
+    overlay.style.top = '0';
+    overlay.style.left = '0';
+    overlay.style.width = '100vw';
+    overlay.style.height = '100vh';
+    overlay.style.background = 'rgba(0, 0, 0, 0)';
+    overlay.style.zIndex = '999';
+    overlay.style.pointerEvents = 'auto'; // Blocks interactions
+    document.body.appendChild(overlay);
+
+    // Create the alert box
+    const alertBox = document.createElement('div');
+    alertBox.id = 'custom-alert'; // Unique ID to prevent duplicates
+    alertBox.innerText = message;
+    alertBox.style.position = 'fixed';
+    alertBox.style.top = '50%';
+    alertBox.style.left = '50%';
+    alertBox.style.transform = 'translate(-50%, -50%)';
+    alertBox.style.background = 'rgb(40, 40, 40)';
+    alertBox.style.color = 'white';
+    alertBox.style.padding = '20px';
+    alertBox.style.boxShadow = '0 0 10px rgba(0, 0, 0, 0.3)';
+    alertBox.style.zIndex = '1001';
+    alertBox.style.borderRadius = '8px';
+    alertBox.style.textAlign = 'center';
+
+    // Create the close button
+    const closeButton = document.createElement('button');
+    closeButton.innerText = 'OK';
+    closeButton.style.marginTop = '10px';
+    closeButton.style.padding = '5px 10px';
+    closeButton.style.border = 'none';
+    closeButton.style.color = 'white';
+    closeButton.style.cursor = 'pointer';
+    closeButton.style.borderRadius = '4px';
+
+    if (mode === 0) {
+        alertBox.style.border = '2px solid red';
+        closeButton.style.background = 'red';
+    } else {
+        alertBox.style.border = '2px solid green';
+        closeButton.style.background = 'green';
+    }
+
+    function closeAlert() {
+        alertBox.remove();
+        overlay.remove();
+        document.removeEventListener('keydown', keyHandler); // Remove key listener
+    }
+
+    closeButton.onclick = closeAlert;
+    overlay.onclick = closeAlert;
+
+    // Close on Enter key
+    function keyHandler(event) {
+        if (event.key === 'Enter') {
+            closeAlert();
+        }
+    }
+
+    document.addEventListener('keydown', keyHandler);
+
+    alertBox.appendChild(closeButton);
+    document.body.appendChild(alertBox);
+    closeButton.focus(); // Focus on button so Enter works immediately
 }
 
 function gameModeSelector() {
@@ -423,7 +528,7 @@ function startGame(gameArea) {
         if (isOnline) {
             if (!isHost) {
                 if (syncActualMap === "" || syncRandomImage === "") {
-                    alert('No image or map received from the host.\nThis should not happen.\nWe will reload this page for you.\nRe-entering this lobby will fix this.');
+                    showCustomAlert('No image or map received from the host.\nThis should not happen.\nWe will reload this page for you.\nRe-entering this lobby will fix this.', 0);
                     window.location.reload();
                     return;
                 }
@@ -582,94 +687,6 @@ function startGame(gameArea) {
     } else {
         renderOptions(selection);
     }
-
-    function showCustomAlert(message, mode) {
-        if (document.getElementById('custom-alert')) return; // Prevent multiple alerts
-        if (mode === 0) {
-            const cont = document.getElementById('gameContainer');
-            if (cont) {
-                cont.animate([
-                    { transform: 'translateX(0)' },
-                    { transform: 'translateX(-12px)' },
-                    { transform: 'translateX(12px)' },
-                    { transform: 'translateX(0)' }
-                ], {
-                    duration: 400,  // Total duration of the shake
-                    easing: 'ease-in-out',
-                    iterations: 1  // Runs only once
-                });
-            }
-        }
-
-        // Create overlay to block interactions
-        const overlay = document.createElement('div');
-        overlay.style.position = 'fixed';
-        overlay.style.top = '0';
-        overlay.style.left = '0';
-        overlay.style.width = '100vw';
-        overlay.style.height = '100vh';
-        overlay.style.background = 'rgba(0, 0, 0, 0)';
-        overlay.style.zIndex = '999';
-        overlay.style.pointerEvents = 'auto'; // Blocks interactions
-        document.body.appendChild(overlay);
-
-        // Create the alert box
-        const alertBox = document.createElement('div');
-        alertBox.id = 'custom-alert'; // Unique ID to prevent duplicates
-        alertBox.innerText = message;
-        alertBox.style.position = 'fixed';
-        alertBox.style.top = '50%';
-        alertBox.style.left = '50%';
-        alertBox.style.transform = 'translate(-50%, -50%)';
-        alertBox.style.background = 'rgb(40, 40, 40)';
-        alertBox.style.color = 'white';
-        alertBox.style.padding = '20px';
-        alertBox.style.boxShadow = '0 0 10px rgba(0, 0, 0, 0.3)';
-        alertBox.style.zIndex = '1001';
-        alertBox.style.borderRadius = '8px';
-        alertBox.style.textAlign = 'center';
-
-        // Create the close button
-        const closeButton = document.createElement('button');
-        closeButton.innerText = 'OK';
-        closeButton.style.marginTop = '10px';
-        closeButton.style.padding = '5px 10px';
-        closeButton.style.border = 'none';
-        closeButton.style.color = 'white';
-        closeButton.style.cursor = 'pointer';
-        closeButton.style.borderRadius = '4px';
-
-        if (mode === 0) {
-            alertBox.style.border = '2px solid red';
-            closeButton.style.background = 'red';
-        } else {
-            alertBox.style.border = '2px solid green';
-            closeButton.style.background = 'green';
-        }
-
-        function closeAlert() {
-            alertBox.remove();
-            overlay.remove();
-            document.removeEventListener('keydown', keyHandler); // Remove key listener
-        }
-
-        closeButton.onclick = closeAlert;
-        overlay.onclick = closeAlert;
-
-        // Close on Enter key
-        function keyHandler(event) {
-            if (event.key === 'Enter') {
-                closeAlert();
-            }
-        }
-
-        document.addEventListener('keydown', keyHandler);
-
-        alertBox.appendChild(closeButton);
-        document.body.appendChild(alertBox);
-        closeButton.focus(); // Focus on button so Enter works immediately
-    }
-
 
     function displayMap(map) {
         // Display the map image
