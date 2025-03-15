@@ -1401,6 +1401,199 @@
                         ]
                     ]
                 }
+            },
+            "Chapter 6 - The Fall": {
+                "Underground": {
+                    "0": [
+                        "images/portal_series/portal2/chapter6/underground/maps/0.png",
+                        [
+                            "images/portal_series/portal2/chapter6/underground/0.png",
+                            []
+                        ]
+                    ],
+                    "1": [
+                        "images/portal_series/portal2/chapter6/underground/maps/1.png",
+                        [
+                            "images/portal_series/portal2/chapter6/underground/1.png",
+                            []
+                        ],
+                        [
+                            "images/portal_series/portal2/chapter6/underground/2.png",
+                            []
+                        ]
+                    ],
+                    "2": [
+                        "images/portal_series/portal2/chapter6/underground/maps/1.png",
+                        [
+                            "images/portal_series/portal2/chapter6/underground/3.png",
+                            []
+                        ],
+                        [
+                            "images/portal_series/portal2/chapter6/underground/4.png",
+                            []
+                        ]
+                    ]
+                },
+                "Cave Johnson": {
+                    "0": [
+                        "images/portal_series/portal2/chapter6/cave_johnson/maps/0.png",
+                        [
+                            "images/portal_series/portal2/chapter6/cave_johnson/0.png",
+                            []
+                        ],
+                        [
+                            "images/portal_series/portal2/chapter6/cave_johnson/3.png",
+                            []
+                        ]
+                    ],
+                    "1": [
+                        "images/portal_series/portal2/chapter6/cave_johnson/maps/1.png",
+                        [
+                            "images/portal_series/portal2/chapter6/cave_johnson/1.png",
+                            []
+                        ],
+                        [
+                            "images/portal_series/portal2/chapter6/cave_johnson/2.png",
+                            []
+                        ]
+                    ],
+                    "2": [
+                        "images/portal_series/portal2/chapter6/cave_johnson/maps/2.png",
+                        [
+                            "images/portal_series/portal2/chapter6/cave_johnson/4.png",
+                            []
+                        ]
+                    ],
+                    "3": [
+                        "images/portal_series/portal2/chapter6/cave_johnson/maps/3.png",
+                        [
+                            "images/portal_series/portal2/chapter6/cave_johnson/5.png",
+                            []
+                        ]
+                    ]
+                },
+                "Repulsion Intro": {
+                    "0": [
+                        "images/portal_series/portal2/chapter6/repulsion_intro/maps/0.png",
+                        [
+                            "images/portal_series/portal2/chapter6/repulsion_intro/0.png",
+                            []
+                        ],
+                        [
+                            "images/portal_series/portal2/chapter6/repulsion_intro/2.png",
+                            []
+                        ]
+                    ],
+                    "1": [
+                        "images/portal_series/portal2/chapter6/repulsion_intro/maps/1.png",
+                        [
+                            "images/portal_series/portal2/chapter6/repulsion_intro/1.png",
+                            []
+                        ]
+                    ],
+                    "2": [
+                        "images/portal_series/portal2/chapter6/repulsion_intro/maps/2.png",
+                        [
+                            "images/portal_series/portal2/chapter6/repulsion_intro/3.png",
+                            []
+                        ]
+                    ]
+                },
+                "Bomb Flings": {
+                    "0": [
+                        "images/portal_series/portal2/chapter6/bomb_flings/maps/0.png",
+                        [
+                            "images/portal_series/portal2/chapter6/bomb_flings/0.png",
+                            [
+                            ]
+                        ]
+                    ],
+                    "1": [
+                        "images/portal_series/portal2/chapter6/bomb_flings/maps/1.png",
+                        [
+                            "images/portal_series/portal2/chapter6/bomb_flings/1.png",
+                            [
+                            ]
+                        ],
+                        [
+                            "images/portal_series/portal2/chapter6/bomb_flings/2.png",
+                            [
+                            ]
+                        ]
+                    ]
+                },
+                "Crazy Box": {
+                    "0": [
+                        "images/portal_series/portal2/chapter6/crazy_box/maps/0.png",
+                        [
+                            "images/portal_series/portal2/chapter6/crazy_box/0.png",
+                            [
+                            ]
+                        ],
+                        [
+                            "images/portal_series/portal2/chapter6/crazy_box/1.png",
+                            [
+                            ]
+                        ],
+                        [
+                            "images/portal_series/portal2/chapter6/crazy_box/2.png",
+                            [
+                            ]
+                        ]
+                    ],
+                    "1": [
+                        "images/portal_series/portal2/chapter6/crazy_box/maps/1.png",
+                        [
+                            "images/portal_series/portal2/chapter6/crazy_box/3.png",
+                            [
+                            ]
+                        ]
+                    ],
+                    "2": [
+                        "images/portal_series/portal2/chapter6/crazy_box/maps/2.png",
+                        [
+                            "images/portal_series/portal2/chapter6/crazy_box/4.png",
+                            [
+                            ]
+                        ],
+                        [
+                            "images/portal_series/portal2/chapter6/crazy_box/5.png",
+                            [
+                            ]
+                        ]
+                    ]
+                },
+                "PotatOS": {
+                    "0": [
+                        "images/portal_series/portal2/chapter6/potatOS/maps/0.png",
+                        [
+                            "images/portal_series/portal2/chapter6/potatOS/0.png",
+                            [
+                            ]
+                        ],
+                        [
+                            "images/portal_series/portal2/chapter6/potatOS/1.png",
+                            [
+                            ]
+                        ]
+                    ],
+                    "1": [
+                        "images/portal_series/portal2/chapter6/potatOS/maps/1.png",
+                        [
+                            "images/portal_series/portal2/chapter6/potatOS/3.png",
+                            [
+                            ]
+                        ]
+                    ],
+                    "2": [
+                        "images/portal_series/portal2/chapter6/potatOS/maps/2.png",
+                        [
+                            "images/portal_series/portal2/chapter6/potatOS/2.png",
+                            [
+                            ]
+                        ]
+                    ]
+                }
             }
         }
     },
