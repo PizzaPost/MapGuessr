@@ -48,11 +48,19 @@ function closeAllLobbies() {
     });
 }
 
+function closeThisLobby() {
+    db.collection('lobbies').doc(lobbyName).delete();
+    location.reload();
+}
+
 function clearHosts() {
     db.collection('lobbies').get().then(querySnapshot => {
         querySnapshot.forEach(doc => {
             doc.ref.update({
-                players: doc.data().players.filter(player => !player.host)
+                players: doc.data().players.reduce((acc, player) => {
+                    if (!player.host) acc.push(player);
+                    return acc;
+                }, [])
             });
         });
     });
@@ -72,6 +80,14 @@ async function loadGameModes() {
     } catch (error) {
         console.error('Error loading game modes:', error);
     }
+}
+
+function getPlayerNames(players) {
+    let result = '';
+    players.sort((a, b) => b.totalScore - a.totalScore).forEach(player => {
+        result += `\n${player.name} (${player.score.toFixed(0)} / ${player.totalScore.toFixed(0)})`;
+    });
+    return result;
 }
 
 // Example function that uses gameModes
@@ -150,9 +166,36 @@ function chooseVersion() {
     gameVersionDiv.appendChild(singlePlayerButton);
 }
 
+function leaveLobby() {
+    db.collection('lobbies').doc(lobbyName).get().then(doc => {
+        if (doc.exists) {
+            const players = doc.data().players || [];
+            const updatedPlayers = players.filter(player => player.name !== userName);
+            if (updatedPlayers.length === 0) {
+                closeThisLobby();
+            }
+            doc.ref.update({ players: updatedPlayers }).then(() => {
+                location.reload();
+            });
+        }
+    });
+}
+
 function joinLobby() {
     console.log(`Joining lobby: ${lobbyName}`);
     gameVersionDiv.style.display = 'none';
+    const leaveLobbyButton = document.createElement('button');
+    leaveLobbyButton.innerText = 'Leave Lobby';
+    leaveLobbyButton.style.position = 'fixed';
+    leaveLobbyButton.style.bottom = '0';
+    leaveLobbyButton.style.left = '50%';
+    leaveLobbyButton.style.transform = 'translateX(-50%)';
+    leaveLobbyButton.style.zIndex = '9999';
+    leaveLobbyButton.style.cursor = 'pointer';
+    leaveLobbyButton.onclick = () => {
+        leaveLobby();
+    };
+    document.body.appendChild(leaveLobbyButton);
     db.collection('lobbies').doc(lobbyName).get().then(doc => {
         if (doc.exists) {
             const existingPlayers = doc.data().players;
@@ -173,12 +216,36 @@ function joinLobby() {
             console.log(`Lobby exists, joining as ${userName}`);
             isHost = existingUserName ? existingUserName.host : false;
             // Join the lobby
-            doc.ref.update({
-                players: firebase.firestore.FieldValue.arrayUnion({
-                    uid: auth.currentUser.uid,
-                    name: userName,
-                    host: isHost
-                })
+            doc.ref.get().then(docSnapshot => {
+                if (docSnapshot.exists) {
+                    const players = docSnapshot.data().players || [];
+                    let playerExists = false;
+                    const updatedPlayers = players.map(player => {
+                        if (player.name === userName) {
+                            playerExists = true;
+                            return {
+                                uid: auth.currentUser.uid,
+                                name: userName,
+                                host: isHost,
+                                wantsHost: null,
+                                score: 0,
+                                totalScore: 0
+                            };
+                        }
+                        return player;
+                    });
+                    if (!playerExists) {
+                        updatedPlayers.push({
+                            uid: auth.currentUser.uid,
+                            name: userName,
+                            host: isHost,
+                            wantsHost: null,
+                            score: 0,
+                            totalScore: 0
+                        });
+                    }
+                    doc.ref.update({ players: updatedPlayers });
+                }
             }).then(() => {
                 loadingDiv.style.display = 'none';
                 if (isHost) {
@@ -194,7 +261,10 @@ function joinLobby() {
                 players: [{
                     uid: auth.currentUser.uid,
                     name: userName,
-                    host: true
+                    host: true,
+                    wantsHost: null,
+                    score: 0,
+                    totalScore: 0
                 }]
             }).then(() => {
                 loadingDiv.style.display = 'none';
@@ -208,26 +278,26 @@ function joinLobby() {
     });
 }
 
+const playerListDiv = document.createElement('div');
+playerListDiv.id = 'playerList';
+const playerListText = document.createElement('p');
+playerListText.innerText = 'Players:';
+playerListDiv.appendChild(playerListText);
+
 function playAsMember() {
     gameVersionDiv.style.display = 'none';
     lobbyName = lobbyInput.value;
-    const playerListDiv = document.createElement('div');
-    playerListDiv.id = 'playerList';
     const claimHostButton = document.createElement('button');
-    const playerListText = document.createElement('p');
-    const waitingText = document.createElement('p');
-    playerListText.innerText = 'Players:';
-    playerListDiv.appendChild(playerListText);
     db.collection('lobbies').doc(lobbyName).onSnapshot(doc => {
         if (!doc.exists) {
-            showCustomAlert('Lobby no longer exists. The page will reload now.', undefined, [gameVersionDiv, playerListDiv, gameModeSelector, gameContainer]);
+            showCustomAlert('Lobby no longer exists. The page will reload now.', undefined, [gameVersionDiv, playerListDiv, gameContainer]);
             window.location.reload();
             return;
         }
         const players = doc.data().players || [];
-        const userInLobby = players.filter(player => player.uid === auth.currentUser.uid)[0];
+        const userInLobby = players.find(player => player.uid === auth.currentUser.uid);
         if (!userInLobby) {
-            showCustomAlert('You have been kicked from this lobby. The page will reload now.', undefined, [gameVersionDiv, playerListDiv, gameModeSelector, gameContainer]);
+            showCustomAlert('You have been kicked from this lobby. The page will reload now.', undefined, [gameVersionDiv, playerListDiv, gameContainer]);
             window.location.reload();
             return;
         }
@@ -235,6 +305,34 @@ function playAsMember() {
             db.collection('lobbies').doc(lobbyName).get().then(doc => {
                 const hostPlayers = doc.data().players.filter(player => player.host);
                 if (hostPlayers.length === 0) {
+                    const wantsHostPlayers = doc.data().players.filter(player => player.wantsHost !== null && player.wantsHost !== undefined);
+                    if (wantsHostPlayers.length > 0) {
+                        const ourPlayer = wantsHostPlayers.find(player => player.name === userName);
+                        if (ourPlayer && wantsHostPlayers.reduce((max, player) => player.wantsHost > max ? player.wantsHost : max, 0) === ourPlayer.wantsHost) {
+                            doc.ref.update({
+                                players: doc.data().players.map(player => {
+                                    if (player.name === userName) {
+                                        player.host = true;
+                                        player.wantsHost = null;
+                                    }
+                                    return player;
+                                })
+                            }).then(() => {
+                                isHost = true;
+                                playAsHost();
+                            });
+                        } else {
+                            doc.ref.update({
+                                players: doc.data().players.map(player => {
+                                    if (player.name === userName) {
+                                        player.wantsHost = null;
+                                    }
+                                    return player;
+                                })
+                            });
+                            isHost = false;
+                        }
+                    }
                     claimHostButton.id = 'claimHostButton';
                     claimHostButton.innerText = 'Claim Host Position';
                     claimHostButton.style.position = 'fixed';
@@ -244,12 +342,11 @@ function playAsMember() {
                         doc.ref.update({
                             players: doc.data().players.map(player => {
                                 if (player.name === userName) {
-                                    player.host = true;
+                                    player.wantsHost = Math.random();
                                 }
                                 return player;
                             })
                         });
-                        playAsHost();
                     };
                     document.body.appendChild(claimHostButton);
                 } else {
@@ -262,13 +359,10 @@ function playAsMember() {
                     syncActualMap = doc.data().actualMap;
                     syncRandomImage = doc.data().randomImage;
                     reload = doc.data().reload;
-                    playerListDiv.style.display = 'none';
                     startGame(JSON.parse(doc.data().gameArea));
                 } else {
-                    const playerNames = doc.data().players.map(player => player.name);
-                    playerListText.innerText = `Players: ${playerNames.join(', ')}`;
-                    waitingText.innerText = 'Waiting for the host to start the game.';
-                    playerListDiv.appendChild(waitingText);
+                    const playerNames = getPlayerNames(doc.data().players);
+                    playerListText.innerText = `Players: ${playerNames}`;
                     document.body.appendChild(playerListDiv);
                 }
                 if (reload) {
@@ -281,10 +375,18 @@ function playAsMember() {
 
 function playAsHost() {
     gameVersionDiv.style.display = 'none';
-    const playerListDiv = document.getElementById('playerList');
-    if (playerListDiv) {
-        playerListDiv.style.display = 'none';
-    }
+    db.collection('lobbies').doc(lobbyName).onSnapshot(doc => {
+        if (!doc.exists) {
+            showCustomAlert('Lobby no longer exists. The page will reload now.', undefined, [gameVersionDiv, playerListDiv, gameContainer]);
+            window.location.reload();
+            return;
+        }
+        const players = doc.data().players || [];
+        const playerNames = getPlayerNames(players);
+        playerListText.innerText = `Players: ${playerNames}`;
+        document.body.appendChild(playerListDiv);
+    });
+    const closeLobbyButton = document.createElement('button');
     const giveUpHostButton = document.createElement('button');
     giveUpHostButton.id = 'giveUpHostButton';
     giveUpHostButton.innerText = 'Give up host position';
@@ -303,6 +405,7 @@ function playAsHost() {
                     })
                 });
                 giveUpHostButton.remove();
+                closeLobbyButton.remove();
                 gameModeSelector.style.display = 'none';
                 isHost = false;
                 playAsMember();
@@ -311,10 +414,27 @@ function playAsHost() {
     };
     document.body.appendChild(giveUpHostButton);
 
+    closeLobbyButton.id = 'closeLobbyButton';
+    closeLobbyButton.innerText = 'Close Lobby';
+    closeLobbyButton.style.position = 'fixed';
+    closeLobbyButton.style.bottom = '0';
+    const giveUpHostButtonRect = giveUpHostButton.getBoundingClientRect();
+    closeLobbyButton.style.left = `${giveUpHostButtonRect.right}px`;
+    closeLobbyButton.onclick = () => {
+        closeThisLobby();
+    };
+    document.body.appendChild(closeLobbyButton);
+
     isHost = true;
-    if (!gameStarted) {
-        startGameModeSelector();
-    }
+
+    db.collection('lobbies').doc(lobbyName).get().then(doc => {
+        if (doc.data().hasOwnProperty('gameStarted')) {
+            gameStarted = doc.data().gameStarted;
+        }
+        if (!gameStarted) {
+            startGameModeSelector();
+        }
+    });
 }
 
 /**
@@ -426,18 +546,19 @@ function showCustomAlert(message, mode = 0, cont = null) {
     closeButton.focus(); // Focus on button so Enter works immediately
 }
 
-let gameModeSelector;
+let gameModeSelector = document.getElementById('gameModeSelector');
+if (!gameModeSelector) {
+    gameModeSelector = document.createElement('div');
+    gameModeSelector.id = 'gameModeSelector';
+    document.body.appendChild(gameModeSelector);
+}
+gameModeSelector.style.display = 'none';
+
 const selectedPathElement = document.createElement('p');
 const selectButton = document.createElement('button');
 
 function startGameModeSelector() {
     // Create the gameModeSelector div if it doesn't exist
-    gameModeSelector = document.getElementById('gameModeSelector');
-    if (!gameModeSelector) {
-        gameModeSelector = document.createElement('div');
-        gameModeSelector.id = 'gameModeSelector';
-        document.body.appendChild(gameModeSelector);
-    }
     gameModeSelector.style.display = 'block';
 
     // Create the selectedPathElement and the selectButton
@@ -619,9 +740,15 @@ function createThemeToggle() {
     document.body.appendChild(toggle);
 }
 
-function startGame(gameArea) {
-    let gameContainer = document.getElementById('gameContainer');
+let gameContainer = document.getElementById('gameContainer');
+if (!gameContainer) {
+    gameContainer = document.createElement('div');
+    gameContainer.id = 'gameContainer';
+    document.body.appendChild(gameContainer);
+}
+gameContainer.style.display = 'none';
 
+function startGame(gameArea) {
     // Remove any existing objects with id marker or solutionMarker
     const markerObjects = document.querySelectorAll('[id="marker"], [id="solutionMarker"]');
     markerObjects.forEach(object => object.remove());
@@ -635,13 +762,8 @@ function startGame(gameArea) {
     `;
     document.head.appendChild(style);
 
-    if (!gameContainer) {
-        gameContainer = document.createElement('div');
-        gameContainer.id = 'gameContainer';
-        document.body.appendChild(gameContainer);
-    }
-
     gameContainer.innerHTML = '';
+    gameContainer.style.display = 'block';
 
     // Display a random image
     function collectLists(obj) {
@@ -688,7 +810,7 @@ function startGame(gameArea) {
         if (isOnline) {
             if (!isHost) {
                 if (syncActualMap === "" || syncRandomImage === "") {
-                    showCustomAlert('No image or map received from the host.\nThis should not happen.\nWe will reload this page for you.\nRe-entering this lobby will fix this.', undefined, [gameVersionDiv, playerListDiv, gameModeSelector, gameContainer]);
+                    showCustomAlert('No image or map received from the host.\nThis should not happen.\nWe will reload this page for you.\nRe-entering this lobby will fix this.', undefined, [gameVersionDiv, playerListDiv, gameContainer]);
                     window.location.reload();
                     return;
                 }
@@ -862,6 +984,7 @@ function startGame(gameArea) {
         marker.style.width = '10px';
         marker.style.height = '10px';
         marker.style.backgroundColor = 'red';
+        marker.style.border = '2px solid black';
         marker.style.borderRadius = '50%';
         marker.style.display = 'none'; // Initially hidden
         document.body.appendChild(marker);
@@ -947,10 +1070,15 @@ function startGame(gameArea) {
                         totalScore += score;
 
                         if (isOnline) {
-                            db.collection('lobbies').doc(lobbyName).update({
-                                gameStarted: false,
-                                [`players.${auth.currentUser.uid}.score`]: score,
-                                [`players.${auth.currentUser.uid}.totalScore`]: totalScore
+                            db.collection('lobbies').doc(lobbyName).get().then(doc => {
+                                const players = doc.data().players;
+                                const myPlayer = players.find(player => player.name === userName);
+                                myPlayer.score = score;
+                                myPlayer.totalScore = totalScore;
+                                db.collection('lobbies').doc(lobbyName).update({
+                                    gameStarted: false,
+                                    players: players,
+                                });
                             });
                         }
 
@@ -1025,8 +1153,6 @@ function startGame(gameArea) {
                 if (!marker.dataset.x || !marker.dataset.y) return;
 
                 const rect = mapImage.getBoundingClientRect();
-                const gameContainer = document.getElementById('gameContainer');
-                const containerRect = gameContainer.getBoundingClientRect();
 
                 const x = parseFloat(marker.dataset.x);
                 const y = parseFloat(marker.dataset.y);
@@ -1038,17 +1164,6 @@ function startGame(gameArea) {
                 // Update marker position
                 marker.style.left = `${markerLeft}px`;
                 marker.style.top = `${markerTop}px`;
-
-                // // Calculate visibility using predicted position instead of actual rect
-                // const isVisible =
-                //     markerLeft + 10 > containerRect.left && // 10px width
-                //     markerLeft < containerRect.right &&
-                //     markerTop + 10 > containerRect.top &&
-                //     markerTop < containerRect.bottom;
-
-                // // Always update display state
-                // marker.style.display = isVisible ? 'block' : 'none';
-                // marker.style.pointerEvents = isVisible ? 'auto' : 'none';
             };
 
             if (delay) {
@@ -1078,20 +1193,15 @@ document.addEventListener('DOMContentLoaded', createThemeToggle);
 window.addEventListener('beforeunload', event => {
     db.collection('lobbies').doc(lobbyName).get().then(doc => {
         if (doc.exists) {
-            doc.ref.update({
-                players: firebase.firestore.FieldValue.arrayRemove({ uid: auth.currentUser.uid, name: userName })
-            }).then(() => {
-                console.log(`User ${userName} removed from lobby ${lobbyName}`);
-            }).catch(error => {
-                console.error('Error updating lobby:', error);
-                showCustomAlert('An error occurred while removing the user. Please try again.', undefined, [gameVersionDiv, playerListDiv, gameModeSelector, gameContainer]);
-            });
+            const players = doc.data().players || [];
+            const updatedPlayers = players.filter(player => player.uid !== auth.currentUser.uid);
+            doc.ref.update({ players: updatedPlayers });
         } else {
             console.log('Lobby does not exist.');
-            showCustomAlert('Lobby does not exist.', undefined, [gameVersionDiv, playerListDiv, gameModeSelector, gameContainer]);
+            showCustomAlert('Lobby does not exist.', undefined, [gameVersionDiv, playerListDiv, gameContainer]);
         }
     }).catch(error => {
         console.error('Error accessing lobby:', error);
-        showCustomAlert('An error occurred. Please try again.', undefined, [gameVersionDiv, playerListDiv, gameModeSelector, gameContainer]);
+        showCustomAlert('An error occurred. Please try again.', undefined, [gameVersionDiv, playerListDiv, gameContainer]);
     });
 });
