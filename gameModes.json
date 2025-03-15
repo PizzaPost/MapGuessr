@@ -648,8 +648,8 @@
                     [
                         "images/portal_series/portal2/chapter2/pit_flings/2.png",
                         [
-                            0.39915966386554624,
-                            0.5938375350140056
+                            0.3928566089821927,
+                            0.5517976414881601
                         ]
                     ],
                     [
@@ -1415,22 +1415,34 @@
                         "images/portal_series/portal2/chapter6/underground/maps/1.png",
                         [
                             "images/portal_series/portal2/chapter6/underground/1.png",
-                            []
+                            [
+                                0.45211701535923665,
+                                0.5265796510120738
+                            ]
                         ],
                         [
                             "images/portal_series/portal2/chapter6/underground/2.png",
-                            []
+                            [
+                                0.625293015437592,
+                                0.6757177083712056
+                            ]
                         ]
                     ],
                     "2": [
-                        "images/portal_series/portal2/chapter6/underground/maps/1.png",
+                        "images/portal_series/portal2/chapter6/underground/maps/2.png",
                         [
                             "images/portal_series/portal2/chapter6/underground/3.png",
-                            []
+                            [
+                                0.4125455281925417,
+                                0.3498727924948438
+                            ]
                         ],
                         [
                             "images/portal_series/portal2/chapter6/underground/4.png",
-                            []
+                            [
+                                0.4335046591305866,
+                                0.5024498281575296
+                            ]
                         ]
                     ]
                 },
@@ -1439,36 +1451,54 @@
                         "images/portal_series/portal2/chapter6/cave_johnson/maps/0.png",
                         [
                             "images/portal_series/portal2/chapter6/cave_johnson/0.png",
-                            []
+                            [
+                                0.28603202312220555,
+                                0.7597491050701788
+                            ]
                         ],
                         [
                             "images/portal_series/portal2/chapter6/cave_johnson/3.png",
-                            []
+                            [
+                                0.7849622911915151,
+                                0.35080878300064866
+                            ]
                         ]
                     ],
                     "1": [
                         "images/portal_series/portal2/chapter6/cave_johnson/maps/1.png",
                         [
                             "images/portal_series/portal2/chapter6/cave_johnson/1.png",
-                            []
+                            [
+                                0.7440822768178097,
+                                0.6089791296065563
+                            ]
                         ],
                         [
                             "images/portal_series/portal2/chapter6/cave_johnson/2.png",
-                            []
+                            [
+                                0.293854748603352,
+                                0.49857642564751903
+                            ]
                         ]
                     ],
                     "2": [
                         "images/portal_series/portal2/chapter6/cave_johnson/maps/2.png",
                         [
                             "images/portal_series/portal2/chapter6/cave_johnson/4.png",
-                            []
+                            [
+                                0.5195530726256983,
+                                0.36946300864716547
+                            ]
                         ]
                     ],
                     "3": [
                         "images/portal_series/portal2/chapter6/cave_johnson/maps/3.png",
                         [
                             "images/portal_series/portal2/chapter6/cave_johnson/5.png",
-                            []
+                            [
+                                0.20334089412255246,
+                                0.728702876815129
+                            ]
                         ]
                     ]
                 },
@@ -1477,25 +1507,37 @@
                         "images/portal_series/portal2/chapter6/repulsion_intro/maps/0.png",
                         [
                             "images/portal_series/portal2/chapter6/repulsion_intro/0.png",
-                            []
+                            [
+                                0.6185829259674656,
+                                0.5388517043750675
+                            ]
                         ],
                         [
                             "images/portal_series/portal2/chapter6/repulsion_intro/2.png",
-                            []
+                            [
+                                0.14732514562591995,
+                                0.5692018765990517
+                            ]
                         ]
                     ],
                     "1": [
                         "images/portal_series/portal2/chapter6/repulsion_intro/maps/1.png",
                         [
                             "images/portal_series/portal2/chapter6/repulsion_intro/1.png",
-                            []
+                            [
+                                0.5932960893854748,
+                                0.8879030369101235
+                            ]
                         ]
                     ],
                     "2": [
                         "images/portal_series/portal2/chapter6/repulsion_intro/maps/2.png",
                         [
                             "images/portal_series/portal2/chapter6/repulsion_intro/3.png",
-                            []
+                            [
+                                0.8354450461367289,
+                                0.15672051364179207
+                            ]
                         ]
                     ]
                 },
@@ -1505,6 +1547,8 @@
                         [
                             "images/portal_series/portal2/chapter6/bomb_flings/0.png",
                             [
+                                0.6906493911579502,
+                                0.6645897132868789
                             ]
                         ]
                     ],
@@ -1513,11 +1557,15 @@
                         [
                             "images/portal_series/portal2/chapter6/bomb_flings/1.png",
                             [
+                                0.7731843575418994,
+                                0.6495398055248555
                             ]
                         ],
                         [
                             "images/portal_series/portal2/chapter6/bomb_flings/2.png",
                             [
+                                0.1447789636066727,
+                                0.2725790111528364
                             ]
                         ]
                     ]
@@ -1528,16 +1576,22 @@
                         [
                             "images/portal_series/portal2/chapter6/crazy_box/0.png",
                             [
+                                0.625959022564595,
+                                0.619241216199505
                             ]
                         ],
                         [
                             "images/portal_series/portal2/chapter6/crazy_box/1.png",
                             [
+                                0.3540931150993218,
+                                0.6717722101012011
                             ]
                         ],
                         [
                             "images/portal_series/portal2/chapter6/crazy_box/2.png",
                             [
+                                0.4228106845978297,
+                                0.41035218081071617
                             ]
                         ]
                     ],
@@ -1546,6 +1600,8 @@
                         [
                             "images/portal_series/portal2/chapter6/crazy_box/3.png",
                             [
+                                0.5709497206703911,
+                                0.5025491461706069
                             ]
                         ]
                     ],
@@ -1554,11 +1610,15 @@
                         [
                             "images/portal_series/portal2/chapter6/crazy_box/4.png",
                             [
+                                0.7828751569970391,
+                                0.5456399756826075
                             ]
                         ],
                         [
                             "images/portal_series/portal2/chapter6/crazy_box/5.png",
                             [
+                                0.2572894012220456,
+                                0.427482964632952
                             ]
                         ]
                     ]
@@ -1569,11 +1629,15 @@
                         [
                             "images/portal_series/portal2/chapter6/potatOS/0.png",
                             [
+                                0.5636148595567799,
+                                0.8452617028692758
                             ]
                         ],
                         [
                             "images/portal_series/portal2/chapter6/potatOS/1.png",
                             [
+                                0.6803097653952681,
+                                0.30561906273199313
                             ]
                         ]
                     ],
@@ -1582,6 +1646,8 @@
                         [
                             "images/portal_series/portal2/chapter6/potatOS/3.png",
                             [
+                                0.5993966589560056,
+                                0.5207707039018692
                             ]
                         ]
                     ],
@@ -1590,6 +1656,8 @@
                         [
                             "images/portal_series/portal2/chapter6/potatOS/2.png",
                             [
+                                0.33258547430697183,
+                                0.3350678047295496
                             ]
                         ]
                     ]
