@@ -1662,6 +1662,197 @@
                         ]
                     ]
                 }
+            },
+            "Chapter 7 - The Reunion": {
+                "Propulsion Intro": {
+                    "0": [
+                        "images/portal_series/portal2/chapter7/propulsion_intro/maps/0.png",
+                        [
+                            "images/portal_series/portal2/chapter7/propulsion_intro/2.png",
+                            []
+                        ]
+                    ],
+                    "1": [
+                        "images/portal_series/portal2/chapter7/propulsion_intro/maps/1.png",
+                        [
+                            "images/portal_series/portal2/chapter7/propulsion_intro/1.png",
+                            [
+                            ]
+                        ]
+                    ],
+                    "2": [
+                        "images/portal_series/portal2/chapter7/propulsion_intro/maps/2.png",
+                        [
+                            "images/portal_series/portal2/chapter7/propulsion_intro/0.png",
+                            [
+                            ]
+                        ]
+                    ],
+                    "3": [
+                        "images/portal_series/portal2/chapter7/propulsion_intro/maps/3.png",
+                        [
+                            "images/portal_series/portal2/chapter7/propulsion_intro/3.png",
+                            [
+                            ]
+                        ],
+                        [
+                            "images/portal_series/portal2/chapter7/propulsion_intro/4.png",
+                            [
+                            ]
+                        ],
+                        [
+                            "images/portal_series/portal2/chapter7/propulsion_intro/5.png",
+                            [
+                            ]
+                        ]
+                    ]
+                },
+                "Propulsion Flings": {
+                    "0": [
+                        "images/portal_series/portal2/chapter7/propulsion_flings/maps/0.png",
+                        [
+                            "images/portal_series/portal2/chapter7/propulsion_flings/0.png",
+                            [
+                            ]
+                        ],
+                        [
+                            "images/portal_series/portal2/chapter7/propulsion_flings/1.png",
+                            [
+                            ]
+                        ],
+                        [
+                            "images/portal_series/portal2/chapter7/propulsion_flings/2.png",
+                            [
+                            ]
+                        ],
+                        [
+                            "images/portal_series/portal2/chapter7/propulsion_flings/3.png",
+                            [
+                            ]
+                        ],
+                        [
+                            "images/portal_series/portal2/chapter7/propulsion_flings/4.png",
+                            [
+                            ]
+                        ]
+                    ]
+                },
+                "Conversion Intro": {
+                    "0": [
+                        "images/portal_series/portal2/chapter7/conversion_intro/maps/0.png",
+                        [
+                            "images/portal_series/portal2/chapter7/conversion_intro/1.png",
+                            [
+                            ]
+                        ],
+                        [
+                            "images/portal_series/portal2/chapter7/conversion_intro/2.png",
+                            [
+                            ]
+                        ]
+                    ],
+                    "1": [
+                        "images/portal_series/portal2/chapter7/conversion_intro/maps/1.png",
+                        [
+                            "images/portal_series/portal2/chapter7/conversion_intro/0.png",
+                            [
+                            ]
+                        ]
+                    ],
+                    "2": [
+                        "images/portal_series/portal2/chapter7/conversion_intro/maps/2.png",
+                        [
+                            "images/portal_series/portal2/chapter7/conversion_intro/3.png",
+                            [
+                            ]
+                        ],
+                        [
+                            "images/portal_series/portal2/chapter7/conversion_intro/4.png",
+                            [
+                            ]
+                        ],
+                        [
+                            "images/portal_series/portal2/chapter7/conversion_intro/5.png",
+                            [
+                            ]
+                        ],
+                        [
+                            "images/portal_series/portal2/chapter7/conversion_intro/6.png",
+                            [
+                            ]
+                        ]
+                    ],
+                    "3": [
+                        "images/portal_series/portal2/chapter7/conversion_intro/maps/3.png",
+                        [
+                            "images/portal_series/portal2/chapter7/conversion_intro/7.png",
+                            [
+                            ]
+                        ],
+                        [
+                            "images/portal_series/portal2/chapter7/conversion_intro/8.png",
+                            [
+                            ]
+                        ]
+                    ]
+                },
+                "Three Gels": {
+                    "0": [
+                        "images/portal_series/portal2/chapter7/three_gels/maps/0.png",
+                        [
+                            "images/portal_series/portal2/chapter7/three_gels/0.png",
+                            [
+                            ]
+                        ]
+                    ],
+                    "1": [
+                        "images/portal_series/portal2/chapter7/three_gels/maps/1.png",
+                        [
+                            "images/portal_series/portal2/chapter7/three_gels/1.png",
+                            [
+                            ]
+                        ],
+                        [
+                            "images/portal_series/portal2/chapter7/three_gels/2.png",
+                            [
+                            ]
+                        ]
+                    ],
+                    "2": [
+                        "images/portal_series/portal2/chapter7/three_gels/maps/2.png",
+                        [
+                            "images/portal_series/portal2/chapter7/three_gels/3.png",
+                            [
+                            ]
+                        ]
+                    ],
+                    "3": [
+                        "images/portal_series/portal2/chapter7/three_gels/maps/3.png",
+                        [
+                            "images/portal_series/portal2/chapter7/three_gels/4.png",
+                            [
+                            ]
+                        ],
+                        [
+                            "images/portal_series/portal2/chapter7/three_gels/5.png",
+                            [
+                            ]
+                        ],
+                        [
+                            "images/portal_series/portal2/chapter7/three_gels/6.png",
+                            [
+                            ]
+                        ]
+                    ],
+                    "4": [
+                        "images/portal_series/portal2/chapter7/three_gels/maps/4.png",
+                        [
+                            "images/portal_series/portal2/chapter7/three_gels/7.png",
+                            [
+                            ]
+                        ]
+                    ]
+                }
             }
         }
     },
