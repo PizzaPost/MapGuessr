@@ -10,7 +10,7 @@ let syncRandomImage = "";
 let syncActualMap = "";
 let reload = false;
 
-let devMode = -1;
+let devMode = 1;
 let altDevMode = 0;
 
 let loadingDiv;
