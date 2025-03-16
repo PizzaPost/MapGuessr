@@ -1026,15 +1026,9 @@ function startGame(gameArea) {
             const mouseX = event.clientX - rect.left;
             const mouseY = event.clientY - rect.top;
 
-            // Smooth centering interpolation
-            const scaleAboveOne = newScale - 1;
-            const centeringFactor = Math.max(0, 1 - scaleAboveOne);
-
-            // Calculate transform origin
-            const mouseOriginX = (mouseX / rect.width) * 100;
-            const mouseOriginY = (mouseY / rect.height) * 100;
-            const originX = mouseOriginX * (1 - centeringFactor) + 50 * centeringFactor;
-            const originY = mouseOriginY * (1 - centeringFactor) + 50 * centeringFactor;
+            // Calculate origin based on mouse position and current scale
+            const originX = (mouseX / rect.width) * 100;
+            const originY = (mouseY / rect.height) * 100;
 
             // Apply transformations
             mapImage.style.transformOrigin = `${originX}% ${originY}%`;
