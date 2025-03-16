@@ -137,8 +137,34 @@ body {
     border-radius: 4px;
 }
 
-/* Theme Toggle Button */
-#themeToggle {
+#themeEmoji {
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    pointer-events: none;
+    cursor: pointer;
+    z-index: 1;
+    transition: opacity 0.3s ease;
+}
+
+#infoLink {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    pointer-events: none;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    z-index: 1;
+}
+
+#menuButton {
     position: fixed;
     bottom: 20px;
     right: 20px;
@@ -149,7 +175,10 @@ body {
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    transition: transform 0.5s ease, box-shadow 0.5s ease;
+    transition: transform 0.5s ease, 
+                box-shadow 0.5s ease, 
+                height 0.5s ease, 
+                border-radius 0.5s ease;
     z-index: 9999;
     padding: 0;
     border: none;
@@ -159,10 +188,30 @@ body {
     box-shadow: 0 4px 15px rgba(0, 123, 255, 0.2);
 }
 
-#themeToggle:hover {
-    transform: scale(1.1);
-    box-shadow: 0 6px 20px var(--button-shadow-hover);
-    animation: pulse 1s ease infinite;
+#textButton {
+    display: block;
+    transform: translateY(1px);
+    transition: transform 0.5s ease;
+}
+
+#menuButton:hover {
+    height: 110px;
+    border-radius: 17px;
+    box-shadow: 100 4px 15px rgba(0, 123, 255, 0.1);
+}
+
+#menuButton:hover #themeEmoji {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+#menuButton:hover #infoLink {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+#menuButton:hover #textButton {
+    transform: translateX(-6px) translateY(33px) rotate(-90deg);
 }
 
 /* Button Styling */
