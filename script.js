@@ -1201,7 +1201,6 @@ function resize() {
 
 window.addEventListener('resize', resize);
 document.addEventListener('DOMContentLoaded', createMoreButton);
-document.addEventListener('DOMContentLoaded', createThemeToggle);
 
 window.addEventListener('beforeunload', event => {
     leaveLobby();
