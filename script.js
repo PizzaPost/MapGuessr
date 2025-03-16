@@ -1191,17 +1191,5 @@ window.addEventListener('resize', resize);
 document.addEventListener('DOMContentLoaded', createThemeToggle);
 
 window.addEventListener('beforeunload', event => {
-    db.collection('lobbies').doc(lobbyName).get().then(doc => {
-        if (doc.exists) {
-            const players = doc.data().players || [];
-            const updatedPlayers = players.filter(player => player.uid !== auth.currentUser.uid);
-            doc.ref.update({ players: updatedPlayers });
-        } else {
-            console.log('Lobby does not exist.');
-            showCustomAlert('Lobby does not exist.', undefined, [gameVersionDiv, playerListDiv, gameContainer]);
-        }
-    }).catch(error => {
-        console.error('Error accessing lobby:', error);
-        showCustomAlert('An error occurred. Please try again.', undefined, [gameVersionDiv, playerListDiv, gameContainer]);
-    });
+    leaveLobby();
 });
