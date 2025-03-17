@@ -1677,6 +1677,8 @@
                         [
                             "images/portal_series/portal2/chapter7/propulsion_intro/1.png",
                             [
+                                0.7628644578928777,
+                                0.273352128710934
                             ]
                         ]
                     ],
@@ -1685,6 +1687,8 @@
                         [
                             "images/portal_series/portal2/chapter7/propulsion_intro/0.png",
                             [
+                                0.5278973487426568,
+                                0.20354086293548385
                             ]
                         ]
                     ],
@@ -1693,16 +1697,22 @@
                         [
                             "images/portal_series/portal2/chapter7/propulsion_intro/3.png",
                             [
+                                0.7540890380609306,
+                                0.5452803354916912
                             ]
                         ],
                         [
                             "images/portal_series/portal2/chapter7/propulsion_intro/4.png",
                             [
+                                0.24526424492403906,
+                                0.7767621310731513
                             ]
                         ],
                         [
                             "images/portal_series/portal2/chapter7/propulsion_intro/5.png",
                             [
+                                0.7796461734025838,
+                                0.2479176254556723
                             ]
                         ]
                     ]
@@ -1713,26 +1723,36 @@
                         [
                             "images/portal_series/portal2/chapter7/propulsion_flings/0.png",
                             [
+                                0.43140292000502084,
+                                0.8558574723091095
                             ]
                         ],
                         [
                             "images/portal_series/portal2/chapter7/propulsion_flings/1.png",
                             [
+                                0.23709175928277618,
+                                0.43218635742347256
                             ]
                         ],
                         [
                             "images/portal_series/portal2/chapter7/propulsion_flings/2.png",
                             [
+                                0.560271882637919,
+                                0.32285638217649026
                             ]
                         ],
                         [
                             "images/portal_series/portal2/chapter7/propulsion_flings/3.png",
                             [
+                                0.599083804338338,
+                                0.29323974340260217
                             ]
                         ],
                         [
                             "images/portal_series/portal2/chapter7/propulsion_flings/4.png",
                             [
+                                0.4869631475432474,
+                                0.06298401335179322
                             ]
                         ]
                     ]
@@ -1743,11 +1763,15 @@
                         [
                             "images/portal_series/portal2/chapter7/conversion_intro/1.png",
                             [
+                                0.3053800085494051,
+                                0.6938694824403675
                             ]
                         ],
                         [
                             "images/portal_series/portal2/chapter7/conversion_intro/2.png",
                             [
+                                0.7128491620111732,
+                                0.679335209448014
                             ]
                         ]
                     ],
@@ -1756,6 +1780,8 @@
                         [
                             "images/portal_series/portal2/chapter7/conversion_intro/0.png",
                             [
+                                0.8201117318435754,
+                                0.6674170478787506
                             ]
                         ]
                     ],
@@ -1764,21 +1790,29 @@
                         [
                             "images/portal_series/portal2/chapter7/conversion_intro/3.png",
                             [
+                                0.852513966480447,
+                                0.6316625631709604
                             ]
                         ],
                         [
                             "images/portal_series/portal2/chapter7/conversion_intro/4.png",
                             [
+                                0.895149513756266,
+                                0.6161047519526347
                             ]
                         ],
                         [
                             "images/portal_series/portal2/chapter7/conversion_intro/5.png",
                             [
+                                0.9365068194862838,
+                                0.6040476990877569
                             ]
                         ],
                         [
                             "images/portal_series/portal2/chapter7/conversion_intro/6.png",
                             [
+                                0.9742197320181564,
+                                0.5906442237700787
                             ]
                         ]
                     ],
@@ -1787,11 +1821,15 @@
                         [
                             "images/portal_series/portal2/chapter7/conversion_intro/7.png",
                             [
+                                0.8356166933734301,
+                                0.42009969167289346
                             ]
                         ],
                         [
                             "images/portal_series/portal2/chapter7/conversion_intro/8.png",
                             [
+                                0.14465548893592878,
+                                0.23100707883318794
                             ]
                         ]
                     ]
@@ -1802,6 +1840,8 @@
                         [
                             "images/portal_series/portal2/chapter7/three_gels/0.png",
                             [
+                                0.5366462970766117,
+                                0.4235015149302985
                             ]
                         ]
                     ],
@@ -1810,11 +1850,15 @@
                         [
                             "images/portal_series/portal2/chapter7/three_gels/1.png",
                             [
+                                0.6233787874806959,
+                                0.5009283077473695
                             ]
                         ],
                         [
                             "images/portal_series/portal2/chapter7/three_gels/2.png",
                             [
+                                0.3349727014844175,
+                                0.37754481406964024
                             ]
                         ]
                     ],
@@ -1823,6 +1867,8 @@
                         [
                             "images/portal_series/portal2/chapter7/three_gels/3.png",
                             [
+                                0.4978937636517391,
+                                0.49411340872445497
                             ]
                         ]
                     ],
@@ -1831,16 +1877,22 @@
                         [
                             "images/portal_series/portal2/chapter7/three_gels/4.png",
                             [
+                                0.4005684103893526,
+                                0.08519579189298487
                             ]
                         ],
                         [
                             "images/portal_series/portal2/chapter7/three_gels/5.png",
                             [
+                                0.6936199718993793,
+                                0.8745051046794607
                             ]
                         ],
                         [
                             "images/portal_series/portal2/chapter7/three_gels/6.png",
                             [
+                                0.23178480276149863,
+                                0.8955120527352597
                             ]
                         ]
                     ],
@@ -1849,6 +1901,8 @@
                         [
                             "images/portal_series/portal2/chapter7/three_gels/7.png",
                             [
+                                0.5971471281424581,
+                                0.3211547246616617
                             ]
                         ]
                     ]
