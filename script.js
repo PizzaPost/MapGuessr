@@ -706,8 +706,8 @@ function createMoreButton() {
     menuButton.id = 'menuButton';
 
     const textSpan = document.createElement('span');
-    textSpan.id='textButton'
-    textSpan.textContent='...'
+    textSpan.id = 'textButton'
+    textSpan.textContent = '...'
 
     const infoLink = document.createElement('span');
     infoLink.id = 'infoLink';
@@ -719,7 +719,7 @@ function createMoreButton() {
     menuButton.appendChild(textSpan);
     menuButton.appendChild(infoLink);
     menuButton.appendChild(themeEmoji)
-    
+
     const updateEmoji = () => {
         const currentTheme = document.body.getAttribute('data-theme');
         themeEmoji.textContent = currentTheme === 'dark' ? '☀️' : '🌙';
@@ -741,7 +741,7 @@ function createMoreButton() {
             window.open('https://github.com/MoCoXIII/MapGuessr');
         }
     });
-    
+
     const savedTheme = localStorage.getItem('theme');
     if (savedTheme === 'dark') {
         document.body.setAttribute('data-theme', 'dark');
@@ -813,7 +813,7 @@ function startGame(gameArea) {
                 devMode++;
             }
             const possibleImage = possibleImages[devMode][1 + altDevMode];
-            const possibleMaps = possibleImages.find(list => list.includes(possibleImage))
+            const possibleMaps = possibleImages.find(list => list.includes(possibleImage));
             actualMap = possibleMaps[0];
             [imagePath, solution] = possibleImage;
             altDevMode++;
@@ -864,8 +864,6 @@ function startGame(gameArea) {
     randomImage.style.height = '50%';
     gameContainer.appendChild(randomImage);
     resize();
-
-    if (devMode > -1) { console.log(`Currently on map ${actualMap} image ${imagePath} with solution ${solution}`); }
 
     const mapImage = document.createElement('img');
 
@@ -1026,15 +1024,9 @@ function startGame(gameArea) {
             const mouseX = event.clientX - rect.left;
             const mouseY = event.clientY - rect.top;
 
-            // Smooth centering interpolation
-            const scaleAboveOne = newScale - 1;
-            const centeringFactor = Math.max(0, 1 - scaleAboveOne);
-
-            // Calculate transform origin
-            const mouseOriginX = (mouseX / rect.width) * 100;
-            const mouseOriginY = (mouseY / rect.height) * 100;
-            const originX = mouseOriginX * (1 - centeringFactor) + 50 * centeringFactor;
-            const originY = mouseOriginY * (1 - centeringFactor) + 50 * centeringFactor;
+            // Calculate origin based on mouse position and current scale
+            const originX = (mouseX / rect.width) * 100;
+            const originY = (mouseY / rect.height) * 100;
 
             // Apply transformations
             mapImage.style.transformOrigin = `${originX}% ${originY}%`;
@@ -1141,9 +1133,14 @@ function startGame(gameArea) {
         continueButton.onclick = () => {
             marker.remove();
             solutionMarker.remove();
-            db.collection('lobbies').doc(lobbyName).update({ gameStarted: true });
+            if (isOnline) {
+                db.collection('lobbies').doc(lobbyName).update({ gameStarted: true });
+            }
             startGame(gameArea); // Restart game with current area
         };
+        if (devMode > -1) {
+            gameContainer.appendChild(continueButton);
+        }
 
         function setMarker(event) {
             if (document.body.contains(submitButton)) {

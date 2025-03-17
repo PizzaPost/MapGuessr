@@ -1669,7 +1669,10 @@
                         "images/portal_series/portal2/chapter7/propulsion_intro/maps/0.png",
                         [
                             "images/portal_series/portal2/chapter7/propulsion_intro/2.png",
-                            [0.49158754871394766, 0.24508817538768787]
+                            [
+                                0.49158754871394766,
+                                0.24508817538768787
+                            ]
                         ]
                     ],
                     "1": [
@@ -2060,5 +2063,101 @@
                 ]
             }
         }
+    },
+    "Babbdi": {
+        "Far from dam": [
+            "images/babbdi/far_from_dam/map.jpg",
+            [
+                "images/babbdi/far_from_dam/colored_hallway.jpg",
+                [
+                    0.7040119412579114,
+                    0.7471421093849892
+                ]
+            ],
+            [
+                "images/babbdi/far_from_dam/dark_rail_climb.jpg",
+                [
+                    0.7776024106839302,
+                    0.6450675477863402
+                ]
+            ],
+            [
+                "images/babbdi/far_from_dam/girl_near_church.jpg",
+                [
+                    0.3231592491417587,
+                    0.8988641651343791
+                ]
+            ],
+            [
+                "images/babbdi/far_from_dam/info_center.jpg",
+                [
+                    0.7425667748489643,
+                    0.09441031282964135
+                ]
+            ],
+            [
+                "images/babbdi/far_from_dam/jumping_wont_hurt.jpg",
+                [
+                    0.6572115038837745,
+                    0.7492333341324638
+                ]
+            ],
+            [
+                "images/babbdi/far_from_dam/lying_fan.jpg",
+                [
+                    0.6690765696921749,
+                    0.011949520796373545
+                ]
+            ],
+            [
+                "images/babbdi/far_from_dam/mall_elevator.jpg",
+                [
+                    0.6364827218123926,
+                    0.7493548630677269
+                ]
+            ],
+            [
+                "images/babbdi/far_from_dam/mall_guy.jpg",
+                [
+                    0.6749388243736058,
+                    0.7160789837703787
+                ]
+            ],
+            [
+                "images/babbdi/far_from_dam/mall_outside.jpg",
+                [
+                    0.7032401975748441,
+                    0.7011457337500642
+                ]
+            ],
+            [
+                "images/babbdi/far_from_dam/rail_climb.jpg",
+                [
+                    0.7438257695671657,
+                    0.43706966567626704
+                ]
+            ],
+            [
+                "images/babbdi/far_from_dam/standing_fan.jpg",
+                [
+                    0.6427663577028193,
+                    0.3470424178493799
+                ]
+            ],
+            [
+                "images/babbdi/far_from_dam/train_station.jpg",
+                [
+                    0.6309731574546893,
+                    0.7029997362869198
+                ]
+            ],
+            [
+                "images/babbdi/far_from_dam/trumpet_instructions.jpg",
+                [
+                    0.6883990780530782,
+                    0.5138304274948856
+                ]
+            ]
+        ]
     }
 }
