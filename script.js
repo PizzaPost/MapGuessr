@@ -700,6 +700,102 @@ function findPathToItem(obj, item) {
     return result;
 }
 
+function showCreditMenu() {
+    if (document.getElementById('credits')) return; // Prevent multiple menus
+    // Create overlay to block interactions
+    const overlay = document.createElement('div');
+    overlay.style.position = 'fixed';
+    overlay.style.top = '0';
+    overlay.style.left = '0';
+    overlay.style.width = '100vw';
+    overlay.style.height = '100vh';
+    overlay.style.background = 'rgba(0, 0, 0, 0)';
+    overlay.style.zIndex = '999';
+    overlay.style.pointerEvents = 'auto'; // Blocks interactions
+    document.body.appendChild(overlay);
+
+    // Create the alert box
+    const creditBox = document.createElement('div');
+    creditBox.id = 'credits'; // Unique ID to prevent duplicates
+    creditBox.innerHTML = `
+    <style>
+      #credits a {
+        color: Blue;
+        text-decoration: none;
+      }
+      #credits a:active {
+        color: RoyalBlue;
+      }
+    </style>
+    <h2 style="text-align: center; font-weight: bold;">CREDITS</h2>
+    <div style="display: flex; flex-direction: column; align-items: start; font-size: 18px;">
+        <div>
+            <strong>Programmer:</strong> 
+            <a href="https://github.com/MoCoXIII/MapGuessr" target="_blank"><u>MoCoXIII</u></a><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <a href="https://github.com/PizzaPost/MapGuessr" target="_blank"><u>PizzaPost</u></a>
+        </div>
+        <div>
+            <strong>Mapper:</strong> 
+            <a href="https://github.com/PizzaPost/MapGuessr" target="_blank"><u>PizzaPost</u></a><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+            <a href="https://github.com/MoCoXIII/MapGuessr" target="_blank"><u>MoCoXIII</u></a>
+        </div>
+        <div><strong>Designer:</strong> 
+            <a href="https://github.com/PizzaPost/MapGuessr" target="_blank"><u>PizzaPost</u></a>
+        </div>
+        <div><strong>Idea:</strong> 
+            <a href="https://github.com/MoCoXIII/MapGuessr" target="_blank"><u>MoCoXIII</u></a>
+        </div>
+    </div>
+    `;
+    creditBox.style.position = 'fixed';
+    creditBox.style.top = '50%';
+    creditBox.style.left = '50%';
+    creditBox.style.transform = 'translate(-50%, -50%)';
+    creditBox.style.background = 'rgb(40, 40, 40)';
+    creditBox.style.color = 'white';
+    creditBox.style.padding = '20px';
+    creditBox.style.boxShadow = '0 0 10px rgba(0, 0, 0, 0.3)';
+    creditBox.style.zIndex = '1001';
+    creditBox.style.borderRadius = '8px';
+    creditBox.style.textAlign = 'center';
+    creditBox.style.border = '2px solid gray';
+
+    // Create the close button
+    const closeButton = document.createElement('button');
+    closeButton.innerText = 'OK';
+    closeButton.style.marginTop = '10px';
+    closeButton.style.padding = '5px 10px';
+    closeButton.style.border = 'none';
+    closeButton.style.color = 'white';
+    closeButton.style.cursor = 'pointer';
+    closeButton.style.borderRadius = '4px';
+    closeButton.style.background = 'gray';
+
+    function closeCredits() {
+        creditBox.remove();
+        overlay.remove();
+        document.removeEventListener('keydown', keyHandler); // Remove key listener
+    }
+
+    closeButton.onclick = closeCredits;
+    overlay.onclick = closeCredits;
+
+    // Close on Enter key
+    function keyHandler(event) {
+        if (event.key === 'Enter') {
+            closeCredits();
+        }
+    }
+
+    document.addEventListener('keydown', keyHandler);
+
+    creditBox.appendChild(closeButton);
+    document.body.appendChild(creditBox);
+    closeButton.focus(); // Focus on button so Enter works immediately
+}
+
 // Menu button functionality
 function createMoreButton() {
     const menuButton = document.createElement('button');
@@ -738,7 +834,7 @@ function createMoreButton() {
             updateEmoji();
         }
         if (event.target.id === 'infoLink') {
-            window.open('https://github.com/MoCoXIII/MapGuessr');
+            showCreditMenu()
         }
     });
 
