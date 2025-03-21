@@ -808,9 +808,11 @@ function createMoreButton() {
     const infoLink = document.createElement('span');
     infoLink.id = 'infoLink';
     infoLink.textContent = 'i';
+    infoLink.style.width = '40px';
 
     const themeEmoji = document.createElement('span');
     themeEmoji.id = 'themeEmoji';
+    themeEmoji.style.width = '40px';
 
     menuButton.appendChild(textSpan);
     menuButton.appendChild(infoLink);
