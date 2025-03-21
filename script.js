@@ -205,7 +205,7 @@ function joinLobby() {
             const existingUID = existingPlayers.find(player => player.uid === auth.currentUser.uid);
             const existingUserName = existingPlayers.find(player => player.name === userName);
             if (existingUID && existingPlayerNames.includes(newUserName)) {
-                newUserName = userName;
+                isHost = existingUserName ? existingUserName.host : false;
             } else {
                 while (existingPlayerNames.includes(newUserName)) {
                     newUserName = `${userName}(${number})`;
@@ -214,7 +214,7 @@ function joinLobby() {
             }
             userName = newUserName;
             console.log(`Lobby exists, joining as ${userName}`);
-            isHost = existingUserName ? existingUserName.host : false;
+            
             // Join the lobby
             doc.ref.get().then(docSnapshot => {
                 if (docSnapshot.exists) {
