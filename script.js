@@ -586,13 +586,14 @@ function startGameModeSelector() {
             if (checkbox && checkbox.checked) {
                 isAnyChecked = true;
                 const value = JSON.parse(button.dataset.value);
-                checkedGameModes[button.innerText] = value;
+                if (true) { // TODO !invertButton.checked
+                    checkedGameModes[button.innerText] = value;
+                    gameArea = checkedGameModes;
+                } else {
+                    delete gameArea[button.innerText];
+                }
             }
         });
-
-        if (isAnyChecked) {
-            gameArea = checkedGameModes;
-        }
 
         gameState = 1;
         gameModeSelector.remove();
