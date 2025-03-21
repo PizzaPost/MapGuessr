@@ -911,6 +911,27 @@ function startGame(gameArea) {
 
     gameContainer.innerHTML = '';
     gameContainer.style.display = 'block';
+
+    if (false) { // TODO toggle this if the user wants to turn off history, maybe through a checkbox in the bottom right menu
+        imagesWrapper.innerHTML = '';
+    } else {
+        const historyLength = 3; // history length in generation (each 2 pictures)
+        if (imagesWrapper.children.length > 2 * historyLength) {
+            for (let i = 0; i < 2; i++) {
+                imagesWrapper.removeChild(imagesWrapper.firstChild);
+            }
+        }
+        const children = Array.from(imagesWrapper.children);
+        for (let i = 0; i < children.length / 2; i++) {
+            const first = children[i * 2];
+            const second = children[i * 2 + 1];
+            const blur = Math.max(0, 6 - (i * 2));
+            first.style.filter = `blur(${blur}px)`;
+            second.style.filter = `blur(${blur}px)`;
+            second.onscroll = null;
+        }
+    }
+
     gameContainer.appendChild(imagesWrapper);
 
     // Display a random image
