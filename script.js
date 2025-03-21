@@ -50,7 +50,7 @@ function closeAllLobbies() {
 
 function closeThisLobby() {
     db.collection('lobbies').doc(lobbyName).delete();
-    location.reload();
+    setTimeout(() => location.reload(), 1000);
 }
 
 function clearHosts() {
