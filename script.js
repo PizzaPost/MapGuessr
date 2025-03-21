@@ -421,6 +421,8 @@ function playAsHost() {
     const giveUpHostButtonRect = giveUpHostButton.getBoundingClientRect();
     closeLobbyButton.style.left = `${giveUpHostButtonRect.right}px`;
     closeLobbyButton.onclick = () => {
+        closeLobbyButton.disabled = true;
+        closeLobbyButton.style.cursor = 'not-allowed';
         closeThisLobby();
     };
     document.body.appendChild(closeLobbyButton);
