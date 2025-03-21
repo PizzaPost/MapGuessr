@@ -852,9 +852,15 @@ let gameContainer = document.getElementById('gameContainer');
 if (!gameContainer) {
     gameContainer = document.createElement('div');
     gameContainer.id = 'gameContainer';
-    document.body.appendChild(gameContainer);
 }
+document.body.appendChild(gameContainer);
 gameContainer.style.display = 'none';
+let imagesWrapper = document.getElementById('imageWrapper');
+if (!imagesWrapper) {
+    imagesWrapper = document.createElement('div');
+    imagesWrapper.id = 'imageWrapper';
+    imagesWrapper.classList.add('images-wrapper');
+}
 
 function startGame(gameArea) {
     // Remove any existing objects with id marker or solutionMarker
@@ -872,6 +878,7 @@ function startGame(gameArea) {
 
     gameContainer.innerHTML = '';
     gameContainer.style.display = 'block';
+    gameContainer.appendChild(imagesWrapper);
 
     // Display a random image
     function collectLists(obj) {
@@ -955,13 +962,13 @@ function startGame(gameArea) {
     }
 
     const randomImage = document.createElement('img');
+    randomImage.style.width = "100%";
     randomImage.src = imagePath;
-    randomImage.style.maxWidth = '100%';
-    randomImage.style.height = '50%';
-    gameContainer.appendChild(randomImage);
+    imagesWrapper.appendChild(randomImage);
     resize();
 
     const mapImage = document.createElement('img');
+    mapImage.style.width = "100%";
 
     let selectedMap = null;
 
@@ -1005,6 +1012,7 @@ function startGame(gameArea) {
                 gameState = 1;
                 mapSelector.style.display = 'block';
                 mapImage.style.display = 'none';
+                imagesWrapper.style.gridTemplateColumns = '1fr';
                 marker.remove();
                 submitButton.remove();
                 backButton.remove();
@@ -1080,9 +1088,8 @@ function startGame(gameArea) {
         // Display the map image
         selectedMap = map
         mapImage.src = map;
-        mapImage.style.maxWidth = '100%';
-        mapImage.style.height = '50%';
-        gameContainer.appendChild(mapImage);
+        imagesWrapper.style.gridTemplateColumns = '1fr 1fr';
+        imagesWrapper.appendChild(mapImage);
         resize();
 
         // Create a marker on the map
@@ -1287,9 +1294,7 @@ function resize() {
     const width = window.innerWidth;
     const height = window.innerHeight;
     const isPortrait = (width < height) || (allImages.length === 1);
-    const imageWidth = isPortrait ? '100%' : '50%';
-
-    allImages.forEach(img => img.style.width = imageWidth);
+    imagesWrapper.style.gridTemplateColumns = isPortrait ? '1fr' : 'repeat(2, 1fr)';
 }
 
 window.addEventListener('resize', resize);
