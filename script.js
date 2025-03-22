@@ -214,7 +214,7 @@ function joinLobby() {
             }
             userName = newUserName;
             console.log(`Lobby exists, joining as ${userName}`);
-            
+
             // Join the lobby
             doc.ref.get().then(docSnapshot => {
                 if (docSnapshot.exists) {
@@ -576,6 +576,25 @@ function startGameModeSelector() {
 
     // Helper function to select a game mode
     function selectGameMode() {
+        const buttonWrappers = gameModeSelector.querySelectorAll('.button-container');
+        let isAnyChecked = false;
+        const checkedGameModes = {};
+
+        buttonWrappers.forEach(buttonWrapper => {
+            const checkbox = buttonWrapper.querySelector('input[type=checkbox]');
+            const button = buttonWrapper.querySelector('button');
+            if (checkbox && checkbox.checked) {
+                isAnyChecked = true;
+                const value = JSON.parse(button.dataset.value);
+                if (true) { // TODO !invertButton.checked
+                    checkedGameModes[button.innerText] = value;
+                    gameArea = checkedGameModes;
+                } else {
+                    delete gameArea[button.innerText];
+                }
+            }
+        });
+
         gameState = 1;
         gameModeSelector.remove();
 
@@ -620,8 +639,12 @@ function startGameModeSelector() {
         // Render current options
         Object.keys(options).forEach(key => {
             const button = document.createElement('button');
+            const checkBox = document.createElement('input');
+            checkBox.type = 'checkbox';
             button.innerText = key;
             const value = options[key];
+            button.dataset.value = JSON.stringify(value);
+
             if (!(typeof value === 'object' && !Array.isArray(value))) {
                 toAltButton(button);
             }
@@ -637,7 +660,14 @@ function startGameModeSelector() {
                     selectGameMode();
                 }
             };
-            gameModeSelector.appendChild(button);
+
+            const container = document.createElement('div');
+            container.classList.add("button-container");
+            container.style.display = 'inline-flex';
+            container.style.alignItems = 'center';
+            container.appendChild(checkBox);
+            container.appendChild(button);
+            gameModeSelector.appendChild(container);
         });
     }
 
@@ -882,6 +912,27 @@ function startGame(gameArea) {
 
     gameContainer.innerHTML = '';
     gameContainer.style.display = 'block';
+
+    if (false) { // TODO toggle this if the user wants to turn off history, maybe through a checkbox in the bottom right menu
+        imagesWrapper.innerHTML = '';
+    } else {
+        const historyLength = 3; // history length in generation (each 2 pictures)
+        if (imagesWrapper.children.length > 2 * historyLength) {
+            for (let i = 0; i < 2; i++) {
+                imagesWrapper.removeChild(imagesWrapper.firstChild);
+            }
+        }
+        const children = Array.from(imagesWrapper.children);
+        for (let i = 0; i < children.length / 2; i++) {
+            const first = children[i * 2];
+            const second = children[i * 2 + 1];
+            const blur = Math.max(0, 6 - (i * 2));
+            first.style.filter = `blur(${blur}px)`;
+            second.style.filter = `blur(${blur}px)`;
+            second.onscroll = null;
+        }
+    }
+
     gameContainer.appendChild(imagesWrapper);
 
     // Display a random image

@@ -26,6 +26,7 @@ html {
     --button-shadow: rgba(0, 123, 255, 0.5);
     --button-shadow-hover: rgba(0, 63, 114, 0.5);
     --button-shadow-alt: rgba(11, 0, 167, 0.5);
+    --button-container-background: linear-gradient(135deg, #001a36, #004691);
 }
 
 [data-theme="dark"] {
@@ -42,6 +43,7 @@ html {
     --button-shadow: rgba(5, 50, 252, 0.2);
     --button-shadow-hover: rgba(0, 40, 216, 0.3);
     --button-shadow-alt: rgba(35, 0, 163, 0.5);
+    --button-container-background: linear-gradient(135deg, #002144, #000b18);
 }
 
 /* Animate gradient change via pseudo-element */
@@ -132,6 +134,20 @@ body {
     box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
     z-index: 10;
 } */
+
+.button-container {
+    background: var(--button-container-background);
+    display: inline-flex;
+    justify-content: center;
+    margin-top: 1.5rem;
+    border-radius: 15px;
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+}
+
+input[type="checkbox"] {
+    margin-left: 8px;
+}
 
 /* Scrollbar Styling */
 ::-webkit-scrollbar {
@@ -231,6 +247,7 @@ button {
     border: none;
     padding: 12px 24px;
     margin: 8px;
+    /* margin-left: 8px; */
     border-radius: 12px;
     cursor: pointer;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
