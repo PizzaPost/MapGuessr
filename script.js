@@ -586,12 +586,33 @@ function startGameModeSelector() {
         if (Object.keys(checkedGameModes).length === 0) {
             console.log("Playing on all maps.");
         } else if (invertSelection) {
-            gameArea = Object.keys(gameModes).reduce((acc, key) => {
-                if (!checkedGameModes[key]) {
-                    acc[key] = gameModes[key];
+            /**
+             * Recursively filters out keys from an object that are in the
+             * checkedGameModes object.
+             *
+             * @param {Object} obj The object to filter.
+             * @returns {Object} The filtered object.
+             */
+            function recursiveFilter(obj) {
+                if (Array.isArray(obj)) {
+                    return obj; // don't look inside arrays (for some reason still counted as objects by the check below)
                 }
-                return acc;
-            }, {});
+
+                if (typeof obj !== 'object') {
+                    return obj;
+                }
+
+                const newObj = {};
+                for (const key in obj) {
+                    if (!(key in checkedGameModes)) {
+                        newObj[key] = recursiveFilter(obj[key]);
+                    }
+                }
+
+                return newObj;
+            }
+
+            gameArea = recursiveFilter(gameArea);
         } else {
             gameArea = checkedGameModes;
         }
@@ -642,6 +663,9 @@ function startGameModeSelector() {
             const button = document.createElement('button');
             const checkBox = document.createElement('input');
             checkBox.type = 'checkbox';
+            if (Object.prototype.hasOwnProperty.call(checkedGameModes, key)) {
+                checkBox.checked = true;
+            }
             button.innerText = key;
             const value = options[key];
             // button.dataset.value = JSON.stringify(value); // or checkBox maybe?
@@ -650,7 +674,7 @@ function startGameModeSelector() {
                 if (checkBox.checked) {
                     checkedGameModes[key] = value;
                 } else {
-                    checkedGameModes[key] = null;
+                    delete checkedGameModes[key];
                 }
             }
 
@@ -666,6 +690,7 @@ function startGameModeSelector() {
                     parentKeys.push(key);
                     renderOptions(value, parentKeys);
                 } else {
+                    checkedGameModes = {};
                     selectGameMode();
                 }
             };
