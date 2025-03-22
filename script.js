@@ -9,6 +9,7 @@ let isHost = false;
 let syncRandomImage = "";
 let syncActualMap = "";
 let reload = false;
+let showHistory=true
 
 let devMode = -1;
 let altDevMode = 0;
@@ -846,9 +847,19 @@ function createMoreButton() {
     themeEmoji.id = 'themeEmoji';
     themeEmoji.style.width = '40px';
 
+    const toggleSelection = document.createElement('span');
+    toggleSelection.id = 'toggleSelection';
+    toggleSelection.textContent = '🔄️';
+
+    const toggleHistory = document.createElement('span');
+    toggleHistory.id = 'toggleHistory';
+    toggleHistory.textContent = '🖼️';
+
     menuButton.appendChild(textSpan);
     menuButton.appendChild(infoLink);
     menuButton.appendChild(themeEmoji)
+    menuButton.appendChild(toggleSelection);
+    menuButton.appendChild(toggleHistory);
 
     const updateEmoji = () => {
         const currentTheme = document.body.getAttribute('data-theme');
@@ -869,6 +880,15 @@ function createMoreButton() {
         }
         if (event.target.id === 'infoLink') {
             showCreditMenu()
+        }
+        if (event.target.id === 'toggleSelection') {
+            toggleSelections();
+        }
+        if (event.target.id === 'toggleHistory') {
+            showHistory = !showHistory;
+            if (!showHistory) toggleHistory.classList.add('disabled');
+            else toggleHistory.classList.remove('disabled');
+            showCustomAlert('History toggled\nIt will update after you click "continue".', 1);
         }
     });
 
@@ -913,7 +933,7 @@ function startGame(gameArea) {
     gameContainer.innerHTML = '';
     gameContainer.style.display = 'block';
 
-    if (false) { // TODO toggle this if the user wants to turn off history, maybe through a checkbox in the bottom right menu
+    if (showHistory) {
         imagesWrapper.innerHTML = '';
     } else {
         const historyLength = 3; // history length in generation (each 2 pictures)

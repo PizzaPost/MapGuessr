@@ -163,9 +163,35 @@ input[type="checkbox"] {
     border-radius: 4px;
 }
 
+#toggleHistory {
+    position: absolute;
+    bottom: 73%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    pointer-events: none;
+    cursor: pointer;
+    z-index: 1;
+    transition: opacity 0.3s ease;
+}
+
+#toggleSelection {
+    position: absolute;
+    bottom: 54%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    pointer-events: none;
+    cursor: pointer;
+    z-index: 1;
+    transition: opacity 0.3s ease;
+}
+
 #themeEmoji {
     position: absolute;
-    top: 20%;
+    bottom: 35%;
     left: 50%;
     transform: translate(-50%, -50%);
     opacity: 0;
@@ -178,7 +204,7 @@ input[type="checkbox"] {
 
 #infoLink {
     position: absolute;
-    top: 50%;
+    bottom: 18%;
     left: 50%;
     transform: translate(-50%, -50%);
     opacity: 0;
@@ -221,23 +247,25 @@ input[type="checkbox"] {
 }
 
 #menuButton:hover {
-    height: 110px;
+    height: 175px;
     border-radius: 17px;
     box-shadow: 100 4px 15px rgba(0, 123, 255, 0.1);
 }
 
-#menuButton:hover #themeEmoji {
-    opacity: 1;
-    pointer-events: auto;
+#toggleHistory.disabled {
+    filter: grayscale(100%);
 }
 
-#menuButton:hover #infoLink {
+#menuButton:hover #themeEmoji,
+#menuButton:hover #infoLink,
+#menuButton:hover #toggleSelection,
+#menuButton:hover #toggleHistory {
     opacity: 1;
     pointer-events: auto;
 }
 
 #menuButton:hover #textButton {
-    transform: translateX(-6px) translateY(33px) rotate(-90deg);
+    transform: translateX(-6px) translateY(66px) rotate(-90deg);
 }
 
 /* Button Styling */
@@ -247,7 +275,6 @@ button {
     border: none;
     padding: 12px 24px;
     margin: 8px;
-    /* margin-left: 8px; */
     border-radius: 12px;
     cursor: pointer;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
