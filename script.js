@@ -884,15 +884,24 @@ function createMoreButton() {
         if (event.target.id === 'infoLink') {
             showCreditMenu()
         }
-        if (event.target.id === 'toggleSelection') {
-            toggleSelections();
-        }
         if (event.target.id === 'toggleHistory') {
             showHistory = !showHistory;
             localStorage.setItem('showHistory', showHistory);
             if (showHistory) toggleHistory.classList.add('disabled');
             else toggleHistory.classList.remove('disabled');
             showCustomAlert('History toggled\nIt will update after you click "continue".', 1);
+        }
+        if (event.target.id === 'toggleSelection') {
+            const buttonWrappers = gameModeSelector.querySelectorAll('.button-container');
+            buttonWrappers.forEach(buttonWrapper => {
+                const checkbox = buttonWrapper.querySelector('input[type=checkbox]');
+                if (checkbox) {
+                    // Invert the checked state
+                    checkbox.checked = !checkbox.checked;
+                }
+            });
+            // Trigger the selection update after inverting
+            selectGameMode();
         }
     });
 
