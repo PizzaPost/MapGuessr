@@ -3,13 +3,15 @@ let gameModes;
 let gameState = 0; // 0 => choose gamemode; 1 => startGame; 2 => selectMap
 let totalScore = 0;
 let gameArea; // not yet set area to choose locations from
+let checkedGameModes = {};
 let gameStarted = false;
 let isOnline = false;
 let isHost = false;
 let syncRandomImage = "";
 let syncActualMap = "";
 let reload = false;
-let showHistory = localStorage.getItem('showHistory') !== 'false'
+let showHistory = localStorage.getItem('showHistory') !== 'false';
+let invertSelection = false;
 const toggleHistory = document.createElement('span');
 if (showHistory) {
     toggleHistory.classList.add('disabled');
@@ -581,24 +583,39 @@ function startGameModeSelector() {
 
     // Helper function to select a game mode
     function selectGameMode() {
-        const buttonWrappers = gameModeSelector.querySelectorAll('.button-container');
-        let isAnyChecked = false;
-        const checkedGameModes = {};
-
-        buttonWrappers.forEach(buttonWrapper => {
-            const checkbox = buttonWrapper.querySelector('input[type=checkbox]');
-            const button = buttonWrapper.querySelector('button');
-            if (checkbox && checkbox.checked) {
-                isAnyChecked = true;
-                const value = JSON.parse(button.dataset.value);
-                if (true) { // TODO !invertButton.checked
-                    checkedGameModes[button.innerText] = value;
-                    gameArea = checkedGameModes;
-                } else {
-                    delete gameArea[button.innerText];
+        if (Object.keys(checkedGameModes).length === 0) {
+            console.log("Playing on all maps.");
+        } else if (invertSelection) {
+            /**
+             * Recursively filters out keys from an object that are in the
+             * checkedGameModes object.
+             *
+             * @param {Object} obj The object to filter.
+             * @returns {Object} The filtered object.
+             */
+            function recursiveFilter(obj) {
+                if (Array.isArray(obj)) {
+                    return obj; // don't look inside arrays (for some reason still counted as objects by the check below)
                 }
+
+                if (typeof obj !== 'object') {
+                    return obj;
+                }
+
+                const newObj = {};
+                for (const key in obj) {
+                    if (!(key in checkedGameModes)) {
+                        newObj[key] = recursiveFilter(obj[key]);
+                    }
+                }
+
+                return newObj;
             }
-        });
+
+            gameArea = recursiveFilter(gameArea);
+        } else {
+            gameArea = checkedGameModes;
+        }
 
         gameState = 1;
         gameModeSelector.remove();
@@ -646,9 +663,20 @@ function startGameModeSelector() {
             const button = document.createElement('button');
             const checkBox = document.createElement('input');
             checkBox.type = 'checkbox';
+            if (Object.prototype.hasOwnProperty.call(checkedGameModes, key)) {
+                checkBox.checked = true;
+            }
             button.innerText = key;
             const value = options[key];
-            button.dataset.value = JSON.stringify(value);
+            // button.dataset.value = JSON.stringify(value); // or checkBox maybe?
+
+            checkBox.onclick = () => {
+                if (checkBox.checked) {
+                    checkedGameModes[key] = value;
+                } else {
+                    delete checkedGameModes[key];
+                }
+            }
 
             if (!(typeof value === 'object' && !Array.isArray(value))) {
                 toAltButton(button);
@@ -662,6 +690,7 @@ function startGameModeSelector() {
                     parentKeys.push(key);
                     renderOptions(value, parentKeys);
                 } else {
+                    checkedGameModes = {};
                     selectGameMode();
                 }
             };
@@ -892,16 +921,8 @@ function createMoreButton() {
             showCustomAlert('History toggled\nIt will update after you click "continue".', 1);
         }
         if (event.target.id === 'toggleSelection') {
-            const buttonWrappers = gameModeSelector.querySelectorAll('.button-container');
-            buttonWrappers.forEach(buttonWrapper => {
-                const checkbox = buttonWrapper.querySelector('input[type=checkbox]');
-                if (checkbox) {
-                    // Invert the checked state
-                    checkbox.checked = !checkbox.checked;
-                }
-            });
-            // Trigger the selection update after inverting
-            selectGameMode();
+            invertSelection = !invertSelection;
+            showCustomAlert(`Selecting will now${invertSelection ? ' ' : ' not '}invert`, 1);
         }
     });
 
@@ -1100,7 +1121,9 @@ function startGame(gameArea) {
                 gameState = 1;
                 mapSelector.style.display = 'block';
                 mapImage.style.display = 'none';
-                imagesWrapper.style.gridTemplateColumns = '1fr';
+                if (imagesWrapper.children.length === 2) {
+                    imagesWrapper.style.gridTemplateColumns = '1fr';
+                }
                 marker.remove();
                 submitButton.remove();
                 backButton.remove();
@@ -1125,7 +1148,7 @@ function startGame(gameArea) {
             backButton.innerText = 'Back';
             backButton.onclick = () => {
                 parentKeys.pop();
-                selection = getParentObject(gameModes, selection);
+                selection = getParentObject(gameArea, selection);
                 const selectedPath = parentKeys.join(' > ');
                 selectedPathElement.innerText = selectedPath;
                 if (parentKeys.length === 0) {
