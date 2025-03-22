@@ -10,7 +10,8 @@ let isHost = false;
 let syncRandomImage = "";
 let syncActualMap = "";
 let reload = false;
-let deepFried = false;
+let filterModes = ['deepFried', 'extraCrispy', 'burnt'];
+let currentFilterModeIndex = -1;
 let showHistory = localStorage.getItem('showHistory') !== 'false';
 let history = [];
 let invertSelection = false;
@@ -1082,10 +1083,18 @@ function startGame(gameArea) {
     history.push(imagePath);
 
     const randomImage = document.createElement('img');
-    if (deepFried) {
-        randomImage.classList.add('deepFried');
+    if (currentFilterModeIndex >= 0) {
+        randomImage.classList.remove(...filterModes);
+        randomImage.classList.add(filterModes[currentFilterModeIndex]);
     }
-    randomImage.onclick = (event) => { randomImage.classList.toggle('deepFried'); deepFried = !deepFried };
+    randomImage.onclick = () => {
+        currentFilterModeIndex += 1;
+        if (currentFilterModeIndex >= filterModes.length) {
+            currentFilterModeIndex = -1;
+        }
+        randomImage.classList.remove(...filterModes);
+        randomImage.classList.add(filterModes[currentFilterModeIndex]);
+    };
     randomImage.style.width = "100%";
     randomImage.src = imagePath;
     imagesWrapper.appendChild(randomImage);
