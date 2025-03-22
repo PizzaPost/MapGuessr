@@ -1008,7 +1008,7 @@ function startGame(gameArea) {
 
     possibleImages = possibleImages.filter(list => !history.includes(list[0]));
     if (possibleImages.length === 0) {
-        history = [];
+        history.splice(0, Math.ceil(history.length * 0.5));
         possibleImages = collectLists(gameArea);
     }
 
