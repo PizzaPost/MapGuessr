@@ -1100,7 +1100,9 @@ function startGame(gameArea) {
                 gameState = 1;
                 mapSelector.style.display = 'block';
                 mapImage.style.display = 'none';
-                imagesWrapper.style.gridTemplateColumns = '1fr';
+                if (imagesWrapper.children.length === 2) {
+                    imagesWrapper.style.gridTemplateColumns = '1fr';
+                }
                 marker.remove();
                 submitButton.remove();
                 backButton.remove();
@@ -1125,7 +1127,7 @@ function startGame(gameArea) {
             backButton.innerText = 'Back';
             backButton.onclick = () => {
                 parentKeys.pop();
-                selection = getParentObject(gameModes, selection);
+                selection = getParentObject(gameArea, selection);
                 const selectedPath = parentKeys.join(' > ');
                 selectedPathElement.innerText = selectedPath;
                 if (parentKeys.length === 0) {
