@@ -983,7 +983,7 @@ function startGame(gameArea) {
             const blur = Math.max(0, 6 - (i * 2));
             first.style.filter = `blur(${blur}px)`;
             second.style.filter = `blur(${blur}px)`;
-            second.onscroll = null;
+            second.onwheel = null;
         }
     }
 
