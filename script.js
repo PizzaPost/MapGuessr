@@ -3,13 +3,15 @@ let gameModes;
 let gameState = 0; // 0 => choose gamemode; 1 => startGame; 2 => selectMap
 let totalScore = 0;
 let gameArea; // not yet set area to choose locations from
+let checkedGameModes = {};
 let gameStarted = false;
 let isOnline = false;
 let isHost = false;
 let syncRandomImage = "";
 let syncActualMap = "";
 let reload = false;
-let showHistory = localStorage.getItem('showHistory') !== 'false'
+let showHistory = localStorage.getItem('showHistory') !== 'false';
+let invertSelection = false;
 const toggleHistory = document.createElement('span');
 if (showHistory) {
     toggleHistory.classList.add('disabled');
@@ -581,24 +583,18 @@ function startGameModeSelector() {
 
     // Helper function to select a game mode
     function selectGameMode() {
-        const buttonWrappers = gameModeSelector.querySelectorAll('.button-container');
-        let isAnyChecked = false;
-        const checkedGameModes = {};
-
-        buttonWrappers.forEach(buttonWrapper => {
-            const checkbox = buttonWrapper.querySelector('input[type=checkbox]');
-            const button = buttonWrapper.querySelector('button');
-            if (checkbox && checkbox.checked) {
-                isAnyChecked = true;
-                const value = JSON.parse(button.dataset.value);
-                if (true) { // TODO !invertButton.checked
-                    checkedGameModes[button.innerText] = value;
-                    gameArea = checkedGameModes;
-                } else {
-                    delete gameArea[button.innerText];
+        if (Object.keys(checkedGameModes).length === 0) {
+            console.log("Playing on all maps.");
+        } else if (invertSelection) {
+            gameArea = Object.keys(gameModes).reduce((acc, key) => {
+                if (!checkedGameModes[key]) {
+                    acc[key] = gameModes[key];
                 }
-            }
-        });
+                return acc;
+            }, {});
+        } else {
+            gameArea = checkedGameModes;
+        }
 
         gameState = 1;
         gameModeSelector.remove();
@@ -648,7 +644,15 @@ function startGameModeSelector() {
             checkBox.type = 'checkbox';
             button.innerText = key;
             const value = options[key];
-            button.dataset.value = JSON.stringify(value);
+            // button.dataset.value = JSON.stringify(value); // or checkBox maybe?
+
+            checkBox.onclick = () => {
+                if (checkBox.checked) {
+                    checkedGameModes[key] = value;
+                } else {
+                    checkedGameModes[key] = null;
+                }
+            }
 
             if (!(typeof value === 'object' && !Array.isArray(value))) {
                 toAltButton(button);
@@ -892,16 +896,8 @@ function createMoreButton() {
             showCustomAlert('History toggled\nIt will update after you click "continue".', 1);
         }
         if (event.target.id === 'toggleSelection') {
-            const buttonWrappers = gameModeSelector.querySelectorAll('.button-container');
-            buttonWrappers.forEach(buttonWrapper => {
-                const checkbox = buttonWrapper.querySelector('input[type=checkbox]');
-                if (checkbox) {
-                    // Invert the checked state
-                    checkbox.checked = !checkbox.checked;
-                }
-            });
-            // Trigger the selection update after inverting
-            selectGameMode();
+            invertSelection = !invertSelection;
+            showCustomAlert(`Selecting will now${invertSelection ? ' ' : ' not '}invert`, 1);
         }
     });
 
