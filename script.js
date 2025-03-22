@@ -10,6 +10,7 @@ let isHost = false;
 let syncRandomImage = "";
 let syncActualMap = "";
 let reload = false;
+let deepFried = false;
 let showHistory = localStorage.getItem('showHistory') !== 'false';
 let history = [];
 let invertSelection = false;
@@ -1081,6 +1082,10 @@ function startGame(gameArea) {
     history.push(imagePath);
 
     const randomImage = document.createElement('img');
+    if (deepFried) {
+        randomImage.classList.add('deepFried');
+    }
+    randomImage.onclick = (event) => { randomImage.classList.toggle('deepFried'); deepFried = !deepFried };
     randomImage.style.width = "100%";
     randomImage.src = imagePath;
     imagesWrapper.appendChild(randomImage);

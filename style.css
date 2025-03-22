@@ -88,6 +88,10 @@ body {
     overflow: hidden;
 }
 
+.deepFried {
+    filter: contrast(5) saturate(3) sepia(0.5);
+}
+
 /* Text Styling */
 #selectedPath {
     font-size: 1.2rem;
