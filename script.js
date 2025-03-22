@@ -9,7 +9,11 @@ let isHost = false;
 let syncRandomImage = "";
 let syncActualMap = "";
 let reload = false;
-let showHistory=true
+let showHistory = localStorage.getItem('showHistory') !== 'false'
+const toggleHistory = document.createElement('span');
+if (showHistory) {
+    toggleHistory.classList.add('disabled');
+}
 
 let devMode = -1;
 let altDevMode = 0;
@@ -851,7 +855,6 @@ function createMoreButton() {
     toggleSelection.id = 'toggleSelection';
     toggleSelection.textContent = '🔄️';
 
-    const toggleHistory = document.createElement('span');
     toggleHistory.id = 'toggleHistory';
     toggleHistory.textContent = '🖼️';
 
@@ -886,7 +889,8 @@ function createMoreButton() {
         }
         if (event.target.id === 'toggleHistory') {
             showHistory = !showHistory;
-            if (!showHistory) toggleHistory.classList.add('disabled');
+            localStorage.setItem('showHistory', showHistory);
+            if (showHistory) toggleHistory.classList.add('disabled');
             else toggleHistory.classList.remove('disabled');
             showCustomAlert('History toggled\nIt will update after you click "continue".', 1);
         }
