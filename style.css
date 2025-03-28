@@ -157,6 +157,71 @@ body {
     margin-right: 0.5rem;
 }
 
+.custom-alert {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, 100%);
+    background: var(--container-bg);
+    color: var(--text-color);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    z-index: 1001;
+    border: 2px solid var(--accent-color);
+    backdrop-filter: blur(5px);
+    min-width: 250px;
+    max-width: 90vw;
+    animation: slideIn 0.3s ease-out forwards;
+    transform-origin: center bottom;
+}
+
+.custom-alert.exiting {
+    animation: shrinkOut 0.2s ease-in forwards;
+}
+
+.custom-alert-close {
+    margin-top: 10px;
+    padding: 8px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: transform 0.2s ease;
+    background: var(--button-bg);
+    color: var(--button-color);
+    box-shadow: 0 2px 4px var(--button-shadow);
+}
+
+.custom-alert-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0);
+    z-index: 999;
+    pointer-events: auto;
+}
+
+/* Alert variations */
+.custom-alert.error {
+    border-color: #dc3545;
+    background: var(--container-bg);
+}
+.custom-alert.error .custom-alert-close {
+    background: linear-gradient(135deg, #dc3545, #a71d2a);
+}
+
+.custom-alert.success {
+    border-color: #28a745;
+    background: var(--container-bg);
+}
+.custom-alert.success .custom-alert-close {
+    background: linear-gradient(135deg, #28a745, #1e7e34);
+}
+
 input[type="checkbox"] {
     margin-left: 8px;
 }
@@ -534,6 +599,30 @@ button:hover::after {
     }
 }
 
+@keyframes slideIn {
+    from { transform: translate(-50%, 100%); }
+    to { transform: translate(-50%, -50%); }
+}
+
+@keyframes shrinkOut {
+    0% { 
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 1;
+    }
+    100% { 
+        transform: translate(-50%, -50%) scale(0.8);
+        opacity: 0;
+    }
+}
+
+@keyframes shake {
+    0% { transform: translate(-50%, -50%) rotate(0deg); }
+    25% { transform: translate(-50%, -50%) rotate(-5deg); }
+    50% { transform: translate(-50%, -50%) rotate(5deg); }
+    75% { transform: translate(-50%, -50%) rotate(-3deg); }
+    100% { transform: translate(-50%, -50%) rotate(0deg); }
+}
+
 /* Element Specific Animations */
 #gameContainer {
     animation: fadeIn 0.6s ease-out;
@@ -561,6 +650,10 @@ button:hover::after {
 
 .map-zoom-enter {
     animation: zoomIn 0.3s ease-out;
+}
+
+.shake-animation {
+    animation: shake 0.4s ease-in-out;
 }
 
 #loading-animation {

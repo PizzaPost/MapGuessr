@@ -457,6 +457,7 @@ function playAsHost() {
  */
 function showCustomAlert(message, mode = 0, cont = null) {
     if (document.getElementById('custom-alert')) return; // Prevent multiple alerts
+    // Handle container shake
     if (mode === 0) {
         if (cont === null) {
             cont = document.getElementById('gameContainer');
@@ -468,9 +469,15 @@ function showCustomAlert(message, mode = 0, cont = null) {
                     { transform: 'translateX(0)' },
                     { transform: 'translateX(-12px)' },
                     { transform: 'translateX(12px)' },
+                    { transform: 'translateX(0)' },
+                    { transform: 'translateX(-12px)' },
+                    { transform: 'translateX(12px)' },
+                    { transform: 'translateX(0)' },
+                    { transform: 'translateX(-12px)' },
+                    { transform: 'translateX(12px)' },
                     { transform: 'translateX(0)' }
                 ], {
-                    duration: 400,  // Total duration of the shake
+                    duration: 1200,  // Total duration of the shake
                     easing: 'ease-in-out',
                     iterations: 1  // Runs only once
                 });
@@ -480,9 +487,15 @@ function showCustomAlert(message, mode = 0, cont = null) {
                 { transform: 'translateX(0)' },
                 { transform: 'translateX(-12px)' },
                 { transform: 'translateX(12px)' },
+                { transform: 'translateX(0)' },
+                { transform: 'translateX(-12px)' },
+                { transform: 'translateX(12px)' },
+                { transform: 'translateX(0)' },
+                { transform: 'translateX(-12px)' },
+                { transform: 'translateX(12px)' },
                 { transform: 'translateX(0)' }
             ], {
-                duration: 400,  // Total duration of the shake
+                duration: 1200,  // Total duration of the shake
                 easing: 'ease-in-out',
                 iterations: 1  // Runs only once
             });
@@ -491,79 +504,29 @@ function showCustomAlert(message, mode = 0, cont = null) {
 
     // Create overlay to block interactions
     const overlay = document.createElement('div');
-    overlay.style.position = 'fixed';
-    overlay.style.top = '0';
-    overlay.style.left = '0';
-    overlay.style.width = '100vw';
-    overlay.style.height = '100vh';
-    overlay.style.background = 'rgba(0, 0, 0, 0)';
-    overlay.style.zIndex = '999';
-    overlay.style.pointerEvents = 'auto'; // Blocks interactions
-    document.body.appendChild(overlay);
+    overlay.className = 'custom-alert-overlay';
 
     // Create the alert box
     const alertBox = document.createElement('div');
-    alertBox.id = 'custom-alert'; // Unique ID to prevent duplicates
-    alertBox.innerText = message;
-    alertBox.style.position = 'fixed';
-    alertBox.style.top = '50%';
-    alertBox.style.left = '50%';
-    alertBox.style.transform = 'translate(-50%, -50%)';
-    alertBox.style.opacity = '1';
-    alertBox.style.background = 'rgb(40, 40, 40)';
-    alertBox.style.color = 'white';
-    alertBox.style.padding = '20px';
-    alertBox.style.boxShadow = '0 0 10px rgba(0, 0, 0, 0.3)';
-    alertBox.style.zIndex = '1001';
-    alertBox.style.borderRadius = '8px';
-    alertBox.style.textAlign = 'center';
+    alertBox.id = 'custom-alert';
+    alertBox.className = `custom-alert ${mode === 0 ? 'error' : 'success'}`;
+    alertBox.textContent = message;
 
     // Create the close button
     const closeButton = document.createElement('button');
-    closeButton.innerText = 'OK';
-    closeButton.style.marginTop = '10px';
-    closeButton.style.padding = '5px 10px';
-    closeButton.style.border = 'none';
-    closeButton.style.color = 'white';
-    closeButton.style.cursor = 'pointer';
-    closeButton.style.borderRadius = '4px';
-
-    // Slide-in animation
-    alertBox.animate([
-        { transform: 'translate(-50%, 100%)' },
-        { transform: 'translate(-50%, -50%)' }
-    ], {
-        duration: 300,
-        easing: 'ease-out',
-        fill: 'forwards'
-    });
-
-    if (mode === 0) {
-        alertBox.style.border = '2px solid red';
-        closeButton.style.background = 'red';
-    } else {
-        alertBox.style.border = '2px solid green';
-        closeButton.style.background = 'green';
-    }
+    closeButton.className = 'custom-alert-close';
+    closeButton.textContent = 'OK';
 
     function closeAlert() {
-        document.removeEventListener('keydown', keyHandler);
-        overlay.onclick = null;
-        closeButton.onclick = null;
-
-        // Shrink and fade out animation
-        const exitAnim = alertBox.animate([
-            { transform: 'translate(-50%, -50%) scale(1)', opacity: 1 },
-            { transform: 'translate(-50%, -50%) scale(0.8)', opacity: 0 }
-        ], {
-            duration: 200,
-            easing: 'ease-in'
-        });
-
-        exitAnim.onfinish = () => {
+        alertBox.style.animation = 'shrinkOut 0.2s ease-in forwards';
+        overlay.style.opacity = '0';
+        overlay.style.transition = 'opacity 0.2s ease-in';
+        
+        alertBox.addEventListener('animationend', () => {
             alertBox.remove();
             overlay.remove();
-        };
+            document.removeEventListener('keydown', keyHandler);
+        }, { once: true });
     }
 
     closeButton.onclick = closeAlert;
@@ -579,7 +542,7 @@ function showCustomAlert(message, mode = 0, cont = null) {
     document.addEventListener('keydown', keyHandler);
 
     alertBox.appendChild(closeButton);
-    document.body.appendChild(alertBox);
+    document.body.append(overlay, alertBox);
     closeButton.focus(); // Focus on button so Enter works immediately
 }
 
