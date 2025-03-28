@@ -97,13 +97,13 @@ function getPlayerNames(players) {
     players.sort((a, b) => b.totalScore - a.totalScore);
     let rank = 1;
     let prevScore = null;
-    
+
     players.forEach((player, index) => {
         if (prevScore !== null && player.totalScore < prevScore) {
             rank = index + 1;
         }
         prevScore = player.totalScore;
-        
+
         let color, glow;
         if (rank === 1) {
             color = '#FFD700'; // gold
@@ -118,7 +118,7 @@ function getPlayerNames(players) {
             color = 'white';
             glow = 'none';
         }
-        
+
         result += `<span style="color:${color}; text-shadow: ${glow};">${player.name} (${player.score.toFixed(0)} / ${player.totalScore.toFixed(0)})</span><br>`;
     });
     return result;
@@ -545,7 +545,7 @@ function showCustomAlert(message, mode = 0, cont = null) {
         alertBox.style.animation = 'shrinkOut 0.2s ease-in forwards';
         overlay.style.opacity = '0';
         overlay.style.transition = 'opacity 0.2s ease-in';
-        
+
         alertBox.addEventListener('animationend', () => {
             alertBox.remove();
             overlay.remove();
@@ -914,6 +914,11 @@ function createMoreButton() {
     };
 
     menuButton.addEventListener('click', (event) => {
+        //if the button is collapsed do nothing
+        if (event.target.id === 'textButton') {
+            return;
+        }
+        //option actions
         if (event.target.id === 'themeEmoji') {
             const currentTheme = document.body.getAttribute('data-theme');
             if (currentTheme === 'dark') {
@@ -1001,11 +1006,11 @@ function startGame(gameArea) {
             const first = children[i * 2];
             const second = children[i * 2 + 1];
             const blur = Math.max(0, 1.7 * (i ** 2) - 7.9 * i + 10); //When the first photo is guessed and appears in the history, it
-                                                                     //immediately has the strongest blur effect instead of the lowest.
-                                                                     //After the second photo becomes the newest in the history, it has
-                                                                     //a medium blur strength, and the oldest still has the strongest.
-                                                                     //However, the oldest one should have the medium blur strength, and the
-                                                                     //newest should have the lowest. After the next guess is everything correct.
+            //immediately has the strongest blur effect instead of the lowest.
+            //After the second photo becomes the newest in the history, it has
+            //a medium blur strength, and the oldest still has the strongest.
+            //However, the oldest one should have the medium blur strength, and the
+            //newest should have the lowest. After the next guess is everything correct.
             first.style.filter = `blur(${blur}px)`;
             second.style.filter = `blur(${blur}px)`;
             second.style.transform = 'scale(1)';
