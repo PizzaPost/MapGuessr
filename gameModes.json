@@ -1720,46 +1720,44 @@
                         ]
                     ]
                 },
-                "Propulsion Flings": {
-                    "0": [
-                        "images/portal_series/portal2/chapter7/propulsion_flings/maps/0.png",
+                "Propulsion Flings": [
+                    "images/portal_series/portal2/chapter7/propulsion_flings/maps/0.png",
+                    [
+                        "images/portal_series/portal2/chapter7/propulsion_flings/0.png",
                         [
-                            "images/portal_series/portal2/chapter7/propulsion_flings/0.png",
-                            [
-                                0.43140292000502084,
-                                0.8558574723091095
-                            ]
-                        ],
+                            0.43140292000502084,
+                            0.8558574723091095
+                        ]
+                    ],
+                    [
+                        "images/portal_series/portal2/chapter7/propulsion_flings/1.png",
                         [
-                            "images/portal_series/portal2/chapter7/propulsion_flings/1.png",
-                            [
-                                0.23709175928277618,
-                                0.43218635742347256
-                            ]
-                        ],
+                            0.23709175928277618,
+                            0.43218635742347256
+                        ]
+                    ],
+                    [
+                        "images/portal_series/portal2/chapter7/propulsion_flings/2.png",
                         [
-                            "images/portal_series/portal2/chapter7/propulsion_flings/2.png",
-                            [
-                                0.560271882637919,
-                                0.32285638217649026
-                            ]
-                        ],
+                            0.560271882637919,
+                            0.32285638217649026
+                        ]
+                    ],
+                    [
+                        "images/portal_series/portal2/chapter7/propulsion_flings/3.png",
                         [
-                            "images/portal_series/portal2/chapter7/propulsion_flings/3.png",
-                            [
-                                0.599083804338338,
-                                0.29323974340260217
-                            ]
-                        ],
+                            0.599083804338338,
+                            0.29323974340260217
+                        ]
+                    ],
+                    [
+                        "images/portal_series/portal2/chapter7/propulsion_flings/4.png",
                         [
-                            "images/portal_series/portal2/chapter7/propulsion_flings/4.png",
-                            [
-                                0.4869631475432474,
-                                0.06298401335179322
-                            ]
+                            0.4869631475432474,
+                            0.06298401335179322
                         ]
                     ]
-                },
+                ],
                 "Conversion Intro": {
                     "0": [
                         "images/portal_series/portal2/chapter7/conversion_intro/maps/0.png",
