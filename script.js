@@ -94,8 +94,32 @@ async function loadGameModes() {
 
 function getPlayerNames(players) {
     let result = '';
-    players.sort((a, b) => b.totalScore - a.totalScore).forEach(player => {
-        result += `\n${player.name} (${player.score.toFixed(0)} / ${player.totalScore.toFixed(0)})`;
+    players.sort((a, b) => b.totalScore - a.totalScore);
+    let rank = 1;
+    let prevScore = null;
+    
+    players.forEach((player, index) => {
+        if (prevScore !== null && player.totalScore < prevScore) {
+            rank = index + 1;
+        }
+        prevScore = player.totalScore;
+        
+        let color, glow;
+        if (rank === 1) {
+            color = '#FFD700'; // gold
+            glow = '0 0 5px rgba(255, 217, 0, 0.6), 0 0 6px rgba(255, 217, 0, 0.6), 0 0 7px rgba(255, 217, 0, 0.6)'; // big glow
+        } else if (rank === 2) {
+            color = '#C0C0C0'; // silver
+            glow = '0 0 5px rgba(192, 192, 192, 0.7), 0 0 6px rgba(192, 192, 192, 0.7)'; // medium glow
+        } else if (rank === 3) {
+            color = '#cd7f32'; // bronze
+            glow = '0 0 5px rgb(205, 128, 50)'; // small glow
+        } else {
+            color = 'white';
+            glow = 'none';
+        }
+        
+        result += `<span style="color:${color}; text-shadow: ${glow};">${player.name} (${player.score.toFixed(0)} / ${player.totalScore.toFixed(0)})</span><br>`;
     });
     return result;
 }
@@ -372,7 +396,7 @@ function playAsMember() {
                     startGame(JSON.parse(doc.data().gameArea));
                 } else {
                     const playerNames = getPlayerNames(doc.data().players);
-                    playerListText.innerText = `Players: ${playerNames}`;
+                    playerListText.innerHTML = `Players: <br>${getPlayerNames(doc.data().players || [])}`;
                     document.body.appendChild(playerListDiv);
                 }
                 if (reload) {
@@ -393,7 +417,7 @@ function playAsHost() {
         }
         const players = doc.data().players || [];
         const playerNames = getPlayerNames(players);
-        playerListText.innerText = `Players: ${playerNames}`;
+        playerListText.innerHTML = `Players: <br>${getPlayerNames(doc.data().players || [])}`;
         document.body.appendChild(playerListDiv);
     });
     const closeLobbyButton = document.createElement('button');
