@@ -509,6 +509,7 @@ function showCustomAlert(message, mode = 0, cont = null) {
     alertBox.style.top = '50%';
     alertBox.style.left = '50%';
     alertBox.style.transform = 'translate(-50%, -50%)';
+    alertBox.style.opacity = '1';
     alertBox.style.background = 'rgb(40, 40, 40)';
     alertBox.style.color = 'white';
     alertBox.style.padding = '20px';
@@ -527,6 +528,16 @@ function showCustomAlert(message, mode = 0, cont = null) {
     closeButton.style.cursor = 'pointer';
     closeButton.style.borderRadius = '4px';
 
+    // Slide-in animation
+    alertBox.animate([
+        { transform: 'translate(-50%, 100%)' },
+        { transform: 'translate(-50%, -50%)' }
+    ], {
+        duration: 300,
+        easing: 'ease-out',
+        fill: 'forwards'
+    });
+
     if (mode === 0) {
         alertBox.style.border = '2px solid red';
         closeButton.style.background = 'red';
@@ -536,9 +547,23 @@ function showCustomAlert(message, mode = 0, cont = null) {
     }
 
     function closeAlert() {
-        alertBox.remove();
-        overlay.remove();
-        document.removeEventListener('keydown', keyHandler); // Remove key listener
+        document.removeEventListener('keydown', keyHandler);
+        overlay.onclick = null;
+        closeButton.onclick = null;
+
+        // Shrink and fade out animation
+        const exitAnim = alertBox.animate([
+            { transform: 'translate(-50%, -50%) scale(1)', opacity: 1 },
+            { transform: 'translate(-50%, -50%) scale(0.8)', opacity: 0 }
+        ], {
+            duration: 200,
+            easing: 'ease-in'
+        });
+
+        exitAnim.onfinish = () => {
+            alertBox.remove();
+            overlay.remove();
+        };
     }
 
     closeButton.onclick = closeAlert;
