@@ -882,6 +882,7 @@ function showCreditMenu() {
 function attachTooltip(el, text) {
     el.addEventListener("mouseenter", e => {
         tooltip = document.createElement("div");
+        tooltip.id='tooltip'
         tooltip.textContent = text;
         tooltip.classList.add("tooltip");
         document.body.appendChild(tooltip);

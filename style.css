@@ -732,6 +732,8 @@ button:hover::after {
 body,
 #gameModeSelector,
 #gameContainer,
-#mapSelector {
+#mapSelector,
+#tooltip,
+#custom-alert {
     transition: background 1s ease, color 1s ease, border 1s ease, box-shadow 1s ease;
 }
