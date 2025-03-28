@@ -222,6 +222,16 @@ body {
     background: linear-gradient(135deg, #28a745, #1e7e34);
 }
 
+.tooltip {
+    position: absolute;
+    background: var(--bg-gradient);
+    border: 2px solid gray;
+    border-radius: 8px;
+    padding: 5px;
+    color: var(--text-color);
+    z-index: 1000;
+}
+
 input[type="checkbox"] {
     margin-left: 8px;
 }

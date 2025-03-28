@@ -15,15 +15,17 @@ let currentFilterModeIndex = -1;
 let showHistory = localStorage.getItem('showHistory') !== 'false';
 let history = [];
 let invertSelection = false;
+let tooltip;
 const toggleHistory = document.createElement('span');
-if (showHistory) {
-    toggleHistory.classList.add('disabled');
-}
 
 let devMode = -1;
 let altDevMode = 0;
 
 let loadingDiv;
+
+if (showHistory) {
+    toggleHistory.classList.add('disabled');
+}
 
 // Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
@@ -877,6 +879,29 @@ function showCreditMenu() {
     closeButton.focus(); // Focus on button so Enter works immediately
 }
 
+function attachTooltip(el, text) {
+    el.addEventListener("mouseenter", e => {
+        tooltip = document.createElement("div");
+        tooltip.textContent = text;
+        tooltip.classList.add("tooltip");
+        document.body.appendChild(tooltip);
+        tooltip.style.left = e.pageX - tooltip.offsetWidth - 20 + "px";
+        tooltip.style.top = e.pageY + "px";
+    });
+    el.addEventListener("mousemove", e => {
+        if (tooltip) {
+            tooltip.style.left = e.pageX - tooltip.offsetWidth - 20 + "px";
+            tooltip.style.top = e.pageY - 10 + "px";
+            document.body.appendChild(tooltip);
+        }
+    });
+    el.addEventListener("mouseleave", () => {
+        if (tooltip) {
+            document.body.removeChild(tooltip); tooltip = null;
+        }
+    });
+}
+
 // Menu button functionality
 function createMoreButton() {
     const menuButton = document.createElement('button');
@@ -899,8 +924,15 @@ function createMoreButton() {
     toggleSelection.id = 'toggleSelection';
     toggleSelection.textContent = '🔄️';
 
+    
+    const toggleHistory = document.createElement('span');
     toggleHistory.id = 'toggleHistory';
     toggleHistory.textContent = '🖼️';
+
+    attachTooltip(infoLink, "Credits");
+    attachTooltip(themeEmoji, "Switch between Dark/Light mode");
+    attachTooltip(toggleSelection, "Toggle the Checkboxes in Map Selection");
+    attachTooltip(toggleHistory, "Toggle the map History in the Game");
 
     menuButton.appendChild(textSpan);
     menuButton.appendChild(infoLink);
@@ -915,7 +947,7 @@ function createMoreButton() {
 
     menuButton.addEventListener('click', (event) => {
         //stop running actions on collapsed button (mobile issue)
-        if (menuButton.getBoundingClientRect().height === 40) return;        
+        if (menuButton.getBoundingClientRect().height === 40) return;
         //option actions
         if (event.target.id === 'themeEmoji') {
             const currentTheme = document.body.getAttribute('data-theme');
