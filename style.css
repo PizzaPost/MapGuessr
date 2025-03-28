@@ -88,6 +88,18 @@ body {
     overflow: hidden;
 }
 
+.deepFried {
+    filter: saturate(5);
+}
+
+.extraCrispy {
+    filter: contrast(5) saturate(3);
+}
+
+.burnt {
+    filter: contrast(100) saturate(100) grayscale(1) url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter%20id='filter'%3E%3CfeComponentTransfer%20in='SourceGraphic'%3E%3E%3Canimate%20attributeName='intercept'%20values='0;1;0'%20dur='2s'%20repeatCount='indefinite'%20/%3E%3C/feComponentTransfer%3E%3C/filter%3E%3C/svg%3E#filter");
+}
+
 /* Text Styling */
 #selectedPath {
     font-size: 1.2rem;

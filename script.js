@@ -10,7 +10,10 @@ let isHost = false;
 let syncRandomImage = "";
 let syncActualMap = "";
 let reload = false;
+let filterModes = ['deepFried', 'extraCrispy', 'burnt'];
+let currentFilterModeIndex = -1;
 let showHistory = localStorage.getItem('showHistory') !== 'false';
+let history = [];
 let invertSelection = false;
 const toggleHistory = document.createElement('span');
 if (showHistory) {
@@ -980,9 +983,10 @@ function startGame(gameArea) {
         for (let i = 0; i < children.length / 2; i++) {
             const first = children[i * 2];
             const second = children[i * 2 + 1];
-            const blur = Math.max(0, 6 - (i * 2));
+            const blur = Math.max(0, 1.7 * (i ** 2) - 7.9 * i + 10);
             first.style.filter = `blur(${blur}px)`;
             second.style.filter = `blur(${blur}px)`;
+            second.style.transform = 'scale(1)';
             second.onwheel = null;
         }
     }
@@ -1002,7 +1006,13 @@ function startGame(gameArea) {
         return result;
     }
 
-    const possibleImages = collectLists(gameArea);
+    let possibleImages = collectLists(gameArea);
+
+    possibleImages = possibleImages.filter(list => !history.includes(list[0]));
+    if (possibleImages.length === 0) {
+        history.splice(0, Math.ceil(history.length * 0.5));
+        possibleImages = collectLists(gameArea).filter(list => !history.includes(list[0]));
+    }
 
     let actualMap = null;
 
@@ -1044,7 +1054,7 @@ function startGame(gameArea) {
                 if (Array.isArray(gameArea)) {
                     actualMap = gameArea[0];
                     syncActualMap = actualMap;
-                    const possibleImage = gameArea[1 + Math.floor(Math.random() * (gameArea.length - 1))];
+                    const possibleImage = possibleImages[Math.floor(Math.random() * (possibleImages.length - 1))];
                     [imagePath, solution] = possibleImage;
                     syncRandomImage = JSON.stringify(possibleImage);
                 } else {
@@ -1060,7 +1070,7 @@ function startGame(gameArea) {
             }
         } else if (Array.isArray(gameArea)) {
             actualMap = gameArea[0];
-            [imagePath, solution] = gameArea[1 + Math.floor(Math.random() * (gameArea.length - 1))];
+            [imagePath, solution] = possibleImages[Math.floor(Math.random() * (possibleImages.length - 1))];
         } else {
             const randomNumber = Math.floor(Math.random() * possibleImages.length);
             const possibleImage = possibleImages[randomNumber][1 + Math.floor(Math.random() * (possibleImages[randomNumber].length - 1))];
@@ -1070,7 +1080,21 @@ function startGame(gameArea) {
         }
     }
 
+    history.push(imagePath);
+
     const randomImage = document.createElement('img');
+    if (currentFilterModeIndex >= 0) {
+        randomImage.classList.remove(...filterModes);
+        randomImage.classList.add(filterModes[currentFilterModeIndex]);
+    }
+    randomImage.onclick = () => {
+        currentFilterModeIndex += 1;
+        if (currentFilterModeIndex >= filterModes.length) {
+            currentFilterModeIndex = -1;
+        }
+        randomImage.classList.remove(...filterModes);
+        randomImage.classList.add(filterModes[currentFilterModeIndex]);
+    };
     randomImage.style.width = "100%";
     randomImage.src = imagePath;
     imagesWrapper.appendChild(randomImage);
