@@ -919,9 +919,14 @@ function createMoreButton() {
         if (event.target.id === 'toggleHistory') {
             showHistory = !showHistory;
             localStorage.setItem('showHistory', showHistory);
-            if (showHistory) toggleHistory.classList.add('disabled');
-            else toggleHistory.classList.remove('disabled');
-            showCustomAlert('History toggled\nIt will update after you click "continue".', 1);
+            if (showHistory) {
+                toggleHistory.classList.add('disabled');
+                showCustomAlert('History disabled\nIt will update after you click "continue".', 1);
+            }
+            else {
+                toggleHistory.classList.remove('disabled');
+                showCustomAlert('History enabled\nIt will update after you click "continue".', 1);
+            }
         }
         if (event.target.id === 'toggleSelection') {
             invertSelection = !invertSelection;
