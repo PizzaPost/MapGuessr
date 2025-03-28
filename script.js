@@ -914,10 +914,8 @@ function createMoreButton() {
     };
 
     menuButton.addEventListener('click', (event) => {
-        //if the button is collapsed do nothing
-        if (event.target.id === 'textButton') {
-            return;
-        }
+        //stop running actions on collapsed button (mobile issue)
+        if (menuButton.getBoundingClientRect().height < 40) return;        
         //option actions
         if (event.target.id === 'themeEmoji') {
             const currentTheme = document.body.getAttribute('data-theme');
