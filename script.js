@@ -343,13 +343,13 @@ function playAsMember() {
     const claimHostButton = document.createElement('button');
     db.collection('lobbies').doc(lobbyName).onSnapshot(doc => {
         if (!doc.exists) {
-            showCustomAlert('Lobby no longer exists. The page will reload now.', undefined, [gameVersionDiv, playerListDiv, gameContainer], true);
+            showCustomAlert('Lobby no longer exists. The page will reload now.', undefined, [], true);
             return;
         }
         const players = doc.data().players || [];
         const userInLobby = players.find(player => player.uid === auth.currentUser.uid);
         if (!userInLobby) {
-            showCustomAlert('You have been kicked from this lobby. The page will reload now.', undefined, [gameVersionDiv, playerListDiv, gameContainer], true);
+            showCustomAlert('You have been kicked from this lobby. The page will reload now.', undefined, [], true);
             return;
         }
         setTimeout(() => {
@@ -428,7 +428,7 @@ function playAsHost() {
     gameVersionDiv.style.display = 'none';
     db.collection('lobbies').doc(lobbyName).onSnapshot(doc => {
         if (!doc.exists) {
-            showCustomAlert('Lobby no longer exists. The page will reload now.', undefined, [gameVersionDiv, playerListDiv, gameContainer], true);
+            showCustomAlert('Lobby no longer exists. The page will reload now.', undefined, [], true);
             return;
         }
         const players = doc.data().players || [];
@@ -489,7 +489,7 @@ function playAsHost() {
     });
 }
 
-function showCustomAlert(message, mode = 0, cont = null, reloadAfter = false) {
+function showCustomAlert(message, mode = 0, cont = null, reload = false) {
     if (document.getElementById('custom-alert')) return; // Prevent multiple alerts
     // Handle container shake
     if (mode === 0) {
@@ -551,7 +551,7 @@ function showCustomAlert(message, mode = 0, cont = null, reloadAfter = false) {
     closeButton.className = 'custom-alert-close';
     closeButton.textContent = 'OK';
 
-    function closeAlert(event) {
+    function closeAlert() {
         alertBox.style.animation = 'shrinkOut 0.2s ease-in forwards';
 
         alertBox.addEventListener('animationend', () => {
@@ -560,7 +560,7 @@ function showCustomAlert(message, mode = 0, cont = null, reloadAfter = false) {
             document.removeEventListener('keydown', keyHandler);
         }, { once: true });
 
-        if (reloadAfter) {
+        if (reload) {
             window.location.reload();
         }
     }
@@ -1120,7 +1120,7 @@ function startGame(gameArea) {
         if (isOnline) {
             if (!isHost) {
                 if (syncActualMap === "" || syncRandomImage === "") {
-                    showCustomAlert('No image or map received from the host.\nThis should not happen.\nWe will reload this page for you.\nRe-entering this lobby will fix this.', undefined, [gameVersionDiv, playerListDiv, gameContainer], true);
+                    showCustomAlert('No image or map received from the host.\nThis should not happen.\nWe will reload this page for you.\nRe-entering this lobby will fix this.', undefined, [], true);
                     return;
                 }
                 actualMap = syncActualMap;
