@@ -292,7 +292,8 @@ function joinLobby() {
                             host: isHost,
                             wantsHost: null,
                             score: 0,
-                            totalScore: 0
+                            totalScore: 0,
+                            totalPossibleScore: 0
                         });
                     }
                     doc.ref.update({ players: updatedPlayers });
