@@ -1,6 +1,7 @@
 let gameModes;
 
 let gameState = 0; // 0 => choose gamemode; 1 => startGame; 2 => selectMap
+let score = 0;
 let totalScore = 0;
 let totalPossibleScore = 0;
 const maxPoints = 5000;
@@ -1387,7 +1388,7 @@ function startGame(gameArea) {
                     const userY = parseFloat(marker.dataset.y);
                     const [solutionX, solutionY] = solution;
                     const distance = Math.sqrt(Math.pow(userX - solutionX, 2) + Math.pow(userY - solutionY, 2));
-                    const score = distance <= 0.01 ? maxPoints : Math.max(0, maxPoints - ((distance - 0.01) / (0.5 - 0.01)) * maxPoints);
+                    score = distance <= 0.01 ? maxPoints : Math.max(0, maxPoints - ((distance - 0.01) / (0.5 - 0.01)) * maxPoints);
 
                     if (Array.isArray(solution) && solution.length > 0) {
                         totalScore += score;
