@@ -1375,6 +1375,7 @@ function startGame(gameArea) {
                     gameContainer.appendChild(continueButton);
                 }
 
+                score = 0;
                 totalPossibleScore += maxPoints;
 
                 if (selectedMap === actualMap) {
