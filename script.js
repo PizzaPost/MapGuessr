@@ -1,6 +1,7 @@
 let gameModes;
 
 let gameState = 0; // 0 => choose gamemode; 1 => startGame; 2 => selectMap
+let score = 0;
 let totalScore = 0;
 let totalPossibleScore = 0;
 const maxPoints = 5000;
@@ -342,14 +343,14 @@ function playAsMember() {
     const claimHostButton = document.createElement('button');
     db.collection('lobbies').doc(lobbyName).onSnapshot(doc => {
         if (!doc.exists) {
-            showCustomAlert('Lobby no longer exists. The page will reload now.', undefined, [gameVersionDiv, playerListDiv, gameContainer]);
+            alert('Lobby no longer exists. The page will reload now.');
             window.location.reload();
             return;
         }
         const players = doc.data().players || [];
         const userInLobby = players.find(player => player.uid === auth.currentUser.uid);
         if (!userInLobby) {
-            showCustomAlert('You have been kicked from this lobby. The page will reload now.', undefined, [gameVersionDiv, playerListDiv, gameContainer]);
+            alert('You have been kicked from this lobby. The page will reload now.');
             window.location.reload();
             return;
         }
@@ -429,7 +430,7 @@ function playAsHost() {
     gameVersionDiv.style.display = 'none';
     db.collection('lobbies').doc(lobbyName).onSnapshot(doc => {
         if (!doc.exists) {
-            showCustomAlert('Lobby no longer exists. The page will reload now.', undefined, [gameVersionDiv, playerListDiv, gameContainer]);
+            alert('Lobby no longer exists. The page will reload now.');
             window.location.reload();
             return;
         }
@@ -1124,7 +1125,7 @@ function startGame(gameArea) {
         if (isOnline) {
             if (!isHost) {
                 if (syncActualMap === "" || syncRandomImage === "") {
-                    showCustomAlert('No image or map received from the host.\nThis should not happen.\nWe will reload this page for you.\nRe-entering this lobby will fix this.', undefined, [gameVersionDiv, playerListDiv, gameContainer]);
+                    alert('No image or map received from the host.\nThis should not happen.\nWe will reload this page for you.\nRe-entering this lobby will fix this.');
                     window.location.reload();
                     return;
                 }
@@ -1387,7 +1388,7 @@ function startGame(gameArea) {
                     const userY = parseFloat(marker.dataset.y);
                     const [solutionX, solutionY] = solution;
                     const distance = Math.sqrt(Math.pow(userX - solutionX, 2) + Math.pow(userY - solutionY, 2));
-                    const score = distance <= 0.01 ? maxPoints : Math.max(0, maxPoints - ((distance - 0.01) / (0.5 - 0.01)) * maxPoints);
+                    score = distance <= 0.01 ? maxPoints : Math.max(0, maxPoints - ((distance - 0.01) / (0.5 - 0.01)) * maxPoints);
 
                     if (Array.isArray(solution) && solution.length > 0) {
                         totalScore += score;
