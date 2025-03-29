@@ -1908,6 +1908,271 @@
                         ]
                     ]
                 }
+            },
+            "Chapter 8 - The Itch": {
+                "Test": {
+                    "0": [
+                        "images/portal_series/portal2/chapter8/test/maps/0.png",
+                        [
+                            "images/portal_series/portal2/chapter8/test/0.png",
+                            [
+                            ]
+                        ],
+                        [
+                            "images/portal_series/portal2/chapter8/test/4.png",
+                            [
+                            ]
+                        ]
+                    ],
+                    "1": [
+                        "images/portal_series/portal2/chapter8/test/maps/1.png",
+                        [
+                            "images/portal_series/portal2/chapter8/test/1.png",
+                            [
+                            ]
+                        ],
+                        [
+                            "images/portal_series/portal2/chapter8/test/2.png",
+                            [
+                            ]
+                        ],
+                        [
+                            "images/portal_series/portal2/chapter8/test/3.png",
+                            [
+                            ]
+                        ]
+                    ]
+                },
+                "Funnel Intro": [
+                    "images/portal_series/portal2/chapter8/funnel_intro/maps/0.png",
+                    [
+                        "images/portal_series/portal2/chapter8/funnel_intro/0.png",
+                        [
+                        ]
+                    ],
+                    [
+                        "images/portal_series/portal2/chapter8/funnel_intro/1.png",
+                        [
+                        ]
+                    ],
+                    [
+                        "images/portal_series/portal2/chapter8/funnel_intro/2.png",
+                        [
+                        ]
+                    ]
+                ],
+                "Ceiling Button": [
+                    "images/portal_series/portal2/chapter8/ceiling_button/maps/0.png",
+                    [
+                        "images/portal_series/portal2/chapter8/ceiling_button/0.png",
+                        [
+                        ]
+                    ],
+                    [
+                        "images/portal_series/portal2/chapter8/ceiling_button/1.png",
+                        [
+                        ]
+                    ],
+                    [
+                        "images/portal_series/portal2/chapter8/ceiling_button/2.png",
+                        [
+                        ]
+                    ]
+                ],
+                "Wall Button": [
+                    "images/portal_series/portal2/chapter8/wall_button/maps/0.png",
+                    [
+                        "images/portal_series/portal2/chapter8/wall_button/0.png",
+                        [
+                        ]
+                    ],
+                    [
+                        "images/portal_series/portal2/chapter8/wall_button/1.png",
+                        [
+                        ]
+                    ],
+                    [
+                        "images/portal_series/portal2/chapter8/wall_button/2.png",
+                        [
+                        ]
+                    ],
+                    [
+                        "images/portal_series/portal2/chapter8/wall_button/3.png",
+                        [
+                        ]
+                    ]
+                ],
+                "Polarity": [
+                    "images/portal_series/portal2/chapter8/polarity/maps/0.png",
+                    [
+                        "images/portal_series/portal2/chapter8/polarity/0.png",
+                        [
+                        ]
+                    ],
+                    [
+                        "images/portal_series/portal2/chapter8/polarity/1.png",
+                        [
+                        ]
+                    ]
+                ],
+                "Funnel Catch": [
+                    "images/portal_series/portal2/chapter8/funnel_catch/maps/0.png",
+                    [
+                        "images/portal_series/portal2/chapter8/funnel_catch/0.png",
+                        [
+                        ]
+                    ],
+                    [
+                        "images/portal_series/portal2/chapter8/funnel_catch/1.png",
+                        [
+                        ]
+                    ],
+                    [
+                        "images/portal_series/portal2/chapter8/funnel_catch/2.png",
+                        [
+                        ]
+                    ],
+                    [
+                        "images/portal_series/portal2/chapter8/funnel_catch/3.png",
+                        [
+                        ]
+                    ]
+                ],
+                "Stop The Box": [
+                    "images/portal_series/portal2/chapter8/stop_the_box/maps/0.png",
+                    [
+                        "images/portal_series/portal2/chapter8/stop_the_box/0.png",
+                        [
+                        ]
+                    ],
+                    [
+                        "images/portal_series/portal2/chapter8/stop_the_box/1.png",
+                        [
+                        ]
+                    ],
+                    [
+                        "images/portal_series/portal2/chapter8/stop_the_box/2.png",
+                        [
+                        ]
+                    ],
+                    [
+                        "images/portal_series/portal2/chapter8/stop_the_box/3.png",
+                        [
+                        ]
+                    ]
+                ],
+                "Laser Catapult": [
+                    "images/portal_series/portal2/chapter8/laser_catapult/maps/0.png",
+                    [
+                        "images/portal_series/portal2/chapter8/laser_catapult/0.png",
+                        [
+                        ]
+                    ],
+                    [
+                        "images/portal_series/portal2/chapter8/laser_catapult/1.png",
+                        [
+                        ]
+                    ],
+                    [
+                        "images/portal_series/portal2/chapter8/laser_catapult/2.png",
+                        [
+                        ]
+                    ]
+                ],
+                "Laser Platform": {
+                    "0": [
+                        "images/portal_series/portal2/chapter8/laser_platform/maps/0.png",
+                        [
+                            "images/portal_series/portal2/chapter8/laser_platform/0.png",
+                            [
+                            ]
+                        ],
+                        [
+                            "images/portal_series/portal2/chapter8/laser_platform/1.png",
+                            [
+                            ]
+                        ],
+                        [
+                            "images/portal_series/portal2/chapter8/laser_platform/2.png",
+                            [
+                            ]
+                        ]
+                    ],
+                    "1": [
+                        "images/portal_series/portal2/chapter8/laser_platform/maps/1.png",
+                        [
+                            "images/portal_series/portal2/chapter8/laser_platform/3.png",
+                            [
+                            ]
+                        ]
+                    ]
+                },
+                "Propulsion Catch": {
+                    "0": [
+                        "images/portal_series/portal2/chapter8/propulsion_catch/maps/0.png",
+                        [
+                            "images/portal_series/portal2/chapter8/propulsion_catch/0.png",
+                            [
+                            ]
+                        ],
+                        [
+                            "images/portal_series/portal2/chapter8/propulsion_catch/1.png",
+                            [
+                            ]
+                        ],
+                        [
+                            "images/portal_series/portal2/chapter8/propulsion_catch/3.png",
+                            [
+                            ]
+                        ],
+                        [
+                            "images/portal_series/portal2/chapter8/propulsion_catch/4.png",
+                            [
+                            ]
+                        ],
+                        [
+                            "images/portal_series/portal2/chapter8/propulsion_catch/5.png",
+                            [
+                            ]
+                        ]
+                    ],
+                    "1": [
+                        "images/portal_series/portal2/chapter8/test/maps/1.png",
+                        [
+                            "images/portal_series/portal2/chapter8/test/2.png",
+                            [
+                            ]
+                        ]
+                    ]
+                },
+                "Repulsion Polarity": {
+                    "0": [
+                        "images/portal_series/portal2/chapter8/repulsion_polarity/maps/0.png",
+                        [
+                            "images/portal_series/portal2/chapter8/repulsion_polarity/0.png",
+                            [
+                            ]
+                        ]
+                    ],
+                    "1": [
+                        "images/portal_series/portal2/chapter8/repulsion_polarity/maps/1.png",
+                        [
+                            "images/portal_series/portal2/chapter8/repulsion_polarity/1.png",
+                            [
+                            ]
+                        ],
+                        [
+                            "images/portal_series/portal2/chapter8/repulsion_polarity/2.png",
+                            [
+                            ]
+                        ],
+                        [
+                            "images/portal_series/portal2/chapter8/repulsion_polarity/3.png",
+                            [
+                            ]
+                        ]
+                    ]
+                }
             }
         }
     },
