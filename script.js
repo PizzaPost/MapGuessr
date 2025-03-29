@@ -343,15 +343,13 @@ function playAsMember() {
     const claimHostButton = document.createElement('button');
     db.collection('lobbies').doc(lobbyName).onSnapshot(doc => {
         if (!doc.exists) {
-            alert('Lobby no longer exists. The page will reload now.');
-            window.location.reload();
+            showCustomAlert('Lobby no longer exists. The page will reload now.', 0, undefined, 1);
             return;
         }
         const players = doc.data().players || [];
         const userInLobby = players.find(player => player.uid === auth.currentUser.uid);
         if (!userInLobby) {
-            alert('You have been kicked from this lobby. The page will reload now.');
-            window.location.reload();
+            showCustomAlert('You have been kicked from this lobby. The page will reload now.', 0, undefined, 1);
             return;
         }
         setTimeout(() => {
@@ -430,8 +428,7 @@ function playAsHost() {
     gameVersionDiv.style.display = 'none';
     db.collection('lobbies').doc(lobbyName).onSnapshot(doc => {
         if (!doc.exists) {
-            alert('Lobby no longer exists. The page will reload now.');
-            window.location.reload();
+            showCustomAlert('Lobby no longer exists. The page will reload now.', 0, undefined, 1);
             return;
         }
         const players = doc.data().players || [];
@@ -495,10 +492,11 @@ function playAsHost() {
 /**
  * Shows a custom alert box with a message and a close button. If mode is 0, the box will shake and have a red border, indicating an error. If mode is not 0, the box will have a green border.
  * @param {string} message The message to show in the alert box.
- * @param {number} mode The mode of the alert box. Only supports 0 for now.
+ * @param {number} mode The mode of the alert box. 0=red 1=green
  * @param {HTMLElement} cont The container element to shake if mode is 0. If not provided, the game container will be used.
+ * @param {number} cont 1=reload after click 0=do nothing
  */
-function showCustomAlert(message, mode = 0, cont = null) {
+function showCustomAlert(message, mode = 0, cont = null, reload=0) {
     if (document.getElementById('custom-alert')) return; // Prevent multiple alerts
     // Handle container shake
     if (mode === 0) {
@@ -560,15 +558,23 @@ function showCustomAlert(message, mode = 0, cont = null) {
     closeButton.className = 'custom-alert-close';
     closeButton.textContent = 'OK';
 
-    function closeAlert() {
+    function closeAlert(event) {
+        event.stopPropagation(); // Prevent event from bubbling up
+        event.preventDefault(); // Guard against default behavior (e.g., form submission)
+        console.log(2222)
         alertBox.style.animation = 'shrinkOut 0.2s ease-in forwards';
-
+    
         alertBox.addEventListener('animationend', () => {
             alertBox.remove();
             overlay.remove();
             document.removeEventListener('keydown', keyHandler);
+            if (reload === 1) {
+                location.reload();
+            }
         }, { once: true });
     }
+    
+    
 
     closeButton.onclick = closeAlert;
     overlay.onclick = closeAlert;
@@ -1125,8 +1131,7 @@ function startGame(gameArea) {
         if (isOnline) {
             if (!isHost) {
                 if (syncActualMap === "" || syncRandomImage === "") {
-                    alert('No image or map received from the host.\nThis should not happen.\nWe will reload this page for you.\nRe-entering this lobby will fix this.');
-                    window.location.reload();
+                    showCustomAlert('No image or map received from the host.\nThis should not happen.\nWe will reload this page for you.\nRe-entering this lobby will fix this.', 0, undefined, 1);
                     return;
                 }
                 actualMap = syncActualMap;
