@@ -989,7 +989,7 @@ function createMoreButton() {
         }
         if (event.target.id === 'toggleSelection') {
             invertSelection = !invertSelection;
-            showCustomAlert(`Selecting will now${invertSelection ? ' ' : ' not '}invert`, 1);
+            showCustomAlert(`Selecting will now${invertSelection ? ' ' : ' not '}invert`, 1); // TODO: I selected Portal 2 and Subnautica but it didn't invert
         }
     });
 
@@ -1047,12 +1047,12 @@ function startGame(gameArea) {
         for (let i = 0; i < children.length / 2; i++) {
             const first = children[i * 2];
             const second = children[i * 2 + 1];
-            const blur = Math.max(0, 1.7 * (i ** 2) - 7.9 * i + 10); //When the first photo is guessed and appears in the history, it
-            //immediately has the strongest blur effect instead of the lowest.
-            //After the second photo becomes the newest in the history, it has
-            //a medium blur strength, and the oldest still has the strongest.
-            //However, the oldest one should have the medium blur strength, and the
-            //newest should have the lowest. After the next guess is everything correct.
+            const blur = Math.max(0, 1.7 * (i ** 2) - 7.9 * i + 10); //TODO: When the first photo is guessed and appears in the history, it
+                                                                           //immediately has the strongest blur effect instead of the lowest.
+                                                                           //After the second photo becomes the newest in the history, it has
+                                                                           //a medium blur strength, and the oldest still has the strongest.
+                                                                           //However, the oldest one should have the medium blur strength, and the
+                                                                           //newest should have the lowest. After the next guess is everything correct.
             first.style.filter = `blur(${blur}px)`;
             second.style.filter = `blur(${blur}px)`;
             second.style.transform = 'scale(1)';
