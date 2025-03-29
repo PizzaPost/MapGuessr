@@ -19,7 +19,7 @@ let tooltip;
 const toggleHistory = document.createElement('span');
 
 let devSkip = false;
-let devMode = 0;
+let devMode = -1;
 let altDevMode = 0;
 
 let loadingDiv;
@@ -557,8 +557,6 @@ function showCustomAlert(message, mode = 0, cont = null) {
 
     function closeAlert() {
         alertBox.style.animation = 'shrinkOut 0.2s ease-in forwards';
-        overlay.style.opacity = '0';
-        overlay.style.transition = 'opacity 0.2s ease-in';
 
         alertBox.addEventListener('animationend', () => {
             alertBox.remove();
@@ -799,41 +797,23 @@ function showCreditMenu() {
     if (document.getElementById('credits')) return; // Prevent multiple menus
     // Create overlay to block interactions
     const overlay = document.createElement('div');
-    overlay.style.position = 'fixed';
-    overlay.style.top = '0';
-    overlay.style.left = '0';
-    overlay.style.width = '100vw';
-    overlay.style.height = '100vh';
-    overlay.style.background = 'rgba(0, 0, 0, 0)';
-    overlay.style.zIndex = '999';
-    overlay.style.pointerEvents = 'auto'; // Blocks interactions
+    overlay.className = 'credit-overlay';
     document.body.appendChild(overlay);
 
     // Create the alert box
     const creditBox = document.createElement('div');
-    creditBox.id = 'credits'; // Unique ID to prevent duplicates
+    creditBox.id = 'credits';
     creditBox.innerHTML = `
-    <style>
-      #credits a {
-        color: Blue;
-        text-decoration: none;
-      }
-      #credits a:active {
-        color: RoyalBlue;
-      }
-    </style>
     <h2 style="text-align: center; font-weight: bold;">CREDITS</h2>
     <div style="display: flex; flex-direction: column; align-items: start; font-size: 18px;">
         <div>
             <strong>Programmer:</strong> 
             <a href="https://github.com/MoCoXIII/MapGuessr" target="_blank"><u>MoCoXIII</u></a><br>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <a href="https://github.com/PizzaPost/MapGuessr" target="_blank"><u>PizzaPost</u></a>
         </div>
         <div>
             <strong>Mapper:</strong> 
             <a href="https://github.com/PizzaPost/MapGuessr" target="_blank"><u>PizzaPost</u></a><br>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
             <a href="https://github.com/MoCoXIII/MapGuessr" target="_blank"><u>MoCoXIII</u></a>
         </div>
         <div><strong>Designer:</strong> 
@@ -844,34 +824,18 @@ function showCreditMenu() {
         </div>
     </div>
     `;
-    creditBox.style.position = 'fixed';
-    creditBox.style.top = '50%';
-    creditBox.style.left = '50%';
-    creditBox.style.transform = 'translate(-50%, -50%)';
-    creditBox.style.background = 'rgb(40, 40, 40)';
-    creditBox.style.color = 'white';
-    creditBox.style.padding = '20px';
-    creditBox.style.boxShadow = '0 0 10px rgba(0, 0, 0, 0.3)';
-    creditBox.style.zIndex = '1001';
-    creditBox.style.borderRadius = '8px';
-    creditBox.style.textAlign = 'center';
-    creditBox.style.border = '2px solid gray';
 
     // Create the close button
     const closeButton = document.createElement('button');
     closeButton.innerText = 'OK';
-    closeButton.style.marginTop = '10px';
-    closeButton.style.padding = '5px 10px';
-    closeButton.style.border = 'none';
-    closeButton.style.color = 'white';
-    closeButton.style.cursor = 'pointer';
-    closeButton.style.borderRadius = '4px';
-    closeButton.style.background = 'gray';
 
     function closeCredits() {
-        creditBox.remove();
-        overlay.remove();
-        document.removeEventListener('keydown', keyHandler); // Remove key listener
+        creditBox.style.animation = 'shrinkOut 0.2s ease-in forwards';
+        creditBox.addEventListener('animationend', () => {
+            creditBox.remove();
+            overlay.remove();
+            document.removeEventListener('keydown', keyHandler);
+        }, { once: true });
     }
 
     closeButton.onclick = closeCredits;
@@ -883,13 +847,13 @@ function showCreditMenu() {
             closeCredits();
         }
     }
-
     document.addEventListener('keydown', keyHandler);
 
     creditBox.appendChild(closeButton);
     document.body.appendChild(creditBox);
     closeButton.focus(); // Focus on button so Enter works immediately
 }
+
 
 function attachTooltip(el, text) {
     el.addEventListener("mouseenter", e => {

@@ -1915,12 +1915,12 @@
                         "images/portal_series/portal2/chapter8/test/maps/0.png",
                         [
                             "images/portal_series/portal2/chapter8/test/0.png",
-                            [
+                            [ 0.5009942151333784, 0.3082641878927702
                             ]
                         ],
                         [
                             "images/portal_series/portal2/chapter8/test/4.png",
-                            [
+                            [ 0.5708387911830406, 0.5840082638833396
                             ]
                         ]
                     ],
@@ -1928,17 +1928,17 @@
                         "images/portal_series/portal2/chapter8/test/maps/1.png",
                         [
                             "images/portal_series/portal2/chapter8/test/1.png",
-                            [
+                            [ 0.6561027958533673, 0.4132310919044556
                             ]
                         ],
                         [
                             "images/portal_series/portal2/chapter8/test/2.png",
-                            [
+                            [ 0.41580467430032353, 0.329928812687402
                             ]
                         ],
                         [
                             "images/portal_series/portal2/chapter8/test/3.png",
-                            [
+                            [0.39946292472285266, 0.6572435659625233
                             ]
                         ]
                     ]
@@ -1947,17 +1947,17 @@
                     "images/portal_series/portal2/chapter8/funnel_intro/maps/0.png",
                     [
                         "images/portal_series/portal2/chapter8/funnel_intro/0.png",
-                        [
+                        [ 0.5758553513556913, 0.7270853829747963
                         ]
                     ],
                     [
                         "images/portal_series/portal2/chapter8/funnel_intro/1.png",
-                        [
+                        [ 0.33277228835014744, 0.6519914319050832
                         ]
                     ],
                     [
                         "images/portal_series/portal2/chapter8/funnel_intro/2.png",
-                        [
+                        [ 0.3441295546558704, 0.19289248962614505
                         ]
                     ]
                 ],
@@ -1965,17 +1965,17 @@
                     "images/portal_series/portal2/chapter8/ceiling_button/maps/0.png",
                     [
                         "images/portal_series/portal2/chapter8/ceiling_button/0.png",
-                        [
+                        [ 0.5536109506512359, 0.22840785792817908
                         ]
                     ],
                     [
                         "images/portal_series/portal2/chapter8/ceiling_button/1.png",
-                        [
+                        [0.32510122693019355, 0.7598140387328762
                         ]
                     ],
                     [
                         "images/portal_series/portal2/chapter8/ceiling_button/2.png",
-                        [
+                        [ 0.8622065864593876, 0.2563461296846885
                         ]
                     ]
                 ],
@@ -1983,22 +1983,22 @@
                     "images/portal_series/portal2/chapter8/wall_button/maps/0.png",
                     [
                         "images/portal_series/portal2/chapter8/wall_button/0.png",
-                        [
+                        [0.7587044534412956, 0.24903282752403846
                         ]
                     ],
                     [
                         "images/portal_series/portal2/chapter8/wall_button/1.png",
-                        [
+                        [ 0.5258335964403041, 0.7578212998833782
                         ]
                     ],
                     [
                         "images/portal_series/portal2/chapter8/wall_button/2.png",
-                        [
+                        [ 0.44614059554131447, 0.7099291252489853
                         ]
                     ],
                     [
                         "images/portal_series/portal2/chapter8/wall_button/3.png",
-                        [
+                        [ 0.5945119280818314, 0.4370862687443331
                         ]
                     ]
                 ],
@@ -2006,12 +2006,12 @@
                     "images/portal_series/portal2/chapter8/polarity/maps/0.png",
                     [
                         "images/portal_series/portal2/chapter8/polarity/0.png",
-                        [
+                        [0.5513313253211544, 0.3697278222105495
                         ]
                     ],
                     [
                         "images/portal_series/portal2/chapter8/polarity/1.png",
-                        [
+                        [0.23690750784371378, 0.6232309565721337
                         ]
                     ]
                 ],
@@ -2019,22 +2019,22 @@
                     "images/portal_series/portal2/chapter8/funnel_catch/maps/0.png",
                     [
                         "images/portal_series/portal2/chapter8/funnel_catch/0.png",
-                        [
+                        [ 0.7393606025480738, 0.3936728092200119
                         ]
                     ],
                     [
                         "images/portal_series/portal2/chapter8/funnel_catch/1.png",
-                        [
+                        [0.3291292467814049, 0.3960787071814581
                         ]
                     ],
                     [
                         "images/portal_series/portal2/chapter8/funnel_catch/2.png",
-                        [
+                        [ 0.32154882154882153, 0.42198723321588755
                         ]
                     ],
                     [
                         "images/portal_series/portal2/chapter8/funnel_catch/3.png",
-                        [
+                        [ 0.38218992854529715, 0.8320863153476084
                         ]
                     ]
                 ],
@@ -2042,22 +2042,22 @@
                     "images/portal_series/portal2/chapter8/stop_the_box/maps/0.png",
                     [
                         "images/portal_series/portal2/chapter8/stop_the_box/0.png",
-                        [
+                        [ 0.4338755325326641, 0.6947181056612175
                         ]
                     ],
                     [
                         "images/portal_series/portal2/chapter8/stop_the_box/1.png",
-                        [
+                        [0.27183532722076154, 0.5830268973987941
                         ]
                     ],
                     [
                         "images/portal_series/portal2/chapter8/stop_the_box/2.png",
-                        [
+                        [0.8063535051887619, 0.5332047278965873
                         ]
                     ],
                     [
                         "images/portal_series/portal2/chapter8/stop_the_box/3.png",
-                        [
+                        [ 0.5999021503036502, 0.6361204966542828
                         ]
                     ]
                 ],
@@ -2065,17 +2065,17 @@
                     "images/portal_series/portal2/chapter8/laser_catapult/maps/0.png",
                     [
                         "images/portal_series/portal2/chapter8/laser_catapult/0.png",
-                        [
+                        [0.5835217622192532, 0.5822165512322166
                         ]
                     ],
                     [
                         "images/portal_series/portal2/chapter8/laser_catapult/1.png",
-                        [
+                        [ 0.21450110801639838, 0.5078385826823392
                         ]
                     ],
                     [
                         "images/portal_series/portal2/chapter8/laser_catapult/2.png",
-                        [
+                        [ 0.7871588329020232, 0.42956632926739907
                         ]
                     ]
                 ],
@@ -2084,17 +2084,17 @@
                         "images/portal_series/portal2/chapter8/laser_platform/maps/0.png",
                         [
                             "images/portal_series/portal2/chapter8/laser_platform/0.png",
-                            [
+                            [ 0.7514927103061869, 0.5949920287743018
                             ]
                         ],
                         [
                             "images/portal_series/portal2/chapter8/laser_platform/1.png",
-                            [
+                            [ 0.3756211289998219, 0.34591285508212194
                             ]
                         ],
                         [
                             "images/portal_series/portal2/chapter8/laser_platform/2.png",
-                            [
+                            [0.3310215094709048, 0.3713944105295824
                             ]
                         ]
                     ],
@@ -2102,7 +2102,7 @@
                         "images/portal_series/portal2/chapter8/laser_platform/maps/1.png",
                         [
                             "images/portal_series/portal2/chapter8/laser_platform/3.png",
-                            [
+                            [0.5932014322469519, 0.5376070441136185
                             ]
                         ]
                     ]
@@ -2112,35 +2112,30 @@
                         "images/portal_series/portal2/chapter8/propulsion_catch/maps/0.png",
                         [
                             "images/portal_series/portal2/chapter8/propulsion_catch/0.png",
-                            [
+                            [ 0.5497062193955222, 0.601674196249885
                             ]
                         ],
                         [
                             "images/portal_series/portal2/chapter8/propulsion_catch/1.png",
-                            [
+                            [ 0.5163569176685878, 0.66485741863969
                             ]
                         ],
                         [
                             "images/portal_series/portal2/chapter8/propulsion_catch/3.png",
-                            [
+                            [ 0.7074138584077634, 0.5681411893339262
                             ]
                         ],
                         [
                             "images/portal_series/portal2/chapter8/propulsion_catch/4.png",
-                            [
-                            ]
-                        ],
-                        [
-                            "images/portal_series/portal2/chapter8/propulsion_catch/5.png",
-                            [
+                            [ 0.9080025838629054, 0.2845557441790895
                             ]
                         ]
                     ],
                     "1": [
-                        "images/portal_series/portal2/chapter8/test/maps/1.png",
+                        "images/portal_series/portal2/chapter8/propulsion_catch/maps/1.png",
                         [
-                            "images/portal_series/portal2/chapter8/test/2.png",
-                            [
+                            "images/portal_series/portal2/chapter8/propulsion_catch/2.png",
+                            [0.5046324768301026, 0.5955685681771994
                             ]
                         ]
                     ]
@@ -2150,7 +2145,7 @@
                         "images/portal_series/portal2/chapter8/repulsion_polarity/maps/0.png",
                         [
                             "images/portal_series/portal2/chapter8/repulsion_polarity/0.png",
-                            [
+                            [ 0.519361280738595, 0.5557989824914646
                             ]
                         ]
                     ],
@@ -2158,17 +2153,17 @@
                         "images/portal_series/portal2/chapter8/repulsion_polarity/maps/1.png",
                         [
                             "images/portal_series/portal2/chapter8/repulsion_polarity/1.png",
-                            [
+                            [0.22314379774185367, 0.5847167284105501
                             ]
                         ],
                         [
                             "images/portal_series/portal2/chapter8/repulsion_polarity/2.png",
-                            [
+                            [ 0.8455716982367318, 0.4947758628131148
                             ]
                         ],
                         [
                             "images/portal_series/portal2/chapter8/repulsion_polarity/3.png",
-                            [
+                            [ 0.75630631744471, 0.51115530541878
                             ]
                         ]
                     ]
