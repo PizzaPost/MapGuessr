@@ -1938,7 +1938,7 @@
                         ],
                         [
                             "images/portal_series/portal2/chapter8/test/3.png",
-                            [ 0.35234810527075583, 0.6752349738787887
+                            [0.39946292472285266, 0.6572435659625233
                             ]
                         ]
                     ]
@@ -1947,17 +1947,17 @@
                     "images/portal_series/portal2/chapter8/funnel_intro/maps/0.png",
                     [
                         "images/portal_series/portal2/chapter8/funnel_intro/0.png",
-                        [ 0.6048820713454032, 0.7556460147985667
+                        [ 0.5758553513556913, 0.7270853829747963
                         ]
                     ],
                     [
                         "images/portal_series/portal2/chapter8/funnel_intro/1.png",
-                        [ 0.21450957375124804, 0.6530050644969545
+                        [ 0.33277228835014744, 0.6519914319050832
                         ]
                     ],
                     [
                         "images/portal_series/portal2/chapter8/funnel_intro/2.png",
-                        [ 0.25247525117307695, 0.1982083893901388
+                        [ 0.3441295546558704, 0.19289248962614505
                         ]
                     ]
                 ],
@@ -1965,17 +1965,17 @@
                     "images/portal_series/portal2/chapter8/ceiling_button/maps/0.png",
                     [
                         "images/portal_series/portal2/chapter8/ceiling_button/0.png",
-                        [ 0.5795040670255336, 0.2257142857142857
+                        [ 0.5536109506512359, 0.22840785792817908
                         ]
                     ],
                     [
                         "images/portal_series/portal2/chapter8/ceiling_button/1.png",
-                        [0.2982857171958812, 0.8107142914506725
+                        [0.32510122693019355, 0.7598140387328762
                         ]
                     ],
                     [
                         "images/portal_series/portal2/chapter8/ceiling_button/2.png",
-                        [ 0.8549576345931057, 0.26242106740571547
+                        [ 0.8622065864593876, 0.2563461296846885
                         ]
                     ]
                 ],
@@ -1983,7 +1983,7 @@
                     "images/portal_series/portal2/chapter8/wall_button/maps/0.png",
                     [
                         "images/portal_series/portal2/chapter8/wall_button/0.png",
-                        [0.7580913255981535, 0.25050221617091306
+                        [0.7587044534412956, 0.24903282752403846
                         ]
                     ],
                     [
