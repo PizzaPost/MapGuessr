@@ -15,7 +15,7 @@ let reload = false;
 let filterModes = ['deepFried', 'extraCrispy', 'burnt'];
 let currentFilterModeIndex = -1;
 let showHistory = localStorage.getItem('showHistory') !== 'false';
-let history = [];
+let image_history = [];
 let invertSelection = false;
 let tooltip;
 const toggleHistory = document.createElement('span');
@@ -1048,10 +1048,10 @@ function startGame(gameArea) {
 
     let possibleImages = collectLists(gameArea);
 
-    possibleImages = possibleImages.filter(list => !history.includes(list[0]));
+    possibleImages = possibleImages.filter(list => !image_history.includes(list[0]));
     if (possibleImages.length === 0) {
-        history.splice(0, Math.ceil(history.length * 0.5));
-        possibleImages = collectLists(gameArea).filter(list => !history.includes(list[0]));
+        image_history.splice(0, Math.ceil(image_history.length * 0.5));
+        possibleImages = collectLists(gameArea).filter(list => !image_history.includes(list[0]));
     }
 
     let actualMap = null;
@@ -1161,7 +1161,7 @@ function startGame(gameArea) {
         }
     }
 
-    history.push(imagePath);
+    image_history.push(imagePath);
 
     const randomImage = document.createElement('img');
     if (currentFilterModeIndex >= 0) {
