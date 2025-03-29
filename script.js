@@ -343,15 +343,13 @@ function playAsMember() {
     const claimHostButton = document.createElement('button');
     db.collection('lobbies').doc(lobbyName).onSnapshot(doc => {
         if (!doc.exists) {
-            alert('Lobby no longer exists. The page will reload now.');
-            window.location.reload();
+            showCustomAlert('Lobby no longer exists. The page will reload now.', undefined, [gameVersionDiv, playerListDiv, gameContainer], true);
             return;
         }
         const players = doc.data().players || [];
         const userInLobby = players.find(player => player.uid === auth.currentUser.uid);
         if (!userInLobby) {
-            alert('You have been kicked from this lobby. The page will reload now.');
-            window.location.reload();
+            showCustomAlert('You have been kicked from this lobby. The page will reload now.', undefined, [gameVersionDiv, playerListDiv, gameContainer], true);
             return;
         }
         setTimeout(() => {
@@ -430,8 +428,7 @@ function playAsHost() {
     gameVersionDiv.style.display = 'none';
     db.collection('lobbies').doc(lobbyName).onSnapshot(doc => {
         if (!doc.exists) {
-            alert('Lobby no longer exists. The page will reload now.');
-            window.location.reload();
+            showCustomAlert('Lobby no longer exists. The page will reload now.', undefined, [gameVersionDiv, playerListDiv, gameContainer], true);
             return;
         }
         const players = doc.data().players || [];
@@ -498,7 +495,7 @@ function playAsHost() {
  * @param {number} mode The mode of the alert box. Only supports 0 for now.
  * @param {HTMLElement} cont The container element to shake if mode is 0. If not provided, the game container will be used.
  */
-function showCustomAlert(message, mode = 0, cont = null) {
+function showCustomAlert(message, mode = 0, cont = null, reloadAfter = false) {
     if (document.getElementById('custom-alert')) return; // Prevent multiple alerts
     // Handle container shake
     if (mode === 0) {
@@ -568,6 +565,10 @@ function showCustomAlert(message, mode = 0, cont = null) {
             overlay.remove();
             document.removeEventListener('keydown', keyHandler);
         }, { once: true });
+
+        if (reloadAfter) {
+            window.location.reload();
+        }
     }
 
     closeButton.onclick = closeAlert;
@@ -1125,8 +1126,7 @@ function startGame(gameArea) {
         if (isOnline) {
             if (!isHost) {
                 if (syncActualMap === "" || syncRandomImage === "") {
-                    alert('No image or map received from the host.\nThis should not happen.\nWe will reload this page for you.\nRe-entering this lobby will fix this.');
-                    window.location.reload();
+                    showCustomAlert('No image or map received from the host.\nThis should not happen.\nWe will reload this page for you.\nRe-entering this lobby will fix this.', undefined, [gameVersionDiv, playerListDiv, gameContainer], true);
                     return;
                 }
                 actualMap = syncActualMap;
