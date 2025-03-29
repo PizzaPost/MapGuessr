@@ -18,6 +18,7 @@ let invertSelection = false;
 let tooltip;
 const toggleHistory = document.createElement('span');
 
+let devSkip = false;
 let devMode = -1;
 let altDevMode = 0;
 
@@ -954,7 +955,7 @@ function createMoreButton() {
         if (event.target.id === 'toggleSelection') {
             invertSelection = !invertSelection;
             showCustomAlert(`Selecting will now${invertSelection ? ' ' : ' not '}invert`, 1); // TODO: I selected Portal 2 and Subnautica but it didn't invert
-                                                                                              // TODO: The whole selection thing is broken. I selected Subnautica and presssed toggle but nothing happened.
+            // TODO: The whole selection thing is broken. I selected Subnautica and presssed toggle but nothing happened.
         }
     });
 
@@ -1013,11 +1014,11 @@ function startGame(gameArea) {
             const first = children[i * 2];
             const second = children[i * 2 + 1];
             const blur = Math.max(0, 1.7 * (i ** 2) - 7.9 * i + 10); //TODO: When the first photo is guessed and appears in the history, it
-                                                                           //immediately has the strongest blur effect instead of the lowest.
-                                                                           //After the second photo becomes the newest in the history, it has
-                                                                           //a medium blur strength, and the oldest still has the strongest.
-                                                                           //However, the oldest one should have the medium blur strength, and the
-                                                                           //newest should have the lowest. After the next guess is everything correct.
+            //immediately has the strongest blur effect instead of the lowest.
+            //After the second photo becomes the newest in the history, it has
+            //a medium blur strength, and the oldest still has the strongest.
+            //However, the oldest one should have the medium blur strength, and the
+            //newest should have the lowest. After the next guess is everything correct.
             first.style.filter = `blur(${blur}px)`;
             second.style.filter = `blur(${blur}px)`;
             second.style.transform = 'scale(1)';
@@ -1061,18 +1062,43 @@ function startGame(gameArea) {
             [imagePath, solution] = gameArea[1 + devMode];
             devMode++;
         } else {
-            if (devMode >= possibleImages.length) {
-                devMode = 0;
+            if (devSkip) {
+                devSkip = false;
+                solution = [0, 1];
+                let attempts = 0;
+                let maxAttempts = possibleImages.reduce((count, list) => count + list.length - 1, 0);
+                while (attempts <= maxAttempts && solution.length > 0) {
+                    if (attempts + 1 > maxAttempts) {
+                        console.log(`Attempts are about to run out, choosing next image.`);
+                    }
+                    if (devMode >= possibleImages.length) {
+                        devMode = 0;
+                    }
+                    if (altDevMode >= possibleImages[devMode].length - 1) {
+                        altDevMode = 0;
+                        devMode++;
+                    }
+                    const possibleImage = possibleImages[devMode][1 + altDevMode];
+                    const possibleMaps = possibleImages.find(list => list.includes(possibleImage));
+                    actualMap = possibleMaps[0];
+                    [imagePath, solution] = possibleImage;
+                    altDevMode++;
+                    attempts++;
+                }
+            } else {
+                if (devMode >= possibleImages.length) {
+                    devMode = 0;
+                }
+                if (altDevMode >= possibleImages[devMode].length - 1) {
+                    altDevMode = 0;
+                    devMode++;
+                }
+                const possibleImage = possibleImages[devMode][1 + altDevMode];
+                const possibleMaps = possibleImages.find(list => list.includes(possibleImage));
+                actualMap = possibleMaps[0];
+                [imagePath, solution] = possibleImage;
+                altDevMode++;
             }
-            if (altDevMode >= possibleImages[devMode].length - 1) {
-                altDevMode = 0;
-                devMode++;
-            }
-            const possibleImage = possibleImages[devMode][1 + altDevMode];
-            const possibleMaps = possibleImages.find(list => list.includes(possibleImage));
-            actualMap = possibleMaps[0];
-            [imagePath, solution] = possibleImage;
-            altDevMode++;
         }
     } else {
         if (isOnline) {
@@ -1171,7 +1197,7 @@ function startGame(gameArea) {
             displayMap(selected[0]);
         }
 
-        if (!Array.isArray(gameArea)) {
+        if (!Array.isArray(gameArea) && !(devMode > -1)) {
             // Create a back button
             backButton.innerText = 'Back';
             backButton.onclick = () => {
@@ -1402,16 +1428,20 @@ function startGame(gameArea) {
         // Create continue button
         const continueButton = document.createElement('button');
         continueButton.innerText = 'Continue';
-        continueButton.onclick = () => {
+        continueButton.onclick = (event) => {
             marker.remove();
             solutionMarker.remove();
             if (isOnline) {
                 db.collection('lobbies').doc(lobbyName).update({ gameStarted: true });
             }
+            if (devMode > -1 && event.shiftKey) {
+                devSkip = true;
+            }
             startGame(gameArea); // Restart game with current area
         };
         if (devMode > -1) {
             gameContainer.appendChild(continueButton);
+            backButton.remove();
         }
 
         function setMarker(event) {
