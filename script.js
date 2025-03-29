@@ -2,6 +2,8 @@ let gameModes;
 
 let gameState = 0; // 0 => choose gamemode; 1 => startGame; 2 => selectMap
 let totalScore = 0;
+let totalPossibleScore = 0;
+const maxPoints = 5000;
 let gameArea; // not yet set area to choose locations from
 let checkedGameModes = {};
 let gameStarted = false;
@@ -133,7 +135,7 @@ function getPlayerNames(players) {
             glow = 'none';
         }
 
-        result += `<span style="color:${color}; text-shadow: ${glow};">${player.name} (${player.score.toFixed(0)} / ${player.totalScore.toFixed(0)})</span><br>`;
+        result += `<span style="color:${color}; text-shadow: ${glow};">${player.name} (${player.score.toFixed(0)} / ${player.totalScore.toFixed(0)} / ${player.totalPossibleScore.toFixed(0)})</span><br>`;
     });
     return result;
 }
@@ -277,7 +279,8 @@ function joinLobby() {
                                 host: isHost,
                                 wantsHost: null,
                                 score: 0,
-                                totalScore: 0
+                                totalScore: 0,
+                                totalPossibleScore: 0
                             };
                         }
                         return player;
@@ -312,7 +315,8 @@ function joinLobby() {
                     host: true,
                     wantsHost: null,
                     score: 0,
-                    totalScore: 0
+                    totalScore: 0,
+                    totalPossibleScore: 0
                 }]
             }).then(() => {
                 loadingDiv.style.display = 'none';
@@ -1055,18 +1059,34 @@ function startGame(gameArea) {
 
     if (devMode > -1) {
         if (Array.isArray(gameArea)) {
-            if (devMode >= gameArea.length - 1) {
-                devMode = 0;
+            if (devSkip) {
+                devSkip = false;
+                solution = [0, 1];
+                let attempts = 0;
+                const maxAttempts = gameArea.length;
+                while (attempts <= maxAttempts && solution.length > 0) {
+                    if (devMode >= gameArea.length - 1) {
+                        devMode = 0;
+                    }
+                    actualMap = gameArea[0];
+                    [imagePath, solution] = gameArea[1 + devMode];
+                    devMode++;
+                    attempts++;
+                }
+            } else {
+                if (devMode >= gameArea.length - 1) {
+                    devMode = 0;
+                }
+                actualMap = gameArea[0];
+                [imagePath, solution] = gameArea[1 + devMode];
+                devMode++;
             }
-            actualMap = gameArea[0];
-            [imagePath, solution] = gameArea[1 + devMode];
-            devMode++;
         } else {
             if (devSkip) {
                 devSkip = false;
                 solution = [0, 1];
                 let attempts = 0;
-                let maxAttempts = possibleImages.reduce((count, list) => count + list.length - 1, 0);
+                const maxAttempts = possibleImages.reduce((count, list) => count + list.length - 1, 0);
                 while (attempts <= maxAttempts && solution.length > 0) {
                     if (attempts + 1 > maxAttempts) {
                         console.log(`Attempts are about to run out, choosing next image.`);
@@ -1360,12 +1380,13 @@ function startGame(gameArea) {
                     gameContainer.appendChild(continueButton);
                 }
 
+                totalPossibleScore += maxPoints;
+
                 if (selectedMap === actualMap) {
                     const userX = parseFloat(marker.dataset.x);
                     const userY = parseFloat(marker.dataset.y);
                     const [solutionX, solutionY] = solution;
                     const distance = Math.sqrt(Math.pow(userX - solutionX, 2) + Math.pow(userY - solutionY, 2));
-                    const maxPoints = 5000;
                     const score = distance <= 0.01 ? maxPoints : Math.max(0, maxPoints - ((distance - 0.01) / (0.5 - 0.01)) * maxPoints);
 
                     if (Array.isArray(solution) && solution.length > 0) {
@@ -1377,6 +1398,7 @@ function startGame(gameArea) {
                                 const myPlayer = players.find(player => player.name === userName);
                                 myPlayer.score = score;
                                 myPlayer.totalScore = totalScore;
+                                myPlayer.totalPossibleScore = totalPossibleScore;
                                 db.collection('lobbies').doc(lobbyName).update({
                                     gameStarted: false,
                                     players: players,
