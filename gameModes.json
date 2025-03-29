@@ -2422,53 +2422,53 @@
         "Izuhara": [
             "images/ghost_of_tsushima/izuhara/maps/0.png",
             [
-                "images/ghost_of_tsushima/izuhara/0.jpg",
-                [
+                "images/ghost_of_tsushima/iki/0.jpg",
+                [0.6383759291128732, 0.5572507422683789
                 ]
             ],
             [
-                "images/ghost_of_tsushima/izuhara/1.jpg",
-                [
+                "images/ghost_of_tsushima/iki/1.jpg",
+                [ 0.24453374432099642, 0.8187682890417833
                 ]
             ],
             [
-                "images/ghost_of_tsushima/izuhara/2.jpg",
-                [
+                "images/ghost_of_tsushima/iki/2.jpg",
+                [0.8178534237228876, 0.08406020294179131
                 ]
             ],
             [
-                "images/ghost_of_tsushima/izuhara/3.jpg",
-                [
+                "images/ghost_of_tsushima/iki/3.jpg",
+                [0.5079817126938317, 0.2934001465196541
                 ]
             ],
             [
-                "images/ghost_of_tsushima/izuhara/4.jpg",
-                [
+                "images/ghost_of_tsushima/iki/4.jpg",
+                [0.3961496678196403, 0.9400360239929653
                 ]
             ],
             [
-                "images/ghost_of_tsushima/izuhara/5.jpg",
-                [
+                "images/ghost_of_tsushima/iki/5.jpg",
+                [0.2836424587825157, 0.21037520444847183
                 ]
             ],
             [
-                "images/ghost_of_tsushima/izuhara/6.jpg",
-                [
+                "images/ghost_of_tsushima/iki/6.jpg",
+                [0.1540984464954602, 0.5801330306852102
                 ]
             ],
             [
-                "images/ghost_of_tsushima/izuhara/7.jpg",
-                [
+                "images/ghost_of_tsushima/iki/7.jpg",
+                [0.49338990122817716, 0.6376053357664816
                 ]
             ],
             [
-                "images/ghost_of_tsushima/izuhara/8.jpg",
-                [
+                "images/ghost_of_tsushima/iki/8.jpg",
+                [0.8345033158815143, 0.6445206354113808
                 ]
             ],
             [
-                "images/ghost_of_tsushima/izuhara/9.jpg",
-                [
+                "images/ghost_of_tsushima/iki/9.jpg",
+                [0.6213096263972746, 0.21046049664693303
                 ]
             ]
         ],
@@ -2476,12 +2476,12 @@
             "images/ghost_of_tsushima/iki/maps/0.png",
             [
                 "images/ghost_of_tsushima/iki/0.jpg",
-                [0.6383759291128732, 0.5572507422683789
+                [
                 ]
             ],
             [
                 "images/ghost_of_tsushima/iki/1.jpg",
-                [
+                [ 
                 ]
             ],
             [
