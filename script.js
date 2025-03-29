@@ -1055,18 +1055,34 @@ function startGame(gameArea) {
 
     if (devMode > -1) {
         if (Array.isArray(gameArea)) {
-            if (devMode >= gameArea.length - 1) {
-                devMode = 0;
+            if (devSkip) {
+                devSkip = false;
+                solution = [0, 1];
+                let attempts = 0;
+                const maxAttempts = gameArea.length;
+                while (attempts <= maxAttempts && solution.length > 0) {
+                    if (devMode >= gameArea.length - 1) {
+                        devMode = 0;
+                    }
+                    actualMap = gameArea[0];
+                    [imagePath, solution] = gameArea[1 + devMode];
+                    devMode++;
+                    attempts++;
+                }
+            } else {
+                if (devMode >= gameArea.length - 1) {
+                    devMode = 0;
+                }
+                actualMap = gameArea[0];
+                [imagePath, solution] = gameArea[1 + devMode];
+                devMode++;
             }
-            actualMap = gameArea[0];
-            [imagePath, solution] = gameArea[1 + devMode];
-            devMode++;
         } else {
             if (devSkip) {
                 devSkip = false;
                 solution = [0, 1];
                 let attempts = 0;
-                let maxAttempts = possibleImages.reduce((count, list) => count + list.length - 1, 0);
+                const maxAttempts = possibleImages.reduce((count, list) => count + list.length - 1, 0);
                 while (attempts <= maxAttempts && solution.length > 0) {
                     if (attempts + 1 > maxAttempts) {
                         console.log(`Attempts are about to run out, choosing next image.`);
