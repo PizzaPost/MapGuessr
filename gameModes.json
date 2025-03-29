@@ -2417,5 +2417,113 @@
                 ]
             ]
         ]
+    },
+    "Ghost of Tsushima": {
+        "Izuhara": [
+            "images/ghost_of_tsushima/izuhara/maps/0.png",
+            [
+                "images/ghost_of_tsushima/iki/0.jpg",
+                [0.6383759291128732, 0.5572507422683789
+                ]
+            ],
+            [
+                "images/ghost_of_tsushima/iki/1.jpg",
+                [ 0.24453374432099642, 0.8187682890417833
+                ]
+            ],
+            [
+                "images/ghost_of_tsushima/iki/2.jpg",
+                [0.8178534237228876, 0.08406020294179131
+                ]
+            ],
+            [
+                "images/ghost_of_tsushima/iki/3.jpg",
+                [0.5079817126938317, 0.2934001465196541
+                ]
+            ],
+            [
+                "images/ghost_of_tsushima/iki/4.jpg",
+                [0.3961496678196403, 0.9400360239929653
+                ]
+            ],
+            [
+                "images/ghost_of_tsushima/iki/5.jpg",
+                [0.2836424587825157, 0.21037520444847183
+                ]
+            ],
+            [
+                "images/ghost_of_tsushima/iki/6.jpg",
+                [0.1540984464954602, 0.5801330306852102
+                ]
+            ],
+            [
+                "images/ghost_of_tsushima/iki/7.jpg",
+                [0.49338990122817716, 0.6376053357664816
+                ]
+            ],
+            [
+                "images/ghost_of_tsushima/iki/8.jpg",
+                [0.8345033158815143, 0.6445206354113808
+                ]
+            ],
+            [
+                "images/ghost_of_tsushima/iki/9.jpg",
+                [0.6213096263972746, 0.21046049664693303
+                ]
+            ]
+        ],
+        "Iki": [
+            "images/ghost_of_tsushima/iki/maps/0.png",
+            [
+                "images/ghost_of_tsushima/iki/0.jpg",
+                [0.40508758446924864, 0.05154992187345477
+                ]
+            ],
+            [
+                "images/ghost_of_tsushima/iki/1.jpg",
+                [ 0.5496229055747447, 0.28602629358166687
+                ]
+            ],
+            [
+                "images/ghost_of_tsushima/iki/2.jpg",
+                [0.18325746044191102, 0.376382718083893
+                ]
+            ],
+            [
+                "images/ghost_of_tsushima/iki/3.jpg",
+                [0.6241704365283769, 0.7941694614881948
+                ]
+            ],
+            [
+                "images/ghost_of_tsushima/iki/4.jpg",
+                [0.7439386950835599, 0.8225591375056384
+                ]
+            ],
+            [
+                "images/ghost_of_tsushima/iki/5.jpg",
+                [0.6776870560540549, 0.31277970737855004
+                ]
+            ],
+            [
+                "images/ghost_of_tsushima/iki/6.jpg",
+                [0.7784314061158665, 0.09682721368409464
+                ]
+            ],
+            [
+                "images/ghost_of_tsushima/iki/7.jpg",
+                [0.30282760027303407, 0.5499801666520988
+                ]
+            ],
+            [
+                "images/ghost_of_tsushima/iki/8.jpg",
+                [0.21529945345405752, 0.5782164413514861
+                ]
+            ],
+            [
+                "images/ghost_of_tsushima/iki/9.jpg",
+                [0.1753012337942887, 0.6571235826992501
+                ]
+            ]
+        ]
     }
 }
