@@ -343,14 +343,14 @@ function playAsMember() {
     const claimHostButton = document.createElement('button');
     db.collection('lobbies').doc(lobbyName).onSnapshot(doc => {
         if (!doc.exists) {
-            showCustomAlert('Lobby no longer exists. The page will reload now.', undefined, [gameVersionDiv, playerListDiv, gameContainer]);
+            alert('Lobby no longer exists. The page will reload now.');
             window.location.reload();
             return;
         }
         const players = doc.data().players || [];
         const userInLobby = players.find(player => player.uid === auth.currentUser.uid);
         if (!userInLobby) {
-            showCustomAlert('You have been kicked from this lobby. The page will reload now.', undefined, [gameVersionDiv, playerListDiv, gameContainer]);
+            alert('You have been kicked from this lobby. The page will reload now.');
             window.location.reload();
             return;
         }
@@ -1125,7 +1125,7 @@ function startGame(gameArea) {
         if (isOnline) {
             if (!isHost) {
                 if (syncActualMap === "" || syncRandomImage === "") {
-                    showCustomAlert('No image or map received from the host.\nThis should not happen.\nWe will reload this page for you.\nRe-entering this lobby will fix this.', undefined, [gameVersionDiv, playerListDiv, gameContainer]);
+                    alert('No image or map received from the host.\nThis should not happen.\nWe will reload this page for you.\nRe-entering this lobby will fix this.');
                     window.location.reload();
                     return;
                 }
