@@ -40,7 +40,10 @@ const firebaseConfig = {
 };
 
 function isMobile() {
-    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    const toMatch = [/Android/i, /webOS/i, /iPhone/i, /iPod/i, /BlackBerry/i, /Windows Phone/i];
+    return toMatch.some((toMatchItem) => {
+        return navigator.userAgent.match(toMatchItem);
+    });
 }
 
 if (isMobile()) {
@@ -890,7 +893,7 @@ function showCreditMenu() {
 function attachTooltip(el, text) {
     el.addEventListener("mouseenter", e => {
         tooltip = document.createElement("div");
-        tooltip.id='tooltip'
+        tooltip.id = 'tooltip'
         tooltip.textContent = text;
         tooltip.classList.add("tooltip");
         document.body.appendChild(tooltip);
@@ -933,7 +936,7 @@ function createMoreButton() {
     toggleSelection.id = 'toggleSelection';
     toggleSelection.textContent = '🔄️';
 
-    
+
     const toggleHistory = document.createElement('span');
     toggleHistory.id = 'toggleHistory';
     toggleHistory.textContent = '🖼️';
