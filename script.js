@@ -39,6 +39,14 @@ const firebaseConfig = {
     measurementId: "G-DNV45FQ36B"
 };
 
+function isMobile() {
+    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+}
+
+if (isMobile()) {
+    showCustomAlert("This website maybe doesn't work perfect on this device. It is recommended to use a computer.", 0);
+}
+
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 
