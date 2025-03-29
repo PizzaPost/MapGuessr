@@ -21,7 +21,7 @@ let tooltip;
 const toggleHistory = document.createElement('span');
 
 let devSkip = false;
-let devMode = 0;
+let devMode = -1;
 let altDevMode = 0;
 
 let loadingDiv;
