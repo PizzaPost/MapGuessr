@@ -489,13 +489,6 @@ function playAsHost() {
     });
 }
 
-/**
- * Shows a custom alert box with a message and a close button. If mode is 0, the box will shake and have a red border, indicating an error. If mode is not 0, the box will have a green border.
- * @param {string} message The message to show in the alert box.
- * @param {number} mode The mode of the alert box. 0=red 1=green
- * @param {HTMLElement} cont The container element to shake if mode is 0. If not provided, the game container will be used.
- * @param {number} cont 1=reload after click 0=do nothing
- */
 function showCustomAlert(message, mode = 0, cont = null, reloadAfter = false) {
     if (document.getElementById('custom-alert')) return; // Prevent multiple alerts
     // Handle container shake
@@ -559,26 +552,18 @@ function showCustomAlert(message, mode = 0, cont = null, reloadAfter = false) {
     closeButton.textContent = 'OK';
 
     function closeAlert(event) {
-        event.stopPropagation(); // Prevent event from bubbling up
-        event.preventDefault(); // Guard against default behavior (e.g., form submission)
-        console.log(2222)
         alertBox.style.animation = 'shrinkOut 0.2s ease-in forwards';
-    
+
         alertBox.addEventListener('animationend', () => {
             alertBox.remove();
             overlay.remove();
             document.removeEventListener('keydown', keyHandler);
-            if (reload === 1) {
-                location.reload();
-            }
         }, { once: true });
 
         if (reloadAfter) {
             window.location.reload();
         }
     }
-    
-    
 
     closeButton.onclick = closeAlert;
     overlay.onclick = closeAlert;
