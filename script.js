@@ -1393,20 +1393,6 @@ function startGame(gameArea) {
                     if (Array.isArray(solution) && solution.length > 0) {
                         totalScore += score;
 
-                        if (isOnline) {
-                            db.collection('lobbies').doc(lobbyName).get().then(doc => {
-                                const players = doc.data().players;
-                                const myPlayer = players.find(player => player.name === userName);
-                                myPlayer.score = score;
-                                myPlayer.totalScore = totalScore;
-                                myPlayer.totalPossibleScore = totalPossibleScore;
-                                db.collection('lobbies').doc(lobbyName).update({
-                                    gameStarted: false,
-                                    players: players,
-                                });
-                            });
-                        }
-
                         document.title = `MapGuessr | Score: ${totalScore.toFixed(0)}`;
                         showCustomAlert(`You scored ${score.toFixed(0)} points!`, 1);
                         solutionMarker.style.position = 'absolute';
@@ -1436,6 +1422,19 @@ function startGame(gameArea) {
                 submitButton.remove();
             } else {
                 showCustomAlert('Please place a marker on the map');
+            }
+            if (isOnline) {
+                db.collection('lobbies').doc(lobbyName).get().then(doc => {
+                    const players = doc.data().players;
+                    const myPlayer = players.find(player => player.name === userName);
+                    myPlayer.score = score;
+                    myPlayer.totalScore = totalScore;
+                    myPlayer.totalPossibleScore = totalPossibleScore;
+                    db.collection('lobbies').doc(lobbyName).update({
+                        gameStarted: false,
+                        players: players,
+                    });
+                });
             }
         };
 
