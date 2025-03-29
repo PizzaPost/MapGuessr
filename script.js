@@ -430,7 +430,7 @@ function playAsHost() {
     gameVersionDiv.style.display = 'none';
     db.collection('lobbies').doc(lobbyName).onSnapshot(doc => {
         if (!doc.exists) {
-            showCustomAlert('Lobby no longer exists. The page will reload now.', undefined, [gameVersionDiv, playerListDiv, gameContainer]);
+            alert('Lobby no longer exists. The page will reload now.');
             window.location.reload();
             return;
         }
