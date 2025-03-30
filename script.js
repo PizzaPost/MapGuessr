@@ -548,8 +548,12 @@ function showCustomAlert(message, mode = 0, cont = null, reload = false) {
 
     // Create the close button
     const closeButton = document.createElement('button');
-    closeButton.className = 'custom-alert-close';
     closeButton.textContent = 'OK';
+    if (mode === 0) {
+        closeButton.className = 'custom-alert-red';
+    } else {
+        closeButton.className = 'custom-alert-green';
+    }
 
     function closeAlert() {
         alertBox.style.animation = 'shrinkOut 0.2s ease-in forwards';

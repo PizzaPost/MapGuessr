@@ -50,6 +50,9 @@ html {
     --link-color: Blue;
     --link-alt: Royalblue;
     --credits-color: rgb(40, 40, 40);
+    --button-bg-red: linear-gradient(135deg, #c00000, #920000);
+    --button-shadow-red: rgba(202, 0, 0, 0.2);
+    --button-shadow-hover-red: rgba(255, 0, 0, 0.2);
 }
 
 /* Animate gradient change via pseudo-element */
@@ -214,6 +217,27 @@ body {
 .custom-alert.success {
     border-color: #28a745;
     background: var(--container-bg);
+}
+
+.custom-alert-red {
+    background: var(--button-bg-red);
+    color: var(--button-color);
+    border: none;
+    padding: 12px 24px;
+    margin: 8px;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 15px var(--button-shadow-red);
+    position: relative;
+    overflow: hidden;
+}
+
+.custom-alert-red:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px var(--button-shadow-hover-red);
 }
 
 .tooltip {
