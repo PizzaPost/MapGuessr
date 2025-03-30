@@ -15,18 +15,18 @@ html {
 :root {
     --bg-gradient: linear-gradient(135deg, #f8f9fa, #9e9e9e);
     --text-color: #333;
-    --container-bg: rgba(255, 255, 255, 0.95);
+    --container-bg: rgba(218, 218, 218, 0.95);
     --accent-color: #007BFF;
     --image-border: rgba(255, 255, 255, 0.3);
     --scrollbar-thumb: rgba(0, 123, 255, 0.4);
-    --button-bg: linear-gradient(135deg, #007BFF, #004691);
-    --button-bg-alt: linear-gradient(135deg, #0400e9, #000879);
-    --button-color: #fff;
-    --button-color-alt: #fff;
+    --button-bg: linear-gradient(135deg, #2e93ff, #006cdf);
+    --button-bg-alt: linear-gradient(135deg, #0066ff, #0046af);
+    --button-color: #dadada;
+    --button-color-alt: #dadada;
     --button-shadow: rgba(0, 123, 255, 0.5);
     --button-shadow-hover: rgba(0, 63, 114, 0.5);
     --button-shadow-alt: rgba(11, 0, 167, 0.5);
-    --button-container-background: linear-gradient(135deg, #001a36, #004691);
+    --button-container-background: linear-gradient(135deg, #6bb2ff, #3295ff);
     --link-color: rgb(0, 60, 255);
     --link-alt: Royalblue;
     --credits-color: rgb(160, 160, 160);
