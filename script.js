@@ -1108,8 +1108,7 @@ function startGame(gameArea) {
                 devMode++;
             }
             const possibleImage = possibleImages[devMode][1 + altDevMode];
-            const possibleMaps = possibleImages.find(list => list.includes(possibleImage));
-            actualMap = possibleMaps[0];
+            actualMap = possibleImages[devMode][0];
             [imagePath, solution] = possibleImage;
             altDevMode++;
         }
@@ -1125,8 +1124,7 @@ function startGame(gameArea) {
             } else {
                 const randomNumber = Math.floor(Math.random() * possibleImages.length);
                 const possibleImage = possibleImages[randomNumber][1 + Math.floor(Math.random() * (possibleImages[randomNumber].length - 1))];
-                const possibleMaps = possibleImages.find(list => list.includes(possibleImage))
-                actualMap = possibleMaps[0];
+                actualMap = possibleImages[randomNumber][0];
                 syncActualMap = actualMap;
                 [imagePath, solution] = possibleImage;
                 syncRandomImage = JSON.stringify(possibleImage);
@@ -1135,13 +1133,11 @@ function startGame(gameArea) {
         } else {
             const randomNumber = Math.floor(Math.random() * possibleImages.length);
             const possibleImage = possibleImages[randomNumber][1 + Math.floor(Math.random() * (possibleImages[randomNumber].length - 1))];
-            const possibleMaps = possibleImages.find(list => list.includes(possibleImage))
-            actualMap = possibleMaps[0];
+            actualMap = possibleImages[randomNumber][0];
             [imagePath, solution] = possibleImage;
         }
+        image_history.push(imagePath);
     }
-
-    image_history.push(imagePath);
 
     const randomImage = document.createElement('img');
     if (currentFilterModeIndex >= 0) {
