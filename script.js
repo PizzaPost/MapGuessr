@@ -767,7 +767,7 @@ function getParentObject(obj, child) {
     for (const key of Object.keys(obj)) {
         if (JSON.stringify(obj[key]) === JSON.stringify(child)) {
             return obj;
-        } else if (typeof obj[key] === 'object' && !Array.isArray(obj[key])) {
+        } else if (typeof obj[key] === 'object') {
             const result = getParentObject(obj[key], child);
             if (result) {
                 return result;
@@ -1013,6 +1013,10 @@ function startGame(gameArea) {
         for (let i = 0; i < children.length / 2; i++) {
             const first = children[i * 2];
             const second = children[i * 2 + 1];
+            if (first && !second) {
+                imagesWrapper.removeChild(first)
+                break
+            }
             const blur = Math.max(0, 1.7 * (i ** 2) - 7.9 * i + 10); //TODO: When the first photo is guessed and appears in the history, it
             //immediately has the strongest blur effect instead of the lowest.
             //After the second photo becomes the newest in the history, it has
@@ -1031,22 +1035,35 @@ function startGame(gameArea) {
     // Display a random image
     function collectLists(obj) {
         let result = [];
-        Object.values(obj).forEach(value => {
-            if (Array.isArray(value)) {
-                result.push(value);
-            } else if (typeof value === 'object' && value !== null) {
+        if (Array.isArray(obj)) {
+            return [obj];
+        } else {
+            Object.values(obj).forEach(value => {
                 result = result.concat(collectLists(value));
-            }
-        });
+            });
+        }
+
         return result;
     }
 
     let possibleImages = collectLists(gameArea);
 
-    possibleImages = possibleImages.filter(list => !image_history.includes(list[0]));
+    function filterPossibleImages(possibleImages) {
+        let newPossibleImages = [];
+        possibleImages.forEach(mapArray => {
+            const [mapString, ...imageArrays] = mapArray;
+            const filteredImages = imageArrays.filter(imageArray => !image_history.includes(imageArray[0]));
+            if (filteredImages.length > 0) {
+                newPossibleImages.push([mapString, ...filteredImages]);
+            }
+        });
+        return newPossibleImages;
+    }
+
+    possibleImages = filterPossibleImages(possibleImages);
     if (possibleImages.length === 0) {
         image_history.splice(0, Math.ceil(image_history.length * 0.5));
-        possibleImages = collectLists(gameArea).filter(list => !image_history.includes(list[0]));
+        possibleImages = filterPossibleImages(collectLists(gameArea));
     }
 
     let actualMap = null;
@@ -1054,54 +1071,15 @@ function startGame(gameArea) {
     let [imagePath, solution] = [null, null];
 
     if (devMode > -1) {
-        if (Array.isArray(gameArea)) {
-            if (devSkip) {
-                devSkip = false;
-                solution = [0, 1];
-                let attempts = 0;
-                const maxAttempts = gameArea.length;
-                while (attempts <= maxAttempts && solution.length > 0) {
-                    if (devMode >= gameArea.length - 1) {
-                        devMode = 0;
-                    }
-                    actualMap = gameArea[0];
-                    [imagePath, solution] = gameArea[1 + devMode];
-                    devMode++;
-                    attempts++;
+        if (devSkip) {
+            devSkip = false;
+            solution = [0, 1];
+            let attempts = 0;
+            const maxAttempts = possibleImages.reduce((count, list) => count + list.length - 1, 0);
+            while (attempts <= maxAttempts && solution.length > 0) {
+                if (attempts + 1 > maxAttempts) {
+                    console.log(`Attempts are about to run out, choosing next image.`);
                 }
-            } else {
-                if (devMode >= gameArea.length - 1) {
-                    devMode = 0;
-                }
-                actualMap = gameArea[0];
-                [imagePath, solution] = gameArea[1 + devMode];
-                devMode++;
-            }
-        } else {
-            if (devSkip) {
-                devSkip = false;
-                solution = [0, 1];
-                let attempts = 0;
-                const maxAttempts = possibleImages.reduce((count, list) => count + list.length - 1, 0);
-                while (attempts <= maxAttempts && solution.length > 0) {
-                    if (attempts + 1 > maxAttempts) {
-                        console.log(`Attempts are about to run out, choosing next image.`);
-                    }
-                    if (devMode >= possibleImages.length) {
-                        devMode = 0;
-                    }
-                    if (altDevMode >= possibleImages[devMode].length - 1) {
-                        altDevMode = 0;
-                        devMode++;
-                    }
-                    const possibleImage = possibleImages[devMode][1 + altDevMode];
-                    const possibleMaps = possibleImages.find(list => list.includes(possibleImage));
-                    actualMap = possibleMaps[0];
-                    [imagePath, solution] = possibleImage;
-                    altDevMode++;
-                    attempts++;
-                }
-            } else {
                 if (devMode >= possibleImages.length) {
                     devMode = 0;
                 }
@@ -1114,7 +1092,21 @@ function startGame(gameArea) {
                 actualMap = possibleMaps[0];
                 [imagePath, solution] = possibleImage;
                 altDevMode++;
+                attempts++;
             }
+        } else {
+            if (devMode >= possibleImages.length) {
+                devMode = 0;
+            }
+            if (altDevMode >= possibleImages[devMode].length - 1) {
+                altDevMode = 0;
+                devMode++;
+            }
+            const possibleImage = possibleImages[devMode][1 + altDevMode];
+            const possibleMaps = possibleImages.find(list => list.includes(possibleImage));
+            actualMap = possibleMaps[0];
+            [imagePath, solution] = possibleImage;
+            altDevMode++;
         }
     } else {
         if (isOnline) {
@@ -1126,26 +1118,15 @@ function startGame(gameArea) {
                 actualMap = syncActualMap;
                 [imagePath, solution] = JSON.parse(syncRandomImage);
             } else {
-                if (Array.isArray(gameArea)) {
-                    actualMap = gameArea[0];
-                    syncActualMap = actualMap;
-                    const possibleImage = possibleImages[Math.floor(Math.random() * (possibleImages.length - 1))];
-                    [imagePath, solution] = possibleImage;
-                    syncRandomImage = JSON.stringify(possibleImage);
-                } else {
-                    const randomNumber = Math.floor(Math.random() * possibleImages.length);
-                    const possibleImage = possibleImages[randomNumber][1 + Math.floor(Math.random() * (possibleImages[randomNumber].length - 1))];
-                    const possibleMaps = possibleImages.find(list => list.includes(possibleImage))
-                    actualMap = possibleMaps[0];
-                    syncActualMap = actualMap;
-                    [imagePath, solution] = possibleImage;
-                    syncRandomImage = JSON.stringify(possibleImage);
-                }
+                const randomNumber = Math.floor(Math.random() * possibleImages.length);
+                const possibleImage = possibleImages[randomNumber][1 + Math.floor(Math.random() * (possibleImages[randomNumber].length - 1))];
+                const possibleMaps = possibleImages.find(list => list.includes(possibleImage))
+                actualMap = possibleMaps[0];
+                syncActualMap = actualMap;
+                [imagePath, solution] = possibleImage;
+                syncRandomImage = JSON.stringify(possibleImage);
                 syncChanges(true, gameArea, syncActualMap, syncRandomImage);
             }
-        } else if (Array.isArray(gameArea)) {
-            actualMap = gameArea[0];
-            [imagePath, solution] = possibleImages[Math.floor(Math.random() * (possibleImages.length - 1))];
         } else {
             const randomNumber = Math.floor(Math.random() * possibleImages.length);
             const possibleImage = possibleImages[randomNumber][1 + Math.floor(Math.random() * (possibleImages[randomNumber].length - 1))];
