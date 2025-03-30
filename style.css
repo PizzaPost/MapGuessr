@@ -30,6 +30,14 @@ html {
     --link-color: rgb(0, 60, 255);
     --link-alt: Royalblue;
     --credits-color: rgb(160, 160, 160);
+    --button-bg-red: linear-gradient(135deg, #c00000, #920000);
+    --button-shadow-red: rgba(202, 0, 0, 0.2);
+    --button-shadow-hover-red: rgba(255, 0, 0, 0.2);
+    --button-bg-green: linear-gradient(135deg, #00c01a, #0e7c00);
+    --button-shadow-green: rgba(0, 202, 27, 0.2);
+    --button-shadow-hover-green: rgba(0, 255, 55, 0.2);
+    --button-shadow-gray: rgba(102, 102, 102, 0.2);
+    --button-shadow-hover-gray: rgba(158, 158, 158, 0.2);
 }
 
 [data-theme="dark"] {
