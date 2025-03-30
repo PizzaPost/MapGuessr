@@ -912,7 +912,7 @@ function createMoreButton() {
     toggleHistory.textContent = '🖼️';
 
     attachTooltip(infoLink, "Credits");
-    attachTooltip(themeEmoji, "Switch between Dark/Light mode");
+    attachTooltip(themeEmoji, "Switch between Dark/Light Appearance");
     attachTooltip(toggleSelection, "Toggle the Checkboxes in Map Selection");
     attachTooltip(toggleHistory, "Toggle the map History in the Game");
 
