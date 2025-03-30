@@ -2176,11 +2176,6 @@
                             "images/portal_series/portal2/chapter9/finale_1/0.png",
                             [
                             ]
-                        ],
-                        [
-                            "images/portal_series/portal2/chapter9/finale_1/4.png",
-                            [
-                            ]
                         ]
                     ],
                     "1": [
@@ -2189,9 +2184,20 @@
                             "images/portal_series/portal2/chapter9/finale_1/1.png",
                             [
                             ]
-                        ],
+                        ]
+                    ],
+                    "2": [
+                        "images/portal_series/portal2/chapter9/finale_1/maps/2.png",
                         [
                             "images/portal_series/portal2/chapter9/finale_1/2.png",
+                            [
+                            ]
+                        ]
+                    ],
+                    "3": [
+                        "images/portal_series/portal2/chapter9/finale_1/maps/3.png",
+                        [
+                            "images/portal_series/portal2/chapter9/finale_1/3.png",
                             [
                             ]
                         ]
@@ -2202,11 +2208,6 @@
                         "images/portal_series/portal2/chapter9/finale_2/maps/0.png",
                         [
                             "images/portal_series/portal2/chapter9/finale_2/0.png",
-                            [
-                            ]
-                        ],
-                        [
-                            "images/portal_series/portal2/chapter9/finale_2/4.png",
                             [
                             ]
                         ]
@@ -2223,6 +2224,27 @@
                             [
                             ]
                         ]
+                    ],
+                    "2": [
+                        "images/portal_series/portal2/chapter9/finale_2/maps/2.png",
+                        [
+                            "images/portal_series/portal2/chapter9/finale_2/3.png",
+                            [
+                            ]
+                        ]
+                    ],
+                    "3": [
+                        "images/portal_series/portal2/chapter9/finale_2/maps/3.png",
+                        [
+                            "images/portal_series/portal2/chapter9/finale_2/4.png",
+                            [
+                            ]
+                        ],
+                        [
+                            "images/portal_series/portal2/chapter9/finale_2/6.png",
+                            [
+                            ]
+                        ]
                     ]
                 },
                 "Finale 3": {
@@ -2230,11 +2252,6 @@
                         "images/portal_series/portal2/chapter9/finale_3/maps/0.png",
                         [
                             "images/portal_series/portal2/chapter9/finale_3/0.png",
-                            [
-                            ]
-                        ],
-                        [
-                            "images/portal_series/portal2/chapter9/finale_3/4.png",
                             [
                             ]
                         ]
@@ -2245,9 +2262,35 @@
                             "images/portal_series/portal2/chapter9/finale_3/1.png",
                             [
                             ]
-                        ],
+                        ]
+                    ],
+                    "2": [
+                        "images/portal_series/portal2/chapter9/finale_3/maps/2.png",
                         [
                             "images/portal_series/portal2/chapter9/finale_3/2.png",
+                            [
+                            ]
+                        ],
+                        [
+                            "images/portal_series/portal2/chapter9/finale_3/3.png",
+                            [
+                            ]
+                        ]
+                    ],
+                    "3": [
+                        "images/portal_series/portal2/chapter9/finale_3/maps/3.png",
+                        [
+                            "images/portal_series/portal2/chapter9/finale_3/4.png",
+                            [
+                            ]
+                        ],
+                        [
+                            "images/portal_series/portal2/chapter9/finale_3/5.png",
+                            [
+                            ]
+                        ],
+                        [
+                            "images/portal_series/portal2/chapter9/finale_3/6.png",
                             [
                             ]
                         ]
@@ -2260,11 +2303,6 @@
                             "images/portal_series/portal2/chapter9/finale_4/0.png",
                             [
                             ]
-                        ],
-                        [
-                            "images/portal_series/portal2/chapter9/finale_4/4.png",
-                            [
-                            ]
                         ]
                     ],
                     "1": [
@@ -2274,6 +2312,19 @@
                             [
                             ]
                         ],
+                        [
+                            "images/portal_series/portal2/chapter9/finale_4/3.png",
+                            [
+                            ]
+                        ],
+                        [
+                            "images/portal_series/portal2/chapter9/finale_4/4.png",
+                            [
+                            ]
+                        ]
+                    ],
+                    "2": [
+                        "images/portal_series/portal2/chapter9/finale_4/maps/2.png",
                         [
                             "images/portal_series/portal2/chapter9/finale_4/2.png",
                             [
