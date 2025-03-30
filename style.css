@@ -56,6 +56,8 @@ html {
     --button-bg-green: linear-gradient(135deg, #00c01a, #0e7c00);
     --button-shadow-green: rgba(0, 202, 27, 0.2);
     --button-shadow-hover-green: rgba(0, 255, 55, 0.2);
+    --button-shadow-gray: rgba(102, 102, 102, 0.2);
+    --button-shadow-hover-gray: rgba(158, 158, 158, 0.2);
 }
 
 /* Animate gradient change via pseudo-element */
@@ -238,6 +240,14 @@ body {
 
 .button-green:hover {
     box-shadow: 0 6px 20px var(--button-shadow-hover-green);
+}
+
+.button-gray {
+    box-shadow: 0 4px 15px var(--button-shadow-gray);
+}
+
+.button-gray:hover {
+    box-shadow: 0 6px 20px var(--button-shadow-hover-gray);
 }
 
 .tooltip {

@@ -832,6 +832,7 @@ function showCreditMenu() {
     // Create the close button
     const closeButton = document.createElement('button');
     closeButton.innerText = 'OK';
+    closeButton.classList.add('button-gray');
 
     function closeCredits() {
         creditBox.style.animation = 'shrinkOut 0.2s ease-in forwards';
