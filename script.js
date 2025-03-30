@@ -51,7 +51,7 @@ function isMobile() {
 }
 
 if (isMobile()) {
-    showCustomAlert("This website maybe doesn't work perfectly on this device. It is recommended to use a computer.", 0);
+    showCustomAlert("This website might not work perfectly on this device. It is recommended to use a computer.", 0);
 }
 
 // Initialize Firebase
