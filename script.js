@@ -550,9 +550,9 @@ function showCustomAlert(message, mode = 0, cont = null, reload = false) {
     const closeButton = document.createElement('button');
     closeButton.textContent = 'OK';
     if (mode === 0) {
-        closeButton.className = 'custom-alert-red';
+        closeButton.className = 'button-red';
     } else {
-        closeButton.className = 'custom-alert-green';
+        closeButton.className = 'button-green';
     }
 
     function closeAlert() {

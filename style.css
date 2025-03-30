@@ -53,6 +53,9 @@ html {
     --button-bg-red: linear-gradient(135deg, #c00000, #920000);
     --button-shadow-red: rgba(202, 0, 0, 0.2);
     --button-shadow-hover-red: rgba(255, 0, 0, 0.2);
+    --button-bg-green: linear-gradient(135deg, #00c01a, #0e7c00);
+    --button-shadow-green: rgba(0, 202, 27, 0.2);
+    --button-shadow-hover-green: rgba(0, 255, 55, 0.2);
 }
 
 /* Animate gradient change via pseudo-element */
@@ -219,14 +222,22 @@ body {
     background: var(--container-bg);
 }
 
-.custom-alert-red {
+.button-red {
     background: var(--button-bg-red);
-    color: var(--button-color);
     box-shadow: 0 4px 15px var(--button-shadow-red);
 }
 
-.custom-alert-red:hover {
+.button-red:hover {
     box-shadow: 0 6px 20px var(--button-shadow-hover-red);
+}
+
+.button-green {
+    background: var(--button-bg-green);
+    box-shadow: 0 4px 15px var(--button-shadow-green);
+}
+
+.button-green:hover {
+    box-shadow: 0 6px 20px var(--button-shadow-hover-green);
 }
 
 .tooltip {
