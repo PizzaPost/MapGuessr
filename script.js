@@ -1303,8 +1303,7 @@ function startGame(gameArea) {
             setMarker(event);
         };
 
-        mapImage.onwheel = (event) => {
-            event.preventDefault();
+        function zoomImage() {
             const rect = mapImage.getBoundingClientRect();
             const scrollDelta = event.deltaY;
 
@@ -1335,7 +1334,23 @@ function startGame(gameArea) {
                     mapImage.style.transition = '';
                 }, 10);
             }
+        }
 
+        mapImage.onwheel = (event) => {
+            event.preventDefault();
+            zoomImage()
+            updateMarker(event, true);
+        };
+
+        marker.onwheel = (event) => {
+            event.preventDefault();
+            zoomImage()
+            updateMarker(event, true);
+        };
+
+        solutionMarker.onwheel = (event) => {
+            event.preventDefault();
+            zoomImage()
             updateMarker(event, true);
         };
 
