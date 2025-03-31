@@ -1303,7 +1303,7 @@ function startGame(gameArea) {
             setMarker(event);
         };
 
-        function zoomImage() {
+        function zoomImage(event) {
             const rect = mapImage.getBoundingClientRect();
             const scrollDelta = event.deltaY;
 
@@ -1334,24 +1334,22 @@ function startGame(gameArea) {
                     mapImage.style.transition = '';
                 }, 10);
             }
+            updateMarker(event, true);
         }
 
         mapImage.onwheel = (event) => {
             event.preventDefault();
-            zoomImage()
-            updateMarker(event, true);
+            zoomImage(event)
         };
 
         marker.onwheel = (event) => {
             event.preventDefault();
-            zoomImage()
-            updateMarker(event, true);
+            zoomImage(event)
         };
 
         solutionMarker.onwheel = (event) => {
             event.preventDefault();
-            zoomImage()
-            updateMarker(event, true);
+            zoomImage(event)
         };
 
         gameContainer.onscroll = (event) => {
@@ -1403,6 +1401,39 @@ function startGame(gameArea) {
                         solutionMarker.style.top = `${mapRect.top + (solutionY * mapImage.naturalHeight / scaleY) - 5 + window.scrollY}px`;
                         solutionMarker.style.display = 'block';
                         document.body.appendChild(solutionMarker);
+
+                        // Create the connection Line
+                        const existingLine = document.getElementById('connectionLine');
+
+                        const line = document.createElement('div');
+                        line.id = 'connectionLine';
+                        marker.parentNode.insertBefore(line, marker);
+
+                        const markerRect = marker.getBoundingClientRect();
+                        const solutionRect = solutionMarker.getBoundingClientRect();
+
+                        // Calculate centers with scroll offset
+                        const userCenterX = markerRect.left + window.scrollX + markerRect.width/2;
+                        const userCenterY = markerRect.top + window.scrollY + markerRect.height/2;
+                        const solutionCenterX = solutionRect.left + window.scrollX + solutionRect.width/2;
+                        const solutionCenterY = solutionRect.top + window.scrollY + solutionRect.height/2;
+
+                        // Calculate line parameters
+                        const deltaX = solutionCenterX - userCenterX;
+                        const deltaY = solutionCenterY - userCenterY;
+                        const length = Math.sqrt(deltaX ** 2 + deltaY ** 2);
+                        const angle = Math.atan2(deltaY, deltaX) * 180 / Math.PI;
+
+                        // Style the connection line
+                        line.style.position = 'absolute';
+                        line.style.left = `${userCenterX}px`;
+                        line.style.top = `${userCenterY}px`;
+                        line.style.width = `${length}px`;
+                        line.style.height = '0';
+                        line.style.borderTop = '2px dashed black';
+                        line.style.transform = `rotate(${angle}deg)`;
+                        line.style.transformOrigin = '0% 50%';
+                        line.style.pointerEvents = 'none';
                     } else {
                         showCustomAlert('You got the map correct!\nThis image has not been assigned a solution yet.', 1);
                     }
@@ -1444,6 +1475,7 @@ function startGame(gameArea) {
         continueButton.innerText = 'Continue';
         continueButton.onclick = (event) => {
             marker.remove();
+            if (existingLine) existingLine.remove();
             solutionMarker.remove();
             if (isOnline) {
                 db.collection('lobbies').doc(lobbyName).update({ gameStarted: true });
@@ -1473,12 +1505,52 @@ function startGame(gameArea) {
             }
         }
 
+        function updateConnectionLine() {
+            const existingLine = document.getElementById('connectionLine');
+            if (!solutionMarker || solutionMarker.style.display !== 'block') {
+                if (existingLine) existingLine.remove();
+                return;
+            }
+        
+            if (!existingLine) {
+                const line = document.createElement('div');
+                line.id = 'connectionLine';
+                document.body.appendChild(line);
+            }
+        
+            const line = document.getElementById('connectionLine');
+            const markerRect = marker.getBoundingClientRect();
+            const solutionRect = solutionMarker.getBoundingClientRect();
+        
+            // Calculate centers with scroll offset
+            const userCenterX = markerRect.left + window.scrollX + markerRect.width/2;
+            const userCenterY = markerRect.top + window.scrollY + markerRect.height/2;
+            const solutionCenterX = solutionRect.left + window.scrollX + solutionRect.width/2;
+            const solutionCenterY = solutionRect.top + window.scrollY + solutionRect.height/2;
+        
+            // Calculate line parameters
+            const deltaX = solutionCenterX - userCenterX;
+            const deltaY = solutionCenterY - userCenterY;
+            const length = Math.sqrt(deltaX ** 2 + deltaY ** 2);
+            const angle = Math.atan2(deltaY, deltaX) * 180 / Math.PI;
+        
+            // Update line styles
+            line.style.position = 'absolute';
+            line.style.left = `${userCenterX}px`;
+            line.style.top = `${userCenterY}px`;
+            line.style.width = `${length}px`;
+            line.style.height = '0';
+            line.style.borderTop = '2px dashed black';
+            line.style.transform = `rotate(${angle}deg)`;
+            line.style.transformOrigin = '0% 50%';
+            line.style.pointerEvents = 'none';
+        }
+
         function updateMarker(event, delay = false) {
             const updatePosition = (marker) => {
                 if (!marker.dataset.x || !marker.dataset.y) return;
 
                 const rect = mapImage.getBoundingClientRect();
-
                 const x = parseFloat(marker.dataset.x);
                 const y = parseFloat(marker.dataset.y);
 
@@ -1491,11 +1563,16 @@ function startGame(gameArea) {
                 marker.style.top = `${markerTop}px`;
             };
 
-            if (delay) {
-                setTimeout(() => { updatePosition(marker); updatePosition(solutionMarker); }, 200);
-            } else {
+            const updateAll = () => {
                 updatePosition(marker);
                 updatePosition(solutionMarker);
+                updateConnectionLine(); // Add this line to update connection
+            };
+        
+            if (delay) {
+                setTimeout(updateAll, 200);
+            } else {
+                updateAll();
             }
         }
     }
