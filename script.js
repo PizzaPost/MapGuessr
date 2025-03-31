@@ -1425,15 +1425,11 @@ function startGame(gameArea) {
                         const angle = Math.atan2(deltaY, deltaX) * 180 / Math.PI;
 
                         // Style the connection line
-                        line.style.position = 'absolute';
+                        line.classList.add('connection-line');
                         line.style.left = `${userCenterX}px`;
                         line.style.top = `${userCenterY}px`;
                         line.style.width = `${length}px`;
-                        line.style.height = '0';
-                        line.style.borderTop = '2px dashed black';
                         line.style.transform = `rotate(${angle}deg)`;
-                        line.style.transformOrigin = '0% 50%';
-                        line.style.pointerEvents = 'none';
                     } else {
                         showCustomAlert('You got the map correct!\nThis image has not been assigned a solution yet.', 1);
                     }
@@ -1535,6 +1531,7 @@ function startGame(gameArea) {
             const angle = Math.atan2(deltaY, deltaX) * 180 / Math.PI;
         
             // Update line styles
+            line.classList.add('connection-line');
             line.style.left = `${userCenterX}px`;
             line.style.top = `${userCenterY}px`;
             line.style.width = `${length}px`;

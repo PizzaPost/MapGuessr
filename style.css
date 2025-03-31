@@ -268,6 +268,14 @@ body {
     z-index: 1000;
 }
 
+.connection-line {
+    position: absolute;
+    height: 0;
+    border-top: 2px dashed black;
+    transform-origin: 0% 50%;
+    pointer-events: none;
+}
+
 input[type="checkbox"] {
     margin-left: 8px;
 }
