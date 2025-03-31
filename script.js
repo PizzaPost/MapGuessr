@@ -1327,7 +1327,7 @@ function startGame(gameArea) {
             document.addEventListener('touchend', endDrag);
         }
     
-        function handleDrag(e) {
+        function handleDrag(e) { //TODO: Make it impossible to drag the image out of the gameContainer (with a buffer)
             if (!isDragging) return;
             e.preventDefault();
             dragOccurred = true;
