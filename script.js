@@ -1172,6 +1172,9 @@ function startGame(gameArea) {
     let marker = document.createElement('div');
     marker.id = 'marker';
 
+    const line = document.createElement('div');
+    line.id = 'connectionLine';
+
     const solutionMarker = document.createElement('div');
     solutionMarker.id = 'solutionMarker';
 
@@ -1403,33 +1406,10 @@ function startGame(gameArea) {
                         document.body.appendChild(solutionMarker);
 
                         // Create the connection Line
-                        const existingLine = document.getElementById('connectionLine');
 
-                        const line = document.createElement('div');
-                        line.id = 'connectionLine';
                         marker.parentNode.insertBefore(line, marker);
 
-                        const markerRect = marker.getBoundingClientRect();
-                        const solutionRect = solutionMarker.getBoundingClientRect();
-
-                        // Calculate centers with scroll offset
-                        const userCenterX = markerRect.left + window.scrollX + markerRect.width/2;
-                        const userCenterY = markerRect.top + window.scrollY + markerRect.height/2;
-                        const solutionCenterX = solutionRect.left + window.scrollX + solutionRect.width/2;
-                        const solutionCenterY = solutionRect.top + window.scrollY + solutionRect.height/2;
-
-                        // Calculate line parameters
-                        const deltaX = solutionCenterX - userCenterX;
-                        const deltaY = solutionCenterY - userCenterY;
-                        const length = Math.sqrt(deltaX ** 2 + deltaY ** 2);
-                        const angle = Math.atan2(deltaY, deltaX) * 180 / Math.PI;
-
-                        // Style the connection line
-                        line.classList.add('connection-line');
-                        line.style.left = `${userCenterX}px`;
-                        line.style.top = `${userCenterY}px`;
-                        line.style.width = `${length}px`;
-                        line.style.transform = `rotate(${angle}deg)`;
+                        updateConnectionLine();
                     } else {
                         showCustomAlert('You got the map correct!\nThis image has not been assigned a solution yet.', 1);
                     }
@@ -1471,7 +1451,7 @@ function startGame(gameArea) {
         continueButton.innerText = 'Continue';
         continueButton.onclick = (event) => {
             marker.remove();
-            if (existingLine) existingLine.remove();
+            line.remove();
             solutionMarker.remove();
             if (isOnline) {
                 db.collection('lobbies').doc(lobbyName).update({ gameStarted: true });
@@ -1502,19 +1482,17 @@ function startGame(gameArea) {
         }
 
         function updateConnectionLine() {
-            const existingLine = document.getElementById('connectionLine');
             if (!solutionMarker || solutionMarker.style.display !== 'block') {
-                if (existingLine) existingLine.remove();
+                if (line) line.remove();
                 return;
             }
         
-            if (!existingLine) {
+            if (!line) {
                 const line = document.createElement('div');
                 line.id = 'connectionLine';
                 document.body.appendChild(line);
             }
         
-            const line = document.getElementById('connectionLine');
             const markerRect = marker.getBoundingClientRect();
             const solutionRect = solutionMarker.getBoundingClientRect();
         
