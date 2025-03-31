@@ -1376,7 +1376,6 @@ function startGame(gameArea) {
         mapImage.addEventListener('touchstart', startDrag, { passive: false });
     
         // Modify click handler to ignore drag events
-        const originalSetMarker = mapImage.onclick;
         mapImage.onclick = (e) => {
             if (dragOccurred) {
                 dragOccurred = false;
@@ -1385,6 +1384,21 @@ function startGame(gameArea) {
             // Call setMarker only if no drag occurred.
             setMarker(e);
         };
+
+        mapImage.oncontextmenu = (e) => {
+            e.preventDefault();
+        }
+        mapImage.onmousedown = (e) => {
+            if (e.button===2) {
+                currentScale = 1;
+                currentTranslateX = 0;
+                currentTranslateY = 0;
+                mapImage.style.transform = 
+                    `translate(${currentTranslateX}px, ${currentTranslateY}px) ` +
+                    `scale(${currentScale})`;
+                    setTimeout(updateMarker, 200)
+            }
+        }
 
 
         // Create a marker on the map
