@@ -1280,12 +1280,112 @@ function startGame(gameArea) {
     }
 
     function displayMap(map) {
-        // Display the map image
+        let isDragging = false;
+        let startX, startY;
+        let currentTranslateX = 0;
+        let currentTranslateY = 0;
+        let currentScale = 1;
+        let dragOccurred = false;
+        let initialClientX, initialClientY;
         selectedMap = map
         mapImage.src = map;
         imagesWrapper.style.gridTemplateColumns = '1fr 1fr';
         imagesWrapper.appendChild(mapImage);
         resize();
+
+        function startDrag(e) {
+            e.preventDefault();
+            isDragging = true;
+            dragOccurred = false;
+            mapImage.style.cursor = 'grabbing';
+    
+            const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+            const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+            startX = clientX;
+            startY = clientY;
+            initialClientX = clientX;
+            initialClientY = clientY;
+    
+            // Parse current transform values
+            const transform = mapImage.style.transform;
+            const translateMatch = transform.match(/translate\(([^)]+)\)/);
+            if (translateMatch) {
+                const parts = translateMatch[1].split(',').map(p => parseFloat(p));
+                currentTranslateX = parts[0] || 0;
+                currentTranslateY = parts[1] || 0;
+            } else {
+                currentTranslateX = 0;
+                currentTranslateY = 0;
+            }
+            
+            const scaleMatch = transform.match(/scale\(([^)]+)\)/);
+            currentScale = scaleMatch ? parseFloat(scaleMatch[1]) : 1;
+    
+            document.addEventListener('mousemove', handleDrag);
+            document.addEventListener('mouseup', endDrag);
+            document.addEventListener('touchmove', handleDrag);
+            document.addEventListener('touchend', endDrag);
+        }
+    
+        function handleDrag(e) {
+            if (!isDragging) return;
+            e.preventDefault();
+            dragOccurred = true;
+    
+            const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+            const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+    
+            const deltaX = (clientX - startX) / currentScale;
+            const deltaY = (clientY - startY) / currentScale;
+    
+            currentTranslateX += deltaX;
+            currentTranslateY += deltaY;
+    
+            mapImage.style.transform = 
+                `translate(${currentTranslateX}px, ${currentTranslateY}px) ` +
+                `scale(${currentScale})`;
+    
+            startX = clientX;
+            startY = clientY;
+    
+            updateMarker(e);
+        }
+    
+        function endDrag(e) {
+            isDragging = false;
+            mapImage.style.cursor = 'grab';
+            
+            // Check if significant movement occurred
+            const clientX = e.changedTouches ? e.changedTouches[0].clientX : e.clientX;
+            const clientY = e.changedTouches ? e.changedTouches[0].clientY : e.clientY;
+            const deltaX = Math.abs(clientX - initialClientX);
+            const deltaY = Math.abs(clientY - initialClientY);
+            
+            if (deltaX > 5 || deltaY > 5) {
+                dragOccurred = true;
+            }
+    
+            document.removeEventListener('mousemove', handleDrag);
+            document.removeEventListener('mouseup', endDrag);
+            document.removeEventListener('touchmove', handleDrag);
+            document.removeEventListener('touchend', endDrag);
+        }
+    
+        // Add event listeners for drag handling
+        mapImage.addEventListener('mousedown', startDrag);
+        mapImage.addEventListener('touchstart', startDrag, { passive: false });
+    
+        // Modify click handler to ignore drag events
+        const originalSetMarker = mapImage.onclick;
+        mapImage.onclick = (e) => {
+            if (dragOccurred) {
+                dragOccurred = false;
+                return;
+            }
+            // Call setMarker only if no drag occurred.
+            setMarker(e);
+        };
+
 
         // Create a marker on the map
         marker.style.position = 'absolute';
@@ -1296,11 +1396,6 @@ function startGame(gameArea) {
         marker.style.borderRadius = '50%';
         marker.style.display = 'none'; // Initially hidden
         document.body.appendChild(marker);
-
-        // Listen for map clicks to place marker
-        mapImage.onclick = (event) => {
-            setMarker(event);
-        };
 
         marker.onclick = (event) => {
             setMarker(event);
