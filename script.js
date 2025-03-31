@@ -1535,15 +1535,10 @@ function startGame(gameArea) {
             const angle = Math.atan2(deltaY, deltaX) * 180 / Math.PI;
         
             // Update line styles
-            line.style.position = 'absolute';
             line.style.left = `${userCenterX}px`;
             line.style.top = `${userCenterY}px`;
             line.style.width = `${length}px`;
-            line.style.height = '0';
-            line.style.borderTop = '2px dashed black';
             line.style.transform = `rotate(${angle}deg)`;
-            line.style.transformOrigin = '0% 50%';
-            line.style.pointerEvents = 'none';
         }
 
         function updateMarker(event, delay = false) {
