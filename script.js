@@ -1365,8 +1365,6 @@ function startGame(gameArea) {
     
             document.removeEventListener('mousemove', handleDrag);
             document.removeEventListener('mouseup', endDrag);
-            document.removeEventListener('touchmove', handleDrag);
-            document.removeEventListener('touchend', endDrag);
         }
     
         // Add event listeners for drag handling
