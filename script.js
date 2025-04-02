@@ -1323,8 +1323,6 @@ function startGame(gameArea) {
     
             document.addEventListener('mousemove', handleDrag);
             document.addEventListener('mouseup', endDrag);
-            document.addEventListener('touchmove', handleDrag);
-            document.addEventListener('touchend', endDrag);
         }
     
         function handleDrag(e) { //TODO: Make it impossible to drag the image out of the gameContainer (with a buffer)
