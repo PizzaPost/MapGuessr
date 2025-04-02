@@ -1373,7 +1373,6 @@ function startGame(gameArea) {
     
         // Add event listeners for drag handling
         mapImage.addEventListener('mousedown', startDrag);
-        mapImage.addEventListener('touchstart', startDrag, { passive: false });
     
         // Modify click handler to ignore drag events
         mapImage.onclick = (e) => {
