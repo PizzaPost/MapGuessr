@@ -447,7 +447,7 @@ input[type="checkbox"] {
 }
 
 #welcome-container {
-    background: #fff;
+    background: #cecece;
     padding: 2rem;
     border-radius: 8px;
     box-shadow: 0 0 400px rgba(0, 123, 255, 0.7);
@@ -578,7 +578,7 @@ button:hover::after {
 .input-field-1 {
     height: 38px;
     padding: 10px;
-    border: 2px solid #ccc;
+    border: 2px solid #888888;
     border-top-left-radius: 12px;
     border-bottom-left-radius: 12px;
     border-top-right-radius: 0px;
