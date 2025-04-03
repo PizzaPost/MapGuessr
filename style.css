@@ -447,7 +447,7 @@ input[type="checkbox"] {
 }
 
 #welcome-container {
-    background: #cecece;
+    background: #ffffff;
     padding: 2rem;
     border-radius: 8px;
     box-shadow: 0 0 400px rgba(0, 123, 255, 0.7);
@@ -458,9 +458,11 @@ input[type="checkbox"] {
 
 #welcome-container h1 {
     margin-bottom: 1rem;
+    color: rgb(83, 83, 83)
 }
 #welcome-container p {
     margin-bottom: 1.5rem;
+    color: rgb(83, 83, 83)
 }
 #welcome-container button {
     padding: 0.5rem 1rem;
