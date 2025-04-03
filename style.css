@@ -453,7 +453,7 @@ input[type="checkbox"] {
     box-shadow: 0 0 400px rgba(0, 123, 255, 0.7);
     text-align: center;
     transform-style: preserve-3d; /* Enables 3D transformations on child elements */
-    animation: fadeIn3D 0.7s ease-out forwards;
+    animation: fadeIn3D 1s ease-out forwards;
 }
 
 #welcome-container h1 {
@@ -760,7 +760,7 @@ button:hover::after {
 @keyframes fadeIn3D {
     from {
         opacity: 0;
-        transform: rotateX(45deg) rotateY(20deg) scale(0.8);
+        transform: rotateX(100deg) rotateY(20deg) scale(0.8);
     }
     to {
         opacity: 1;

@@ -52,7 +52,7 @@ if (isMobile()) {
     const start_button = document.createElement('button');
     start_button.textContent = 'Start';
     start_button.addEventListener('click', () => {
-        overlay.style.transition = 'opacity 0.5s ease';
+        overlay.style.transition = 'opacity 0.75s ease';
         overlay.style.opacity = '0';
         setTimeout(() => document.body.removeChild(overlay), 500);
         localStorage.setItem('hasVisited', 'true');
