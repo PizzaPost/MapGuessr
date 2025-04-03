@@ -27,55 +27,63 @@ let altDevMode = 0;
 
 let loadingDiv;
 
-// Check if the user has visited before using localStorage
-if (!localStorage.getItem('hasVisited')) {
-// Create and insert style element for keyframes and additional CSS
-const style = document.createElement('style');
-document.head.appendChild(style);
-const overlay = document.createElement('div');
-overlay.id = 'welcome-overlay';
-const container = document.createElement('div');
-container.id = 'welcome-container';
-const title = document.createElement('h1');
-title.textContent = 'Welcome to MapGuessr!';
-const description = document.createElement('p');
-description.textContent = 'Get ready to explore the map!';
-const start_button = document.createElement('button');
-start_button.textContent = 'Start';
-start_button.addEventListener('click', () => {
-    overlay.style.transition = 'opacity 0.5s ease';
-    overlay.style.opacity = '0';
-    setTimeout(() => document.body.removeChild(overlay), 500);
-    localStorage.setItem('hasVisited', 'true');
-});
-
-const introduction_button = document.createElement('button');
-introduction_button.textContent = 'Introduction';
-introduction_button.addEventListener('click', () => {
-    introduction_button.remove();
-    const introduction_button_text = document.createElement('button');
-    introduction_button_text.textContent = 'Text Introduction';
-    introduction_button_text.addEventListener('click', () => {
-        introduction_button_text.remove();
-        introduction_button_video.remove();
-        window.open("https://github.com/PizzaPost/MapGuessr/blob/main/README.md", "_blank");
+if (isMobile()) {
+    const blackOverlay = document.createElement('div');
+    blackOverlay.style.position = 'fixed';
+    blackOverlay.style.top = '0';
+    blackOverlay.style.left = '0';
+    blackOverlay.style.width = '100vw';
+    blackOverlay.style.height = '100vh';
+    blackOverlay.style.background = 'black';
+    blackOverlay.style.zIndex = '999';
+    document.body.appendChild(blackOverlay);
+    showCustomAlert("This website doesn't work on this device. It is recommended to use a computer.", 0, undefined, true);
+} else if (!localStorage.getItem('hasVisited')) {
+    const style = document.createElement('style');
+    document.head.appendChild(style);
+    const overlay = document.createElement('div');
+    overlay.id = 'welcome-overlay';
+    const container = document.createElement('div');
+    container.id = 'welcome-container';
+    const title = document.createElement('h1');
+    title.textContent = 'Welcome to MapGuessr!';
+    const description = document.createElement('p');
+    description.textContent = 'Get ready to explore the map!';
+    const start_button = document.createElement('button');
+    start_button.textContent = 'Start';
+    start_button.addEventListener('click', () => {
+        overlay.style.transition = 'opacity 0.5s ease';
+        overlay.style.opacity = '0';
+        setTimeout(() => document.body.removeChild(overlay), 500);
+        localStorage.setItem('hasVisited', 'true');
     });
-    const introduction_button_video = document.createElement('button');
-    introduction_button_video.textContent = 'Video Introduction';
-    introduction_button_video.addEventListener('click', () => {
-        introduction_button_text.remove();
-        introduction_button_video.remove();
-        window.open("https://youtube.com", "_blank");
+    const introduction_button = document.createElement('button');
+    introduction_button.textContent = 'Introduction';
+    introduction_button.addEventListener('click', () => {
+        introduction_button.remove();
+        const introduction_button_text = document.createElement('button');
+        introduction_button_text.textContent = 'Text Introduction';
+        introduction_button_text.addEventListener('click', () => {
+            introduction_button_text.remove();
+            introduction_button_video.remove();
+            window.open("https://github.com/PizzaPost/MapGuessr/blob/main/README.md", "_blank");
+        });
+        const introduction_button_video = document.createElement('button');
+        introduction_button_video.textContent = 'Video Introduction';
+        introduction_button_video.addEventListener('click', () => {
+            introduction_button_text.remove();
+            introduction_button_video.remove();
+            window.open("https://youtube.com", "_blank");
+        });
+        container.appendChild(introduction_button_text);
+        container.appendChild(introduction_button_video);
     });
-    container.appendChild(introduction_button_text);
-    container.appendChild(introduction_button_video);
-});
-container.appendChild(title);
-container.appendChild(description);
-container.appendChild(start_button);
-container.appendChild(introduction_button);
-overlay.appendChild(container);
-document.body.appendChild(overlay);
+    container.appendChild(title);
+    container.appendChild(description);
+    container.appendChild(start_button);
+    container.appendChild(introduction_button);
+    overlay.appendChild(container);
+    document.body.appendChild(overlay);
 }
   
 
@@ -100,10 +108,6 @@ function isMobile() {
     return toMatch.some((toMatchItem) => {
         return navigator.userAgent.match(toMatchItem);
     });
-}
-
-if (isMobile()) {
-    showCustomAlert("This website doesn't work on this device. It is recommended to use a computer.", 0, undefined, true);
 }
 
 // Initialize Firebase
