@@ -392,9 +392,9 @@ input[type="checkbox"] {
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    transition: transform 0.5s ease, 
-                box-shadow 0.5s ease, 
-                height 0.5s ease, 
+    transition: transform 0.5s ease,
+                box-shadow 0.5s ease,
+                height 0.5s ease,
                 border-radius 0.5s ease;
     z-index: 9999;
     padding: 0;
@@ -431,6 +431,45 @@ input[type="checkbox"] {
 
 #menuButton:hover #textButton {
     transform: translateX(-6px) translateY(66px) rotate(-90deg);
+}
+
+#welcome-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+}
+
+#welcome-container {
+    background: #fff;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 0 400px rgba(0, 123, 255, 0.7);
+    text-align: center;
+    transform-style: preserve-3d; /* Enables 3D transformations on child elements */
+    animation: fadeIn3D 0.7s ease-out forwards;
+}
+
+#welcome-container h1 {
+    margin-bottom: 1rem;
+}
+#welcome-container p {
+    margin-bottom: 1.5rem;
+}
+#welcome-container button {
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    background-color: #007BFF;
+    color: #fff;
 }
 
 /* Button Styling */
@@ -693,11 +732,11 @@ button:hover::after {
 }
 
 @keyframes shrinkOut {
-    0% { 
+    0% {
         transform: translate(-50%, -50%) scale(1);
         opacity: 1;
     }
-    100% { 
+    100% {
         transform: translate(-50%, -50%) scale(0.8);
         opacity: 0;
     }
@@ -709,6 +748,22 @@ button:hover::after {
     50% { transform: translate(-50%, -50%) rotate(5deg); }
     75% { transform: translate(-50%, -50%) rotate(-3deg); }
     100% { transform: translate(-50%, -50%) rotate(0deg); }
+}
+
+@keyframes fadeInScale {
+    from { opacity: 0; transform: scale(0.8); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes fadeIn3D {
+    from {
+        opacity: 0;
+        transform: rotateX(45deg) rotateY(20deg) scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: rotateX(0deg) rotateY(0deg) scale(1);
+    }
 }
 
 /* Element Specific Animations */
