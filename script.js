@@ -39,51 +39,230 @@ if (isMobile()) {
     document.body.appendChild(blackOverlay);
     showCustomAlert("This website doesn't work on this device. It is recommended to use a computer.", 0, undefined, true);
 } else if (!localStorage.getItem('hasVisited')) {
-    const style = document.createElement('style');
-    document.head.appendChild(style);
-    const overlay = document.createElement('div');
-    overlay.id = 'welcome-overlay';
-    const container = document.createElement('div');
-    container.id = 'welcome-container';
-    const title = document.createElement('h1');
-    title.textContent = 'Welcome to MapGuessr!';
-    const description = document.createElement('p');
-    description.textContent = 'Get ready to explore the map!';
-    const start_button = document.createElement('button');
-    start_button.textContent = 'Start';
-    start_button.addEventListener('click', () => {
-        overlay.style.transition = 'opacity 0.75s ease';
-        overlay.style.opacity = '0';
-        setTimeout(() => document.body.removeChild(overlay), 500);
-        localStorage.setItem('hasVisited', 'true');
-    });
-    const introduction_button = document.createElement('button');
-    introduction_button.textContent = 'Introduction';
-    introduction_button.addEventListener('click', () => {
-        introduction_button.remove();
-        const introduction_button_text = document.createElement('button');
-        introduction_button_text.textContent = 'Text Introduction';
-        introduction_button_text.addEventListener('click', () => {
-            introduction_button_text.remove();
-            introduction_button_video.remove();
-            window.open("https://github.com/PizzaPost/MapGuessr/blob/main/README.md", "_blank");
+    document.addEventListener('DOMContentLoaded', () => {
+        if (isMobile()) {
+            const blackOverlay = document.createElement('div');
+            blackOverlay.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100vw;
+                height: 100vh;
+                background: black;
+                z-index: 9999;
+            `;
+            document.body.appendChild(blackOverlay);
+            alert("This website doesn't work on mobile devices. Please use a computer.");
+        } else if (!localStorage.getItem('hasVisited')) {
+            createWelcomeOverlay();
+        }
+      });
+      
+      function createWelcomeOverlay() {
+        const overlay = document.createElement('div');
+        overlay.id = 'welcome-overlay';
+        
+        const containerHTML = `
+            <div id="welcome-container">
+                <header>
+                    <h1>🌍 Welcome to MapGuessr!</h1>
+                </header>
+                
+                <div id="content-wrapper">
+                    <nav id="toc-sidebar">
+                        <h3>Table of Contents</h3>
+                    </nav>
+                    <article id="main-content"></article>
+                </div>
+      
+                <footer>
+                    <button class="primary-btn" id="start-btn">Start Guessing 🌍</button>
+                    <div class="toolbar">
+              <button class="icon-btn" id="font-increase"><span class="button-text">A+</span>+</button>
+              <button class="icon-btn" id="font-decrease"><span class="button-text">A-</span>-</button>
+          </div>
+                </footer>
+            </div>
+        `;
+
+        overlay.innerHTML = containerHTML;
+        document.body.appendChild(overlay);
+      
+        loadMarkdownContent();
+      
+        document.getElementById('start-btn').addEventListener('click', () => {
+            overlay.style.opacity = '0';
+            setTimeout(() => overlay.remove(), 500);
+            localStorage.setItem('hasVisited', 'true');
         });
-        const introduction_button_video = document.createElement('button');
-        introduction_button_video.textContent = 'Video Introduction';
-        introduction_button_video.addEventListener('click', () => {
-            introduction_button_text.remove();
-            introduction_button_video.remove();
-            window.open("https://youtube.com", "_blank");
+      
+        setupFontControls();
+      }
+      
+      function setupJumpButton() {
+        const container = document.getElementById('main-content');
+        const startBtn = document.getElementById('start-btn');
+        let isJumping = false;
+        let animationTimeout = null;
+      
+        container.addEventListener('scroll', () => {
+            const isAtBottom = container.scrollHeight - container.scrollTop <= container.clientHeight + 50;
+            
+            if (isAtBottom && !isJumping) {
+                startBtn.classList.add('jump-active');
+                isJumping = true;
+            } else if (!isAtBottom && isJumping) {
+                startBtn.classList.add('jump-completing');
+                startBtn.classList.remove('jump-active');
+                clearTimeout(animationTimeout);
+                animationTimeout = setTimeout(() => {
+                  startBtn.classList.remove('jump-completing');
+                  isJumping = false;
+              }, 250);
+            }
         });
-        container.appendChild(introduction_button_text);
-        container.appendChild(introduction_button_video);
-    });
-    container.appendChild(title);
-    container.appendChild(description);
-    container.appendChild(start_button);
-    container.appendChild(introduction_button);
-    overlay.appendChild(container);
-    document.body.appendChild(overlay);
+      }
+      
+      async function loadMarkdownContent() {
+        try {
+            const response = await fetch('./README.md');
+            if (!response.ok) throw new Error('File not found');
+            const text = await response.text();
+            
+            const mainContent = document.getElementById('main-content');
+            const sidebar = document.getElementById('toc-sidebar');
+            
+            mainContent.innerHTML = `<div class="markdown-content">${parseMarkdown(text)}</div>`;
+            generateTOC(mainContent, sidebar);
+            setupLinks(mainContent);
+            setupJumpButton();
+        } catch (error) {
+            console.error('Error loading content:', error);
+            document.getElementById('main-content').innerHTML = `
+                <div class="error">
+                    <h3>⚠️ Documentation Missing</h3>
+                    <p>${error.message}</p>
+                </div>
+            `;
+        }
+      }
+      
+      function parseMarkdown(text) {
+        return text
+            // Backslash am Zeilenende als <br> behandeln
+            .replace(/\\(\s*)\n/g, '<br>')
+            // Setext-Headings
+            .replace(/^(.+)[ \t]*\r?\n(=+)[ \t]*$/gm, '<h1>$1</h1>')
+            .replace(/^(.+)[ \t]*\r?\n(-+)[ \t]*$/gm, '<h2>$1</h2>')
+            // ATX-Headings
+            .replace(/^# (.*$)/gm, '<h1>$1</h1>')
+            .replace(/^## (.*$)/gm, '<h2>$1</h2>')
+            .replace(/^### (.*$)/gm, '<h3>$1</h3>')
+            .replace(/^#### (.*$)/gm, '<h4>$1</h4>')
+            // Links
+            .replace(/\[(.*?)\]\((.*?)\)/g, (_, text, link) => {
+                const cleanLink = link.toLowerCase()
+                    .replace(/[^a-z0-9 -]/g, '')
+                    .replace(/\s+/g, '-')
+                    .replace(/-+/g, '-');
+                return `<a class="content-link" href="#${cleanLink}">${text}</a>`;
+            })
+            // Formatierung
+            .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+            .replace(/\*(.*?)\*/g, '<em>$1</em>')
+            .replace(/`(.*?)`/g, '<code>$1</code>')
+            .replace(/```([\s\S]*?)```/g, '<pre><code>$1</code></pre>');
+      }
+      
+      function generateTOC(contentElement, sidebarElement) {
+        const headings = contentElement.querySelectorAll('h1, h2, h3, h4, h5, h6');
+        
+        headings.forEach(heading => {
+            const id = heading.textContent
+                .toLowerCase()
+                .replace(/[^a-z0-9 -]/g, '')
+                .replace(/\s+/g, '-')
+                .replace(/-+/g, '-');
+      
+            heading.id = id;
+            
+            const tocItem = document.createElement('a');
+            tocItem.className = `toc-link ${heading.tagName.toLowerCase()}`;
+            tocItem.textContent = heading.textContent;
+            tocItem.href = `#${id}`;
+            tocItem.addEventListener('click', smoothScroll);
+            sidebarElement.appendChild(tocItem);
+        });
+      }
+      
+      function setupLinks(container) {
+        container.querySelectorAll('.content-link').forEach(link => {
+            link.addEventListener('click', smoothScroll);
+        });
+      }
+      
+      function smoothScroll(e) {
+          e.preventDefault();
+          const link = e.target.closest('a');
+          if (!link || !link.hash) return;
+      
+          const targetId = decodeURIComponent(link.hash.substring(1));
+          const target = document.getElementById(targetId);
+          
+          if (target) {
+              const headerHeight = document.querySelector('header').offsetHeight;
+              const elementRect = target.getBoundingClientRect();
+              const offsetPosition = elementRect.top + window.pageYOffset - headerHeight - 20;
+              window.scroll({
+                  top: offsetPosition,
+                  behavior: 'smooth'
+              });
+              target.classList.add('highlight');
+              setTimeout(() => target.classList.remove('highlight'), 2000);
+              history.replaceState(null, null, link.hash);
+          }
+      }
+      function smoothScroll(e) {
+          e.preventDefault();
+          const link = e.target.closest('a');
+          if (!link || !link.hash) return;
+      
+          const targetId = decodeURIComponent(link.hash.substring(1));
+          const target = document.getElementById(targetId);
+          const container = document.getElementById('main-content');
+      
+          if (target && container) {
+              const headerHeight = document.querySelector('header').offsetHeight;
+              const containerRect = container.getBoundingClientRect();
+              const targetRect = target.getBoundingClientRect();
+              const scrollPosition = targetRect.top - containerRect.top + container.scrollTop - headerHeight+ 100;
+              
+              container.scrollTo({
+                  top: scrollPosition,
+                  behavior: 'smooth'
+              });
+      
+              target.classList.add('highlight');
+              setTimeout(() => target.classList.remove('highlight'), 2000);
+              history.replaceState(null, null, link.hash);
+          }
+      }
+      
+      
+      function setupFontControls() {
+        let fontSize = 16;
+        const updateFontSize = () => document.documentElement.style.fontSize = `${fontSize}px`;
+        
+        document.getElementById('font-increase').addEventListener('click', () => {
+            fontSize = Math.min(20, fontSize + 1);
+            updateFontSize();
+        });
+        
+        document.getElementById('font-decrease').addEventListener('click', () => {
+            fontSize = Math.max(14, fontSize - 1);
+            updateFontSize();
+        });
+      }
 }
   
 
