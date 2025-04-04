@@ -134,11 +134,15 @@ body {
     transition: color 1s ease, border-color 1s ease;
 }
 
-.images-wrapper img:only-child {
+/* .images-wrapper img:only-child {
+    border-radius: 15px;
+} */
+
+.images-wrapper img {
     border-radius: 15px;
 }
 
-.images-wrapper img:nth-child(2n+1) {
+/* .images-wrapper img:nth-child(2n+1) {
     border-top-left-radius: 15px;
     border-bottom-left-radius: 15px;
 }
@@ -146,7 +150,7 @@ body {
 .images-wrapper img:nth-child(2n) {
     border-top-right-radius: 15px;
     border-bottom-right-radius: 15px;
-}
+} */
 
 /* Image Arrangement and Effects */
 .images-wrapper {

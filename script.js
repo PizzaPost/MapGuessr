@@ -85,7 +85,7 @@ if (isMobile()) {
     overlay.appendChild(container);
     document.body.appendChild(overlay);
 }
-  
+
 
 if (showHistory) {
     toggleHistory.classList.add('disabled');
@@ -1045,10 +1045,6 @@ if (!imagesWrapper) {
 }
 
 function startGame(gameArea) {
-    // Remove any existing objects with id marker or solutionMarker
-    const markerObjects = document.querySelectorAll('[id="marker"], [id="solutionMarker"]');
-    markerObjects.forEach(object => object.remove());
-
     // Add the CSS transition here
     const style = document.createElement('style');
     style.textContent = `
@@ -1078,12 +1074,13 @@ function startGame(gameArea) {
                 imagesWrapper.removeChild(first)
                 break
             }
-            const blur = Math.max(0, 1.7 * (i ** 2) - 7.9 * i + 10); //TODO: When the first photo is guessed and appears in the history, it
-            //immediately has the strongest blur effect instead of the lowest.
-            //After the second photo becomes the newest in the history, it has
-            //a medium blur strength, and the oldest still has the strongest.
-            //However, the oldest one should have the medium blur strength, and the
-            //newest should have the lowest. After the next guess is everything correct.
+            const blur = Math.max(0, 1.7 * (i ** 2) - 7.9 * i + 10); // TODO: When the first photo is guessed and appears in the history, it
+            // immediately has the strongest blur effect instead of the lowest.
+            // After the second photo becomes the newest in the history, it has
+            // a medium blur strength, and the oldest still has the strongest.
+            // However, the oldest one should have the medium blur strength, and the
+            // newest should have the lowest. After the next guess is everything correct.
+            // We do not want this behavior though, as we prefer the blur to gradually increase towards the top.
             first.style.filter = `blur(${blur}px)`;
             second.style.filter = `blur(${blur}px)`;
             second.style.transform = 'scale(1)';
@@ -1215,6 +1212,10 @@ function startGame(gameArea) {
 
     const mapImage = document.createElement('img');
     mapImage.style.width = "100%";
+    const mapImageContainer = document.createElement('div');
+    mapImageContainer.id = 'mapImageContainer';
+    mapImageContainer.style.position = "relative";
+    mapImageContainer.appendChild(mapImage);
 
     let selectedMap = null;
 
@@ -1346,7 +1347,7 @@ function startGame(gameArea) {
         selectedMap = map
         mapImage.src = map;
         imagesWrapper.style.gridTemplateColumns = '1fr 1fr';
-        imagesWrapper.appendChild(mapImage);
+        imagesWrapper.appendChild(mapImageContainer);
         resize();
 
         function startDrag(e) {
@@ -1354,14 +1355,14 @@ function startGame(gameArea) {
             isDragging = true;
             dragOccurred = false;
             mapImage.style.cursor = 'grabbing';
-    
+
             const clientX = e.touches ? e.touches[0].clientX : e.clientX;
             const clientY = e.touches ? e.touches[0].clientY : e.clientY;
             startX = clientX;
             startY = clientY;
             initialClientX = clientX;
             initialClientY = clientY;
-    
+
             // Parse current transform values
             const transform = mapImage.style.transform;
             const translateMatch = transform.match(/translate\(([^)]+)\)/);
@@ -1373,81 +1374,67 @@ function startGame(gameArea) {
                 currentTranslateX = 0;
                 currentTranslateY = 0;
             }
-            
+
             const scaleMatch = transform.match(/scale\(([^)]+)\)/);
             currentScale = scaleMatch ? parseFloat(scaleMatch[1]) : 1;
-    
+
             document.addEventListener('mousemove', handleDrag);
             document.addEventListener('mouseup', endDrag);
         }
-    
+
         function handleDrag(e) { //TODO: Make it impossible to drag the image out of the gameContainer (with a buffer)
             if (!isDragging) return;
             e.preventDefault();
             dragOccurred = true;
-    
+
             const clientX = e.touches ? e.touches[0].clientX : e.clientX;
             const clientY = e.touches ? e.touches[0].clientY : e.clientY;
-    
+
             const deltaX = (clientX - startX) / currentScale;
             const deltaY = (clientY - startY) / currentScale;
-    
+
             currentTranslateX += deltaX;
             currentTranslateY += deltaY;
-    
-            mapImage.style.transform = 
+
+            mapImage.style.transform =
                 `translate(${currentTranslateX}px, ${currentTranslateY}px) ` +
                 `scale(${currentScale})`;
-    
+
             startX = clientX;
             startY = clientY;
-    
+
             updateMarker(e);
         }
-    
+
         function endDrag(e) {
             isDragging = false;
             mapImage.style.cursor = 'grab';
-            
-            // Check if significant movement occurred
-            const clientX = e.changedTouches ? e.changedTouches[0].clientX : e.clientX;
-            const clientY = e.changedTouches ? e.changedTouches[0].clientY : e.clientY;
-            const deltaX = Math.abs(clientX - initialClientX);
-            const deltaY = Math.abs(clientY - initialClientY);
-            
-            if (deltaX > 5 || deltaY > 5) {
-                dragOccurred = true;
+
+            dragOccurred = true;
+
+            const distance = Math.hypot(e.clientX - initialClientX, e.clientY - initialClientY);
+            if (distance < 5) { // Call setMarker only if no drag occurred.
+                setMarker(e);
             }
-    
+
             document.removeEventListener('mousemove', handleDrag);
             document.removeEventListener('mouseup', endDrag);
         }
-    
-        // Add event listeners for drag handling
-        mapImage.addEventListener('mousedown', startDrag);
-    
-        // Modify click handler to ignore drag events
-        mapImage.onclick = (e) => {
-            if (dragOccurred) {
-                dragOccurred = false;
-                return;
-            }
-            // Call setMarker only if no drag occurred.
-            setMarker(e);
-        };
 
         mapImage.oncontextmenu = (e) => {
             e.preventDefault();
         }
         mapImage.onmousedown = (e) => {
-            if (e.button===2) {
+            if (e.button === 2) {
                 currentScale = 1;
                 currentTranslateX = 0;
                 currentTranslateY = 0;
-                mapImage.style.transform = 
+                mapImage.style.transform =
                     `translate(${currentTranslateX}px, ${currentTranslateY}px) ` +
                     `scale(${currentScale})`;
-                    setTimeout(updateMarker, 200)
+                setTimeout(updateMarker, 200)
+            } else {
+                startDrag(e);
             }
         }
 
@@ -1460,7 +1447,7 @@ function startGame(gameArea) {
         marker.style.border = '2px solid black';
         marker.style.borderRadius = '50%';
         marker.style.display = 'none'; // Initially hidden
-        document.body.appendChild(marker);
+        mapImageContainer.appendChild(marker);
 
         marker.onclick = (event) => {
             setMarker(event);
@@ -1487,16 +1474,16 @@ function startGame(gameArea) {
 
             // Apply transformations
             mapImage.style.transformOrigin = `${originX}% ${originY}%`;
-            mapImage.style.transform = `scale(${newScale})`;
-
-            // Smooth centering animation when returning to original size
-            if (newScale === 1 && oldScale !== 1) {
-                mapImage.style.transition = 'transform 0.3s ease-out, transform-origin 0.3s ease-out';
-                setTimeout(() => {
-                    mapImage.style.transformOrigin = '50% 50%';
-                    mapImage.style.transition = '';
-                }, 10);
+            const currentTransform = mapImage.style.transform;
+            const transformParts = currentTransform ? currentTransform.split(' ') : [];
+            const scaleIndex = transformParts.findIndex(part => part.startsWith('scale'));
+            if (scaleIndex === -1) {
+                transformParts.push(`scale(${newScale})`);
+            } else {
+                transformParts[scaleIndex] = `scale(${newScale})`;
             }
+            mapImage.style.transform = transformParts.join(' ');
+
             updateMarker(event, true);
         }
 
@@ -1553,17 +1540,16 @@ function startGame(gameArea) {
                         solutionMarker.style.height = '10px';
                         solutionMarker.style.backgroundColor = 'green';
                         solutionMarker.style.borderRadius = '50%';
+                        solutionMarker.style.border = '2px solid black';
                         solutionMarker.dataset.x = solutionX;
                         solutionMarker.dataset.y = solutionY;
-                        solutionMarker.style.left = `${mapImage.offsetLeft + solutionX * mapImage.offsetWidth - 5}px`; // subtract half the size of the marker
-                        solutionMarker.style.top = `${mapImage.offsetTop + solutionY * mapImage.offsetHeight - 5}px`;
                         const mapRect = mapImage.getBoundingClientRect();
                         const scaleX = mapImage.naturalWidth / mapRect.width;
                         const scaleY = mapImage.naturalHeight / mapRect.height;
-                        solutionMarker.style.left = `${mapRect.left + (solutionX * mapImage.naturalWidth / scaleX) - 5 + window.scrollX}px`;
-                        solutionMarker.style.top = `${mapRect.top + (solutionY * mapImage.naturalHeight / scaleY) - 5 + window.scrollY}px`;
+                        solutionMarker.style.left = `${(solutionX * mapImage.naturalWidth / scaleX) - 5}px`;
+                        solutionMarker.style.top = `${(solutionY * mapImage.naturalHeight / scaleY) - 5}px`;
                         solutionMarker.style.display = 'block';
-                        document.body.appendChild(solutionMarker);
+                        mapImageContainer.appendChild(solutionMarker);
 
                         // Create the connection Line
 
@@ -1610,9 +1596,6 @@ function startGame(gameArea) {
         const continueButton = document.createElement('button');
         continueButton.innerText = 'Continue';
         continueButton.onclick = (event) => {
-            marker.remove();
-            line.remove();
-            solutionMarker.remove();
             if (isOnline) {
                 db.collection('lobbies').doc(lobbyName).update({ gameStarted: true });
             }
@@ -1642,38 +1625,30 @@ function startGame(gameArea) {
         }
 
         function updateConnectionLine() {
-            if (!solutionMarker || solutionMarker.style.display !== 'block') {
-                if (line) line.remove();
-                return;
-            }
-        
-            if (!line) {
-                const line = document.createElement('div');
-                line.id = 'connectionLine';
-                document.body.appendChild(line);
-            }
-        
             const markerRect = marker.getBoundingClientRect();
             const solutionRect = solutionMarker.getBoundingClientRect();
-        
-            // Calculate centers with scroll offset
-            const userCenterX = markerRect.left + window.scrollX + markerRect.width/2;
-            const userCenterY = markerRect.top + window.scrollY + markerRect.height/2;
-            const solutionCenterX = solutionRect.left + window.scrollX + solutionRect.width/2;
-            const solutionCenterY = solutionRect.top + window.scrollY + solutionRect.height/2;
-        
+            const mICRect = mapImageContainer.getBoundingClientRect();
+
+            // Calculate centers. Keep in mind that the markers' left and top are page values, while line.style.left sets the distance to the left of the mapImageContainer
+            const userCenterX = markerRect.left + markerRect.width / 2 - mICRect.left;
+            const userCenterY = markerRect.top + markerRect.height / 2 - mICRect.top;
+            const solutionCenterX = solutionRect.left + solutionRect.width / 2 - mICRect.left;
+            const solutionCenterY = solutionRect.top + solutionRect.height / 2 - mICRect.top;
+
             // Calculate line parameters
             const deltaX = solutionCenterX - userCenterX;
             const deltaY = solutionCenterY - userCenterY;
             const length = Math.sqrt(deltaX ** 2 + deltaY ** 2);
             const angle = Math.atan2(deltaY, deltaX) * 180 / Math.PI;
-        
+
             // Update line styles
             line.classList.add('connection-line');
+            line.style.position = 'absolute';
             line.style.left = `${userCenterX}px`;
             line.style.top = `${userCenterY}px`;
             line.style.width = `${length}px`;
             line.style.transform = `rotate(${angle}deg)`;
+            line.style.display = 'block';
         }
 
         function updateMarker(event, delay = false) {
@@ -1685,8 +1660,8 @@ function startGame(gameArea) {
                 const y = parseFloat(marker.dataset.y);
 
                 // Calculate expected position regardless of current visibility
-                const markerLeft = rect.left + (x * rect.width) - 5 + window.scrollX;
-                const markerTop = rect.top + (y * rect.height) - 5 + window.scrollY;
+                const markerLeft = (x * rect.width) - 5;
+                const markerTop = (y * rect.height) - 5;
 
                 // Update marker position
                 marker.style.left = `${markerLeft}px`;
@@ -1698,7 +1673,7 @@ function startGame(gameArea) {
                 updatePosition(solutionMarker);
                 updateConnectionLine(); // Add this line to update connection
             };
-        
+
             if (delay) {
                 setTimeout(updateAll, 200);
             } else {
