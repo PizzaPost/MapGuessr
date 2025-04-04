@@ -56,12 +56,12 @@ if (isMobile()) {
         } else if (!localStorage.getItem('hasVisited')) {
             createWelcomeOverlay();
         }
-      });
-      
-      function createWelcomeOverlay() {
+    });
+
+    function createWelcomeOverlay() {
         const overlay = document.createElement('div');
         overlay.id = 'welcome-overlay';
-        
+
         const containerHTML = `
             <div id="welcome-container">
                 <header>
@@ -87,27 +87,27 @@ if (isMobile()) {
 
         overlay.innerHTML = containerHTML;
         document.body.appendChild(overlay);
-      
+
         loadMarkdownContent();
-      
+
         document.getElementById('start-btn').addEventListener('click', () => {
             overlay.style.opacity = '0';
             setTimeout(() => overlay.remove(), 500);
             localStorage.setItem('hasVisited', 'true');
         });
-      
+
         setupFontControls();
-      }
-      
-      function setupJumpButton() {
+    }
+
+    function setupJumpButton() {
         const container = document.getElementById('main-content');
         const startBtn = document.getElementById('start-btn');
         let isJumping = false;
         let animationTimeout = null;
-      
+
         container.addEventListener('scroll', () => {
             const isAtBottom = container.scrollHeight - container.scrollTop <= container.clientHeight + 50;
-            
+
             if (isAtBottom && !isJumping) {
                 startBtn.classList.add('jump-active');
                 isJumping = true;
@@ -116,22 +116,22 @@ if (isMobile()) {
                 startBtn.classList.remove('jump-active');
                 clearTimeout(animationTimeout);
                 animationTimeout = setTimeout(() => {
-                  startBtn.classList.remove('jump-completing');
-                  isJumping = false;
-              }, 250);
+                    startBtn.classList.remove('jump-completing');
+                    isJumping = false;
+                }, 250);
             }
         });
-      }
-      
-      async function loadMarkdownContent() {
+    }
+
+    async function loadMarkdownContent() {
         try {
             const response = await fetch('./README.md');
             if (!response.ok) throw new Error('File not found');
             const text = await response.text();
-            
+
             const mainContent = document.getElementById('main-content');
             const sidebar = document.getElementById('toc-sidebar');
-            
+
             mainContent.innerHTML = `<div class="markdown-content">${parseMarkdown(text)}</div>`;
             generateTOC(mainContent, sidebar);
             setupLinks(mainContent);
@@ -145,9 +145,9 @@ if (isMobile()) {
                 </div>
             `;
         }
-      }
-      
-      function parseMarkdown(text) {
+    }
+
+    function parseMarkdown(text) {
         return text
             // Backslash am Zeilenende als <br> behandeln
             .replace(/\\(\s*)\n/g, '<br>')
@@ -172,20 +172,20 @@ if (isMobile()) {
             .replace(/\*(.*?)\*/g, '<em>$1</em>')
             .replace(/`(.*?)`/g, '<code>$1</code>')
             .replace(/```([\s\S]*?)```/g, '<pre><code>$1</code></pre>');
-      }
-      
-      function generateTOC(contentElement, sidebarElement) {
+    }
+
+    function generateTOC(contentElement, sidebarElement) {
         const headings = contentElement.querySelectorAll('h1, h2, h3, h4, h5, h6');
-        
+
         headings.forEach(heading => {
             const id = heading.textContent
                 .toLowerCase()
                 .replace(/[^a-z0-9 -]/g, '')
                 .replace(/\s+/g, '-')
                 .replace(/-+/g, '-');
-      
+
             heading.id = id;
-            
+
             const tocItem = document.createElement('a');
             tocItem.className = `toc-link ${heading.tagName.toLowerCase()}`;
             tocItem.textContent = heading.textContent;
@@ -193,78 +193,78 @@ if (isMobile()) {
             tocItem.addEventListener('click', smoothScroll);
             sidebarElement.appendChild(tocItem);
         });
-      }
-      
-      function setupLinks(container) {
+    }
+
+    function setupLinks(container) {
         container.querySelectorAll('.content-link').forEach(link => {
             link.addEventListener('click', smoothScroll);
         });
-      }
-      
-      function smoothScroll(e) {
-          e.preventDefault();
-          const link = e.target.closest('a');
-          if (!link || !link.hash) return;
-      
-          const targetId = decodeURIComponent(link.hash.substring(1));
-          const target = document.getElementById(targetId);
-          
-          if (target) {
-              const headerHeight = document.querySelector('header').offsetHeight;
-              const elementRect = target.getBoundingClientRect();
-              const offsetPosition = elementRect.top + window.pageYOffset - headerHeight - 20;
-              window.scroll({
-                  top: offsetPosition,
-                  behavior: 'smooth'
-              });
-              target.classList.add('highlight');
-              setTimeout(() => target.classList.remove('highlight'), 2000);
-              history.replaceState(null, null, link.hash);
-          }
-      }
-      function smoothScroll(e) {
-          e.preventDefault();
-          const link = e.target.closest('a');
-          if (!link || !link.hash) return;
-      
-          const targetId = decodeURIComponent(link.hash.substring(1));
-          const target = document.getElementById(targetId);
-          const container = document.getElementById('main-content');
-      
-          if (target && container) {
-              const headerHeight = document.querySelector('header').offsetHeight;
-              const containerRect = container.getBoundingClientRect();
-              const targetRect = target.getBoundingClientRect();
-              const scrollPosition = targetRect.top - containerRect.top + container.scrollTop - headerHeight+ 100;
-              
-              container.scrollTo({
-                  top: scrollPosition,
-                  behavior: 'smooth'
-              });
-      
-              target.classList.add('highlight');
-              setTimeout(() => target.classList.remove('highlight'), 2000);
-              history.replaceState(null, null, link.hash);
-          }
-      }
-      
-      
-      function setupFontControls() {
+    }
+
+    function smoothScroll(e) {
+        e.preventDefault();
+        const link = e.target.closest('a');
+        if (!link || !link.hash) return;
+
+        const targetId = decodeURIComponent(link.hash.substring(1));
+        const target = document.getElementById(targetId);
+
+        if (target) {
+            const headerHeight = document.querySelector('header').offsetHeight;
+            const elementRect = target.getBoundingClientRect();
+            const offsetPosition = elementRect.top + window.pageYOffset - headerHeight - 20;
+            window.scroll({
+                top: offsetPosition,
+                behavior: 'smooth'
+            });
+            target.classList.add('highlight');
+            setTimeout(() => target.classList.remove('highlight'), 2000);
+            history.replaceState(null, null, link.hash);
+        }
+    }
+    function smoothScroll(e) {
+        e.preventDefault();
+        const link = e.target.closest('a');
+        if (!link || !link.hash) return;
+
+        const targetId = decodeURIComponent(link.hash.substring(1));
+        const target = document.getElementById(targetId);
+        const container = document.getElementById('main-content');
+
+        if (target && container) {
+            const headerHeight = document.querySelector('header').offsetHeight;
+            const containerRect = container.getBoundingClientRect();
+            const targetRect = target.getBoundingClientRect();
+            const scrollPosition = targetRect.top - containerRect.top + container.scrollTop - headerHeight + 100;
+
+            container.scrollTo({
+                top: scrollPosition,
+                behavior: 'smooth'
+            });
+
+            target.classList.add('highlight');
+            setTimeout(() => target.classList.remove('highlight'), 2000);
+            history.replaceState(null, null, link.hash);
+        }
+    }
+
+
+    function setupFontControls() {
         let fontSize = 16;
         const updateFontSize = () => document.documentElement.style.fontSize = `${fontSize}px`;
-        
+
         document.getElementById('font-increase').addEventListener('click', () => {
             fontSize = Math.min(20, fontSize + 1);
             updateFontSize();
         });
-        
+
         document.getElementById('font-decrease').addEventListener('click', () => {
             fontSize = Math.max(14, fontSize - 1);
             updateFontSize();
         });
-      }
+    }
 }
-  
+
 
 if (showHistory) {
     toggleHistory.classList.add('disabled');
@@ -1533,14 +1533,14 @@ function startGame(gameArea) {
             isDragging = true;
             dragOccurred = false;
             mapImage.style.cursor = 'grabbing';
-    
+
             const clientX = e.touches ? e.touches[0].clientX : e.clientX;
             const clientY = e.touches ? e.touches[0].clientY : e.clientY;
             startX = clientX;
             startY = clientY;
             initialClientX = clientX;
             initialClientY = clientY;
-    
+
             // Parse current transform values
             const transform = mapImage.style.transform;
             const translateMatch = transform.match(/translate\(([^)]+)\)/);
@@ -1552,59 +1552,59 @@ function startGame(gameArea) {
                 currentTranslateX = 0;
                 currentTranslateY = 0;
             }
-            
+
             const scaleMatch = transform.match(/scale\(([^)]+)\)/);
             currentScale = scaleMatch ? parseFloat(scaleMatch[1]) : 1;
-    
+
             document.addEventListener('mousemove', handleDrag);
             document.addEventListener('mouseup', endDrag);
         }
-    
+
         function handleDrag(e) { //TODO: Make it impossible to drag the image out of the gameContainer (with a buffer)
             if (!isDragging) return;
             e.preventDefault();
             dragOccurred = true;
-    
+
             const clientX = e.touches ? e.touches[0].clientX : e.clientX;
             const clientY = e.touches ? e.touches[0].clientY : e.clientY;
-    
+
             const deltaX = (clientX - startX) / currentScale;
             const deltaY = (clientY - startY) / currentScale;
-    
+
             currentTranslateX += deltaX;
             currentTranslateY += deltaY;
-    
-            mapImage.style.transform = 
+
+            mapImage.style.transform =
                 `translate(${currentTranslateX}px, ${currentTranslateY}px) ` +
                 `scale(${currentScale})`;
-    
+
             startX = clientX;
             startY = clientY;
-    
+
             updateMarker(e);
         }
-    
+
         function endDrag(e) {
             isDragging = false;
             mapImage.style.cursor = 'grab';
-            
+
             // Check if significant movement occurred
             const clientX = e.changedTouches ? e.changedTouches[0].clientX : e.clientX;
             const clientY = e.changedTouches ? e.changedTouches[0].clientY : e.clientY;
             const deltaX = Math.abs(clientX - initialClientX);
             const deltaY = Math.abs(clientY - initialClientY);
-            
+
             if (deltaX > 5 || deltaY > 5) {
                 dragOccurred = true;
             }
-    
+
             document.removeEventListener('mousemove', handleDrag);
             document.removeEventListener('mouseup', endDrag);
         }
-    
+
         // Add event listeners for drag handling
         mapImage.addEventListener('mousedown', startDrag);
-    
+
         // Modify click handler to ignore drag events
         mapImage.onclick = (e) => {
             if (dragOccurred) {
@@ -1619,14 +1619,14 @@ function startGame(gameArea) {
             e.preventDefault();
         }
         mapImage.onmousedown = (e) => {
-            if (e.button===2) {
+            if (e.button === 2) {
                 currentScale = 1;
                 currentTranslateX = 0;
                 currentTranslateY = 0;
-                mapImage.style.transform = 
+                mapImage.style.transform =
                     `translate(${currentTranslateX}px, ${currentTranslateY}px) ` +
                     `scale(${currentScale})`;
-                    setTimeout(updateMarker, 200)
+                setTimeout(updateMarker, 200)
             }
         }
 
@@ -1825,28 +1825,28 @@ function startGame(gameArea) {
                 if (line) line.remove();
                 return;
             }
-        
+
             if (!line) {
                 const line = document.createElement('div');
                 line.id = 'connectionLine';
                 document.body.appendChild(line);
             }
-        
+
             const markerRect = marker.getBoundingClientRect();
             const solutionRect = solutionMarker.getBoundingClientRect();
-        
+
             // Calculate centers with scroll offset
-            const userCenterX = markerRect.left + window.scrollX + markerRect.width/2;
-            const userCenterY = markerRect.top + window.scrollY + markerRect.height/2;
-            const solutionCenterX = solutionRect.left + window.scrollX + solutionRect.width/2;
-            const solutionCenterY = solutionRect.top + window.scrollY + solutionRect.height/2;
-        
+            const userCenterX = markerRect.left + window.scrollX + markerRect.width / 2;
+            const userCenterY = markerRect.top + window.scrollY + markerRect.height / 2;
+            const solutionCenterX = solutionRect.left + window.scrollX + solutionRect.width / 2;
+            const solutionCenterY = solutionRect.top + window.scrollY + solutionRect.height / 2;
+
             // Calculate line parameters
             const deltaX = solutionCenterX - userCenterX;
             const deltaY = solutionCenterY - userCenterY;
             const length = Math.sqrt(deltaX ** 2 + deltaY ** 2);
             const angle = Math.atan2(deltaY, deltaX) * 180 / Math.PI;
-        
+
             // Update line styles
             line.classList.add('connection-line');
             line.style.left = `${userCenterX}px`;
@@ -1877,7 +1877,7 @@ function startGame(gameArea) {
                 updatePosition(solutionMarker);
                 updateConnectionLine(); // Add this line to update connection
             };
-        
+
             if (delay) {
                 setTimeout(updateAll, 200);
             } else {
