@@ -1150,6 +1150,10 @@ function createMoreButton() {
         themeEmoji.textContent = currentTheme === 'dark' ? '☀️' : '🌙';
     };
 
+    if (!showHistory) {
+        toggleHistory.classList.add('disabled');
+    }
+
     menuButton.addEventListener('click', (event) => {
         //stop running actions on collapsed button (mobile issue)
         if (menuButton.getBoundingClientRect().height === 40) return;
