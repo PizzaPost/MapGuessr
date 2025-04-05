@@ -1888,6 +1888,21 @@ function resize() {
     imagesWrapper.style.gridTemplateColumns = isPortrait ? '1fr' : 'repeat(2, 1fr)';
 }
 
+//a way to disable console? should we do that?
+//
+//Ethical Note:
+//Blocking the console harms legitimate users and developers trying to debug our site. Browsers like Chrome may even penalize this behavior in the future.
+
+
+// Detect devtools via debugger; statements
+// setInterval(() => {
+//     const start = Date.now();
+//     debugger;
+//     if (Date.now() - start > 100) {
+//         window.location.reload();
+//     }
+// }, 1000);
+
 window.addEventListener('resize', resize);
 document.addEventListener('DOMContentLoaded', createMoreButton);
 
