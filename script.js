@@ -77,6 +77,7 @@ if (isMobile()) {
       
                 <footer>
                     <button class="primary-btn" id="start-btn">Start Guessing 🌍</button>
+                    <button class="download" id="download-readme">Download README 📄</button>
                     <div class="toolbar">
           </div>
                 </footer>
@@ -92,6 +93,13 @@ if (isMobile()) {
             overlay.style.opacity = '0';
             setTimeout(() => overlay.remove(), 500);
             localStorage.setItem('hasVisited', 'true');
+        });
+
+        document.getElementById('download-readme').addEventListener('click', () => {
+            const link = document.createElement('a');
+            link.href = './README-txt.txt';
+            link.download = 'README.txt';
+            link.click();
         });
     }
 
