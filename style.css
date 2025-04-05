@@ -22,7 +22,6 @@ html {
     --button-bg: linear-gradient(135deg, #2e93ff, #006cdf);
     --button-bg-alt: linear-gradient(135deg, #0066ff, #0046af);
     --button-color: #dadada;
-    --button-color-alt: #dadada;
     --button-shadow: rgba(0, 123, 255, 0.5);
     --button-shadow-hover: rgba(0, 63, 114, 0.5);
     --button-shadow-alt: rgba(11, 0, 167, 0.5);
@@ -38,9 +37,7 @@ html {
     --button-shadow-hover-green: rgba(0, 255, 55, 0.2);
     --button-shadow-gray: rgba(102, 102, 102, 0.2);
     --button-shadow-hover-gray: rgba(158, 158, 158, 0.2);
-    --bg-color: #cfcfcf;
     --primary-accent: #4CAF50;
-    --secondary-accent: #2196F3;
 }
 
 [data-theme="dark"] {
@@ -53,7 +50,6 @@ html {
     --button-bg: linear-gradient(135deg, #007BFF, #0056b3);
     --button-bg-alt: linear-gradient(135deg, #0400e0, #0d007e);
     --button-color: #fff;
-    --button-color-alt: #fff;
     --button-shadow: rgba(5, 50, 252, 0.2);
     --button-shadow-hover: rgba(0, 40, 216, 0.3);
     --button-shadow-alt: rgba(35, 0, 163, 0.5);
@@ -69,9 +65,7 @@ html {
     --button-shadow-hover-green: rgba(0, 255, 55, 0.2);
     --button-shadow-gray: rgba(102, 102, 102, 0.2);
     --button-shadow-hover-gray: rgba(158, 158, 158, 0.2);
-    --bg-color: #1a1a1a;
     --primary-accent: #4CAF50;
-    --secondary-accent: #2196F3;
 }
 
 header {
@@ -464,7 +458,6 @@ input[type="checkbox"] {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-family: 'Segoe UI', system-ui;
 }
 
 #welcome-container {
@@ -498,21 +491,6 @@ input[type="checkbox"] {
 #main-content {
     overflow-y: auto;
     padding-right: 1rem;
-}
-
-#font-increase::after,
-#font-decrease::after {
-    content: "+";
-    font-size: 1.2em;
-    color: var(--text-color);
-    line-height: 1;
-    margin-top: -1px;
-    /* Feinjustierung für optische Mitte */
-}
-
-#font-decrease::after {
-    content: "-";
-    margin-top: -2px;
 }
 
 /* Button Styling */
@@ -750,6 +728,7 @@ button:hover::after {
     border-radius: 8px;
     cursor: pointer;
     transition: transform 0.2s ease;
+    box-shadow: var(--primary-accent);
 }
 
 .primary-btn:hover {

@@ -78,8 +78,6 @@ if (isMobile()) {
                 <footer>
                     <button class="primary-btn" id="start-btn">Start Guessing 🌍</button>
                     <div class="toolbar">
-              <button class="icon-btn" id="font-increase"><span class="button-text">A+</span>+</button>
-              <button class="icon-btn" id="font-decrease"><span class="button-text">A-</span>-</button>
           </div>
                 </footer>
             </div>
@@ -95,8 +93,6 @@ if (isMobile()) {
             setTimeout(() => overlay.remove(), 500);
             localStorage.setItem('hasVisited', 'true');
         });
-
-        setupFontControls();
     }
 
     function setupJumpButton() {
@@ -246,22 +242,6 @@ if (isMobile()) {
             setTimeout(() => target.classList.remove('highlight'), 2000);
             history.replaceState(null, null, link.hash);
         }
-    }
-
-
-    function setupFontControls() {
-        let fontSize = 16;
-        const updateFontSize = () => document.documentElement.style.fontSize = `${fontSize}px`;
-
-        document.getElementById('font-increase').addEventListener('click', () => {
-            fontSize = Math.min(20, fontSize + 1);
-            updateFontSize();
-        });
-
-        document.getElementById('font-decrease').addEventListener('click', () => {
-            fontSize = Math.max(14, fontSize - 1);
-            updateFontSize();
-        });
     }
 }
 
