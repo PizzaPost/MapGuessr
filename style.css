@@ -38,6 +38,7 @@ html {
     --button-shadow-gray: rgba(102, 102, 102, 0.2);
     --button-shadow-hover-gray: rgba(158, 158, 158, 0.2);
     --primary-accent: #4CAF50;
+    --secondary-accent: #2196F3;
 }
 
 [data-theme="dark"] {
@@ -66,6 +67,7 @@ html {
     --button-shadow-gray: rgba(102, 102, 102, 0.2);
     --button-shadow-hover-gray: rgba(158, 158, 158, 0.2);
     --primary-accent: #4CAF50;
+    --secondary-accent: #2196F3;
 }
 
 header {
