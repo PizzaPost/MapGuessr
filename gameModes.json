@@ -474,7 +474,8 @@
                     [
                         "images/portal_series/portal2/chapter2/laser_stairs/3.png",
                         [
-                            0.8865347707565094, 0.3771579458066897
+                            0.8865347707565094,
+                            0.3771579458066897
                         ]
                     ]
                 ],
@@ -1914,12 +1915,16 @@
                         "images/portal_series/portal2/chapter8/test/maps/0.png",
                         [
                             "images/portal_series/portal2/chapter8/test/0.png",
-                            [ 0.5009942151333784, 0.3082641878927702
+                            [
+                                0.5009942151333784,
+                                0.3082641878927702
                             ]
                         ],
                         [
                             "images/portal_series/portal2/chapter8/test/4.png",
-                            [ 0.5708387911830406, 0.5840082638833396
+                            [
+                                0.5708387911830406,
+                                0.5840082638833396
                             ]
                         ]
                     ],
@@ -1927,17 +1932,23 @@
                         "images/portal_series/portal2/chapter8/test/maps/1.png",
                         [
                             "images/portal_series/portal2/chapter8/test/1.png",
-                            [ 0.6561027958533673, 0.4132310919044556
+                            [
+                                0.6561027958533673,
+                                0.4132310919044556
                             ]
                         ],
                         [
                             "images/portal_series/portal2/chapter8/test/2.png",
-                            [ 0.41580467430032353, 0.329928812687402
+                            [
+                                0.41580467430032353,
+                                0.329928812687402
                             ]
                         ],
                         [
                             "images/portal_series/portal2/chapter8/test/3.png",
-                            [0.39946292472285266, 0.6572435659625233
+                            [
+                                0.39946292472285266,
+                                0.6572435659625233
                             ]
                         ]
                     ]
@@ -1946,17 +1957,23 @@
                     "images/portal_series/portal2/chapter8/funnel_intro/maps/0.png",
                     [
                         "images/portal_series/portal2/chapter8/funnel_intro/0.png",
-                        [ 0.5758553513556913, 0.7270853829747963
+                        [
+                            0.5758553513556913,
+                            0.7270853829747963
                         ]
                     ],
                     [
                         "images/portal_series/portal2/chapter8/funnel_intro/1.png",
-                        [ 0.33277228835014744, 0.6519914319050832
+                        [
+                            0.33277228835014744,
+                            0.6519914319050832
                         ]
                     ],
                     [
                         "images/portal_series/portal2/chapter8/funnel_intro/2.png",
-                        [ 0.3441295546558704, 0.19289248962614505
+                        [
+                            0.3441295546558704,
+                            0.19289248962614505
                         ]
                     ]
                 ],
@@ -1964,17 +1981,23 @@
                     "images/portal_series/portal2/chapter8/ceiling_button/maps/0.png",
                     [
                         "images/portal_series/portal2/chapter8/ceiling_button/0.png",
-                        [ 0.5536109506512359, 0.22840785792817908
+                        [
+                            0.5536109506512359,
+                            0.22840785792817908
                         ]
                     ],
                     [
                         "images/portal_series/portal2/chapter8/ceiling_button/1.png",
-                        [0.32510122693019355, 0.7598140387328762
+                        [
+                            0.32510122693019355,
+                            0.7598140387328762
                         ]
                     ],
                     [
                         "images/portal_series/portal2/chapter8/ceiling_button/2.png",
-                        [ 0.8622065864593876, 0.2563461296846885
+                        [
+                            0.8622065864593876,
+                            0.2563461296846885
                         ]
                     ]
                 ],
@@ -1982,22 +2005,30 @@
                     "images/portal_series/portal2/chapter8/wall_button/maps/0.png",
                     [
                         "images/portal_series/portal2/chapter8/wall_button/0.png",
-                        [0.7587044534412956, 0.24903282752403846
+                        [
+                            0.7587044534412956,
+                            0.24903282752403846
                         ]
                     ],
                     [
                         "images/portal_series/portal2/chapter8/wall_button/1.png",
-                        [ 0.5258335964403041, 0.7578212998833782
+                        [
+                            0.5258335964403041,
+                            0.7578212998833782
                         ]
                     ],
                     [
                         "images/portal_series/portal2/chapter8/wall_button/2.png",
-                        [ 0.44614059554131447, 0.7099291252489853
+                        [
+                            0.44614059554131447,
+                            0.7099291252489853
                         ]
                     ],
                     [
                         "images/portal_series/portal2/chapter8/wall_button/3.png",
-                        [ 0.5945119280818314, 0.4370862687443331
+                        [
+                            0.5945119280818314,
+                            0.4370862687443331
                         ]
                     ]
                 ],
@@ -2005,12 +2036,16 @@
                     "images/portal_series/portal2/chapter8/polarity/maps/0.png",
                     [
                         "images/portal_series/portal2/chapter8/polarity/0.png",
-                        [0.5513313253211544, 0.3697278222105495
+                        [
+                            0.5513313253211544,
+                            0.3697278222105495
                         ]
                     ],
                     [
                         "images/portal_series/portal2/chapter8/polarity/1.png",
-                        [0.23690750784371378, 0.6232309565721337
+                        [
+                            0.23690750784371378,
+                            0.6232309565721337
                         ]
                     ]
                 ],
@@ -2018,22 +2053,30 @@
                     "images/portal_series/portal2/chapter8/funnel_catch/maps/0.png",
                     [
                         "images/portal_series/portal2/chapter8/funnel_catch/0.png",
-                        [ 0.7393606025480738, 0.3936728092200119
+                        [
+                            0.7393606025480738,
+                            0.3936728092200119
                         ]
                     ],
                     [
                         "images/portal_series/portal2/chapter8/funnel_catch/1.png",
-                        [0.3291292467814049, 0.3960787071814581
+                        [
+                            0.3291292467814049,
+                            0.3960787071814581
                         ]
                     ],
                     [
                         "images/portal_series/portal2/chapter8/funnel_catch/2.png",
-                        [ 0.32154882154882153, 0.42198723321588755
+                        [
+                            0.32154882154882153,
+                            0.42198723321588755
                         ]
                     ],
                     [
                         "images/portal_series/portal2/chapter8/funnel_catch/3.png",
-                        [ 0.38218992854529715, 0.8320863153476084
+                        [
+                            0.38218992854529715,
+                            0.8320863153476084
                         ]
                     ]
                 ],
@@ -2041,22 +2084,30 @@
                     "images/portal_series/portal2/chapter8/stop_the_box/maps/0.png",
                     [
                         "images/portal_series/portal2/chapter8/stop_the_box/0.png",
-                        [ 0.4338755325326641, 0.6947181056612175
+                        [
+                            0.4338755325326641,
+                            0.6947181056612175
                         ]
                     ],
                     [
                         "images/portal_series/portal2/chapter8/stop_the_box/1.png",
-                        [0.27183532722076154, 0.5830268973987941
+                        [
+                            0.27183532722076154,
+                            0.5830268973987941
                         ]
                     ],
                     [
                         "images/portal_series/portal2/chapter8/stop_the_box/2.png",
-                        [0.8063535051887619, 0.5332047278965873
+                        [
+                            0.8063535051887619,
+                            0.5332047278965873
                         ]
                     ],
                     [
                         "images/portal_series/portal2/chapter8/stop_the_box/3.png",
-                        [ 0.5999021503036502, 0.6361204966542828
+                        [
+                            0.5999021503036502,
+                            0.6361204966542828
                         ]
                     ]
                 ],
@@ -2064,17 +2115,23 @@
                     "images/portal_series/portal2/chapter8/laser_catapult/maps/0.png",
                     [
                         "images/portal_series/portal2/chapter8/laser_catapult/0.png",
-                        [0.5835217622192532, 0.5822165512322166
+                        [
+                            0.5835217622192532,
+                            0.5822165512322166
                         ]
                     ],
                     [
                         "images/portal_series/portal2/chapter8/laser_catapult/1.png",
-                        [ 0.21450110801639838, 0.5078385826823392
+                        [
+                            0.21450110801639838,
+                            0.5078385826823392
                         ]
                     ],
                     [
                         "images/portal_series/portal2/chapter8/laser_catapult/2.png",
-                        [ 0.7871588329020232, 0.42956632926739907
+                        [
+                            0.7871588329020232,
+                            0.42956632926739907
                         ]
                     ]
                 ],
@@ -2083,17 +2140,23 @@
                         "images/portal_series/portal2/chapter8/laser_platform/maps/0.png",
                         [
                             "images/portal_series/portal2/chapter8/laser_platform/0.png",
-                            [ 0.7514927103061869, 0.5949920287743018
+                            [
+                                0.7514927103061869,
+                                0.5949920287743018
                             ]
                         ],
                         [
                             "images/portal_series/portal2/chapter8/laser_platform/1.png",
-                            [ 0.3756211289998219, 0.34591285508212194
+                            [
+                                0.3756211289998219,
+                                0.34591285508212194
                             ]
                         ],
                         [
                             "images/portal_series/portal2/chapter8/laser_platform/2.png",
-                            [0.3310215094709048, 0.3713944105295824
+                            [
+                                0.3310215094709048,
+                                0.3713944105295824
                             ]
                         ]
                     ],
@@ -2101,7 +2164,9 @@
                         "images/portal_series/portal2/chapter8/laser_platform/maps/1.png",
                         [
                             "images/portal_series/portal2/chapter8/laser_platform/3.png",
-                            [0.5932014322469519, 0.5376070441136185
+                            [
+                                0.5932014322469519,
+                                0.5376070441136185
                             ]
                         ]
                     ]
@@ -2111,22 +2176,30 @@
                         "images/portal_series/portal2/chapter8/propulsion_catch/maps/0.png",
                         [
                             "images/portal_series/portal2/chapter8/propulsion_catch/0.png",
-                            [ 0.5497062193955222, 0.601674196249885
+                            [
+                                0.5497062193955222,
+                                0.601674196249885
                             ]
                         ],
                         [
                             "images/portal_series/portal2/chapter8/propulsion_catch/1.png",
-                            [ 0.5163569176685878, 0.66485741863969
+                            [
+                                0.5163569176685878,
+                                0.66485741863969
                             ]
                         ],
                         [
                             "images/portal_series/portal2/chapter8/propulsion_catch/3.png",
-                            [ 0.7074138584077634, 0.5681411893339262
+                            [
+                                0.7074138584077634,
+                                0.5681411893339262
                             ]
                         ],
                         [
                             "images/portal_series/portal2/chapter8/propulsion_catch/4.png",
-                            [ 0.9080025838629054, 0.2845557441790895
+                            [
+                                0.9080025838629054,
+                                0.2845557441790895
                             ]
                         ]
                     ],
@@ -2134,7 +2207,9 @@
                         "images/portal_series/portal2/chapter8/propulsion_catch/maps/1.png",
                         [
                             "images/portal_series/portal2/chapter8/propulsion_catch/2.png",
-                            [0.5046324768301026, 0.5955685681771994
+                            [
+                                0.5046324768301026,
+                                0.5955685681771994
                             ]
                         ]
                     ]
@@ -2144,7 +2219,9 @@
                         "images/portal_series/portal2/chapter8/repulsion_polarity/maps/0.png",
                         [
                             "images/portal_series/portal2/chapter8/repulsion_polarity/0.png",
-                            [ 0.519361280738595, 0.5557989824914646
+                            [
+                                0.519361280738595,
+                                0.5557989824914646
                             ]
                         ]
                     ],
@@ -2152,17 +2229,23 @@
                         "images/portal_series/portal2/chapter8/repulsion_polarity/maps/1.png",
                         [
                             "images/portal_series/portal2/chapter8/repulsion_polarity/1.png",
-                            [0.22314379774185367, 0.5847167284105501
+                            [
+                                0.22314379774185367,
+                                0.5847167284105501
                             ]
                         ],
                         [
                             "images/portal_series/portal2/chapter8/repulsion_polarity/2.png",
-                            [ 0.8455716982367318, 0.4947758628131148
+                            [
+                                0.8455716982367318,
+                                0.4947758628131148
                             ]
                         ],
                         [
                             "images/portal_series/portal2/chapter8/repulsion_polarity/3.png",
-                            [ 0.75630631744471, 0.51115530541878
+                            [
+                                0.75630631744471,
+                                0.51115530541878
                             ]
                         ]
                     ]
@@ -2174,7 +2257,9 @@
                         "images/portal_series/portal2/chapter9/finale_1/maps/0.png",
                         [
                             "images/portal_series/portal2/chapter9/finale_1/0.png",
-                            [0.7605020753354018, 0.36598291807838523
+                            [
+                                0.7605020753354018,
+                                0.36598291807838523
                             ]
                         ]
                     ],
@@ -2182,7 +2267,9 @@
                         "images/portal_series/portal2/chapter9/finale_1/maps/1.png",
                         [
                             "images/portal_series/portal2/chapter9/finale_1/1.png",
-                            [0.5888268156424581, 0.8481758316792455
+                            [
+                                0.5888268156424581,
+                                0.8481758316792455
                             ]
                         ]
                     ],
@@ -2190,7 +2277,9 @@
                         "images/portal_series/portal2/chapter9/finale_1/maps/2.png",
                         [
                             "images/portal_series/portal2/chapter9/finale_1/2.png",
-                            [0.1548997465409849, 0.34712414083118237
+                            [
+                                0.1548997465409849,
+                                0.34712414083118237
                             ]
                         ]
                     ],
@@ -2198,7 +2287,9 @@
                         "images/portal_series/portal2/chapter9/finale_1/maps/3.png",
                         [
                             "images/portal_series/portal2/chapter9/finale_1/3.png",
-                            [0.5910614525139665, 0.5343309103553092
+                            [
+                                0.5910614525139665,
+                                0.5343309103553092
                             ]
                         ]
                     ]
@@ -2208,7 +2299,9 @@
                         "images/portal_series/portal2/chapter9/finale_2/maps/0.png",
                         [
                             "images/portal_series/portal2/chapter9/finale_2/0.png",
-                            [0.2435754189944134, 0.5541945129707482
+                            [
+                                0.2435754189944134,
+                                0.5541945129707482
                             ]
                         ]
                     ],
@@ -2216,12 +2309,16 @@
                         "images/portal_series/portal2/chapter9/finale_2/maps/1.png",
                         [
                             "images/portal_series/portal2/chapter9/finale_2/1.png",
-                            [0.770949720670391, 0.18870422484667054
+                            [
+                                0.770949720670391,
+                                0.18870422484667054
                             ]
                         ],
                         [
                             "images/portal_series/portal2/chapter9/finale_2/2.png",
-                            [0.20558659217877095, 0.8044759059252797
+                            [
+                                0.20558659217877095,
+                                0.8044759059252797
                             ]
                         ]
                     ],
@@ -2229,7 +2326,9 @@
                         "images/portal_series/portal2/chapter9/finale_2/maps/2.png",
                         [
                             "images/portal_series/portal2/chapter9/finale_2/3.png",
-                            [0.5407821229050279, 0.5045355064321507
+                            [
+                                0.5407821229050279,
+                                0.5045355064321507
                             ]
                         ]
                     ],
@@ -2237,12 +2336,16 @@
                         "images/portal_series/portal2/chapter9/finale_2/maps/3.png",
                         [
                             "images/portal_series/portal2/chapter9/finale_2/4.png",
-                            [0.7631284916201118, 0.4091902138780435
+                            [
+                                0.7631284916201118,
+                                0.4091902138780435
                             ]
                         ],
                         [
                             "images/portal_series/portal2/chapter9/finale_2/6.png",
-                            [0.4086509086875048, 0.43796708158888586
+                            [
+                                0.4086509086875048,
+                                0.43796708158888586
                             ]
                         ]
                     ],
@@ -2250,7 +2353,9 @@
                         "images/portal_series/portal2/chapter9/finale_2/maps/4.png",
                         [
                             "images/portal_series/portal2/chapter9/finale_2/5.png",
-                            [0.3486033519553073, 0.4187247431334542
+                            [
+                                0.3486033519553073,
+                                0.4187247431334542
                             ]
                         ]
                     ]
@@ -2260,7 +2365,9 @@
                         "images/portal_series/portal2/chapter9/finale_3/maps/0.png",
                         [
                             "images/portal_series/portal2/chapter9/finale_3/0.png",
-                            [0.6122905027932961, 0.5621399540169238
+                            [
+                                0.6122905027932961,
+                                0.5621399540169238
                             ]
                         ]
                     ],
@@ -2268,7 +2375,9 @@
                         "images/portal_series/portal2/chapter9/finale_3/maps/1.png",
                         [
                             "images/portal_series/portal2/chapter9/finale_3/1.png",
-                            [0.6927374301675978, 0.6117989605555213
+                            [
+                                0.6927374301675978,
+                                0.6117989605555213
                             ]
                         ]
                     ],
@@ -2276,12 +2385,16 @@
                         "images/portal_series/portal2/chapter9/finale_3/maps/2.png",
                         [
                             "images/portal_series/portal2/chapter9/finale_3/2.png",
-                            [0.24022346368715083, 0.8024895456637358
+                            [
+                                0.24022346368715083,
+                                0.8024895456637358
                             ]
                         ],
                         [
                             "images/portal_series/portal2/chapter9/finale_3/3.png",
-                            [0.7215317730240969, 0.16969425041192565
+                            [
+                                0.7215317730240969,
+                                0.16969425041192565
                             ]
                         ]
                     ],
@@ -2289,17 +2402,23 @@
                         "images/portal_series/portal2/chapter9/finale_3/maps/3.png",
                         [
                             "images/portal_series/portal2/chapter9/finale_3/4.png",
-                            [0.6916201117318436, 0.5045355064321507
+                            [
+                                0.6916201117318436,
+                                0.5045355064321507
                             ]
                         ],
                         [
                             "images/portal_series/portal2/chapter9/finale_3/5.png",
-                            [0.6586418791075749, 0.438758852020527
+                            [
+                                0.6586418791075749,
+                                0.438758852020527
                             ]
                         ],
                         [
                             "images/portal_series/portal2/chapter9/finale_3/6.png",
-                            [0.2222403594376778, 0.18318043836291306
+                            [
+                                0.2222403594376778,
+                                0.18318043836291306
                             ]
                         ]
                     ]
@@ -2309,7 +2428,9 @@
                         "images/portal_series/portal2/chapter9/finale_4/maps/0.png",
                         [
                             "images/portal_series/portal2/chapter9/finale_4/0.png",
-                            [0.506145251396648, 0.5224127487860458
+                            [
+                                0.506145251396648,
+                                0.5224127487860458
                             ]
                         ]
                     ],
@@ -2317,17 +2438,23 @@
                         "images/portal_series/portal2/chapter9/finale_4/maps/1.png",
                         [
                             "images/portal_series/portal2/chapter9/finale_4/1.png",
-                            [0.8726256983240224, 0.4946037051244312
+                            [
+                                0.8726256983240224,
+                                0.4946037051244312
                             ]
                         ],
                         [
                             "images/portal_series/portal2/chapter9/finale_4/3.png",
-                            [0.15754189944134078, 0.6932397312788212
+                            [
+                                0.15754189944134078,
+                                0.6932397312788212
                             ]
                         ],
                         [
                             "images/portal_series/portal2/chapter9/finale_4/4.png",
-                            [0.8670391061452514, 0.6614579670941189
+                            [
+                                0.8670391061452514,
+                                0.6614579670941189
                             ]
                         ]
                     ],
@@ -2335,7 +2462,9 @@
                         "images/portal_series/portal2/chapter9/finale_4/maps/2.png",
                         [
                             "images/portal_series/portal2/chapter9/finale_4/2.png",
-                            [0.5843575418994413, 0.6892670107557335
+                            [
+                                0.5843575418994413,
+                                0.6892670107557335
                             ]
                         ]
                     ]
@@ -2595,97 +2724,135 @@
             "images/ghost_of_tsushima/izuhara/maps/0.png",
             [
                 "images/ghost_of_tsushima/izuhara/0.jpg",
-                [0.6383759291128732, 0.5572507422683789
+                [
+                    0.6383759291128732,
+                    0.5572507422683789
                 ]
             ],
             [
                 "images/ghost_of_tsushima/izuhara/1.jpg",
-                [ 0.24453374432099642, 0.8187682890417833
+                [
+                    0.24453374432099642,
+                    0.8187682890417833
                 ]
             ],
             [
                 "images/ghost_of_tsushima/izuhara/2.jpg",
-                [0.8178534237228876, 0.08406020294179131
+                [
+                    0.8178534237228876,
+                    0.08406020294179131
                 ]
             ],
             [
                 "images/ghost_of_tsushima/izuhara/3.jpg",
-                [0.5079817126938317, 0.2934001465196541
+                [
+                    0.5079817126938317,
+                    0.2934001465196541
                 ]
             ],
             [
                 "images/ghost_of_tsushima/izuhara/4.jpg",
-                [0.3961496678196403, 0.9400360239929653
+                [
+                    0.3961496678196403,
+                    0.9400360239929653
                 ]
             ],
             [
                 "images/ghost_of_tsushima/izuhara/5.jpg",
-                [0.2836424587825157, 0.21037520444847183
+                [
+                    0.2836424587825157,
+                    0.21037520444847183
                 ]
             ],
             [
                 "images/ghost_of_tsushima/izuhara/6.jpg",
-                [0.1540984464954602, 0.5801330306852102
+                [
+                    0.1540984464954602,
+                    0.5801330306852102
                 ]
             ],
             [
                 "images/ghost_of_tsushima/izuhara/7.jpg",
-                [0.49338990122817716, 0.6376053357664816
+                [
+                    0.49338990122817716,
+                    0.6376053357664816
                 ]
             ],
             [
                 "images/ghost_of_tsushima/izuhara/8.jpg",
-                [0.8345033158815143, 0.6445206354113808
+                [
+                    0.8345033158815143,
+                    0.6445206354113808
                 ]
             ],
             [
                 "images/ghost_of_tsushima/izuhara/9.jpg",
-                [0.6213096263972746, 0.21046049664693303
+                [
+                    0.6213096263972746,
+                    0.21046049664693303
                 ]
             ],
             [
                 "images/ghost_of_tsushima/izuhara/10.jpg",
-                [0.23428234802004919, 0.44029660051787967
+                [
+                    0.23428234802004919,
+                    0.44029660051787967
                 ]
             ],
             [
                 "images/ghost_of_tsushima/izuhara/11.jpg",
-                [0.16958369064815046, 0.31320912322910505
+                [
+                    0.16958369064815046,
+                    0.31320912322910505
                 ]
             ],
             [
                 "images/ghost_of_tsushima/izuhara/12.jpg",
-                [0.16906137589682296, 0.2754579106221114
+                [
+                    0.16906137589682296,
+                    0.2754579106221114
                 ]
             ],
             [
                 "images/ghost_of_tsushima/izuhara/13.jpg",
-                [0.22605534777961866, 0.14677383884418677
+                [
+                    0.22605534777961866,
+                    0.14677383884418677
                 ]
             ],
             [
                 "images/ghost_of_tsushima/izuhara/14.jpg",
-                [0.7331361801632017, 0.25806850820780475
+                [
+                    0.7331361801632017,
+                    0.25806850820780475
                 ]
             ],
             [
                 "images/ghost_of_tsushima/izuhara/15.jpg",
-                [0.5733816332223004, 0.5003366144000496
+                [
+                    0.5733816332223004,
+                    0.5003366144000496
                 ]
             ],
             [
                 "images/ghost_of_tsushima/izuhara/16.jpg",
-                [0.5471754846999038, 0.5250033936354791
+                [
+                    0.5471754846999038,
+                    0.5250033936354791
                 ]
             ],
             [
                 "images/ghost_of_tsushima/izuhara/17.jpg",
-                [0.570604058227092, 0.6436326722953686
+                [
+                    0.570604058227092,
+                    0.6436326722953686
                 ]
             ],
             [
                 "images/ghost_of_tsushima/izuhara/18.jpg",
-                [0.69813861918651, 0.7636083242106775
+                [
+                    0.69813861918651,
+                    0.7636083242106775
                 ]
             ]
         ],
@@ -2693,107 +2860,149 @@
             "images/ghost_of_tsushima/iki/maps/0.png",
             [
                 "images/ghost_of_tsushima/iki/0.jpg",
-                [0.40508758446924864, 0.05154992187345477
+                [
+                    0.40508758446924864,
+                    0.05154992187345477
                 ]
             ],
             [
                 "images/ghost_of_tsushima/iki/1.jpg",
-                [ 0.5496229055747447, 0.28602629358166687
+                [
+                    0.5496229055747447,
+                    0.28602629358166687
                 ]
             ],
             [
                 "images/ghost_of_tsushima/iki/2.jpg",
-                [0.18325746044191102, 0.376382718083893
+                [
+                    0.18325746044191102,
+                    0.376382718083893
                 ]
             ],
             [
                 "images/ghost_of_tsushima/iki/3.jpg",
-                [0.6241704365283769, 0.7941694614881948
+                [
+                    0.6241704365283769,
+                    0.7941694614881948
                 ]
             ],
             [
                 "images/ghost_of_tsushima/iki/4.jpg",
-                [0.7439386950835599, 0.8225591375056384
+                [
+                    0.7439386950835599,
+                    0.8225591375056384
                 ]
             ],
             [
                 "images/ghost_of_tsushima/iki/5.jpg",
-                [0.6776870560540549, 0.31277970737855004
+                [
+                    0.6776870560540549,
+                    0.31277970737855004
                 ]
             ],
             [
                 "images/ghost_of_tsushima/iki/6.jpg",
-                [0.7784314061158665, 0.09682721368409464
+                [
+                    0.7784314061158665,
+                    0.09682721368409464
                 ]
             ],
             [
                 "images/ghost_of_tsushima/iki/7.jpg",
-                [0.30282760027303407, 0.5499801666520988
+                [
+                    0.30282760027303407,
+                    0.5499801666520988
                 ]
             ],
             [
                 "images/ghost_of_tsushima/iki/8.jpg",
-                [0.21529945345405752, 0.5782164413514861
+                [
+                    0.21529945345405752,
+                    0.5782164413514861
                 ]
             ],
             [
                 "images/ghost_of_tsushima/iki/9.jpg",
-                [0.1753012337942887, 0.6571235826992501
+                [
+                    0.1753012337942887,
+                    0.6571235826992501
                 ]
             ],
             [
                 "images/ghost_of_tsushima/iki/10.jpg",
-                [0.8037709442691247, 0.7223901494912198
+                [
+                    0.8037709442691247,
+                    0.7223901494912198
                 ]
             ],
             [
                 "images/ghost_of_tsushima/iki/11.jpg",
-                [0.14765313865926033, 0.7607477684702108
+                [
+                    0.14765313865926033,
+                    0.7607477684702108
                 ]
             ],
             [
                 "images/ghost_of_tsushima/iki/12.jpg",
-                [0.11009194533048038, 0.9325496524455421
+                [
+                    0.11009194533048038,
+                    0.9325496524455421
                 ]
             ],
             [
                 "images/ghost_of_tsushima/iki/13.jpg",
-                [0.099816632364449, 0.9333915167469832
+                [
+                    0.099816632364449,
+                    0.9333915167469832
                 ]
             ],
             [
                 "images/ghost_of_tsushima/iki/14.jpg",
-                [0.5793065177075488, 0.7585847079021728
+                [
+                    0.5793065177075488,
+                    0.7585847079021728
                 ]
             ],
             [
                 "images/ghost_of_tsushima/iki/15.jpg",
-                [0.5362007634412819, 0.8159638189951902
+                [
+                    0.5362007634412819,
+                    0.8159638189951902
                 ]
             ],
             [
                 "images/ghost_of_tsushima/iki/16.jpg",
-                [0.4076943904868305, 0.8496671531526362
+                [
+                    0.4076943904868305,
+                    0.8496671531526362
                 ]
             ],
             [
                 "images/ghost_of_tsushima/iki/17.jpg",
-                [0.5560626035544255, 0.5027160614285174
+                [
+                    0.5560626035544255,
+                    0.5027160614285174
                 ]
             ],
             [
                 "images/ghost_of_tsushima/iki/18.jpg",
-                [0.6687962013237124, 0.5470630279804588
+                [
+                    0.6687962013237124,
+                    0.5470630279804588
                 ]
             ],
             [
                 "images/ghost_of_tsushima/iki/19.jpg",
-                [0.8312463719883596, 0.5172551391870809
+                [
+                    0.8312463719883596,
+                    0.5172551391870809
                 ]
             ],
             [
                 "images/ghost_of_tsushima/iki/20.jpg",
-                [0.8592434876838732, 0.5631774981972085
+                [
+                    0.8592434876838732,
+                    0.5631774981972085
                 ]
             ]
         ]

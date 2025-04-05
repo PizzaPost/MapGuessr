@@ -1098,12 +1098,13 @@ button:hover::after {
 #main-content,
 #start-btn,
 .toolbar button {
-    transition: 
+    transition:
         background 0.4s ease,
         color 0.4s ease,
         border-color 0.4s ease,
         box-shadow 0.4s ease;
 }
+
 #start-btn,
 .toolbar button {
     transition: all var(--transition-time) cubic-bezier(0.4, 0, 0.2, 1);
@@ -1118,14 +1119,14 @@ button:hover::after {
 
 #welcome-container {
     background: var(--container-bg);
-    transition: 
+    transition:
         background 0.4s ease,
         opacity 0.3s ease-in-out;
 }
 
 #toc-sidebar,
 #main-content {
-    transition: 
+    transition:
         background-color 0.4s ease,
         border-color 0.4s ease;
 }
