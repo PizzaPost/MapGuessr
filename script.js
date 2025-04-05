@@ -20,12 +20,65 @@ let image_history = [];
 let invertSelection = false;
 let tooltip;
 const toggleHistory = document.createElement('span');
+let lastPressTime = null;
+let timeoutId = null;
 
 let devSkip = false;
 let devMode = -1;
 let altDevMode = 0;
 
 let loadingDiv;
+let submitButton;
+let continueButton;
+let alertBox;
+let joinLobbyButton;
+let closeButton;
+
+const possibleNames1 = [
+    "Shadow", "Phantom", "Neon", "Vortex", "Crimson",
+    "Cyber", "Blitz", "Titan", "Quantum", "Frost",
+    "Nova", "Silent", "Ghost", "Iron", "Solar",
+    "Midnight", "Rogue", "Stealth", "Chaos", "Zephyr",
+    "Nitro", "Cyber", "Ember", "Void", "Thunder",
+    "Pixel", "Lunar", "Storm", "Iron", "Nebula",
+    "Obsidian", "Blaze", "Stellar", "Nova", "Cyber",
+    "Frost", "Valkyrie", "Turbo", "Eclipse", "Galactic",
+    "Rustic", "Neon", "Inferno", "Zero", "Chrono",
+    "Spectral", "Drift", "Cobalt", "Mystic", "Noodle",
+    "Wraith", "Toxic", "Aurora", "Viper", "Quantum",
+    "Steel", "Nebula", "Cyber", "Rift", "Blaze",
+    "Sapphire", "Thunder", "Phantom", "Celestial", "Ironclad",
+    "Nova", "Echo", "Solar", "Void", "Crimson",
+    "Frost", "Neon", "Pandora", "Rogue", "Infernal",
+    "Cyber", "Titanium", "Astral", "Nebula", "Blitz",
+    "Stellar", "Quantum", "Shadow", "Lunar", "Valkyrie",
+    "Cyber", "Onyx", "Nova", "Frost", "Rift",
+    "Turbo", "Ember", "Ghost", "Thunder", "Crimson",
+    "Solar", "Neon", "Void", "Iron", "Zenith"
+];
+
+const possibleNames2 = [
+    "Striker", "Wraith", "Drift", "Viper", "Cobra",
+    "Cobra007", "Brawler", "Nova", "Dragon", "Byte",
+    "Blitz", "Warlord", "Sentinel", "Overlord", "FlareX",
+    "Marauder", "Pendulum", "Spartan", "Catalyst", "Rogue",
+    "Nebula", "Prowler", "Fang", "Vagabond", "Saber",
+    "Pirate", "Lynx", "Rider", "Havoc", "Ninja",
+    "Oracle", "Bolt", "Samurai", "Nomad", "Zenith",
+    "Havoc", "Void", "Taco", "Enigma", "Ronin",
+    "Raptor", "Nighthawk", "Igloo", "Gravity", "Chaos",
+    "Saiyan", "Phoenix", "Crusader", "Mongoose", "Ninja",
+    "Warden", "Tornado", "Assassin", "Vanguard", "Quokka",
+    "Falcon", "Nuke", "Serpent", "Raider", "Baron",
+    "Sphinx", "Titan", "Pilot", "Cyclone", "Jester",
+    "Knightmare", "Enforcer", "Sovereign", "Voyager", "Chimera",
+    "Fury", "Nemesis", "Pixel", "Ronin", "Ibis",
+    "Celestial", "Talon", "Axolotl", "Noble", "Banshee",
+    "Sparrow", "Quasar", "Spectre", "Lycan", "Vortex",
+    "Phoenix", "Outlaw", "Nebula", "Fox", "Runner",
+    "Tyrant", "Empress", "Gambit", "Thistle", "Corsair",
+    "Spartan", "Nuke", "Valkyrie", "Iguana", "Zombie"
+];
 
 if (isMobile()) {
     const blackOverlay = document.createElement('div');
@@ -405,7 +458,7 @@ function chooseVersion() {
     loadingDiv.style.display = 'none'; // Initially hidden
 
     // Create the join lobby button
-    const joinLobbyButton = document.createElement('button');
+    joinLobbyButton = document.createElement('button');
     joinLobbyButton.innerText = 'Join Lobby';
     joinLobbyButton.onclick = () => {
         isOnline = true;
@@ -764,13 +817,13 @@ function showCustomAlert(message, mode = 0, cont = null, reload = false) {
     overlay.className = 'custom-alert-overlay';
 
     // Create the alert box
-    const alertBox = document.createElement('div');
+    alertBox = document.createElement('div');
     alertBox.id = 'custom-alert';
     alertBox.className = `custom-alert ${mode === 0 ? 'error' : 'success'}`;
     alertBox.textContent = message;
 
     // Create the close button
-    const closeButton = document.createElement('button');
+    closeButton = document.createElement('button');
     closeButton.textContent = 'OK';
     if (mode === 0) {
         closeButton.className = 'button-red';
@@ -1177,11 +1230,11 @@ function createMoreButton() {
             localStorage.setItem('showHistory', showHistory);
             if (showHistory) {
                 toggleHistory.classList.add('disabled');
-                showCustomAlert('History disabled\nIt will update after you click "continue".', 1);
+                showCustomAlert('History disabled. It will update after you click "continue".', 1);
             }
             else {
                 toggleHistory.classList.remove('disabled');
-                showCustomAlert('History enabled\nIt will update after you click "continue".', 1);
+                showCustomAlert('History enabled. It will update after you click "continue".', 1);
             }
         }
         if (event.target.id === 'toggleSelection') {
@@ -1394,7 +1447,7 @@ function startGame(gameArea) {
 
     const backButton = document.createElement('button');
 
-    const submitButton = document.createElement('button');
+    submitButton = document.createElement('button');
 
     let marker = document.createElement('div');
     marker.id = 'marker';
@@ -1778,7 +1831,7 @@ function startGame(gameArea) {
         mapImage.style.display = '';
 
         // Create continue button
-        const continueButton = document.createElement('button');
+        continueButton = document.createElement('button');
         continueButton.innerText = 'Continue';
         continueButton.onclick = (event) => {
             marker.remove();
@@ -1878,6 +1931,71 @@ function startGame(gameArea) {
         }
     }
 }
+
+function isElementVisible(element) {
+    if (!element) return false; // Element doesn't exist
+
+    const style = window.getComputedStyle(element);
+
+    // Check for display: none, visibility: hidden/collapsed, and opacity: 0
+    if (style.display === 'none') return false;
+    if (style.visibility === 'hidden' || style.visibility === 'collapse') return false;
+    if (parseFloat(style.opacity) <= 0) return false;
+
+    // Check if element has zero area
+    const rect = element.getBoundingClientRect();
+    if (rect.width <= 0 || rect.height <= 0) return false;
+
+    return true;
+}
+  
+//keybinds
+document.addEventListener('keydown', event => {
+    if (!document.activeElement || document.activeElement.tagName !== 'INPUT') {
+        if (event.key === 'Escape') {
+            const currentTime = Date.now();
+            // Check for double press (within 300ms)
+            if (lastPressTime !== null && currentTime - lastPressTime < 300) {
+                clearTimeout(timeoutId);
+                closeThisLobby();
+                lastPressTime = null;
+                timeoutId = null;
+            } else {
+                // Set up single press action
+                clearTimeout(timeoutId); // Clear any existing timeout
+                timeoutId = setTimeout(() => {
+                    leaveLobby();
+                    lastPressTime = null;
+                    timeoutId = null;
+                }, 300);
+                lastPressTime = currentTime;
+            }
+        } else if (event.code === 'Space') {
+            if (isElementVisible(submitButton)) {
+                submitButton.click();
+            } else if (isElementVisible(continueButton)) {
+                continueButton.click();
+            } else if (isElementVisible(alertBox)) {
+                closeButton.click();
+            }
+        } else if (event.key === 'n') {
+            db.collection('lobbies').get().then(querySnapshot => {
+                if (lobbyInput.value==='') {
+                    const lobbies = querySnapshot.docs;
+                    const lobbyCount = lobbies.length;
+                    const randomLobbyName = lobbyCount > 0 ? lobbies[Math.floor(Math.random() * lobbyCount)].id : '1';
+                    lobbyInput.value = randomLobbyName;
+                }
+                if (nameInput.value==='') {
+                    nameInput.value = possibleNames1[Math.floor(Math.random() * possibleNames1.length)]+possibleNames2[Math.floor(Math.random() * possibleNames2.length)];
+                }
+                joinLobbyButton.click();
+            });
+        } else {
+            console.log(event.key);
+        }
+    }
+});
 
 function resize() {
     const allImages = document.querySelectorAll('img');
