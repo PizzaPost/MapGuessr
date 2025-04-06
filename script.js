@@ -33,6 +33,10 @@ let continueButton;
 let alertBox;
 let joinLobbyButton;
 let closeButton;
+let leaveLobbyButton;
+let closeLobbyButton;
+let giveUpHostButton;
+let claimHostButton;
 
 const possibleNames1 = [
     "Shadow", "Phantom", "Neon", "Vortex", "Crimson",
@@ -481,7 +485,7 @@ function leaveLobby() {
 function joinLobby() {
     console.log(`Joining lobby: ${lobbyName}`);
     gameVersionDiv.style.display = 'none';
-    const leaveLobbyButton = document.createElement('button');
+    leaveLobbyButton = document.createElement('button');
     leaveLobbyButton.innerText = 'Leave Lobby';
     leaveLobbyButton.style.position = 'fixed';
     leaveLobbyButton.style.bottom = '0';
@@ -587,7 +591,7 @@ playerListDiv.appendChild(playerListText);
 function playAsMember() {
     gameVersionDiv.style.display = 'none';
     lobbyName = lobbyInput.value;
-    const claimHostButton = document.createElement('button');
+    claimHostButton = document.createElement('button');
     db.collection('lobbies').doc(lobbyName).onSnapshot(doc => {
         if (!doc.exists) {
             showCustomAlert('Lobby no longer exists. The page will reload now.', undefined, [], true);
@@ -683,8 +687,8 @@ function playAsHost() {
         playerListText.innerHTML = `Players: <br>${getPlayerNames(doc.data().players || [])}`;
         document.body.appendChild(playerListDiv);
     });
-    const closeLobbyButton = document.createElement('button');
-    const giveUpHostButton = document.createElement('button');
+    closeLobbyButton = document.createElement('button');
+    giveUpHostButton = document.createElement('button');
     giveUpHostButton.id = 'giveUpHostButton';
     giveUpHostButton.innerText = 'Give up host position';
     giveUpHostButton.style.position = 'fixed';
@@ -1179,9 +1183,9 @@ function createMoreButton() {
     }
 
     menuButton.addEventListener('click', (event) => {
-        //stop running actions on collapsed button (mobile issue)
+        // stop running actions on collapsed button (mobile issue)
         if (menuButton.getBoundingClientRect().height === 40) return;
-        //option actions
+        // option actions
         if (event.target.id === 'themeEmoji') {
             const currentTheme = document.body.getAttribute('data-theme');
             if (currentTheme === 'dark') {
@@ -1577,7 +1581,7 @@ function startGame(gameArea) {
             document.addEventListener('mouseup', endDrag);
         }
 
-        function handleDrag(e) { //TODO: Make it impossible to drag the image out of the gameContainer (with a buffer)
+        function handleDrag(e) { // TODO: Make it impossible to drag the image out of the gameContainer (with a buffer)
             if (!isDragging) return;
             e.preventDefault();
             dragOccurred = true;
@@ -1894,8 +1898,8 @@ function isElementVisible(element) {
 
     return true;
 }
-  
-//keybinds
+
+// keybinds
 document.addEventListener('keydown', event => {
     if (!document.activeElement || document.activeElement.tagName !== 'INPUT') {
         if (event.key === 'Escape') {
@@ -1903,40 +1907,50 @@ document.addEventListener('keydown', event => {
             // Check for double press (within 300ms)
             if (lastPressTime !== null && currentTime - lastPressTime < 300) {
                 clearTimeout(timeoutId);
-                closeThisLobby();
+                if (isElementVisible(closeLobbyButton)) {
+                    closeLobbyButton.click(); // close lobby if host
+                }
                 lastPressTime = null;
                 timeoutId = null;
             } else {
                 // Set up single press action
                 clearTimeout(timeoutId); // Clear any existing timeout
                 timeoutId = setTimeout(() => {
-                    leaveLobby();
+                    if (isElementVisible(leaveLobbyButton)) {
+                        leaveLobbyButton.click(); // leave lobby if available
+                    }
                     lastPressTime = null;
                     timeoutId = null;
                 }, 300);
                 lastPressTime = currentTime;
             }
         } else if (event.code === 'Space') {
-            if (isElementVisible(submitButton)) {
+            if (isElementVisible(selectButton)) {
+                selectButton.click();
+            } else if (isElementVisible(submitButton)) {
                 submitButton.click();
             } else if (isElementVisible(continueButton)) {
                 continueButton.click();
             } else if (isElementVisible(alertBox)) {
                 closeButton.click();
             }
-        } else if (event.key === 'n') {
+        } else if (event.key === 'n' && isElementVisible(joinLobbyButton)) { // if new lobby keybind is pressed ONLY while lobby selection screen is open
             db.collection('lobbies').get().then(querySnapshot => {
-                if (lobbyInput.value==='') {
+                if (lobbyInput.value === '') {
                     const lobbies = querySnapshot.docs;
                     const lobbyCount = lobbies.length;
                     const randomLobbyName = lobbyCount > 0 ? lobbies[Math.floor(Math.random() * lobbyCount)].id : '1';
                     lobbyInput.value = randomLobbyName;
                 }
-                if (nameInput.value==='') {
-                    nameInput.value = possibleNames1[Math.floor(Math.random() * possibleNames1.length)]+possibleNames2[Math.floor(Math.random() * possibleNames2.length)];
+                if (nameInput.value === '') {
+                    nameInput.value = possibleNames1[Math.floor(Math.random() * possibleNames1.length)] + possibleNames2[Math.floor(Math.random() * possibleNames2.length)];
                 }
                 joinLobbyButton.click();
             });
+        } else if (event.key === 'g' && isElementVisible(giveUpHostButton)) {
+            giveUpHostButton.click();
+        } else if (event.key === 'c' && isElementVisible(claimHostButton)) {
+            claimHostButton.click();
         } else {
             console.log(event.key);
         }
@@ -1952,10 +1966,10 @@ function resize() {
     imagesWrapper.style.gridTemplateColumns = isPortrait ? '1fr' : 'repeat(2, 1fr)';
 }
 
-//a way to disable console? should we do that?
-//
-//Ethical Note:
-//Blocking the console harms legitimate users and developers trying to debug our site. Browsers like Chrome may even penalize this behavior in the future.
+// a way to disable console? should we do that?
+// 
+// Ethical Note:
+// Blocking the console harms legitimate users and developers trying to debug our site. Browsers like Chrome may even penalize this behavior in the future.
 
 
 // Detect devtools via debugger; statements
