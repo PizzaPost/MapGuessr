@@ -20,12 +20,65 @@ let image_history = [];
 let invertSelection = false;
 let tooltip;
 const toggleHistory = document.createElement('span');
+let lastPressTime = null;
+let timeoutId = null;
 
 let devSkip = false;
 let devMode = -1;
 let altDevMode = 0;
 
 let loadingDiv;
+let submitButton;
+let continueButton;
+let alertBox;
+let joinLobbyButton;
+let closeButton;
+
+const possibleNames1 = [
+    "Shadow", "Phantom", "Neon", "Vortex", "Crimson",
+    "Cyber", "Blitz", "Titan", "Quantum", "Frost",
+    "Nova", "Silent", "Ghost", "Iron", "Solar",
+    "Midnight", "Rogue", "Stealth", "Chaos", "Zephyr",
+    "Nitro", "Cyber", "Ember", "Void", "Thunder",
+    "Pixel", "Lunar", "Storm", "Iron", "Nebula",
+    "Obsidian", "Blaze", "Stellar", "Nova", "Cyber",
+    "Frost", "Valkyrie", "Turbo", "Eclipse", "Galactic",
+    "Rustic", "Neon", "Inferno", "Zero", "Chrono",
+    "Spectral", "Drift", "Cobalt", "Mystic", "Noodle",
+    "Wraith", "Toxic", "Aurora", "Viper", "Quantum",
+    "Steel", "Nebula", "Cyber", "Rift", "Blaze",
+    "Sapphire", "Thunder", "Phantom", "Celestial", "Ironclad",
+    "Nova", "Echo", "Solar", "Void", "Crimson",
+    "Frost", "Neon", "Pandora", "Rogue", "Infernal",
+    "Cyber", "Titanium", "Astral", "Nebula", "Blitz",
+    "Stellar", "Quantum", "Shadow", "Lunar", "Valkyrie",
+    "Cyber", "Onyx", "Nova", "Frost", "Rift",
+    "Turbo", "Ember", "Ghost", "Thunder", "Crimson",
+    "Solar", "Neon", "Void", "Iron", "Zenith"
+];
+
+const possibleNames2 = [
+    "Striker", "Wraith", "Drift", "Viper", "Cobra",
+    "Cobra007", "Brawler", "Nova", "Dragon", "Byte",
+    "Blitz", "Warlord", "Sentinel", "Overlord", "FlareX",
+    "Marauder", "Pendulum", "Spartan", "Catalyst", "Rogue",
+    "Nebula", "Prowler", "Fang", "Vagabond", "Saber",
+    "Pirate", "Lynx", "Rider", "Havoc", "Ninja",
+    "Oracle", "Bolt", "Samurai", "Nomad", "Zenith",
+    "Havoc", "Void", "Taco", "Enigma", "Ronin",
+    "Raptor", "Nighthawk", "Igloo", "Gravity", "Chaos",
+    "Saiyan", "Phoenix", "Crusader", "Mongoose", "Ninja",
+    "Warden", "Tornado", "Assassin", "Vanguard", "Quokka",
+    "Falcon", "Nuke", "Serpent", "Raider", "Baron",
+    "Sphinx", "Titan", "Pilot", "Cyclone", "Jester",
+    "Knightmare", "Enforcer", "Sovereign", "Voyager", "Chimera",
+    "Fury", "Nemesis", "Pixel", "Ronin", "Ibis",
+    "Celestial", "Talon", "Axolotl", "Noble", "Banshee",
+    "Sparrow", "Quasar", "Spectre", "Lycan", "Vortex",
+    "Phoenix", "Outlaw", "Nebula", "Fox", "Runner",
+    "Tyrant", "Empress", "Gambit", "Thistle", "Corsair",
+    "Spartan", "Nuke", "Valkyrie", "Iguana", "Zombie"
+];
 
 if (isMobile()) {
     const blackOverlay = document.createElement('div');
@@ -39,51 +92,218 @@ if (isMobile()) {
     document.body.appendChild(blackOverlay);
     showCustomAlert("This website doesn't work on this device. It is recommended to use a computer.", 0, undefined, true);
 } else if (!localStorage.getItem('hasVisited')) {
-    const style = document.createElement('style');
-    document.head.appendChild(style);
-    const overlay = document.createElement('div');
-    overlay.id = 'welcome-overlay';
-    const container = document.createElement('div');
-    container.id = 'welcome-container';
-    const title = document.createElement('h1');
-    title.textContent = 'Welcome to MapGuessr!';
-    const description = document.createElement('p');
-    description.textContent = 'Get ready to explore the map!';
-    const start_button = document.createElement('button');
-    start_button.textContent = 'Start';
-    start_button.addEventListener('click', () => {
-        overlay.style.transition = 'opacity 0.75s ease';
-        overlay.style.opacity = '0';
-        setTimeout(() => document.body.removeChild(overlay), 500);
-        localStorage.setItem('hasVisited', 'true');
+    document.addEventListener('DOMContentLoaded', () => {
+        if (isMobile()) {
+            const blackOverlay = document.createElement('div');
+            blackOverlay.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100vw;
+                height: 100vh;
+                background: black;
+                z-index: 9999;
+            `;
+            document.body.appendChild(blackOverlay);
+            alert("This website doesn't work on mobile devices. Please use a computer.");
+        } else if (!localStorage.getItem('hasVisited')) {
+            createWelcomeOverlay();
+        }
     });
-    const introduction_button = document.createElement('button');
-    introduction_button.textContent = 'Introduction';
-    introduction_button.addEventListener('click', () => {
-        introduction_button.remove();
-        const introduction_button_text = document.createElement('button');
-        introduction_button_text.textContent = 'Text Introduction';
-        introduction_button_text.addEventListener('click', () => {
-            introduction_button_text.remove();
-            introduction_button_video.remove();
-            window.open("https://github.com/PizzaPost/MapGuessr/blob/main/README.md", "_blank");
+
+    function createWelcomeOverlay() {
+        const overlay = document.createElement('div');
+        overlay.id = 'welcome-overlay';
+
+        const containerHTML = `
+            <div id="welcome-container">
+                <header>
+                    <h1>🌍 Welcome to MapGuessr!</h1>
+                </header>
+                
+                <div id="content-wrapper">
+                    <nav id="toc-sidebar">
+                        <h3>Table of Contents</h3>
+                    </nav>
+                    <article id="main-content"></article>
+                </div>
+      
+                <footer>
+                    <button class="primary-btn" id="start-btn">Start Guessing 🌍</button>
+                    <button class="download" id="download-readme">Download README 📄</button>
+                    <div class="toolbar">
+          </div>
+                </footer>
+            </div>
+        `;
+
+        overlay.innerHTML = containerHTML;
+        document.body.appendChild(overlay);
+
+        loadMarkdownContent();
+
+        document.getElementById('start-btn').addEventListener('click', () => {
+            overlay.style.opacity = '0';
+            setTimeout(() => overlay.remove(), 500);
+            localStorage.setItem('hasVisited', 'true');
         });
-        const introduction_button_video = document.createElement('button');
-        introduction_button_video.textContent = 'Video Introduction';
-        introduction_button_video.addEventListener('click', () => {
-            introduction_button_text.remove();
-            introduction_button_video.remove();
-            window.open("https://youtube.com", "_blank");
+
+        document.getElementById('download-readme').addEventListener('click', () => {
+            const link = document.createElement('a');
+            link.href = './README-txt.txt';
+            link.download = 'README.txt';
+            link.click();
         });
-        container.appendChild(introduction_button_text);
-        container.appendChild(introduction_button_video);
-    });
-    container.appendChild(title);
-    container.appendChild(description);
-    container.appendChild(start_button);
-    container.appendChild(introduction_button);
-    overlay.appendChild(container);
-    document.body.appendChild(overlay);
+    }
+
+    function setupJumpButton() {
+        const container = document.getElementById('main-content');
+        const startBtn = document.getElementById('start-btn');
+        let isJumping = false;
+        let animationTimeout = null;
+
+        container.addEventListener('scroll', () => {
+            const isAtBottom = container.scrollHeight - container.scrollTop <= container.clientHeight + 50;
+
+            if (isAtBottom && !isJumping) {
+                startBtn.classList.add('jump-active');
+                isJumping = true;
+            } else if (!isAtBottom && isJumping) {
+                startBtn.classList.add('jump-completing');
+                startBtn.classList.remove('jump-active');
+                clearTimeout(animationTimeout);
+                animationTimeout = setTimeout(() => {
+                    startBtn.classList.remove('jump-completing');
+                    isJumping = false;
+                }, 250);
+            }
+        });
+    }
+
+    async function loadMarkdownContent() {
+        try {
+            const response = await fetch('./README.md');
+            if (!response.ok) throw new Error('File not found');
+            const text = await response.text();
+
+            const mainContent = document.getElementById('main-content');
+            const sidebar = document.getElementById('toc-sidebar');
+
+            mainContent.innerHTML = `<div class="markdown-content">${parseMarkdown(text)}</div>`;
+            generateTOC(mainContent, sidebar);
+            setupLinks(mainContent);
+            setupJumpButton();
+        } catch (error) {
+            console.error('Error loading content:', error);
+            document.getElementById('main-content').innerHTML = `
+                <div class="error">
+                    <h3>⚠️ Documentation Missing</h3>
+                    <p>${error.message}</p>
+                </div>
+            `;
+        }
+    }
+
+    function parseMarkdown(text) {
+        return text
+            // Backslash am Zeilenende als <br> behandeln
+            .replace(/\\(\s*)\n/g, '<br>')
+            // Setext-Headings
+            .replace(/^(.+)[ \t]*\r?\n(=+)[ \t]*$/gm, '<h1>$1</h1>')
+            .replace(/^(.+)[ \t]*\r?\n(-+)[ \t]*$/gm, '<h2>$1</h2>')
+            // ATX-Headings
+            .replace(/^# (.*$)/gm, '<h1>$1</h1>')
+            .replace(/^## (.*$)/gm, '<h2>$1</h2>')
+            .replace(/^### (.*$)/gm, '<h3>$1</h3>')
+            .replace(/^#### (.*$)/gm, '<h4>$1</h4>')
+            // Links
+            .replace(/\[(.*?)\]\((.*?)\)/g, (_, text, link) => {
+                const cleanLink = link.toLowerCase()
+                    .replace(/[^a-z0-9 -]/g, '')
+                    .replace(/\s+/g, '-')
+                    .replace(/-+/g, '-');
+                return `<a class="content-link" href="#${cleanLink}">${text}</a>`;
+            })
+            // Formatierung
+            .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+            .replace(/\*(.*?)\*/g, '<em>$1</em>')
+            .replace(/`(.*?)`/g, '<code>$1</code>')
+            .replace(/```([\s\S]*?)```/g, '<pre><code>$1</code></pre>');
+    }
+
+    function generateTOC(contentElement, sidebarElement) {
+        const headings = contentElement.querySelectorAll('h1, h2, h3, h4, h5, h6');
+
+        headings.forEach(heading => {
+            const id = heading.textContent
+                .toLowerCase()
+                .replace(/[^a-z0-9 -]/g, '')
+                .replace(/\s+/g, '-')
+                .replace(/-+/g, '-');
+
+            heading.id = id;
+
+            const tocItem = document.createElement('a');
+            tocItem.className = `toc-link ${heading.tagName.toLowerCase()}`;
+            tocItem.textContent = heading.textContent;
+            tocItem.href = `#${id}`;
+            tocItem.addEventListener('click', smoothScroll);
+            sidebarElement.appendChild(tocItem);
+        });
+    }
+
+    function setupLinks(container) {
+        container.querySelectorAll('.content-link').forEach(link => {
+            link.addEventListener('click', smoothScroll);
+        });
+    }
+
+    function smoothScroll(e) {
+        e.preventDefault();
+        const link = e.target.closest('a');
+        if (!link || !link.hash) return;
+
+        const targetId = decodeURIComponent(link.hash.substring(1));
+        const target = document.getElementById(targetId);
+
+        if (target) {
+            const headerHeight = document.querySelector('header').offsetHeight;
+            const elementRect = target.getBoundingClientRect();
+            const offsetPosition = elementRect.top + window.pageYOffset - headerHeight - 20;
+            window.scroll({
+                top: offsetPosition,
+                behavior: 'smooth'
+            });
+            target.classList.add('highlight');
+            setTimeout(() => target.classList.remove('highlight'), 2000);
+            history.replaceState(null, null, link.hash);
+        }
+    }
+    function smoothScroll(e) {
+        e.preventDefault();
+        const link = e.target.closest('a');
+        if (!link || !link.hash) return;
+
+        const targetId = decodeURIComponent(link.hash.substring(1));
+        const target = document.getElementById(targetId);
+        const container = document.getElementById('main-content');
+
+        if (target && container) {
+            const headerHeight = document.querySelector('header').offsetHeight;
+            const containerRect = container.getBoundingClientRect();
+            const targetRect = target.getBoundingClientRect();
+            const scrollPosition = targetRect.top - containerRect.top + container.scrollTop - headerHeight + 100;
+
+            container.scrollTo({
+                top: scrollPosition,
+                behavior: 'smooth'
+            });
+
+            target.classList.add('highlight');
+            setTimeout(() => target.classList.remove('highlight'), 2000);
+            history.replaceState(null, null, link.hash);
+        }
+    }
 }
 
 
@@ -238,7 +458,7 @@ function chooseVersion() {
     loadingDiv.style.display = 'none'; // Initially hidden
 
     // Create the join lobby button
-    const joinLobbyButton = document.createElement('button');
+    joinLobbyButton = document.createElement('button');
     joinLobbyButton.innerText = 'Join Lobby';
     joinLobbyButton.onclick = () => {
         isOnline = true;
@@ -597,13 +817,13 @@ function showCustomAlert(message, mode = 0, cont = null, reload = false) {
     overlay.className = 'custom-alert-overlay';
 
     // Create the alert box
-    const alertBox = document.createElement('div');
+    alertBox = document.createElement('div');
     alertBox.id = 'custom-alert';
     alertBox.className = `custom-alert ${mode === 0 ? 'error' : 'success'}`;
     alertBox.textContent = message;
 
     // Create the close button
-    const closeButton = document.createElement('button');
+    closeButton = document.createElement('button');
     closeButton.textContent = 'OK';
     if (mode === 0) {
         closeButton.className = 'button-red';
@@ -983,6 +1203,10 @@ function createMoreButton() {
         themeEmoji.textContent = currentTheme === 'dark' ? '☀️' : '🌙';
     };
 
+    if (!showHistory) {
+        toggleHistory.classList.add('disabled');
+    }
+
     menuButton.addEventListener('click', (event) => {
         //stop running actions on collapsed button (mobile issue)
         if (menuButton.getBoundingClientRect().height === 40) return;
@@ -1006,11 +1230,11 @@ function createMoreButton() {
             localStorage.setItem('showHistory', showHistory);
             if (showHistory) {
                 toggleHistory.classList.add('disabled');
-                showCustomAlert('History disabled\nIt will update after you click "continue".', 1);
+                showCustomAlert('History disabled. It will update after you click "continue".', 1);
             }
             else {
                 toggleHistory.classList.remove('disabled');
-                showCustomAlert('History enabled\nIt will update after you click "continue".', 1);
+                showCustomAlert('History enabled. It will update after you click "continue".', 1);
             }
         }
         if (event.target.id === 'toggleSelection') {
@@ -1224,7 +1448,7 @@ function startGame(gameArea) {
 
     const backButton = document.createElement('button');
 
-    const submitButton = document.createElement('button');
+    submitButton = document.createElement('button');
 
     let marker = document.createElement('div');
     marker.id = 'marker';
@@ -1593,7 +1817,7 @@ function startGame(gameArea) {
         mapImage.style.display = '';
 
         // Create continue button
-        const continueButton = document.createElement('button');
+        continueButton = document.createElement('button');
         continueButton.innerText = 'Continue';
         continueButton.onclick = (event) => {
             if (isOnline) {
@@ -1683,6 +1907,71 @@ function startGame(gameArea) {
     }
 }
 
+function isElementVisible(element) {
+    if (!element) return false; // Element doesn't exist
+
+    const style = window.getComputedStyle(element);
+
+    // Check for display: none, visibility: hidden/collapsed, and opacity: 0
+    if (style.display === 'none') return false;
+    if (style.visibility === 'hidden' || style.visibility === 'collapse') return false;
+    if (parseFloat(style.opacity) <= 0) return false;
+
+    // Check if element has zero area
+    const rect = element.getBoundingClientRect();
+    if (rect.width <= 0 || rect.height <= 0) return false;
+
+    return true;
+}
+  
+//keybinds
+document.addEventListener('keydown', event => {
+    if (!document.activeElement || document.activeElement.tagName !== 'INPUT') {
+        if (event.key === 'Escape') {
+            const currentTime = Date.now();
+            // Check for double press (within 300ms)
+            if (lastPressTime !== null && currentTime - lastPressTime < 300) {
+                clearTimeout(timeoutId);
+                closeThisLobby();
+                lastPressTime = null;
+                timeoutId = null;
+            } else {
+                // Set up single press action
+                clearTimeout(timeoutId); // Clear any existing timeout
+                timeoutId = setTimeout(() => {
+                    leaveLobby();
+                    lastPressTime = null;
+                    timeoutId = null;
+                }, 300);
+                lastPressTime = currentTime;
+            }
+        } else if (event.code === 'Space') {
+            if (isElementVisible(submitButton)) {
+                submitButton.click();
+            } else if (isElementVisible(continueButton)) {
+                continueButton.click();
+            } else if (isElementVisible(alertBox)) {
+                closeButton.click();
+            }
+        } else if (event.key === 'n') {
+            db.collection('lobbies').get().then(querySnapshot => {
+                if (lobbyInput.value==='') {
+                    const lobbies = querySnapshot.docs;
+                    const lobbyCount = lobbies.length;
+                    const randomLobbyName = lobbyCount > 0 ? lobbies[Math.floor(Math.random() * lobbyCount)].id : '1';
+                    lobbyInput.value = randomLobbyName;
+                }
+                if (nameInput.value==='') {
+                    nameInput.value = possibleNames1[Math.floor(Math.random() * possibleNames1.length)]+possibleNames2[Math.floor(Math.random() * possibleNames2.length)];
+                }
+                joinLobbyButton.click();
+            });
+        } else {
+            console.log(event.key);
+        }
+    }
+});
+
 function resize() {
     const allImages = document.querySelectorAll('img');
 
@@ -1691,6 +1980,21 @@ function resize() {
     const isPortrait = (width < height) || (allImages.length === 1);
     imagesWrapper.style.gridTemplateColumns = isPortrait ? '1fr' : 'repeat(2, 1fr)';
 }
+
+//a way to disable console? should we do that?
+//
+//Ethical Note:
+//Blocking the console harms legitimate users and developers trying to debug our site. Browsers like Chrome may even penalize this behavior in the future.
+
+
+// Detect devtools via debugger; statements
+// setInterval(() => {
+//     const start = Date.now();
+//     debugger;
+//     if (Date.now() - start > 100) {
+//         window.location.reload();
+//     }
+// }, 1000);
 
 window.addEventListener('resize', resize);
 document.addEventListener('DOMContentLoaded', createMoreButton);
