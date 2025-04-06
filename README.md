@@ -15,7 +15,7 @@ This is the [offline mode](#single-player-or-host), recommended for single playe
 
 Multiplayer
 -
-When playing with friends, one player may [host](#the-host) a lobby and share the lobby code with the other players. The host will behave like in [single player mode](#single-player-or-host), while the other players behave [differently](#other-players).
+When playing with friends, one player may [host](#the-host) a lobby and share the lobby code with the other players. The host will behave like in [single player mode](#single-player-or-host), while the other players behave [differently](#other-players)
 
 Single Player or Host
 -
