@@ -347,21 +347,6 @@ input[type="checkbox"] {
     background: gray;
 }
 
-/*
-Calculations for bottoms:
-
-Total height of menu button: 190px
-Total height of menu button we want the buttons to take up: 90%
-Total amount of buttons: 6
-Bottom of each button: (90%/6 = 15%)
-toggleHistory: 95%
-toggleSelection: 77%
-themeEmoji: 59%
-infoLink: 41%
-localStorageReset: 23%
-menuButton: 5%
-*/
-
 :root {
     --menu-height: 190;
     --menu-height-percentage: 90;
@@ -461,7 +446,7 @@ menuButton: 5%
 }
 
 #menuButton:hover {
-    height: 190px;
+    height: calc(var(--menu-height) * 1px);
     border-radius: 17px;
     box-shadow: 100 4px 15px rgba(0, 123, 255, 0.1);
 }
