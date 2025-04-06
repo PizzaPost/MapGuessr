@@ -257,27 +257,6 @@ if (isMobile()) {
 
         const targetId = decodeURIComponent(link.hash.substring(1));
         const target = document.getElementById(targetId);
-
-        if (target) {
-            const headerHeight = document.querySelector('header').offsetHeight;
-            const elementRect = target.getBoundingClientRect();
-            const offsetPosition = elementRect.top + window.pageYOffset - headerHeight - 20;
-            window.scroll({
-                top: offsetPosition,
-                behavior: 'smooth'
-            });
-            target.classList.add('highlight');
-            setTimeout(() => target.classList.remove('highlight'), 2000);
-            history.replaceState(null, null, link.hash);
-        }
-    }
-    function smoothScroll(e) {
-        e.preventDefault();
-        const link = e.target.closest('a');
-        if (!link || !link.hash) return;
-
-        const targetId = decodeURIComponent(link.hash.substring(1));
-        const target = document.getElementById(targetId);
         const container = document.getElementById('main-content');
 
         if (target && container) {
