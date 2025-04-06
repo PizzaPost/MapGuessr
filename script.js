@@ -1,6 +1,6 @@
 let gameModes;
 
-let gameState = 0; // 0 => choose gamemode; 1 => startGame; 2 => selectMap
+let gameState = 0; // useless, but we might make use of it in the future
 let score = 0;
 let totalScore = 0;
 let totalPossibleScore = 0;
@@ -1162,16 +1162,22 @@ function createMoreButton() {
     toggleHistory.id = 'toggleHistory';
     toggleHistory.textContent = '🖼️';
 
+    const localStorageReset = document.createElement('span');
+    localStorageReset.id = 'localStorageReset';
+    localStorageReset.textContent = '🗑️';
+
     attachTooltip(infoLink, "Credits");
     attachTooltip(themeEmoji, "Switch between Dark/Light Appearance");
     attachTooltip(toggleSelection, "Toggle the Checkboxes in Map Selection");
     attachTooltip(toggleHistory, "Toggle the map History in the Game");
+    attachTooltip(localStorageReset, "Reset Local Storage");
 
     menuButton.appendChild(textSpan);
     menuButton.appendChild(infoLink);
     menuButton.appendChild(themeEmoji)
     menuButton.appendChild(toggleSelection);
     menuButton.appendChild(toggleHistory);
+    menuButton.appendChild(localStorageReset);
 
     const updateEmoji = () => {
         const currentTheme = document.body.getAttribute('data-theme');
@@ -1216,6 +1222,10 @@ function createMoreButton() {
             invertSelection = !invertSelection;
             showCustomAlert(`Selecting will now${invertSelection ? ' ' : ' not '}invert`, 1); // TODO: I selected Portal 2 and Subnautica but it didn't invert
             // TODO: The whole selection thing is broken. I selected Subnautica and presssed toggle but nothing happened.
+        }
+        if (event.target.id === 'localStorageReset') {
+            localStorage.clear();
+            showCustomAlert('Local storage cleared. Changes will apply soon.', 1);
         }
     });
 

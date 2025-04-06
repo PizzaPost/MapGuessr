@@ -357,12 +357,11 @@ input[type="checkbox"] {
     pointer-events: none;
     cursor: pointer;
     z-index: 1;
-    transition: opacity 0.3s ease;
 }
 
 #toggleSelection {
     position: absolute;
-    bottom: 54%;
+    bottom: 60%;
     left: 50%;
     transform: translate(-50%, -50%);
     opacity: 0;
@@ -370,12 +369,11 @@ input[type="checkbox"] {
     pointer-events: none;
     cursor: pointer;
     z-index: 1;
-    transition: opacity 0.3s ease;
 }
 
 #themeEmoji {
     position: absolute;
-    bottom: 35%;
+    bottom: 47%;
     left: 50%;
     transform: translate(-50%, -50%);
     opacity: 0;
@@ -383,12 +381,11 @@ input[type="checkbox"] {
     pointer-events: none;
     cursor: pointer;
     z-index: 1;
-    transition: opacity 0.3s ease;
 }
 
 #infoLink {
     position: absolute;
-    bottom: 18%;
+    bottom: 34%;
     left: 50%;
     transform: translate(-50%, -50%);
     opacity: 0;
@@ -396,6 +393,18 @@ input[type="checkbox"] {
     pointer-events: none;
     color: white;
     font-size: 20px;
+    cursor: pointer;
+    z-index: 1;
+}
+
+#localStorageReset {
+    position: absolute;
+    bottom: 21%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    pointer-events: none;
     cursor: pointer;
     z-index: 1;
 }
@@ -431,7 +440,7 @@ input[type="checkbox"] {
 }
 
 #menuButton:hover {
-    height: 175px;
+    height: 180px;
     border-radius: 17px;
     box-shadow: 100 4px 15px rgba(0, 123, 255, 0.1);
 }
@@ -443,7 +452,8 @@ input[type="checkbox"] {
 #menuButton:hover #themeEmoji,
 #menuButton:hover #infoLink,
 #menuButton:hover #toggleSelection,
-#menuButton:hover #toggleHistory {
+#menuButton:hover #toggleHistory,
+#menuButton:hover #localStorageReset {
     opacity: 1;
     pointer-events: auto;
 }
