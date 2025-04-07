@@ -47,3 +47,12 @@ On devices with a mouse pointer, you may use the wheel to zoom into the map once
 **Clicking on the map** will place a marker. You may adjust this marker until you press **Submit**. Your guess will be scored from 0-5000 depending on your distance from the actual location on the map. There **is** a tolerance for 5k guesses and 0 points will be awarded if either the marker is placed further than half the image width/height average away from the actual location or you guessed the wrong map entirely. **Keep in mind, that when guessing a map, there may be locations that appear on multiple. In these cases, the correct map is the one where the target location is available in the highest detail.** For example, on the maps of Subnautica, guessing the location of an image to be on an island on the world/biome map, while not technically wrong, will not award points because there exist more detailed maps of each island.\
 **Dragging** the map will move it.\
 **Right Clicking** will reset the zoom and position of the map.
+
+
+## Keybinds
+**Space**: confirm your action (presses alert, continue, and submit buttons)
+**Escape**: leave the lobby
+**Double Escape**: close the lobby
+**n**: join a public server when no one was entered in the field and give you a name when no one was entered
+**g**: give up the host position
+**c**: claim the host position
