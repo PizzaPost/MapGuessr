@@ -148,11 +148,15 @@ footer {
     transition: color 1s ease, border-color 1s ease;
 }
 
-.images-wrapper img:only-child {
+/* .images-wrapper img:only-child {
+    border-radius: 15px;
+} */
+
+.images-wrapper img {
     border-radius: 15px;
 }
 
-.images-wrapper img:nth-child(2n+1) {
+/* .images-wrapper img:nth-child(2n+1) {
     border-top-left-radius: 15px;
     border-bottom-left-radius: 15px;
 }
@@ -160,7 +164,7 @@ footer {
 .images-wrapper img:nth-child(2n) {
     border-top-right-radius: 15px;
     border-bottom-right-radius: 15px;
-}
+} */
 
 /* Image Arrangement and Effects */
 .images-wrapper {
@@ -343,9 +347,15 @@ input[type="checkbox"] {
     background: gray;
 }
 
+:root {
+    --menu-height: 190;
+    --menu-height-percentage: 90;
+    --button-count: 6; /* Number of buttons in the menu, including the textButton */
+}
+
 #toggleHistory {
     position: absolute;
-    bottom: 73%;
+    bottom: calc((var(--menu-height-percentage) - var(--menu-height-percentage) / var(--button-count) * 1) * 1%);
     left: 50%;
     transform: translate(-50%, -50%);
     opacity: 0;
@@ -353,12 +363,11 @@ input[type="checkbox"] {
     pointer-events: none;
     cursor: pointer;
     z-index: 1;
-    transition: opacity 0.3s ease;
 }
 
 #toggleSelection {
     position: absolute;
-    bottom: 54%;
+    bottom: calc((var(--menu-height-percentage) - var(--menu-height-percentage) / var(--button-count) * 2) * 1%);
     left: 50%;
     transform: translate(-50%, -50%);
     opacity: 0;
@@ -366,12 +375,11 @@ input[type="checkbox"] {
     pointer-events: none;
     cursor: pointer;
     z-index: 1;
-    transition: opacity 0.3s ease;
 }
 
 #themeEmoji {
     position: absolute;
-    bottom: 35%;
+    bottom: calc((var(--menu-height-percentage) - var(--menu-height-percentage) / var(--button-count) * 3) * 1%);
     left: 50%;
     transform: translate(-50%, -50%);
     opacity: 0;
@@ -379,12 +387,11 @@ input[type="checkbox"] {
     pointer-events: none;
     cursor: pointer;
     z-index: 1;
-    transition: opacity 0.3s ease;
 }
 
 #infoLink {
     position: absolute;
-    bottom: 18%;
+    bottom: calc((var(--menu-height-percentage) - var(--menu-height-percentage) / var(--button-count) * 4) * 1%);
     left: 50%;
     transform: translate(-50%, -50%);
     opacity: 0;
@@ -392,6 +399,18 @@ input[type="checkbox"] {
     pointer-events: none;
     color: white;
     font-size: 20px;
+    cursor: pointer;
+    z-index: 1;
+}
+
+#localStorageReset {
+    position: absolute;
+    bottom: calc((var(--menu-height-percentage) - var(--menu-height-percentage) / var(--button-count) * 5) * 1%);
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    pointer-events: none;
     cursor: pointer;
     z-index: 1;
 }
@@ -427,7 +446,7 @@ input[type="checkbox"] {
 }
 
 #menuButton:hover {
-    height: 175px;
+    height: calc(var(--menu-height) * 1px);
     border-radius: 17px;
     box-shadow: 100 4px 15px rgba(0, 123, 255, 0.1);
 }
@@ -439,13 +458,14 @@ input[type="checkbox"] {
 #menuButton:hover #themeEmoji,
 #menuButton:hover #infoLink,
 #menuButton:hover #toggleSelection,
-#menuButton:hover #toggleHistory {
+#menuButton:hover #toggleHistory,
+#menuButton:hover #localStorageReset {
     opacity: 1;
     pointer-events: auto;
 }
 
 #menuButton:hover #textButton {
-    transform: translateX(-6px) translateY(66px) rotate(-90deg);
+    transform: translateX(-6px) translateY(calc((var(--menu-height) / 2 - 20) * 1px)) rotate(-90deg);
 }
 
 #welcome-overlay {
