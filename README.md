@@ -50,9 +50,9 @@ On devices with a mouse pointer, you may use the wheel to zoom into the map once
 
 
 ## Keybinds
-**Space**: confirm your action (presses alert, continue, and submit buttons)
-**Escape**: leave the lobby
-**Double Escape**: close the lobby
-**n**: join a public server when no one was entered in the field and give you a name when no one was entered
-**g**: give up the host position
-**c**: claim the host position
+**Space**: confirm your action (presses alert, continue, and submit buttons)\
+**Escape**: leave the lobby\
+**Double Escape**: close the lobby\
+**n**: join a public server when no one was entered in the field and give you a name when no one was entered\
+**g**: give up the host position\
+**c**: claim the host position\
