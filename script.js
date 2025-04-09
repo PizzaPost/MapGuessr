@@ -1325,14 +1325,15 @@ function createMoreButton() {
                 // } else {
                 //     keybindRow.style.display = 'none'; // Hide the row if no buttons are visible
                 // }
-                actionDescription.textContent = elements
+                actionDescription.innerHTML = elements
                     .map(element => {
                         const el = document.getElementById(element);
-                        console.log(el, element)
-                        return el ? el.textContent : element;
+                        return isElementVisible(el) 
+                            ? `<strong>${el.textContent}</strong>` 
+                            : element;
                     })
                     .join(', ');
-                actionDescription.style.flex = '2';
+                actionDescription.style.flex = '1';
                 actionDescription.style.textAlign = 'left';
                 actionDescription.style.fontSize = '12px';
                 actionDescription.style.color = 'var(--text-color-secondary)';
