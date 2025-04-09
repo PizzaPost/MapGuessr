@@ -348,9 +348,9 @@ input[type="checkbox"] {
 }
 
 :root {
-    --menu-height: 190;
+    --menu-height: 220;
     --menu-height-percentage: 90;
-    --button-count: 6; /* Number of buttons in the menu, including the textButton */
+    --button-count: 7; /* Number of buttons in the menu, including the textButton */
 }
 
 #toggleHistory {
@@ -379,7 +379,7 @@ input[type="checkbox"] {
 
 #themeEmoji {
     position: absolute;
-    bottom: calc((var(--menu-height-percentage) - var(--menu-height-percentage) / var(--button-count) * 3) * 1%);
+    bottom: calc((var(--menu-height-percentage) - var(--menu-height-percentage) / var(--button-count) * 4) * 1%);
     left: 50%;
     transform: translate(-50%, -50%);
     opacity: 0;
@@ -391,7 +391,7 @@ input[type="checkbox"] {
 
 #infoLink {
     position: absolute;
-    bottom: calc((var(--menu-height-percentage) - var(--menu-height-percentage) / var(--button-count) * 4) * 1%);
+    bottom: calc((var(--menu-height-percentage) - var(--menu-height-percentage) / var(--button-count) * 5) * 1%);
     left: 50%;
     transform: translate(-50%, -50%);
     opacity: 0;
@@ -405,7 +405,19 @@ input[type="checkbox"] {
 
 #localStorageReset {
     position: absolute;
-    bottom: calc((var(--menu-height-percentage) - var(--menu-height-percentage) / var(--button-count) * 5) * 1%);
+    bottom: calc((var(--menu-height-percentage) - var(--menu-height-percentage) / var(--button-count) * 6) * 1%);
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    pointer-events: none;
+    cursor: pointer;
+    z-index: 1;
+}
+
+#keybindMenu {
+    position: absolute;
+    bottom: calc((var(--menu-height-percentage) - var(--menu-height-percentage) / var(--button-count) * 3) * 1%);
     left: 50%;
     transform: translate(-50%, -50%);
     opacity: 0;
@@ -459,6 +471,7 @@ input[type="checkbox"] {
 #menuButton:hover #infoLink,
 #menuButton:hover #toggleSelection,
 #menuButton:hover #toggleHistory,
+#menuButton:hover #keybindMenu,
 #menuButton:hover #localStorageReset {
     opacity: 1;
     pointer-events: auto;
@@ -466,6 +479,22 @@ input[type="checkbox"] {
 
 #menuButton:hover #textButton {
     transform: translateX(-6px) translateY(calc((var(--menu-height) / 2 - 20) * 1px)) rotate(-90deg);
+}
+
+#keybindMenuBox {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: var(--container-bg);
+    color: var(--text-color);
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    z-index: 1001;
+    border-radius: 8px;
+    text-align: center;
+    border: 2px solid var(--accent-color);
+    animation: slideIn 0.3s ease-out forwards;
 }
 
 #welcome-overlay {
