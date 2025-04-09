@@ -28,15 +28,19 @@ let devMode = -1;
 let altDevMode = 0;
 
 let loadingDiv;
-let submitButton;
-let continueButton;
 let alertBox;
-let joinLobbyButton;
 let closeButton;
-let leaveLobbyButton;
-let closeLobbyButton;
-let giveUpHostButton;
-let claimHostButton;
+
+let keybinds = [];
+// Keybinds for the game: "key": [[buttonsToPress], doubleClick: boolean]
+
+let selectButton; let submitButton; let continueButton;
+keybinds.push([" ", [() => selectButton, () => submitButton, () => continueButton], false]); // single press space to select / submit / continue
+let joinLobbyButton; keybinds.push(["n", [() => joinLobbyButton], false]); // single press n to join any lobby
+let leaveLobbyButton; keybinds.push(["Escape", [() => leaveLobbyButton], false]); // single press escape to leave lobby
+let closeLobbyButton; keybinds.push(["Escape", [() => closeLobbyButton], true]); // double press escape to close lobby
+let giveUpHostButton; keybinds.push(["g", [() => giveUpHostButton], false]); // single press g to give up host position
+let claimHostButton; keybinds.push(["c", [() => claimHostButton], false]); // single press c to claim host position
 
 const possibleNames1 = [
     "Shadow", "Phantom", "Neon", "Vortex", "Crimson",
@@ -434,6 +438,7 @@ function chooseVersion() {
 
     // Create the join lobby button
     joinLobbyButton = document.createElement('button');
+    joinLobbyButton.id = 'joinLobbyButton';
     joinLobbyButton.innerText = 'Join Lobby';
     joinLobbyButton.onclick = () => {
         isOnline = true;
@@ -846,7 +851,7 @@ if (!gameModeSelector) {
 gameModeSelector.style.display = 'none';
 
 const selectedPathElement = document.createElement('p');
-const selectButton = document.createElement('button');
+selectButton = document.createElement('button');
 
 function startGameModeSelector() {
     // Create the gameModeSelector div if it doesn't exist
@@ -1912,57 +1917,63 @@ function isElementVisible(element) {
 // keybinds
 document.addEventListener('keydown', event => {
     if (!document.activeElement || document.activeElement.tagName !== 'INPUT') {
-        if (event.key === 'Escape') {
-            const currentTime = Date.now();
-            // Check for double press (within 300ms)
-            if (lastPressTime !== null && currentTime - lastPressTime < 300) {
-                clearTimeout(timeoutId);
-                if (isElementVisible(closeLobbyButton)) {
-                    closeLobbyButton.click(); // close lobby if host
+        const currentTime = Date.now();
+        // Check for double press (within 300ms)
+        if (lastPressTime !== null && currentTime - lastPressTime < 300) {
+            clearTimeout(timeoutId);
+            lastPressTime = null;
+            timeoutId = null;
+
+            // double press action
+            console.log("Double press: ", event.key);
+            keybinds.forEach(keybind => {
+                const [key, elements, isDoublePress] = keybind;
+                if (event.key === key && isDoublePress) {
+                    elements.forEach(element => {
+                        element = element();
+                        if (isElementVisible(element)) {
+                            element.click();
+                        }
+                    });
                 }
+            });
+        } else {
+            clearTimeout(timeoutId);
+            timeoutId = setTimeout(() => {
+                // single press action
+                console.log("Single press: ", event.key);
+
+                keybinds.forEach(keybind => {
+                    const [key, elements, isDoublePress] = keybind;
+                    if (event.key === key && !isDoublePress) {
+                        elements.forEach(element => {
+                            element = element();
+                            if (isElementVisible(element)) {
+                                // check for special case of joinLobbyButton
+                                if (element.id === 'joinLobbyButton') {
+                                    db.collection('lobbies').get().then(querySnapshot => {
+                                        if (lobbyInput.value === '') {
+                                            const lobbies = querySnapshot.docs;
+                                            const lobbyCount = lobbies.length;
+                                            const randomLobbyName = lobbyCount > 0 ? lobbies[Math.floor(Math.random() * lobbyCount)].id : '1';
+                                            lobbyInput.value = randomLobbyName;
+                                        }
+                                        if (nameInput.value === '') {
+                                            nameInput.value = possibleNames1[Math.floor(Math.random() * possibleNames1.length)] + possibleNames2[Math.floor(Math.random() * possibleNames2.length)];
+                                        }
+                                        element.click();
+                                    });
+                                } else {
+                                    element.click();
+                                }
+                            }
+                        });
+                    }
+                });
                 lastPressTime = null;
                 timeoutId = null;
-            } else {
-                // Set up single press action
-                clearTimeout(timeoutId); // Clear any existing timeout
-                timeoutId = setTimeout(() => {
-                    if (isElementVisible(leaveLobbyButton)) {
-                        leaveLobbyButton.click(); // leave lobby if available
-                    }
-                    lastPressTime = null;
-                    timeoutId = null;
-                }, 300);
-                lastPressTime = currentTime;
-            }
-        } else if (event.code === 'Space') {
-            if (isElementVisible(selectButton)) {
-                selectButton.click();
-            } else if (isElementVisible(submitButton)) {
-                submitButton.click();
-            } else if (isElementVisible(continueButton)) {
-                continueButton.click();
-            } else if (isElementVisible(alertBox)) {
-                closeButton.click();
-            }
-        } else if (event.key === 'n' && isElementVisible(joinLobbyButton)) { // if new lobby keybind is pressed ONLY while lobby selection screen is open
-            db.collection('lobbies').get().then(querySnapshot => {
-                if (lobbyInput.value === '') {
-                    const lobbies = querySnapshot.docs;
-                    const lobbyCount = lobbies.length;
-                    const randomLobbyName = lobbyCount > 0 ? lobbies[Math.floor(Math.random() * lobbyCount)].id : '1';
-                    lobbyInput.value = randomLobbyName;
-                }
-                if (nameInput.value === '') {
-                    nameInput.value = possibleNames1[Math.floor(Math.random() * possibleNames1.length)] + possibleNames2[Math.floor(Math.random() * possibleNames2.length)];
-                }
-                joinLobbyButton.click();
-            });
-        } else if (event.key === 'g' && isElementVisible(giveUpHostButton)) {
-            giveUpHostButton.click();
-        } else if (event.key === 'c' && isElementVisible(claimHostButton)) {
-            claimHostButton.click();
-        } else {
-            console.log(event.key);
+            }, 300);
+            lastPressTime = currentTime;
         }
     }
 });
