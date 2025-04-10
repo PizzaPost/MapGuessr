@@ -47,6 +47,7 @@ let claimHostButton; keybinds.push(["c", ["claimHostButton"], false]); // single
 // default keybinds will be overridden if there are custom ones in localStorage
 keybinds = JSON.parse(localStorage.getItem('keybinds')) || keybinds;
 
+// duplicate names filter regex (replace selected with ""): ("[^,]*?")(?=[\d\D\n]*?\1), *(?=\n* *?")
 const possibleNames = [
     "Aegis", "Alchemist", "Aqua", "Aura", "Baron", "Bellowing", "Blending", "Blizzard", "Clapping", "Competing",
     "Contemplating", "Elliptical", "Emerald", "Eon", "Finishing", "Flare", "Fox", "Fragmenting", "Geometric", "Ginger",
