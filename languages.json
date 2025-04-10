@@ -26,7 +26,7 @@
             "closeButtonText": "OK",
             "infoTooltipText": "Credits",
             "themeTooltipText": "Switch between Dark/Light Appearance",
-            "keybindsTooltipText": "View and change Keybinds",
+            "keybindTooltipText": "View and change Keybinds",
             "toggleSelectionTooltipText": "Toggle the Checkboxes in Map Selection",
             "toggleHistoryTooltipText": "Toggle the map History in the Game",
             "localStorageResetTooltipText": "Reset Local Storage",

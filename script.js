@@ -712,7 +712,7 @@ function playAsHost() {
     gameVersionDiv.style.display = 'none';
     db.collection('lobbies').doc(lobbyName).onSnapshot(doc => {
         if (!doc.exists) {
-            showCustomAlert(gLS("lobbyNonexitent"), undefined, [], true);
+            showCustomAlert(gLS("lobbyNonexistent"), undefined, [], true);
             return;
         }
         const players = doc.data().players || [];
