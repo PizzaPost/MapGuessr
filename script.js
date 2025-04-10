@@ -28,15 +28,21 @@ let devMode = -1;
 let altDevMode = 0;
 
 let loadingDiv;
-let submitButton;
-let continueButton;
 let alertBox;
-let joinLobbyButton;
 let closeButton;
-let leaveLobbyButton;
-let closeLobbyButton;
-let giveUpHostButton;
-let claimHostButton;
+
+let keybinds = [];
+// Keybinds for the game: "key": [[buttonsToPress], doubleClick: boolean]
+
+let selectButton; let submitButton; let continueButton;
+keybinds.push([" ", ["selectButton", "submitButton", "continueButton"], false]); // single press space to select / submit / continue
+let joinLobbyButton; keybinds.push(["n", ["joinLobbyButton"], false]); // single press n to join any lobby
+let leaveLobbyButton; keybinds.push(["Escape", ["leaveLobbyButton"], false]); // single press escape to leave lobby
+let closeLobbyButton; keybinds.push(["Escape", ["closeLobbyButton"], true]); // double press escape to close lobby
+let giveUpHostButton; keybinds.push(["g", ["giveUpHostButton"], false]); // single press g to give up host position
+let claimHostButton; keybinds.push(["c", ["claimHostButton"], false]); // single press c to claim host position
+// default keybinds will be overridden if there are custom ones in localStorage
+keybinds = JSON.parse(localStorage.getItem('keybinds')) || keybinds;
 
 const possibleNames1 = [
     "Shadow", "Phantom", "Neon", "Vortex", "Crimson",
@@ -416,7 +422,6 @@ function chooseVersion() {
     gameVersionDiv.id = 'gameVersion';
     document.body.appendChild(gameVersionDiv);
 
-
     // Create the text input for lobby name
     lobbyInput.type = 'text';
     lobbyInput.placeholder = 'Lobby Name';
@@ -434,6 +439,7 @@ function chooseVersion() {
 
     // Create the join lobby button
     joinLobbyButton = document.createElement('button');
+    joinLobbyButton.id = 'joinLobbyButton';
     joinLobbyButton.innerText = 'Join Lobby';
     joinLobbyButton.onclick = () => {
         isOnline = true;
@@ -486,6 +492,7 @@ function joinLobby() {
     console.log(`Joining lobby: ${lobbyName}`);
     gameVersionDiv.style.display = 'none';
     leaveLobbyButton = document.createElement('button');
+    leaveLobbyButton.id = 'leaveLobbyButton';
     leaveLobbyButton.innerText = 'Leave Lobby';
     leaveLobbyButton.style.position = 'fixed';
     leaveLobbyButton.style.bottom = '0';
@@ -846,7 +853,7 @@ if (!gameModeSelector) {
 gameModeSelector.style.display = 'none';
 
 const selectedPathElement = document.createElement('p');
-const selectButton = document.createElement('button');
+selectButton = document.createElement('button');
 
 function startGameModeSelector() {
     // Create the gameModeSelector div if it doesn't exist
@@ -1154,10 +1161,13 @@ function createMoreButton() {
     themeEmoji.id = 'themeEmoji';
     themeEmoji.style.width = '40px';
 
+    const keybindMenu = document.createElement('span');
+    keybindMenu.id = 'keybindMenu';
+    keybindMenu.textContent = '⌨️';
+
     const toggleSelection = document.createElement('span');
     toggleSelection.id = 'toggleSelection';
     toggleSelection.textContent = '🔄️';
-
 
     const toggleHistory = document.createElement('span');
     toggleHistory.id = 'toggleHistory';
@@ -1169,6 +1179,7 @@ function createMoreButton() {
 
     attachTooltip(infoLink, "Credits");
     attachTooltip(themeEmoji, "Switch between Dark/Light Appearance");
+    attachTooltip(keybindMenu, "View and change Keybinds");
     attachTooltip(toggleSelection, "Toggle the Checkboxes in Map Selection");
     attachTooltip(toggleHistory, "Toggle the map History in the Game");
     attachTooltip(localStorageReset, "Reset Local Storage");
@@ -1176,6 +1187,7 @@ function createMoreButton() {
     menuButton.appendChild(textSpan);
     menuButton.appendChild(infoLink);
     menuButton.appendChild(themeEmoji)
+    menuButton.appendChild(keybindMenu);
     menuButton.appendChild(toggleSelection);
     menuButton.appendChild(toggleHistory);
     menuButton.appendChild(localStorageReset);
@@ -1206,6 +1218,174 @@ function createMoreButton() {
         }
         if (event.target.id === 'infoLink') {
             showCreditMenu()
+        }
+        if (event.target.id === 'keybindMenu') {
+            if (document.getElementById('keybinds')) return; // Prevent multiple menus
+
+            // Create overlay to block interactions
+            const overlay = document.createElement('div');
+            overlay.className = 'keybind-overlay';
+            overlay.style.position = 'fixed';
+            overlay.style.top = '0';
+            overlay.style.left = '0';
+            overlay.style.width = '100vw';
+            overlay.style.height = '100vh';
+            overlay.style.background = 'rgba(0, 0, 0, 0.3)';
+            overlay.style.display = 'flex';
+            overlay.style.justifyContent = 'center';
+            overlay.style.alignItems = 'center';
+            document.body.appendChild(overlay);
+
+            // Create the keybind manager menu
+            const keybindMenuBox = document.createElement('div');
+            keybindMenuBox.id = 'keybinds';
+            keybindMenuBox.className = 'keybinds';
+            keybindMenuBox.style.background = 'var(--bg-gradient)';
+            keybindMenuBox.style.opacity = '1';
+            keybindMenuBox.style.padding = '20px';
+            keybindMenuBox.style.borderRadius = '10px';
+            keybindMenuBox.style.boxShadow = '0 4px 15px rgba(0, 0, 0, 0.2)';
+            keybindMenuBox.style.maxWidth = '900px';
+            keybindMenuBox.style.width = '90%';
+
+            // Add a title
+            const title = document.createElement('h2');
+            title.textContent = 'Keybind Manager';
+            title.style.textAlign = 'center';
+            title.style.marginBottom = '20px';
+            keybindMenuBox.appendChild(title);
+
+            // Add explanation text
+            const explanation = document.createElement('p');
+            explanation.innerHTML = `
+                <strong>Instructions:</strong><br>
+                - <strong>Key:</strong> The key that triggers the action.<br>
+                - <strong>Double Press:</strong> Whether the action requires a double press.<br>
+                - Modify the fields below to customize your keybinds.
+            `;
+            explanation.style.marginBottom = '20px';
+            explanation.style.fontSize = '14px';
+            explanation.style.color = 'var(--text-color)';
+            keybindMenuBox.appendChild(explanation);
+
+            // Add a note about the keybinds (last key pressed, updated by the keybind listener at the bottom of this file)
+            const lastPress = document.createElement('p');
+            lastPress.id = 'lastKeyPressed';
+            const lastPressLabel = document.createElement('span');
+            lastPressLabel.textContent = 'Last Key Pressed: ';
+            lastPressLabel.style.fontWeight = 'bold';
+            lastPressLabel.style.color = 'var(--text-color)';
+            lastPressLabel.appendChild(lastPress);
+            keybindMenuBox.appendChild(lastPressLabel);
+
+            // Create the keybinds list
+            const keybindsList = document.createElement('div');
+            keybindsList.style.display = 'flex';
+            keybindsList.style.flexDirection = 'column';
+            keybindsList.style.gap = '10px';
+
+            keybinds.forEach(([key, elements, doublePress], index) => {
+                const keybindRow = document.createElement('div');
+                keybindRow.style.display = 'flex';
+                keybindRow.style.alignItems = 'center';
+                keybindRow.style.justifyContent = 'space-between';
+                keybindRow.style.gap = '10px';
+
+                // Key input
+                const keybindTextfield = document.createElement('input');
+                keybindTextfield.type = 'text';
+                keybindTextfield.value = key;
+                keybindTextfield.style.flex = '1';
+                keybindTextfield.style.padding = '5px';
+                keybindTextfield.style.border = '1px solid var(--border-color)';
+                keybindTextfield.style.borderRadius = '5px';
+                keybindTextfield.onchange = () => {
+                    keybinds[index][0] = keybindTextfield.value;
+                };
+
+                // Double press checkbox
+                const doublePressCheckbox = document.createElement('input');
+                doublePressCheckbox.type = 'checkbox';
+                doublePressCheckbox.checked = doublePress;
+                doublePressCheckbox.style.marginLeft = '10px';
+                doublePressCheckbox.onchange = () => {
+                    keybinds[index][2] = doublePressCheckbox.checked;
+                };
+
+                // Action description
+                const actionDescription = document.createElement('span');
+                // const visibleElements = elements.filter(element => {
+                //     const el = document.getElementById(element);
+                //     return el && isElementVisible(el);
+                // });
+
+                // if (visibleElements.length > 0) {
+                //     actionDescription.textContent = visibleElements
+                //         .map(el => (el ? el : 'button not visible'))
+                //         .join(', ');
+                // } else {
+                //     keybindRow.style.display = 'none'; // Hide the row if no buttons are visible
+                // }
+                actionDescription.innerHTML = elements
+                    .map(element => {
+                        const el = document.getElementById(element);
+                        return isElementVisible(el) 
+                            ? `<strong>${el.textContent}</strong>` 
+                            : element;
+                    })
+                    .join(', ');
+                actionDescription.style.flex = '1';
+                actionDescription.style.textAlign = 'left';
+                actionDescription.style.fontSize = '12px';
+                actionDescription.style.color = 'var(--text-color-secondary)';
+
+                // Add labels for clarity
+                const actionLabel = document.createElement('span');
+                actionLabel.textContent = 'Buttons pressed by this keybind:';
+                actionLabel.style.flex = '1';
+                actionLabel.style.textAlign = 'right';
+
+                const keyLabel = document.createElement('span');
+                keyLabel.textContent = 'Key:';
+                keyLabel.style.flex = '1';
+                keyLabel.style.textAlign = 'right';
+
+                const doublePressLabel = document.createElement('span');
+                doublePressLabel.textContent = 'Double Press:';
+                doublePressLabel.style.flex = '1';
+                doublePressLabel.style.textAlign = 'right';
+
+                keybindRow.appendChild(actionLabel);
+                keybindRow.appendChild(actionDescription);
+                keybindRow.appendChild(keyLabel);
+                keybindRow.appendChild(keybindTextfield);
+                keybindRow.appendChild(doublePressLabel);
+                keybindRow.appendChild(doublePressCheckbox);
+
+                keybindsList.appendChild(keybindRow);
+            });
+
+            keybindMenuBox.appendChild(keybindsList);
+
+            // Exit menu button
+            const exitMenuButton = document.createElement('button');
+            exitMenuButton.id = 'exitMenuButton';
+            exitMenuButton.textContent = 'Exit Keybind Menu';
+            exitMenuButton.style.marginTop = '20px';
+            exitMenuButton.style.padding = '10px 20px';
+            exitMenuButton.style.background = 'var(--button-bg)';
+            exitMenuButton.style.color = 'var(--button-color)';
+            exitMenuButton.style.border = 'none';
+            exitMenuButton.style.borderRadius = '5px';
+            exitMenuButton.style.cursor = 'pointer';
+            exitMenuButton.style.alignSelf = 'center';
+            exitMenuButton.onclick = () => {
+                localStorage.setItem('keybinds', JSON.stringify(keybinds));
+                overlay.remove();
+            };
+
+            keybindMenuBox.appendChild(exitMenuButton);
+            overlay.appendChild(keybindMenuBox);
         }
         if (event.target.id === 'toggleHistory') {
             showHistory = !showHistory;
@@ -1435,6 +1615,7 @@ function startGame(gameArea) {
     const backButton = document.createElement('button');
 
     submitButton = document.createElement('button');
+    submitButton.id = 'submitButton';
 
     let marker = document.createElement('div');
     marker.id = 'marker';
@@ -1804,6 +1985,7 @@ function startGame(gameArea) {
 
         // Create continue button
         continueButton = document.createElement('button');
+        continueButton.id = 'continueButton';
         continueButton.innerText = 'Continue';
         continueButton.onclick = (event) => {
             if (isOnline) {
@@ -1912,58 +2094,68 @@ function isElementVisible(element) {
 
 // keybinds
 document.addEventListener('keydown', event => {
-    if (!document.activeElement || document.activeElement.tagName !== 'INPUT') {
-        if (event.key === 'Escape') {
-            const currentTime = Date.now();
-            // Check for double press (within 300ms)
-            if (lastPressTime !== null && currentTime - lastPressTime < 300) {
-                clearTimeout(timeoutId);
-                if (isElementVisible(closeLobbyButton)) {
-                    closeLobbyButton.click(); // close lobby if host
+    if (document.getElementById('keybinds') !== null) {
+        document.getElementById('lastKeyPressed').textContent = `'${event.key}'`;
+        return;
+    }
+    if (document.activeElement.tagName !== 'INPUT' && document.getElementById('keybinds') === null) {
+        const currentTime = Date.now();
+        // Check for double press (within 300ms)
+        if (lastPressTime !== null && currentTime - lastPressTime < 300) {
+            clearTimeout(timeoutId);
+            lastPressTime = null;
+            timeoutId = null;
+
+            // double press action
+            console.log("Double press: ", event.key);
+            keybinds.forEach(keybind => {
+                const [key, elements, isDoublePress] = keybind;
+                if (event.key === key && isDoublePress) {
+                    elements.forEach(element => {
+                        element = document.getElementById(element);
+                        if (isElementVisible(element)) {
+                            element.click();
+                        }
+                    });
                 }
+            });
+        } else {
+            clearTimeout(timeoutId);
+            timeoutId = setTimeout(() => {
+                // single press action
+                console.log("Single press: ", event.key);
+
+                keybinds.forEach(keybind => {
+                    const [key, elements, isDoublePress] = keybind;
+                    if (event.key === key && !isDoublePress) {
+                        elements.forEach(element => {
+                            element = document.getElementById(element);
+                            if (isElementVisible(element)) {
+                                // check for special case of joinLobbyButton
+                                if (element.id === 'joinLobbyButton') {
+                                    db.collection('lobbies').get().then(querySnapshot => {
+                                        if (lobbyInput.value === '') {
+                                            const lobbies = querySnapshot.docs;
+                                            const lobbyCount = lobbies.length;
+                                            const randomLobbyName = lobbyCount > 0 ? lobbies[Math.floor(Math.random() * lobbyCount)].id : '1';
+                                            lobbyInput.value = randomLobbyName;
+                                        }
+                                        if (nameInput.value === '') {
+                                            nameInput.value = possibleNames1[Math.floor(Math.random() * possibleNames1.length)] + possibleNames2[Math.floor(Math.random() * possibleNames2.length)];
+                                        }
+                                        element.click();
+                                    });
+                                } else {
+                                    element.click();
+                                }
+                            }
+                        });
+                    }
+                });
                 lastPressTime = null;
                 timeoutId = null;
-            } else {
-                // Set up single press action
-                clearTimeout(timeoutId); // Clear any existing timeout
-                timeoutId = setTimeout(() => {
-                    if (isElementVisible(leaveLobbyButton)) {
-                        leaveLobbyButton.click(); // leave lobby if available
-                    }
-                    lastPressTime = null;
-                    timeoutId = null;
-                }, 300);
-                lastPressTime = currentTime;
-            }
-        } else if (event.code === 'Space') {
-            if (isElementVisible(selectButton)) {
-                selectButton.click();
-            } else if (isElementVisible(submitButton)) {
-                submitButton.click();
-            } else if (isElementVisible(continueButton)) {
-                continueButton.click();
-            } else if (isElementVisible(alertBox)) {
-                closeButton.click();
-            }
-        } else if (event.key === 'n' && isElementVisible(joinLobbyButton)) { // if new lobby keybind is pressed ONLY while lobby selection screen is open
-            db.collection('lobbies').get().then(querySnapshot => {
-                if (lobbyInput.value === '') {
-                    const lobbies = querySnapshot.docs;
-                    const lobbyCount = lobbies.length;
-                    const randomLobbyName = lobbyCount > 0 ? lobbies[Math.floor(Math.random() * lobbyCount)].id : '1';
-                    lobbyInput.value = randomLobbyName;
-                }
-                if (nameInput.value === '') {
-                    nameInput.value = possibleNames1[Math.floor(Math.random() * possibleNames1.length)] + possibleNames2[Math.floor(Math.random() * possibleNames2.length)];
-                }
-                joinLobbyButton.click();
-            });
-        } else if (event.key === 'g' && isElementVisible(giveUpHostButton)) {
-            giveUpHostButton.click();
-        } else if (event.key === 'c' && isElementVisible(claimHostButton)) {
-            claimHostButton.click();
-        } else {
-            console.log(event.key);
+            }, 300);
+            lastPressTime = currentTime;
         }
     }
 });
