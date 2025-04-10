@@ -1328,8 +1328,8 @@ function createMoreButton() {
                 actionDescription.innerHTML = elements
                     .map(element => {
                         const el = document.getElementById(element);
-                        return isElementVisible(el) 
-                            ? `<strong>${el.textContent}</strong>` 
+                        return isElementVisible(el)
+                            ? `<strong>${el.textContent}</strong>`
                             : element;
                     })
                     .join(', ');
@@ -2113,6 +2113,10 @@ document.addEventListener('keydown', event => {
                     elements.forEach(element => {
                         element = document.getElementById(element);
                         if (isElementVisible(element)) {
+                            // check for special case of joinLobbyButton
+                            if (element.id === 'joinLobbyButton') {
+                                autoFill();
+                            }
                             element.click();
                         }
                     });
@@ -2132,21 +2136,9 @@ document.addEventListener('keydown', event => {
                             if (isElementVisible(element)) {
                                 // check for special case of joinLobbyButton
                                 if (element.id === 'joinLobbyButton') {
-                                    db.collection('lobbies').get().then(querySnapshot => {
-                                        if (lobbyInput.value === '') {
-                                            const lobbies = querySnapshot.docs;
-                                            const lobbyCount = lobbies.length;
-                                            const randomLobbyName = lobbyCount > 0 ? lobbies[Math.floor(Math.random() * lobbyCount)].id : '1';
-                                            lobbyInput.value = randomLobbyName;
-                                        }
-                                        if (nameInput.value === '') {
-                                            nameInput.value = possibleNames1[Math.floor(Math.random() * possibleNames1.length)] + possibleNames2[Math.floor(Math.random() * possibleNames2.length)];
-                                        }
-                                        element.click();
-                                    });
-                                } else {
-                                    element.click();
+                                    autoFill();
                                 }
+                                element.click();
                             }
                         });
                     }
@@ -2158,6 +2150,20 @@ document.addEventListener('keydown', event => {
         }
     }
 });
+
+function autoFill() {
+    db.collection('lobbies').get().then(querySnapshot => {
+        if (lobbyInput.value === '') {
+            const lobbies = querySnapshot.docs;
+            const lobbyCount = lobbies.length;
+            const randomLobbyName = lobbyCount > 0 ? lobbies[Math.floor(Math.random() * lobbyCount)].id : '1';
+            lobbyInput.value = randomLobbyName;
+        }
+        if (nameInput.value === '') {
+            nameInput.value = possibleNames1[Math.floor(Math.random() * possibleNames1.length)] + possibleNames2[Math.floor(Math.random() * possibleNames2.length)];
+        }
+    });
+}
 
 function resize() {
     const allImages = document.querySelectorAll('img');
