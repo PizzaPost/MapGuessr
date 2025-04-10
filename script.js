@@ -1,5 +1,8 @@
 let gameModes;
+let languages;
 
+let language = localStorage.getItem('language') || 'en'; // default to English if not set
+let prank = new Date().getMonth() === 3 && new Date().getDate() === 1; // true if it's April 1st
 let gameState = 0; // useless, but we might make use of it in the future
 let score = 0;
 let totalScore = 0;
@@ -90,203 +93,209 @@ const possibleNames2 = [
     "Spartan", "Nuke", "Valkyrie", "Iguana", "Zombie"
 ];
 
-if (isMobile()) {
-    const blackOverlay = document.createElement('div');
-    blackOverlay.style.position = 'fixed';
-    blackOverlay.style.top = '0';
-    blackOverlay.style.left = '0';
-    blackOverlay.style.width = '100vw';
-    blackOverlay.style.height = '100vh';
-    blackOverlay.style.background = 'black';
-    blackOverlay.style.zIndex = '999';
-    document.body.appendChild(blackOverlay);
-    showCustomAlert("This website doesn't work on this device. It is recommended to use a computer.", 0, undefined, true);
-} else if (!localStorage.getItem('hasVisited')) {
-    document.addEventListener('DOMContentLoaded', () => {
-        if (isMobile()) {
-            const blackOverlay = document.createElement('div');
-            blackOverlay.style.cssText = `
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100vw;
-                height: 100vh;
-                background: black;
-                z-index: 9999;
-            `;
-            document.body.appendChild(blackOverlay);
-            alert("This website doesn't work on mobile devices. Please use a computer.");
-        } else if (!localStorage.getItem('hasVisited')) {
-            createWelcomeOverlay();
+function initialDeviceCheck() {
+    if (isMobile()) {
+        const blackOverlay = document.createElement('div');
+        blackOverlay.style.position = 'fixed';
+        blackOverlay.style.top = '0';
+        blackOverlay.style.left = '0';
+        blackOverlay.style.width = '100vw';
+        blackOverlay.style.height = '100vh';
+        blackOverlay.style.background = 'black';
+        blackOverlay.style.zIndex = '999';
+        document.body.appendChild(blackOverlay);
+        showCustomAlert(gLS("deviceIncompatible"), 0, undefined, true);
+    } else if (!localStorage.getItem('hasVisited')) {
+        createWelcomeOverlay();
+
+        function createWelcomeOverlay() {
+            const overlay = document.createElement('div');
+            overlay.id = 'welcome-overlay';
+
+            const containerHTML = document.createElement('div');
+            containerHTML.id = 'welcome-container';
+
+            const header = document.createElement('header');
+            const headerTitle = document.createElement('h1');
+            headerTitle.textContent = gLS("welcomeTitle");
+            header.appendChild(headerTitle);
+
+            const contentWrapper = document.createElement('div');
+            contentWrapper.id = 'content-wrapper';
+
+            const tocSidebar = document.createElement('nav');
+            tocSidebar.id = 'toc-sidebar';
+            const tocTitle = document.createElement('h3');
+            tocTitle.textContent = gLS("tocTitle");
+            tocSidebar.appendChild(tocTitle);
+
+            const mainContent = document.createElement('article');
+            mainContent.id = 'main-content';
+
+            contentWrapper.appendChild(tocSidebar);
+            contentWrapper.appendChild(mainContent);
+
+            const footer = document.createElement('footer');
+            const startButton = document.createElement('button');
+            startButton.className = 'primary-btn';
+            startButton.id = 'start-btn';
+            startButton.textContent = gLS("startButtonText");
+
+            const toolbar = document.createElement('div');
+            toolbar.className = 'toolbar';
+
+            footer.appendChild(startButton);
+            footer.appendChild(toolbar);
+
+            containerHTML.appendChild(header);
+            containerHTML.appendChild(contentWrapper);
+            containerHTML.appendChild(footer);
+
+            overlay.appendChild(containerHTML);
+            document.body.appendChild(overlay);
+
+            loadMarkdownContent();
+
+            document.getElementById('start-btn').addEventListener('click', () => {
+                overlay.style.opacity = '0';
+                setTimeout(() => overlay.remove(), 500);
+                localStorage.setItem('hasVisited', 'true');
+            });
         }
-    });
 
-    function createWelcomeOverlay() {
-        const overlay = document.createElement('div');
-        overlay.id = 'welcome-overlay';
+        function setupJumpButton() {
+            const container = document.getElementById('main-content');
+            const startBtn = document.getElementById('start-btn');
+            let isJumping = false;
+            let animationTimeout = null;
 
-        const containerHTML = `
-            <div id="welcome-container">
-                <header>
-                    <h1>🌍 Welcome to MapGuessr!</h1>
-                </header>
-                
-                <div id="content-wrapper">
-                    <nav id="toc-sidebar">
-                        <h3>Table of Contents</h3>
-                    </nav>
-                    <article id="main-content"></article>
-                </div>
-      
-                <footer>
-                    <button class="primary-btn" id="start-btn">Start Guessing 🌍</button>
-                    <div class="toolbar">
-          </div>
-                </footer>
-            </div>
-        `;
+            container.addEventListener('scroll', () => {
+                const isAtBottom = container.scrollHeight - container.scrollTop <= container.clientHeight + 50;
 
-        overlay.innerHTML = containerHTML;
-        document.body.appendChild(overlay);
+                if (isAtBottom && !isJumping) {
+                    startBtn.classList.add('jump-active');
+                    isJumping = true;
+                } else if (!isAtBottom && isJumping) {
+                    startBtn.classList.add('jump-completing');
+                    startBtn.classList.remove('jump-active');
+                    clearTimeout(animationTimeout);
+                    animationTimeout = setTimeout(() => {
+                        startBtn.classList.remove('jump-completing');
+                        isJumping = false;
+                    }, 250);
+                }
+            });
+        }
 
-        loadMarkdownContent();
+        async function loadMarkdownContent() {
+            try {
+                const response = await fetch('./README.md');
+                if (!response.ok) throw new Error('File not found');
+                const text = await response.text();
 
-        document.getElementById('start-btn').addEventListener('click', () => {
-            overlay.style.opacity = '0';
-            setTimeout(() => overlay.remove(), 500);
-            localStorage.setItem('hasVisited', 'true');
-        });
-    }
+                const mainContent = document.getElementById('main-content');
+                const sidebar = document.getElementById('toc-sidebar');
 
-    function setupJumpButton() {
-        const container = document.getElementById('main-content');
-        const startBtn = document.getElementById('start-btn');
-        let isJumping = false;
-        let animationTimeout = null;
-
-        container.addEventListener('scroll', () => {
-            const isAtBottom = container.scrollHeight - container.scrollTop <= container.clientHeight + 50;
-
-            if (isAtBottom && !isJumping) {
-                startBtn.classList.add('jump-active');
-                isJumping = true;
-            } else if (!isAtBottom && isJumping) {
-                startBtn.classList.add('jump-completing');
-                startBtn.classList.remove('jump-active');
-                clearTimeout(animationTimeout);
-                animationTimeout = setTimeout(() => {
-                    startBtn.classList.remove('jump-completing');
-                    isJumping = false;
-                }, 250);
-            }
-        });
-    }
-
-    async function loadMarkdownContent() {
-        try {
-            const response = await fetch('./README.md');
-            if (!response.ok) throw new Error('File not found');
-            const text = await response.text();
-
-            const mainContent = document.getElementById('main-content');
-            const sidebar = document.getElementById('toc-sidebar');
-
-            mainContent.innerHTML = `<div class="markdown-content">${parseMarkdown(text)}</div>`;
-            generateTOC(mainContent, sidebar);
-            setupLinks(mainContent);
-            setupJumpButton();
-        } catch (error) {
-            console.error('Error loading content:', error);
-            document.getElementById('main-content').innerHTML = `
+                mainContent.innerHTML = `<div class="markdown-content">${parseMarkdown(text)}</div>`;
+                generateTOC(mainContent, sidebar);
+                setupLinks(mainContent);
+                setupJumpButton();
+            } catch (error) {
+                console.error('Error loading content:', error);
+                document.getElementById('main-content').innerHTML = `
                 <div class="error">
                     <h3>⚠️ Documentation Missing</h3>
                     <p>${error.message}</p>
                 </div>
             `;
+            }
         }
-    }
 
-    function parseMarkdown(text) {
-        return text
-            // Backslash am Zeilenende als <br> behandeln
-            .replace(/\\(\s*)\n/g, '<br>')
-            // Setext-Headings
-            .replace(/^(.+)[ \t]*\r?\n(=+)[ \t]*$/gm, '<h1>$1</h1>')
-            .replace(/^(.+)[ \t]*\r?\n(-+)[ \t]*$/gm, '<h2>$1</h2>')
-            // ATX-Headings
-            .replace(/^# (.*$)/gm, '<h1>$1</h1>')
-            .replace(/^## (.*$)/gm, '<h2>$1</h2>')
-            .replace(/^### (.*$)/gm, '<h3>$1</h3>')
-            .replace(/^#### (.*$)/gm, '<h4>$1</h4>')
-            // Links
-            .replace(/\[(.*?)\]\((.*?)\)/g, (_, text, link) => {
-                const cleanLink = link.toLowerCase()
+        function parseMarkdown(text) {
+            return text
+                // Backslash am Zeilenende als <br> behandeln
+                .replace(/\\(\s*)\n/g, '<br>')
+                // Setext-Headings
+                .replace(/^(.+)[ \t]*\r?\n(=+)[ \t]*$/gm, '<h1>$1</h1>')
+                .replace(/^(.+)[ \t]*\r?\n(-+)[ \t]*$/gm, '<h2>$1</h2>')
+                // ATX-Headings
+                .replace(/^# (.*$)/gm, '<h1>$1</h1>')
+                .replace(/^## (.*$)/gm, '<h2>$1</h2>')
+                .replace(/^### (.*$)/gm, '<h3>$1</h3>')
+                .replace(/^#### (.*$)/gm, '<h4>$1</h4>')
+                // Links
+                .replace(/\[(.*?)\]\((.*?)\)/g, (_, text, link) => {
+                    const cleanLink = link.toLowerCase()
+                        .replace(/[^a-z0-9 -]/g, '')
+                        .replace(/\s+/g, '-')
+                        .replace(/-+/g, '-');
+                    return `<a class="content-link" href="#${cleanLink}">${text}</a>`;
+                })
+                // Formatierung
+                .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+                .replace(/\*(.*?)\*/g, '<em>$1</em>')
+                .replace(/`(.*?)`/g, '<code>$1</code>')
+                .replace(/```([\s\S]*?)```/g, '<pre><code>$1</code></pre>');
+        }
+
+        function generateTOC(contentElement, sidebarElement) {
+            const headings = contentElement.querySelectorAll('h1, h2, h3, h4, h5, h6');
+
+            headings.forEach(heading => {
+                const id = heading.textContent
+                    .toLowerCase()
                     .replace(/[^a-z0-9 -]/g, '')
                     .replace(/\s+/g, '-')
                     .replace(/-+/g, '-');
-                return `<a class="content-link" href="#${cleanLink}">${text}</a>`;
-            })
-            // Formatierung
-            .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-            .replace(/\*(.*?)\*/g, '<em>$1</em>')
-            .replace(/`(.*?)`/g, '<code>$1</code>')
-            .replace(/```([\s\S]*?)```/g, '<pre><code>$1</code></pre>');
-    }
 
-    function generateTOC(contentElement, sidebarElement) {
-        const headings = contentElement.querySelectorAll('h1, h2, h3, h4, h5, h6');
+                heading.id = id;
 
-        headings.forEach(heading => {
-            const id = heading.textContent
-                .toLowerCase()
-                .replace(/[^a-z0-9 -]/g, '')
-                .replace(/\s+/g, '-')
-                .replace(/-+/g, '-');
-
-            heading.id = id;
-
-            const tocItem = document.createElement('a');
-            tocItem.className = `toc-link ${heading.tagName.toLowerCase()}`;
-            tocItem.textContent = heading.textContent;
-            tocItem.href = `#${id}`;
-            tocItem.addEventListener('click', smoothScroll);
-            sidebarElement.appendChild(tocItem);
-        });
-    }
-
-    function setupLinks(container) {
-        container.querySelectorAll('.content-link').forEach(link => {
-            link.addEventListener('click', smoothScroll);
-        });
-    }
-
-    function smoothScroll(e) {
-        e.preventDefault();
-        const link = e.target.closest('a');
-        if (!link || !link.hash) return;
-
-        const targetId = decodeURIComponent(link.hash.substring(1));
-        const target = document.getElementById(targetId);
-        const container = document.getElementById('main-content');
-
-        if (target && container) {
-            const headerHeight = document.querySelector('header').offsetHeight;
-            const containerRect = container.getBoundingClientRect();
-            const targetRect = target.getBoundingClientRect();
-            const scrollPosition = targetRect.top - containerRect.top + container.scrollTop - headerHeight + 100;
-
-            container.scrollTo({
-                top: scrollPosition,
-                behavior: 'smooth'
+                const tocItem = document.createElement('a');
+                tocItem.className = `toc-link ${heading.tagName.toLowerCase()}`;
+                tocItem.textContent = heading.textContent;
+                tocItem.href = `#${id}`;
+                tocItem.addEventListener('click', smoothScroll);
+                sidebarElement.appendChild(tocItem);
             });
+        }
 
-            target.classList.add('highlight');
-            setTimeout(() => target.classList.remove('highlight'), 2000);
-            history.replaceState(null, null, link.hash);
+        function setupLinks(container) {
+            container.querySelectorAll('.content-link').forEach(link => {
+                link.addEventListener('click', smoothScroll);
+            });
+        }
+
+        function smoothScroll(e) {
+            e.preventDefault();
+            const link = e.target.closest('a');
+            if (!link || !link.hash) return;
+
+            const targetId = decodeURIComponent(link.hash.substring(1));
+            const target = document.getElementById(targetId);
+            const container = document.getElementById('main-content');
+
+            if (target && container) {
+                const headerHeight = document.querySelector('header').offsetHeight;
+                const containerRect = container.getBoundingClientRect();
+                const targetRect = target.getBoundingClientRect();
+                const scrollPosition = targetRect.top - containerRect.top + container.scrollTop - headerHeight + 100;
+
+                container.scrollTo({
+                    top: scrollPosition,
+                    behavior: 'smooth'
+                });
+
+                target.classList.add('highlight');
+                setTimeout(() => target.classList.remove('highlight'), 2000);
+                history.replaceState(null, null, link.hash);
+            }
         }
     }
 }
 
+function gLS(key) { // get language string
+    return languages[language][prank ? 'aprilFools' : 'normal'][key] || key;
+}
 
 if (showHistory) {
     toggleHistory.classList.add('disabled');
@@ -349,6 +358,23 @@ function clearHosts() {
     });
 }
 
+async function loadLanguages() {
+    try {
+        const response = await fetch('languages.json'); // Path to your JSON file
+        if (!response.ok) {
+            throw new Error('Failed to load languages');
+        }
+        languages = await response.json(); // Parse the JSON data
+        console.log('Languages loaded successfully:', languages);
+        // Call any functions that depend on languages here
+        createMoreButton();
+        initialDeviceCheck();
+        initializeGame();
+    } catch (error) {
+        console.error('Error loading languages:', error);
+    }
+}
+
 // Function to load the JSON file
 async function loadGameModes() {
     try {
@@ -359,7 +385,7 @@ async function loadGameModes() {
         gameModes = await response.json(); // Parse the JSON data
         console.log('Game modes loaded successfully:', gameModes);
         // Call any functions that depend on gameModes here
-        initializeGame();
+        loadLanguages();
     } catch (error) {
         console.error('Error loading game modes:', error);
     }
@@ -397,6 +423,9 @@ function getPlayerNames(players) {
     return result;
 }
 
+// Load the game modes when the script runs
+loadGameModes();
+
 // Example function that uses gameModes
 function initializeGame() {
     if (gameModes) {
@@ -408,9 +437,6 @@ function initializeGame() {
         console.error('Game modes not loaded yet.');
     }
 }
-
-// Load the game modes when the script runs
-loadGameModes();
 
 const gameVersionDiv = document.createElement('div');
 const lobbyInput = document.createElement('input');
@@ -424,10 +450,10 @@ function chooseVersion() {
 
     // Create the text input for lobby name
     lobbyInput.type = 'text';
-    lobbyInput.placeholder = 'Lobby Name';
+    lobbyInput.placeholder = gLS("placeholderLobbyName");
     lobbyInput.classList.add('input-field-1');
     nameInput.type = 'text';
-    nameInput.placeholder = 'Your Name';
+    nameInput.placeholder = gLS("placeholderUserName");
     nameInput.classList.add('input-field-2');
 
     // Create loading animation element
@@ -440,7 +466,7 @@ function chooseVersion() {
     // Create the join lobby button
     joinLobbyButton = document.createElement('button');
     joinLobbyButton.id = 'joinLobbyButton';
-    joinLobbyButton.innerText = 'Join Lobby';
+    joinLobbyButton.innerText = gLS("joinLobbyButtonText");
     joinLobbyButton.onclick = () => {
         isOnline = true;
         lobbyName = lobbyInput.value.trim();
@@ -450,10 +476,10 @@ function chooseVersion() {
                 loadingDiv.style.display = 'flex';
                 joinLobby();
             } else {
-                showCustomAlert('No user name provided.', undefined, gameVersionDiv);
+                showCustomAlert(gLS("noUserName"), undefined, gameVersionDiv);
             }
         } else {
-            showCustomAlert('No lobby name provided.', undefined, gameVersionDiv);
+            showCustomAlert(gLS("noLobbyName"), undefined, gameVersionDiv);
         }
     };
 
@@ -464,7 +490,7 @@ function chooseVersion() {
 
     // Create the play single player button
     const singlePlayerButton = document.createElement('button');
-    singlePlayerButton.innerText = 'Play Single Player';
+    singlePlayerButton.innerText = gLS("singlePlayerButtonText");
     singlePlayerButton.onclick = () => {
         console.log('Starting single player game...');
         gameVersionDiv.style.display = 'none';
@@ -493,7 +519,7 @@ function joinLobby() {
     gameVersionDiv.style.display = 'none';
     leaveLobbyButton = document.createElement('button');
     leaveLobbyButton.id = 'leaveLobbyButton';
-    leaveLobbyButton.innerText = 'Leave Lobby';
+    leaveLobbyButton.innerText = gLS("leaveLobbyButtonText");
     leaveLobbyButton.style.position = 'fixed';
     leaveLobbyButton.style.bottom = '0';
     leaveLobbyButton.style.left = '50%';
@@ -505,6 +531,7 @@ function joinLobby() {
     };
     document.body.appendChild(leaveLobbyButton);
     db.collection('lobbies').doc(lobbyName).get().then(doc => {
+        playerListText.innerText = gLS("playerListText");
         if (doc.exists) {
             const existingPlayers = doc.data().players;
             const existingPlayerNames = existingPlayers.map(player => player.name);
@@ -585,14 +612,13 @@ function joinLobby() {
     }).catch(error => {
         console.error('Error joining lobby:', error);
         loadingDiv.style.display = 'none';
-        showCustomAlert('An error occurred. Please try again.', undefined, gameVersionDiv);
+        showCustomAlert(gLS("error"), undefined, gameVersionDiv);
     });
 }
 
 const playerListDiv = document.createElement('div');
 playerListDiv.id = 'playerList';
 const playerListText = document.createElement('p');
-playerListText.innerText = 'Players:';
 playerListDiv.appendChild(playerListText);
 
 function playAsMember() {
@@ -601,13 +627,13 @@ function playAsMember() {
     claimHostButton = document.createElement('button');
     db.collection('lobbies').doc(lobbyName).onSnapshot(doc => {
         if (!doc.exists) {
-            showCustomAlert('Lobby no longer exists. The page will reload now.', undefined, [], true);
+            showCustomAlert(gLS("lobbyNonexistent"), undefined, [], true);
             return;
         }
         const players = doc.data().players || [];
         const userInLobby = players.find(player => player.uid === auth.currentUser.uid);
         if (!userInLobby) {
-            showCustomAlert('You have been kicked from this lobby. The page will reload now.', undefined, [], true);
+            showCustomAlert(gLS("lobbyKicked"), undefined, [], true);
             return;
         }
         setTimeout(() => {
@@ -643,7 +669,7 @@ function playAsMember() {
                         }
                     }
                     claimHostButton.id = 'claimHostButton';
-                    claimHostButton.innerText = 'Claim Host Position';
+                    claimHostButton.innerText = gLS("claimHostButtonText");
                     claimHostButton.style.position = 'fixed';
                     claimHostButton.style.bottom = '0';
                     claimHostButton.style.left = '0';
@@ -671,7 +697,7 @@ function playAsMember() {
                     startGame(JSON.parse(doc.data().gameArea));
                 } else {
                     const playerNames = getPlayerNames(doc.data().players);
-                    playerListText.innerHTML = `Players: <br>${getPlayerNames(doc.data().players || [])}`;
+                    playerListText.innerHTML = `${gLS("playerListText")}<br>${getPlayerNames(doc.data().players || [])}`;
                     document.body.appendChild(playerListDiv);
                 }
                 if (reload) {
@@ -686,18 +712,18 @@ function playAsHost() {
     gameVersionDiv.style.display = 'none';
     db.collection('lobbies').doc(lobbyName).onSnapshot(doc => {
         if (!doc.exists) {
-            showCustomAlert('Lobby no longer exists. The page will reload now.', undefined, [], true);
+            showCustomAlert(gLS("lobbyNonexitent"), undefined, [], true);
             return;
         }
         const players = doc.data().players || [];
         const playerNames = getPlayerNames(players);
-        playerListText.innerHTML = `Players: <br>${getPlayerNames(doc.data().players || [])}`;
+        playerListText.innerHTML = `${gLS("playerListText")}<br>${getPlayerNames(doc.data().players || [])}`;
         document.body.appendChild(playerListDiv);
     });
     closeLobbyButton = document.createElement('button');
     giveUpHostButton = document.createElement('button');
     giveUpHostButton.id = 'giveUpHostButton';
-    giveUpHostButton.innerText = 'Give up host position';
+    giveUpHostButton.innerText = gLS("giveUpHostButtonText");
     giveUpHostButton.style.position = 'fixed';
     giveUpHostButton.style.bottom = '0';
     giveUpHostButton.style.left = '0';
@@ -723,7 +749,7 @@ function playAsHost() {
     document.body.appendChild(giveUpHostButton);
 
     closeLobbyButton.id = 'closeLobbyButton';
-    closeLobbyButton.innerText = 'Close Lobby';
+    closeLobbyButton.innerText = gLS("closeLobbyButtonText");
     closeLobbyButton.style.position = 'fixed';
     closeLobbyButton.style.bottom = '0';
     const giveUpHostButtonRect = giveUpHostButton.getBoundingClientRect();
@@ -861,9 +887,9 @@ function startGameModeSelector() {
 
     // Create the selectedPathElement and the selectButton
     selectedPathElement.id = 'selectedPath';
-    selectedPathElement.innerText = 'Choose a game (or all in this directory ->)';
+    selectedPathElement.innerText = gLS("chooseGameText");
     selectButton.id = 'selectButton';
-    selectButton.innerText = 'Select';
+    selectButton.innerText = gLS("selectButtonText");
     selectButton.onclick = () => {
         selectGameMode();
     };
@@ -930,14 +956,14 @@ function startGameModeSelector() {
         // Create back button if not at the top level
         if (parentKeys.length > 0) {
             const backButton = document.createElement('button');
-            backButton.innerText = 'Back';
+            backButton.innerText = gLS("backButtonText");
             backButton.onclick = () => {
                 parentKeys.pop();
                 gameArea = getNestedObject(gameModes, parentKeys);
                 const selectedPath = parentKeys.join(' > ');
                 selectedPathElement.innerText = selectedPath;
                 if (parentKeys.length === 0) {
-                    selectedPathElement.innerText = 'All Games / ';
+                    selectedPathElement.innerText = gLS("allGamesText");
                 }
                 renderOptions(getNestedObject(gameModes, parentKeys), parentKeys);
             };
@@ -1090,7 +1116,7 @@ function showCreditMenu() {
 
     // Create the close button
     const closeButton = document.createElement('button');
-    closeButton.innerText = 'OK';
+    closeButton.innerText = gLS("closeButtonText");
     closeButton.classList.add('button-gray');
 
     function closeCredits() {
@@ -1177,12 +1203,12 @@ function createMoreButton() {
     localStorageReset.id = 'localStorageReset';
     localStorageReset.textContent = '🗑️';
 
-    attachTooltip(infoLink, "Credits");
-    attachTooltip(themeEmoji, "Switch between Dark/Light Appearance");
-    attachTooltip(keybindMenu, "View and change Keybinds");
-    attachTooltip(toggleSelection, "Toggle the Checkboxes in Map Selection");
-    attachTooltip(toggleHistory, "Toggle the map History in the Game");
-    attachTooltip(localStorageReset, "Reset Local Storage");
+    attachTooltip(infoLink, gLS("infoTooltipText"));
+    attachTooltip(themeEmoji, gLS("themeTooltipText"));
+    attachTooltip(keybindMenu, gLS("keybindTooltipText"));
+    attachTooltip(toggleSelection, gLS("toggleSelectionTooltipText"));
+    attachTooltip(toggleHistory, gLS("toggleHistoryTooltipText"));
+    attachTooltip(localStorageReset, gLS("localStorageResetTooltipText"));
 
     menuButton.appendChild(textSpan);
     menuButton.appendChild(infoLink);
@@ -1250,7 +1276,7 @@ function createMoreButton() {
 
             // Add a title
             const title = document.createElement('h2');
-            title.textContent = 'Keybind Manager';
+            title.textContent = gLS("keybindMenuTitleText");
             title.style.textAlign = 'center';
             title.style.marginBottom = '20px';
             keybindMenuBox.appendChild(title);
@@ -1272,7 +1298,7 @@ function createMoreButton() {
             const lastPress = document.createElement('p');
             lastPress.id = 'lastKeyPressed';
             const lastPressLabel = document.createElement('span');
-            lastPressLabel.textContent = 'Last Key Pressed: ';
+            lastPressLabel.textContent = gLS("lastKeyPressedText");
             lastPressLabel.style.fontWeight = 'bold';
             lastPressLabel.style.color = 'var(--text-color)';
             lastPressLabel.appendChild(lastPress);
@@ -1341,17 +1367,17 @@ function createMoreButton() {
 
                 // Add labels for clarity
                 const actionLabel = document.createElement('span');
-                actionLabel.textContent = 'Buttons pressed by this keybind:';
+                actionLabel.textContent = gLS("actionLabelText");
                 actionLabel.style.flex = '1';
                 actionLabel.style.textAlign = 'right';
 
                 const keyLabel = document.createElement('span');
-                keyLabel.textContent = 'Key:';
+                keyLabel.textContent = gLS("keyLabelText");
                 keyLabel.style.flex = '1';
                 keyLabel.style.textAlign = 'right';
 
                 const doublePressLabel = document.createElement('span');
-                doublePressLabel.textContent = 'Double Press:';
+                doublePressLabel.textContent = gLS("doublePressLabelText");
                 doublePressLabel.style.flex = '1';
                 doublePressLabel.style.textAlign = 'right';
 
@@ -1370,7 +1396,7 @@ function createMoreButton() {
             // Exit menu button
             const exitMenuButton = document.createElement('button');
             exitMenuButton.id = 'exitMenuButton';
-            exitMenuButton.textContent = 'Exit Keybind Menu';
+            exitMenuButton.textContent = gLS("exitMenuButtonText");
             exitMenuButton.style.marginTop = '20px';
             exitMenuButton.style.padding = '10px 20px';
             exitMenuButton.style.background = 'var(--button-bg)';
@@ -1392,21 +1418,21 @@ function createMoreButton() {
             localStorage.setItem('showHistory', showHistory);
             if (showHistory) {
                 toggleHistory.classList.add('disabled');
-                showCustomAlert('History disabled. It will update after you click "continue".', 1);
+                showCustomAlert(gLS("historyDisabled"), 1);
             }
             else {
                 toggleHistory.classList.remove('disabled');
-                showCustomAlert('History enabled. It will update after you click "continue".', 1);
+                showCustomAlert(gLS("historyEnabled"), 1);
             }
         }
         if (event.target.id === 'toggleSelection') {
             invertSelection = !invertSelection;
-            showCustomAlert(`Selecting will now${invertSelection ? ' ' : ' not '}invert.`, 1); // TODO: I selected Portal 2 and Subnautica but it didn't invert
+            showCustomAlert(invertSelection ? gLS("selectionInverted") : gLS("selectionNormal"), 1); // TODO: I selected Portal 2 and Subnautica but it didn't invert
             // TODO: The whole selection thing is broken. I selected Subnautica and presssed toggle but nothing happened.
         }
         if (event.target.id === 'localStorageReset') {
             localStorage.clear();
-            showCustomAlert('Local storage cleared. Changes will apply soon.', 1);
+            showCustomAlert(gLS("localStorageCleared"), 1);
         }
     });
 
@@ -1559,7 +1585,7 @@ function startGame(gameArea) {
         if (isOnline) {
             if (!isHost) {
                 if (syncActualMap === "" || syncRandomImage === "") {
-                    showCustomAlert('No image or map received from the host.\nThis should not happen.\nWe will reload this page for you.\nRe-entering this lobby will fix this.', undefined, [], true);
+                    showCustomAlert(gLS("noImageReceived"), undefined, [], true);
                     return;
                 }
                 actualMap = syncActualMap;
@@ -1632,7 +1658,7 @@ function startGame(gameArea) {
 
     const selectedPathElement = document.createElement('p');
     selectedPathElement.id = 'selectedPath';
-    selectedPathElement.innerText = 'Choose where you think this image was taken';
+    selectedPathElement.innerText = gLS("imageChoiceText");
     mapSelector.appendChild(selectedPathElement);
 
     // Helper function to select a map
@@ -1647,7 +1673,7 @@ function startGame(gameArea) {
 
         if (!Array.isArray(gameArea) && !(devMode > -1)) {
             // Create a back button
-            backButton.innerText = 'Back';
+            backButton.innerText = gLS("backButtonText");
             backButton.onclick = () => {
                 // Go back to the map selection screen
                 gameState = 1;
@@ -1677,14 +1703,14 @@ function startGame(gameArea) {
         // Create back button if not at the top level
         if (parentKeys.length > 0) {
             const backButton = document.createElement('button');
-            backButton.innerText = 'Back';
+            backButton.innerText = gLS("backButtonText");
             backButton.onclick = () => {
                 parentKeys.pop();
                 selection = getParentObject(gameArea, selection);
                 const selectedPath = parentKeys.join(' > ');
                 selectedPathElement.innerText = selectedPath;
                 if (parentKeys.length === 0) {
-                    selectedPathElement.innerText = 'All Games / ';
+                    selectedPathElement.innerText = gLS("allGamesText");
                 }
                 renderOptions(selection, parentKeys);
             };
@@ -1898,7 +1924,7 @@ function startGame(gameArea) {
         };
 
         // Create submit button
-        submitButton.innerText = 'Submit';
+        submitButton.innerText = gLS("submitButtonText");
         submitButton.onclick = () => {
             if (marker.style.display === 'block') {
                 backButton.remove();
@@ -1924,8 +1950,8 @@ function startGame(gameArea) {
                     if (Array.isArray(solution) && solution.length > 0) {
                         totalScore += score;
 
-                        document.title = `MapGuessr | Score: ${totalScore.toFixed(0)}`;
-                        showCustomAlert(`You scored ${score.toFixed(0)} points!`, 1);
+                        document.title = `${gLS("titleScore")} ${totalScore.toFixed(0)}`;
+                        showCustomAlert(`${gLS("pointsScored")} ${score.toFixed(0)}`, 1);
                         solutionMarker.style.position = 'absolute';
                         solutionMarker.style.width = '10px';
                         solutionMarker.style.height = '10px';
@@ -1948,16 +1974,16 @@ function startGame(gameArea) {
 
                         updateConnectionLine();
                     } else {
-                        showCustomAlert('You got the map correct!\nThis image has not been assigned a solution yet.', 1);
+                        showCustomAlert(gLS("correctNoSolution"), 1);
                     }
                 } else {
                     const pathToMap = findPathToItem(gameModes, actualMap);
-                    showCustomAlert('You have chosen the wrong map. It was: ' + pathToMap);
+                    showCustomAlert(gLS("wrongMap") + pathToMap);
                 }
 
                 submitButton.remove();
             } else {
-                showCustomAlert('Please place a marker on the map.');
+                showCustomAlert(gLS("markerNotSet"));
             }
             if (isOnline) {
                 db.collection('lobbies').doc(lobbyName).get().then(doc => {
@@ -1986,7 +2012,7 @@ function startGame(gameArea) {
         // Create continue button
         continueButton = document.createElement('button');
         continueButton.id = 'continueButton';
-        continueButton.innerText = 'Continue';
+        continueButton.innerText = gLS("continueButtonText");
         continueButton.onclick = (event) => {
             if (isOnline) {
                 db.collection('lobbies').doc(lobbyName).update({ gameStarted: true });
@@ -2191,7 +2217,6 @@ function resize() {
 // }, 1000);
 
 window.addEventListener('resize', resize);
-document.addEventListener('DOMContentLoaded', createMoreButton);
 
 window.addEventListener('beforeunload', event => {
     leaveLobby();
