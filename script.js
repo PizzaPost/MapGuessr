@@ -2142,9 +2142,10 @@ document.addEventListener('keydown', event => {
                         if (isElementVisible(element)) {
                             // check for special case of joinLobbyButton
                             if (element.id === 'joinLobbyButton') {
-                                autoFill();
+                                autoFill(element);
+                            } else {
+                                element.click();
                             }
-                            element.click();
                         }
                     });
                 }
@@ -2163,9 +2164,10 @@ document.addEventListener('keydown', event => {
                             if (isElementVisible(element)) {
                                 // check for special case of joinLobbyButton
                                 if (element.id === 'joinLobbyButton') {
-                                    autoFill();
+                                    autoFill(element);
+                                } else {
+                                    element.click();
                                 }
-                                element.click();
                             }
                         });
                     }
@@ -2178,7 +2180,7 @@ document.addEventListener('keydown', event => {
     }
 });
 
-function autoFill() {
+function autoFill(element = null) {
     db.collection('lobbies').get().then(querySnapshot => {
         if (lobbyInput.value === '') {
             const lobbies = querySnapshot.docs;
@@ -2188,6 +2190,9 @@ function autoFill() {
         }
         if (nameInput.value === '') {
             nameInput.value = possibleNames1[Math.floor(Math.random() * possibleNames1.length)] + possibleNames2[Math.floor(Math.random() * possibleNames2.length)];
+        }
+        if (element) {
+            element.click();
         }
     });
 }
