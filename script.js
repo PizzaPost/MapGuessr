@@ -1952,12 +1952,12 @@ function startGame(gameArea) {
                     }
                 } else {
                     const pathToMap = findPathToItem(gameModes, actualMap);
-                    showCustomAlert('You have chosen the wrong map. It was ' + pathToMap);
+                    showCustomAlert('You have chosen the wrong map. It was: ' + pathToMap);
                 }
 
                 submitButton.remove();
             } else {
-                showCustomAlert('Please place a marker on the map');
+                showCustomAlert('Please place a marker on the map.');
             }
             if (isOnline) {
                 db.collection('lobbies').doc(lobbyName).get().then(doc => {
