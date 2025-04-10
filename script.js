@@ -1401,7 +1401,7 @@ function createMoreButton() {
         }
         if (event.target.id === 'toggleSelection') {
             invertSelection = !invertSelection;
-            showCustomAlert(`Selecting will now${invertSelection ? ' ' : ' not '}invert`, 1); // TODO: I selected Portal 2 and Subnautica but it didn't invert
+            showCustomAlert(`Selecting will now${invertSelection ? ' ' : ' not '}invert.`, 1); // TODO: I selected Portal 2 and Subnautica but it didn't invert
             // TODO: The whole selection thing is broken. I selected Subnautica and presssed toggle but nothing happened.
         }
         if (event.target.id === 'localStorageReset') {
