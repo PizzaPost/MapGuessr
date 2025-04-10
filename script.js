@@ -1095,20 +1095,20 @@ function showCreditMenu() {
     <h2 style="text-align: center; font-weight: bold;">CREDITS</h2>
     <div style="display: flex; flex-direction: column; align-items: start; font-size: 18px;">
         <div>
-            <strong>Programmer:</strong> 
+            <strong>${gLS("programmer")}</strong>
             <a href="https://github.com/MoCoXIII/MapGuessr" target="_blank"><u>MoCoXIII</u></a><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <a href="https://github.com/PizzaPost/MapGuessr" target="_blank"><u>PizzaPost</u></a>
         </div>
         <div>
-            <strong>Mapper:</strong> 
+            <strong>${gLS("mapper")}</strong>
             <a href="https://github.com/PizzaPost/MapGuessr" target="_blank"><u>PizzaPost</u></a><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <a href="https://github.com/MoCoXIII/MapGuessr" target="_blank"><u>MoCoXIII</u></a><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             Ghxo
         </div>
-        <div><strong>Designer:</strong> 
+        <div><strong>${gLS("designer")}</strong>
             <a href="https://github.com/PizzaPost/MapGuessr" target="_blank"><u>PizzaPost</u></a>
         </div>
-        <div><strong>Idea:</strong> 
+        <div><strong>${gLS("idea")}</strong>
             <a href="https://github.com/MoCoXIII/MapGuessr" target="_blank"><u>MoCoXIII</u></a>
         </div>
     </div>
