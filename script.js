@@ -1319,6 +1319,13 @@ function createMoreButton() {
                     const key = e.key === ' ' ? 'Space' : e.key;
                     keybindTextfield.value = key;
                     keybinds[index][0] = key;
+
+                    // adjust width of textfield
+                    keybindTextfield.style.width = '30px';
+                    if (keybindTextfield.scrollWidth > 30) {
+                        keybindTextfield.style.width = `${keybindTextfield.scrollWidth + 5}px`;
+                    }
+
                     return false;
                 };
 

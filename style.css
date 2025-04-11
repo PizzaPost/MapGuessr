@@ -1142,12 +1142,17 @@ button:hover::after {
 }
 
 .keybind-input {
-    flex: 1;
     padding: 5px;
     border: 1px solid var(--border-color);
     border-radius: 5px;
     background: var(--input-bg);
     color: var(--text-color);
+    cursor: pointer;
+    caret-color: transparent;
+    outline: none;
+    resize: none;
+    width: 30px;
+    height: 30px;
 }
 
 .keybind-checkbox {
