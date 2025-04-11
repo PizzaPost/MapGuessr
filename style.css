@@ -1159,11 +1159,16 @@ button:hover::after {
     transition: all var(--transition-time) cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-#start-btn:hover,
 .toolbar button:hover {
     transform: translateY(-2px);
     filter: brightness(110%);
     box-shadow: 0 4px 15px var(--button-shadow-hover);
+}
+
+#start-btn:hover {
+    transform: translateY(-2px);
+    filter: brightness(110%);
+    box-shadow: 0 4px 15px var(--button-shadow-hover-green);
 }
 
 #welcome-container {
