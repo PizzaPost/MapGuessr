@@ -1268,23 +1268,23 @@ function createMoreButton() {
         }
         if (event.target.id === 'keybindMenu') {
             if (document.getElementById('keybinds')) return;
-        
+
             // Create overlay
             const overlay = document.createElement('div');
             overlay.className = 'keybind-overlay';
             document.body.appendChild(overlay);
-        
+
             // Create menu container
             const keybindMenuBox = document.createElement('div');
             keybindMenuBox.id = 'keybinds';
             keybindMenuBox.className = 'keybinds';
-            
+
             // Add title
             const title = document.createElement('h2');
             title.className = 'keybinds-title';
             title.textContent = gLS("keybindMenuTitleText");
             keybindMenuBox.appendChild(title);
-        
+
             // Add explanation
             const explanation = document.createElement('p');
             explanation.className = 'keybinds-explanation';
@@ -1293,7 +1293,7 @@ function createMoreButton() {
                 - <strong>Double Press:</strong> Whether the action requires a double press.<br>
                 - Modify the fields below to customize your keybinds.`;
             keybindMenuBox.appendChild(explanation);
-        
+
             // Add last pressed key display
             const lastPress = document.createElement('p');
             lastPress.id = 'lastKeyPressed';
@@ -1301,32 +1301,34 @@ function createMoreButton() {
             lastPressLabel.innerHTML = `${gLS("lastKeyPressedText")}: `;
             lastPressLabel.appendChild(lastPress);
             keybindMenuBox.appendChild(lastPressLabel);
-        
+
             // Create keybinds list
             const keybindsList = document.createElement('div');
             keybindsList.className = 'keybinds-list';
-        
+
             keybinds.forEach(([key, elements, doublePress], index) => {
                 const keybindRow = document.createElement('div');
                 keybindRow.className = 'keybind-row';
-        
+
                 // Key input
                 const keybindTextfield = document.createElement('input');
                 keybindTextfield.className = 'keybind-input';
                 keybindTextfield.value = key;
-                keybindTextfield.oninput = () => {
-                    keybindTextfield.value = keybindTextfield.value.slice(-1);
-                    keybinds[index][0] = keybindTextfield.value;
-                    if (keybindTextfield.value===" ") keybindTextfield.value = "Space";
+                keybindTextfield.onkeydown = (e) => {
+                    e.preventDefault();
+                    const key = e.key === ' ' ? 'Space' : e.key;
+                    keybindTextfield.value = key;
+                    keybinds[index][0] = key;
+                    return false;
                 };
-        
+
                 // Double press checkbox
                 const doublePressCheckbox = document.createElement('input');
                 doublePressCheckbox.className = 'keybind-checkbox';
                 doublePressCheckbox.type = 'checkbox';
                 doublePressCheckbox.checked = doublePress;
                 doublePressCheckbox.onchange = () => keybinds[index][2] = doublePressCheckbox.checked;
-        
+
                 // Action description
                 const actionDescription = document.createElement('span');
                 actionDescription.className = 'keybind-action';
@@ -1336,7 +1338,7 @@ function createMoreButton() {
                         return isElementVisible(el) ? `<strong>${el.textContent}</strong>` : element;
                     })
                     .join(', ');
-        
+
                 // Create labels
                 const createLabel = (text) => {
                     const label = document.createElement('span');
@@ -1344,19 +1346,19 @@ function createMoreButton() {
                     label.textContent = text;
                     return label;
                 };
-        
+
                 keybindRow.appendChild(createLabel(gLS("actionLabelText")));
                 keybindRow.appendChild(actionDescription);
                 keybindRow.appendChild(createLabel(gLS("keyLabelText")));
                 keybindRow.appendChild(keybindTextfield);
                 keybindRow.appendChild(createLabel(gLS("doublePressLabelText")));
                 keybindRow.appendChild(doublePressCheckbox);
-        
+
                 keybindsList.appendChild(keybindRow);
             });
-        
+
             keybindMenuBox.appendChild(keybindsList);
-        
+
             // Exit button
             const exitMenuButton = document.createElement('button');
             exitMenuButton.className = 'keybind-exit-btn';
