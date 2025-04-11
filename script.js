@@ -1314,7 +1314,11 @@ function createMoreButton() {
                 const keybindTextfield = document.createElement('input');
                 keybindTextfield.className = 'keybind-input';
                 keybindTextfield.value = key;
-                keybindTextfield.onchange = () => keybinds[index][0] = keybindTextfield.value;
+                keybindTextfield.oninput = () => {
+                    keybindTextfield.value = keybindTextfield.value.slice(-1);
+                    keybinds[index][0] = keybindTextfield.value;
+                    if (keybindTextfield.value===" ") keybindTextfield.value = "Space";
+                };
         
                 // Double press checkbox
                 const doublePressCheckbox = document.createElement('input');
