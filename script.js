@@ -1,7 +1,8 @@
 let gameModes;
 let languages;
 
-let language = localStorage.getItem('language') || 'en'; // default to English if not set
+const urlParams = new URLSearchParams(window.location.search);
+const language = urlParams.get('language') || urlParams.get('lang') || localStorage.getItem('language') || 'en';
 let prank = new Date().getMonth() === 3 && new Date().getDate() === 1; // true if it's April 1st
 let gameState = 0; // useless, but we might make use of it in the future
 let score = 0;
@@ -1325,14 +1326,6 @@ function createMoreButton() {
                 - <strong>Double Press:</strong> Whether the action requires a double press.<br>
                 - Modify the fields below to customize your keybinds.`;
             keybindMenuBox.appendChild(explanation);
-
-            // Add last pressed key display
-            const lastPress = document.createElement('p');
-            lastPress.id = 'lastKeyPressed';
-            const lastPressLabel = document.createElement('span');
-            lastPressLabel.innerHTML = `${gLS("lastKeyPressedText")}: `;
-            lastPressLabel.appendChild(lastPress);
-            keybindMenuBox.appendChild(lastPressLabel);
 
             // Create keybinds list
             const keybindsList = document.createElement('div');
