@@ -1305,6 +1305,7 @@ function createMoreButton() {
             // Create overlay
             const overlay = document.createElement('div');
             overlay.className = 'keybind-overlay';
+            overlay.addEventListener('click', (event) => {if (!event.target.closest('#keybinds')) {closeKeybindsMenu()}});
             document.body.appendChild(overlay);
 
             // Create menu container
@@ -1354,12 +1355,32 @@ function createMoreButton() {
                     return false;
                 };
 
-                // Double press checkbox
-                const doublePressCheckbox = document.createElement('input');
-                doublePressCheckbox.className = 'keybind-checkbox';
-                doublePressCheckbox.type = 'checkbox';
-                doublePressCheckbox.checked = doublePress;
-                doublePressCheckbox.onchange = () => keybinds[index][2] = doublePressCheckbox.checked;
+                const slider = document.createElement('div');
+                slider.className = 'lottieContainer';
+
+                const animation = lottie.loadAnimation({
+                    container: slider,
+                    renderer: 'svg',
+                    loop: false,
+                    autoplay: false,
+                    path: 'lot.json'
+                });
+
+                if (keybinds[index][2]) { animation.playSegments([30], true); }
+
+                // State-Variable zum Umschalten der Segmente
+                let playFirstSegment = !keybinds[index][2];
+                slider.addEventListener('click', () => {
+                    if (playFirstSegment) {
+                        animation.playSegments([0, 30], true);
+                        keybinds[index][2] = true;
+                    } else {
+                        animation.playSegments([30, 0], true);
+                        keybinds[index][2] = false;
+                    }
+                    playFirstSegment = !playFirstSegment;
+                });
+
 
                 // Action description
                 const actionDescription = document.createElement('span');
@@ -1384,7 +1405,7 @@ function createMoreButton() {
                 keybindRow.appendChild(createLabel(gLS("keyLabelText")));
                 keybindRow.appendChild(keybindTextfield);
                 keybindRow.appendChild(createLabel(gLS("doublePressLabelText")));
-                keybindRow.appendChild(doublePressCheckbox);
+                keybindRow.appendChild(slider);
 
                 keybindsList.appendChild(keybindRow);
             });
