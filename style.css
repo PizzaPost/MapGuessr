@@ -22,6 +22,7 @@ html {
     --button-bg: linear-gradient(135deg, #2e93ff, #006cdf);
     --button-bg-alt: linear-gradient(135deg, #0066ff, #0046af);
     --button-color: #dadada;
+    --button-color-alt: #cccccc;
     --button-shadow: rgba(0, 123, 255, 0.5);
     --button-shadow-hover: rgba(0, 63, 114, 0.5);
     --button-shadow-alt: rgba(11, 0, 167, 0.5);
@@ -52,6 +53,7 @@ html {
     --button-bg: linear-gradient(135deg, #007BFF, #0056b3);
     --button-bg-alt: linear-gradient(135deg, #0400e0, #0d007e);
     --button-color: #fff;
+    --button-color-alt: #d3d3d3;
     --button-shadow: rgba(5, 50, 252, 0.2);
     --button-shadow-hover: rgba(0, 40, 216, 0.3);
     --button-shadow-alt: rgba(35, 0, 163, 0.5);
