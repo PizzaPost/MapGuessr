@@ -1354,12 +1354,29 @@ function createMoreButton() {
                     return false;
                 };
 
-                // Double press checkbox
-                const doublePressCheckbox = document.createElement('input');
-                doublePressCheckbox.className = 'keybind-checkbox';
-                doublePressCheckbox.type = 'checkbox';
-                doublePressCheckbox.checked = doublePress;
-                doublePressCheckbox.onchange = () => keybinds[index][2] = doublePressCheckbox.checked;
+                const slider = document.createElement('div');
+                
+                const animation = lottie.loadAnimation({
+                    container: slider,
+                    renderer: 'svg',
+                    loop: false,
+                    autoplay: false,
+                    path: 'lot.json'
+                });
+
+                // State-Variable zum Umschalten der Segmente
+                let playFirstSegment = true;
+                slider.addEventListener('click', () => {
+                    if (playFirstSegment) {
+                        animation.playSegments([0, 30], true);
+                        keybinds[index][2] = true;
+                    } else {
+                        animation.playSegments([30, 0], true);
+                        keybinds[index][2] = false;
+                    }
+                    playFirstSegment = !playFirstSegment;
+                });
+
 
                 // Action description
                 const actionDescription = document.createElement('span');
@@ -1384,7 +1401,7 @@ function createMoreButton() {
                 keybindRow.appendChild(createLabel(gLS("keyLabelText")));
                 keybindRow.appendChild(keybindTextfield);
                 keybindRow.appendChild(createLabel(gLS("doublePressLabelText")));
-                keybindRow.appendChild(doublePressCheckbox);
+                keybindRow.appendChild(slider);
 
                 keybindsList.appendChild(keybindRow);
             });
