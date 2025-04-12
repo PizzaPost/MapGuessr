@@ -1305,6 +1305,7 @@ function createMoreButton() {
             // Create overlay
             const overlay = document.createElement('div');
             overlay.className = 'keybind-overlay';
+            overlay.addEventListener('click', (event) => {if (!event.target.closest('#keybinds')) {closeKeybindsMenu()}});
             document.body.appendChild(overlay);
 
             // Create menu container
@@ -1355,7 +1356,8 @@ function createMoreButton() {
                 };
 
                 const slider = document.createElement('div');
-                
+                slider.className = 'lottieContainer';
+
                 const animation = lottie.loadAnimation({
                     container: slider,
                     renderer: 'svg',
@@ -1364,8 +1366,10 @@ function createMoreButton() {
                     path: 'lot.json'
                 });
 
+                if (keybinds[index][2]) { animation.playSegments([30], true); }
+
                 // State-Variable zum Umschalten der Segmente
-                let playFirstSegment = true;
+                let playFirstSegment = !keybinds[index][2];
                 slider.addEventListener('click', () => {
                     if (playFirstSegment) {
                         animation.playSegments([0, 30], true);
