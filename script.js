@@ -210,8 +210,18 @@ function initialDeviceCheck() {
             loadMarkdownContent();
 
             document.getElementById('start-btn').addEventListener('click', () => {
+                containerHTML.style.position = 'fixed';
+                containerHTML.style.top = '50%';
+                containerHTML.style.left = '50%';
+                containerHTML.style.transform = 'translate(-50%, -50%)';
+                containerHTML.style.animation = 'shrinkOut 0.3s ease-in forwards';
+                overlay.style.transition = 'opacity 0.3s ease-in';
                 overlay.style.opacity = '0';
-                setTimeout(() => overlay.remove(), 500);
+                containerHTML.addEventListener('animationend', () => {
+                    containerHTML.remove();
+                    overlay.remove();
+                    document.removeEventListener('keydown', keyHandler);
+                }, { once: true });
                 localStorage.setItem('hasVisited', 'true');
             });
         }
@@ -1305,7 +1315,7 @@ function createMoreButton() {
             // Create overlay
             const overlay = document.createElement('div');
             overlay.className = 'keybind-overlay';
-            overlay.addEventListener('click', (event) => {if (!event.target.closest('#keybinds')) {closeKeybindsMenu()}});
+            overlay.addEventListener('click', (event) => { if (!event.target.closest('#keybinds')) { closeKeybindsMenu() } });
             document.body.appendChild(overlay);
 
             // Create menu container
