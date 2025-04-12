@@ -1144,6 +1144,83 @@ function findPathToItem(obj, item) {
     return result;
 }
 
+function showLanguageMenu() {
+    if (document.getElementById('languageBox')) return; // Prevent multiple menus
+    // Create overlay to block interactions
+    const overlay = document.createElement('div');
+    overlay.className = 'language-overlay';
+    document.body.appendChild(overlay);
+
+    // Create the alert box
+    const languageBox = document.createElement('div');
+    languageBox.id = 'languageBox';
+    languageBox.innerHTML = `
+    <h2 style="text-align: center; font-weight: bold;">LANGUAGES</h2>
+    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; font-size: 18px;">
+        <div style="text-align: center;"><a href="?lang=en">English (en)</a></div>
+        <div style="text-align: center;"><a href="?lang=de">Deutsch (de)</a></div>
+        <div style="text-align: center;"><a href="?lang=fr">Français (fr)</a></div>
+        
+        <div style="text-align: center;"><a href="?lang=es">Español (es)</a></div>
+        <div style="text-align: center;"><a href="?lang=ja">日本語 (ja)</a></div>
+        <div style="text-align: center;"><a href="?lang=zh">中文 (zh)</a></div>
+        
+        <div style="text-align: center;"><a href="?lang=ru">Русский (ru)</a></div>
+        <div style="text-align: center;"><a href="?lang=ar">العربية (ar)</a></div>
+        <div style="text-align: center;"><a href="?lang=pt">Português (pt)</a></div>
+        
+        <div style="text-align: center;"><a href="?lang=hi">हिन्दी (hi)</a></div>
+        <div style="text-align: center;"><a href="?lang=it">Italiano (it)</a></div>
+        <div style="text-align: center;"><a href="?lang=ko">한국어 (ko)</a></div>
+        
+        <div style="text-align: center;"><a href="?lang=tr">Türkçe (tr)</a></div>
+        <div style="text-align: center;"><a href="?lang=vi">Tiếng Việt (vi)</a></div>
+        <div style="text-align: center;"><a href="?lang=th">ไทย (th)</a></div>
+        
+        <div style="text-align: center;"><a href="?lang=nl">Nederlands (nl)</a></div>
+        <div style="text-align: center;"><a href="?lang=pl">Polski (pl)</a></div>
+        <div style="text-align: center;"><a href="?lang=id">Bahasa Indonesia (id)</a></div>
+        
+        <div style="text-align: center;"><a href="?lang=bn">বাংলা (bn)</a></div>
+        <div style="text-align: center;"><a href="?lang=lv">Latviešu (lv)</a></div>
+        <div style="text-align: center;"><a href="?lang=uk">Українська (uk)</a></div>
+        
+        <div style="text-align: center;"><a href="?lang=ms">Bahasa Melayu (ms)</a></div>
+        <div style="text-align: center;"><a href="?lang=sw">Kiswahili (sw)</a></div>
+        <div style="text-align: center;"></div> <!-- Empty div for layout balance -->
+    </div>
+`;
+
+    // Create the close button
+    const closeButton = document.createElement('button');
+    closeButton.innerText = gLS("closeButtonText");
+    closeButton.classList.add('button-gray');
+
+    function closeLanguageBox() {
+        languageBox.style.animation = 'shrinkOut 0.2s ease-in forwards';
+        languageBox.addEventListener('animationend', () => {
+            languageBox.remove();
+            overlay.remove();
+            document.removeEventListener('keydown', keyHandler);
+        }, { once: true });
+    }
+
+    closeButton.onclick = closeLanguageBox;
+    overlay.onclick = closeLanguageBox;
+
+    // Close on Enter key
+    function keyHandler(event) {
+        if (event.key === 'Enter') {
+            closeLanguageBox();
+        }
+    }
+    document.addEventListener('keydown', keyHandler);
+
+    languageBox.appendChild(closeButton);
+    document.body.appendChild(languageBox);
+    closeButton.focus(); // Focus on button so Enter works immediately
+}
+
 function showCreditMenu() {
     if (document.getElementById('credits')) return; // Prevent multiple menus
     // Create overlay to block interactions
@@ -1266,12 +1343,17 @@ function createMoreButton() {
     localStorageReset.id = 'localStorageReset';
     localStorageReset.textContent = '🗑️';
 
+    const languageMenu = document.createElement('span');
+    languageMenu.id = 'languageMenu';
+    languageMenu.textContent = '💬';
+
     attachTooltip(infoLink, gLS("infoTooltipText"));
     attachTooltip(themeEmoji, gLS("themeTooltipText"));
     attachTooltip(keybindMenu, gLS("keybindTooltipText"));
     attachTooltip(toggleSelection, gLS("toggleSelectionTooltipText"));
     attachTooltip(toggleHistory, gLS("toggleHistoryTooltipText"));
     attachTooltip(localStorageReset, gLS("localStorageResetTooltipText"));
+    attachTooltip(languageMenu, gLS("languageMenuTooltipText"));
 
     menuButton.appendChild(textSpan);
     menuButton.appendChild(infoLink);
@@ -1280,6 +1362,7 @@ function createMoreButton() {
     menuButton.appendChild(toggleSelection);
     menuButton.appendChild(toggleHistory);
     menuButton.appendChild(localStorageReset);
+    menuButton.appendChild(languageMenu);
 
     const updateEmoji = () => {
         const currentTheme = document.body.getAttribute('data-theme');
@@ -1308,6 +1391,9 @@ function createMoreButton() {
         }
         if (event.target.id === 'infoLink') {
             showCreditMenu()
+        }
+        if (event.target.id === 'languageMenu') {
+            showLanguageMenu();
         }
         if (event.target.id === 'keybindMenu') {
             if (document.getElementById('keybinds')) return;
