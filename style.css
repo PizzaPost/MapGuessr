@@ -1364,7 +1364,8 @@ body,
     }
 
     button {
-        padding: 0.75rem 2.25rem;
+        padding: 1.5rem 3rem;
+        font-size: 1.25rem;
     }
 
     /* Simplify content layout for mobile */
@@ -1397,7 +1398,7 @@ body,
         cursor: pointer;
         z-index: 1;
     }
-    
+
     #toggleSelection {
         position: absolute;
         bottom: calc((var(--menu-height-percentage) - var(--menu-height-percentage) / var(--button-count) * 2) * 1%);
@@ -1409,7 +1410,7 @@ body,
         cursor: pointer;
         z-index: 1;
     }
-    
+
     #themeEmoji {
         position: absolute;
         bottom: calc((var(--menu-height-percentage) - var(--menu-height-percentage) / var(--button-count) * 3) * 1%);
@@ -1421,7 +1422,7 @@ body,
         cursor: pointer;
         z-index: 1;
     }
-    
+
     #infoLink {
         position: absolute;
         bottom: calc((var(--menu-height-percentage) - var(--menu-height-percentage) / var(--button-count) * 4) * 1%);
@@ -1435,7 +1436,7 @@ body,
         cursor: pointer;
         z-index: 1;
     }
-    
+
     #localStorageReset {
         position: absolute;
         bottom: calc((var(--menu-height-percentage) - var(--menu-height-percentage) / var(--button-count) * 5) * 1%);
