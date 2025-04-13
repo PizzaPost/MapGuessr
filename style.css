@@ -1532,4 +1532,20 @@ body,
     #singlePlayerButton {
         margin-top: -0.75em;
     }
+
+    .custom-alert {
+        font-size: 240%;
+    }
+
+    .button-red {
+        font-size: 60%;
+    }
+
+    .button-green {
+        font-size: 60%;
+    }
+
+    .button-gray {
+        font-size: 60%;
+    }
 }
