@@ -1156,6 +1156,7 @@ function showLanguageMenu() {
     languageBox.id = 'languageBox';
     languageBox.innerHTML = `
     <h2 style="text-align: center; font-weight: bold;">${gLS("languages")}</h2>
+    <h3 style="text-align: center;font-weight: normal; color: red;">${gLS("aiMistakes")}</h3>
     <br>
     <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; font-size: 18px;">
         <div style="text-align: center;"><a href="?lang=en">English (en)</a></div>

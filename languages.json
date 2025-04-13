@@ -54,7 +54,8 @@
             "welcomeTitle": "Sweet Home Alabama!",
             "wrongMap": "It's alright. No need to cry about it. ",
             "languages": "SPRACHEN",
-            "languageMenuTooltipText": "Zwischen Sprachen wechseln"
+            "languageMenuTooltipText": "Zwischen Sprachen wechseln",
+            "aiMistakes": "Definitely not AI translated."
         },
         "normal": {
             "actionLabelText": "Buttons pressed by this keybind:",
@@ -110,7 +111,8 @@
             "welcomeTitle": "🌍 Welcome to MapGuessr!",
             "wrongMap": "You have chosen the wrong map. It was: ",
             "languages": "LANGUAGES",
-            "languageMenuTooltipText": "Switch between languages"
+            "languageMenuTooltipText": "Switch between languages",
+            "aiMistakes": "Artificial intelligence can make mistakes. If you find one, we'd love to hear about it."
         }
     },
     "de": {
@@ -168,7 +170,8 @@
             "welcomeTitle": "Genau so muss es!",
             "wrongMap": "Kein Grund traurig zu sein. ",
             "languages": "IDIOMAS",
-            "languageMenuTooltipText": "Cambiar idioma"
+            "languageMenuTooltipText": "Cambiar idioma",
+            "aiMistakes": "Auf keinen Fall von künstlicher Intelligenz übersetzt."
         },
         "normal": {
             "actionLabelText": "Von diesem Kurzbefehl gedrückte Knöpfe:",
@@ -224,7 +227,8 @@
             "welcomeTitle": "🌍 Willkommen zu MapGuessr!",
             "wrongMap": "Das war die falsche Karte. Die korrekte wäre: ",
             "languages": "SPRACHEN",
-            "languageMenuTooltipText": "Zwischen Sprachen wechseln"
+            "languageMenuTooltipText": "Zwischen Sprachen wechseln",
+            "aiMistakes": "Künstliche Intelligenz kann Fehler machen. Wenn Sie einen finden, würden wir uns freuen, davon zu hören."
         }
     },
     "fr": {
@@ -282,7 +286,8 @@
             "welcomeTitle": "C'est exactement ça !",
             "wrongMap": "Pas de raison d'être triste.",
             "languages": "SPRACHEN",
-            "languageMenuTooltipText": "Zwischen Sprachen wechseln"
+            "languageMenuTooltipText": "Zwischen Sprachen wechseln",
+            "aiMistakes": "Définitivement pas traduit par intelligence artificielle."
         },
         "normal": {
             "actionLabelText": "Boutons activés par ce raccourci :",
@@ -338,7 +343,8 @@
             "welcomeTitle": "🌍 Bienvenue sur MapGuessr !",
             "wrongMap": "Mauvaise carte. La bonne était : ",
             "languages": "LANGUES",
-            "languageMenuTooltipText": "Changer de langue"
+            "languageMenuTooltipText": "Changer de langue",
+            "aiMistakes": "L'intelligence artificielle peut faire des erreurs. Si vous en trouvez une, nous serions ravis d'en être informés."
         }
     },
     "es": {
@@ -396,7 +402,8 @@
             "welcomeTitle": "¡Así se hace!",
             "wrongMap": "No hay que ponerse triste. ",
             "languages": "SPRACHEN",
-            "languageMenuTooltipText": "Zwischen Sprachen wechseln"
+            "languageMenuTooltipText": "Zwischen Sprachen wechseln",
+            "aiMistakes": "Definitivamente no traducido por inteligencia artificial."
         },
         "normal": {
             "actionLabelText": "Botones pulsados por este atajo:",
@@ -452,7 +459,8 @@
             "welcomeTitle": "🌍 ¡Bienvenido a MapGuessr!",
             "wrongMap": "Mapa incorrecto. El correcto era: ",
             "languages": "IDIOMAS",
-            "languageMenuTooltipText": "Cambiar idioma"
+            "languageMenuTooltipText": "Cambiar idioma",
+            "aiMistakes": "La inteligencia artificial puede cometer errores. Si encuentras uno, nos encantaría saberlo."
         }
     },
     "ja": {
@@ -510,7 +518,8 @@
             "welcomeTitle": "そうそう！",
             "wrongMap": "泣くことないよ。",
             "languages": "SPRACHEN",
-            "languageMenuTooltipText": "Zwischen Sprachen wechseln"
+            "languageMenuTooltipText": "Zwischen Sprachen wechseln",
+            "aiMistakes": "決して人工知能によって翻訳されたものではありません。"
         },
         "normal": {
             "actionLabelText": "このショートカットで押されるボタン:",
@@ -566,7 +575,8 @@
             "welcomeTitle": "🌍 MapGuessrへようこそ！",
             "wrongMap": "不正解。正解は: ",
             "languages": "言語",
-            "languageMenuTooltipText": "言語を切り替える"
+            "languageMenuTooltipText": "言語を切り替える",
+            "aiMistakes": "人工知能は間違いを犯すことがあります。もし見つけたら、ぜひお知らせください。"
         }
     },
     "zh": {
@@ -624,7 +634,8 @@
             "welcomeTitle": "这就对了！",
             "wrongMap": "没必要难过。",
             "languages": "SPRACHEN",
-            "languageMenuTooltipText": "Zwischen Sprachen wechseln"
+            "languageMenuTooltipText": "Zwischen Sprachen wechseln",
+            "aiMistakes": "绝对不是由人工智能翻译的。"
         },
         "normal": {
             "actionLabelText": "此快捷键按下的按钮:",
@@ -680,7 +691,8 @@
             "welcomeTitle": "🌍 欢迎来到MapGuessr！",
             "wrongMap": "错误答案。正确答案是: ",
             "languages": "语言",
-            "languageMenuTooltipText": "切换语言"
+            "languageMenuTooltipText": "切换语言",
+            "aiMistakes": "人工智能可能会出错。如果你发现了，我们非常乐意听取反馈。"
         }
     },
     "ru": {
@@ -738,7 +750,8 @@
             "welcomeTitle": "Так точно!",
             "wrongMap": "Не грусти. ",
             "languages": "SPRACHEN",
-            "languageMenuTooltipText": "Zwischen Sprachen wechseln"
+            "languageMenuTooltipText": "Zwischen Sprachen wechseln",
+            "aiMistakes": "Определённо не переведено искусственным интеллектом."
         },
         "normal": {
             "actionLabelText": "Кнопки этого сочетания:",
@@ -794,7 +807,8 @@
             "welcomeTitle": "🌍 Добро пожаловать в MapGuessr!",
             "wrongMap": "Неверный ответ. Правильный: ",
             "languages": "ЯЗЫКИ",
-            "languageMenuTooltipText": "Переключить язык"
+            "languageMenuTooltipText": "Переключить язык",
+            "aiMistakes": "Искусственный интеллект может совершать ошибки. Если вы обнаружите ошибку, нам будет приятно об этом узнать."
         }
     },
     "ar": {
@@ -852,7 +866,8 @@
             "welcomeTitle": "هكذا تمامًا!",
             "wrongMap": "لا داعي للحزن. ",
             "languages": "SPRACHEN",
-            "languageMenuTooltipText": "Zwischen Sprachen wechseln"
+            "languageMenuTooltipText": "Zwischen Sprachen wechseln",
+            "aiMistakes": "ليس مترجمًا بواسطة الذكاء الاصطناعي على الإطلاق."
         },
         "normal": {
             "actionLabelText": "أزرار هذا الاختصار:",
@@ -908,7 +923,8 @@
             "welcomeTitle": "🌍 مرحبًا في MapGuessr!",
             "wrongMap": "الجواب خاطئ. الصحيح كان: ",
             "languages": "اللغات",
-            "languageMenuTooltipText": "تغيير اللغة"
+            "languageMenuTooltipText": "تغيير اللغة",
+            "aiMistakes": "يمكن للذكاء الاصطناعي أن يرتكب أخطاء. إذا وجدت خطأً، سنكون سعداء لسماع رأيك."
         }
     },
     "pt": {
@@ -966,7 +982,8 @@
             "welcomeTitle": "Isso mesmo!",
             "wrongMap": "Não precisa chorar.",
             "languages": "SPRACHEN",
-            "languageMenuTooltipText": "Zwischen Sprachen wechseln"
+            "languageMenuTooltipText": "Zwischen Sprachen wechseln",
+            "aiMistakes": "Definitivamente não traduzido por inteligência artificial."
         },
         "normal": {
             "actionLabelText": "Botões pressionados por este atalho:",
@@ -1022,7 +1039,8 @@
             "welcomeTitle": "🌍 Bem-vindo ao MapGuessr!",
             "wrongMap": "Resposta errada. A certa era: ",
             "languages": "IDIOMAS",
-            "languageMenuTooltipText": "Mudar idioma"
+            "languageMenuTooltipText": "Mudar idioma",
+            "aiMistakes": "A inteligência artificial pode cometer erros. Se você encontrar algum, adoraríamos saber."
         }
     },
     "hi": {
@@ -1080,7 +1098,8 @@
             "welcomeTitle": "बिल्कुल सही!",
             "wrongMap": "रोने की ज़रूरत नहीं।",
             "languages": "SPRACHEN",
-            "languageMenuTooltipText": "Zwischen Sprachen wechseln"
+            "languageMenuTooltipText": "Zwischen Sprachen wechseln",
+            "aiMistakes": "बिल्कुल भी कृत्रिम बुद्धिमत्ता द्वारा अनुवादित नहीं।"
         },
         "normal": {
             "actionLabelText": "इस शॉर्टकट के बटन:",
@@ -1136,7 +1155,8 @@
             "welcomeTitle": "🌍 MapGuessr में आपका स्वागत है!",
             "wrongMap": "गलत जवाब। सही था: ",
             "languages": "भाषाएँ",
-            "languageMenuTooltipText": "भाषा बदलें"
+            "languageMenuTooltipText": "भाषा बदलें",
+            "aiMistakes": "कृत्रिम बुद्धिमत्ता से गलतियाँ हो सकती हैं। यदि आप कोई गलती पाते हैं, तो हमें बताने में खुशी होगी।"
         }
     },
     "it": {
@@ -1194,7 +1214,8 @@
             "welcomeTitle": "Esattamente così!",
             "wrongMap": "Non c'è bisogno di piangere.",
             "languages": "SPRACHEN",
-            "languageMenuTooltipText": "Zwischen Sprachen wechseln"
+            "languageMenuTooltipText": "Zwischen Sprachen wechseln",
+            "aiMistakes": "Decisamente non tradotto dall'intelligenza artificiale."
         },
         "normal": {
             "actionLabelText": "Pulsanti premuti da questo tasto:",
@@ -1250,7 +1271,8 @@
             "welcomeTitle": "🌍 Benvenuto in MapGuessr!",
             "wrongMap": "Sbagliato. La risposta era: ",
             "languages": "LINGUE",
-            "languageMenuTooltipText": "Cambia lingua"
+            "languageMenuTooltipText": "Cambia lingua",
+            "aiMistakes": "L'intelligenza artificiale può commettere errori. Se ne trovi uno, saremmo lieti di saperlo."
         }
     },
     "ko": {
@@ -1308,7 +1330,8 @@
             "welcomeTitle": "바로 이거야!",
             "wrongMap": "울 필요 없어.",
             "languages": "SPRACHEN",
-            "languageMenuTooltipText": "Zwischen Sprachen wechseln"
+            "languageMenuTooltipText": "Zwischen Sprachen wechseln",
+            "aiMistakes": "절대 인공지능에 의해 번역된 것이 아닙니다."
         },
         "normal": {
             "actionLabelText": "단축키로 누른 버튼:",
@@ -1364,7 +1387,8 @@
             "welcomeTitle": "🌍 MapGuessr에 오신 것을 환영합니다!",
             "wrongMap": "틀렸습니다. 정답: ",
             "languages": "언어",
-            "languageMenuTooltipText": "언어 변경"
+            "languageMenuTooltipText": "언어 변경",
+            "aiMistakes": "인공지능은 실수를 할 수 있습니다. 만약 발견하신다면 알려주시면 감사하겠습니다."
         }
     },
     "tr": {
@@ -1422,7 +1446,8 @@
             "welcomeTitle": "Aynen öyle!",
             "wrongMap": "Üzülmeye gerek yok.",
             "languages": "SPRACHEN",
-            "languageMenuTooltipText": "Zwischen Sprachen wechseln"
+            "languageMenuTooltipText": "Zwischen Sprachen wechseln",
+            "aiMistakes": "Kesinlikle yapay zeka tarafından çevrilmedi."
         },
         "normal": {
             "actionLabelText": "Kısayol tuşları:",
@@ -1478,7 +1503,8 @@
             "welcomeTitle": "🌍 MapGuessr'a hoş geldiniz!",
             "wrongMap": "Yanlış cevap. Doğrusu: ",
             "languages": "DİLLER",
-            "languageMenuTooltipText": "Dili değiştir"
+            "languageMenuTooltipText": "Dili değiştir",
+            "aiMistakes": "Yapay zeka hata yapabilir. Eğer bir hata bulursanız, bize bildirmenizi çok isteriz."
         }
     },
     "vi": {
@@ -1536,7 +1562,8 @@
             "welcomeTitle": "Chuẩn đấy!",
             "wrongMap": "Khóc lóc gì.",
             "languages": "SPRACHEN",
-            "languageMenuTooltipText": "Zwischen Sprachen wechseln"
+            "languageMenuTooltipText": "Zwischen Sprachen wechseln",
+            "aiMistakes": "Chắc chắn không được dịch bởi trí tuệ nhân tạo."
         },
         "normal": {
             "actionLabelText": "Nút được bấm bởi phím tắt:",
@@ -1592,7 +1619,8 @@
             "welcomeTitle": "🌍 Chào mừng đến MapGuessr!",
             "wrongMap": "Sai rồi. Đáp án: ",
             "languages": "NGÔN NGỮ",
-            "languageMenuTooltipText": "Chuyển đổi ngôn ngữ"
+            "languageMenuTooltipText": "Chuyển đổi ngôn ngữ",
+            "aiMistakes": "Trí tuệ nhân tạo có thể mắc sai lầm. Nếu bạn tìm thấy sai sót, chúng tôi rất muốn biết."
         }
     },
     "th": {
@@ -1650,7 +1678,8 @@
             "welcomeTitle": "ถูกต้องเลย!",
             "wrongMap": "อย่าร้องไห้.",
             "languages": "SPRACHEN",
-            "languageMenuTooltipText": "Zwischen Sprachen wechseln"
+            "languageMenuTooltipText": "Zwischen Sprachen wechseln",
+            "aiMistakes": "แน่นอนว่าไม่ใช่การแปลโดยปัญญาประดิษฐ์."
         },
         "normal": {
             "actionLabelText": "ปุ่มที่ถูกกด:",
@@ -1706,7 +1735,8 @@
             "welcomeTitle": "🌍 ยินดีต้อนรับสู่ MapGuessr!",
             "wrongMap": "ตอบผิด คำตอบถูก: ",
             "languages": "ภาษา",
-            "languageMenuTooltipText": "เปลี่ยนภาษา"
+            "languageMenuTooltipText": "เปลี่ยนภาษา",
+            "aiMistakes": "ปัญญาประดิษฐ์อาจทำผิดพลาดได้ หากคุณพบข้อผิดพลาดใด ๆ เรายินดีที่จะรับฟังความคิดเห็น."
         }
     },
     "nl": {
@@ -1764,7 +1794,8 @@
             "welcomeTitle": "Precies zo!",
             "wrongMap": "Geen reden om te huilen.",
             "languages": "SPRACHEN",
-            "languageMenuTooltipText": "Zwischen Sprachen wechseln"
+            "languageMenuTooltipText": "Zwischen Sprachen wechseln",
+            "aiMistakes": "Zeker niet door kunstmatige intelligentie vertaald."
         },
         "normal": {
             "actionLabelText": "Toetsenbordknoppen:",
@@ -1820,7 +1851,8 @@
             "welcomeTitle": "🌍 Welkom bij MapGuessr!",
             "wrongMap": "Fout antwoord. Juist was: ",
             "languages": "TALEN",
-            "languageMenuTooltipText": "Taal wijzigen"
+            "languageMenuTooltipText": "Taal wijzigen",
+            "aiMistakes": "Kunstmatige intelligentie kan fouten maken. Als je er een vindt, horen we dat graag."
         }
     },
     "pl": {
@@ -1878,7 +1910,8 @@
             "welcomeTitle": "Dokładnie tak!",
             "wrongMap": "Nie ma co płakać.",
             "languages": "SPRACHEN",
-            "languageMenuTooltipText": "Zwischen Sprachen wechseln"
+            "languageMenuTooltipText": "Zwischen Sprachen wechseln",
+            "aiMistakes": "Zdecydowanie nie przetłumaczone przez sztuczną inteligencję."
         },
         "normal": {
             "actionLabelText": "Przyciski skrótów:",
@@ -1934,7 +1967,8 @@
             "welcomeTitle": "🌍 Witaj w MapGuessr!",
             "wrongMap": "Zła odpowiedź. Poprawna: ",
             "languages": "JĘZYKI",
-            "languageMenuTooltipText": "Zmień język"
+            "languageMenuTooltipText": "Zmień język",
+            "aiMistakes": "Sztuczna inteligencja może popełniać błędy. Jeśli znajdziesz jakiś błąd, chętnie o tym usłyszymy."
         }
     },
     "id": {
@@ -1992,7 +2026,8 @@
             "welcomeTitle": "Nah gitu dong!",
             "wrongMap": "Nggak usah nangis.",
             "languages": "SPRACHEN",
-            "languageMenuTooltipText": "Zwischen Sprachen wechseln"
+            "languageMenuTooltipText": "Zwischen Sprachen wechseln",
+            "aiMistakes": "Tentu saja tidak diterjemahkan oleh kecerdasan buatan."
         },
         "normal": {
             "actionLabelText": "Tombol shortcut:",
@@ -2048,7 +2083,8 @@
             "welcomeTitle": "🌍 Selamat datang di MapGuessr!",
             "wrongMap": "Salah. Jawaban benar: ",
             "languages": "BAHASA",
-            "languageMenuTooltipText": "Ganti bahasa"
+            "languageMenuTooltipText": "Ganti bahasa",
+            "aiMistakes": "Kecerdasan buatan bisa melakukan kesalahan. Jika Anda menemukan salah satunya, kami akan sangat senang untuk mengetahuinya."
         }
     },
     "uk": {
@@ -2106,7 +2142,8 @@
             "welcomeTitle": "Саме так!",
             "wrongMap": "Не плач.",
             "languages": "SPRACHEN",
-            "languageMenuTooltipText": "Zwischen Sprachen wechseln"
+            "languageMenuTooltipText": "Zwischen Sprachen wechseln",
+            "aiMistakes": "Абсолютно не перекладено штучним інтелектом."
         },
         "normal": {
             "actionLabelText": "Клавіші цього ярлика:",
@@ -2162,7 +2199,8 @@
             "welcomeTitle": "🌍 Ласкаво просимо до MapGuessr!",
             "wrongMap": "Неправильно. Правильна відповідь: ",
             "languages": "МОВИ",
-            "languageMenuTooltipText": "Змінити мову"
+            "languageMenuTooltipText": "Змінити мову",
+            "aiMistakes": "Штучний інтелект може помилятися. Якщо ви знайдете помилку, нам буде приємно про це дізнатися."
         }
     },
     "ms": {
@@ -2220,7 +2258,8 @@
             "welcomeTitle": "Macam tu lah!",
             "wrongMap": "Tak payah nangis.",
             "languages": "SPRACHEN",
-            "languageMenuTooltipText": "Zwischen Sprachen wechseln"
+            "languageMenuTooltipText": "Zwischen Sprachen wechseln",
+            "aiMistakes": "Pastinya tidak diterjemahkan oleh kecerdasan buatan."
         },
         "normal": {
             "actionLabelText": "Kekunci ditekan:",
@@ -2276,7 +2315,8 @@
             "welcomeTitle": "🌍 Selamat datang ke MapGuessr!",
             "wrongMap": "Salah. Jawapan betul: ",
             "languages": "BAHASA",
-            "languageMenuTooltipText": "Tukar bahasa"
+            "languageMenuTooltipText": "Tukar bahasa",
+            "aiMistakes": "Kecerdasan buatan boleh membuat kesilapan. Jika anda menjumpai satu, kami akan gembira untuk mendengarnya."
         }
     },
     "sw": {
@@ -2334,7 +2374,8 @@
             "welcomeTitle": "Hivyo ndivyo!",
             "wrongMap": "Hakuna haja ya kulia.",
             "languages": "SPRACHEN",
-            "languageMenuTooltipText": "Zwischen Sprachen wechseln"
+            "languageMenuTooltipText": "Zwischen Sprachen wechseln",
+            "aiMistakes": "Hakika si tafsiri ya akili bandia."
         },
         "normal": {
             "actionLabelText": "Vifungo vilivyobonyezwa:",
@@ -2390,7 +2431,8 @@
             "welcomeTitle": "🌍 Karibu MapGuessr!",
             "wrongMap": "Sio sahihi. Jibu ni: ",
             "languages": "LUGHA",
-            "languageMenuTooltipText": "Badilisha lugha"
+            "languageMenuTooltipText": "Badilisha lugha",
+            "aiMistakes": "Akili bandia inaweza kufanya makosa. Ukipata moja, tunapenda kuisikia."
         }
     },
     "bn": {
@@ -2448,7 +2490,8 @@
             "welcomeTitle": "ঠিক এইরকম!",
             "wrongMap": "কান্নার কোনো কারণ নেই।",
             "languages": "SPRACHEN",
-            "languageMenuTooltipText": "Zwischen Sprachen wechseln"
+            "languageMenuTooltipText": "Zwischen Sprachen wechseln",
+            "aiMistakes": "নিশ্চিতভাবে কৃত্রিম বুদ্ধিমত্তা দ্বারা অনুবাদ করা হয়নি।"
         },
         "normal": {
             "actionLabelText": "এই কী-বাইন্ডের চাপা বোতাম:",
@@ -2504,7 +2547,8 @@
             "welcomeTitle": "🌍 MapGuessr এ স্বাগতম!",
             "wrongMap": "ভুল মানচিত্র। সঠিকটি ছিল: ",
             "languages": "ভাষা",
-            "languageMenuTooltipText": "ভাষা পরিবর্তন করুন"
+            "languageMenuTooltipText": "ভাষা পরিবর্তন করুন",
+            "aiMistakes": "কৃত্রিম বুদ্ধিমত্তা ভুল করতে পারে। যদি আপনি কোনো ভুল পান, আমরা তা জানতে পেরে খুশি হব।"
         }
     },
     "lv": {
@@ -2562,7 +2606,8 @@
             "welcomeTitle": "Tieši tā!",
             "wrongMap": "Nav jāraud.",
             "languages": "SPRACHEN",
-            "languageMenuTooltipText": "Zwischen Sprachen wechseln"
+            "languageMenuTooltipText": "Zwischen Sprachen wechseln",
+            "aiMistakes": "Noteikti nav tulkots ar mākslīgo intelektu."
         },
         "normal": {
             "actionLabelText": "Šī taustiņa nospiestās pogas:",
@@ -2618,7 +2663,8 @@
             "welcomeTitle": "🌍 Laipni lūgti MapGuessr!",
             "wrongMap": "Nepareiza karte. Pareiza bija: ",
             "languages": "VALODAS",
-            "languageMenuTooltipText": "Mainīt valodu"
+            "languageMenuTooltipText": "Mainīt valodu",
+            "aiMistakes": "Mākslīgais intelekts var pieļaut kļūdas. Ja atradīsiet kļūdu, mēs būsim priecīgi to zināt."
         }
     }
 }
