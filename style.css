@@ -1353,6 +1353,11 @@ body,
         width: calc(100% - 2rem);
     }
 
+    .images-wrapper {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
     .images-wrapper img {
         width: 100%;
         height: auto;
@@ -1381,8 +1386,82 @@ body,
         /* Number of buttons in the menu, including the textButton */
     }
 
+    #toggleHistory {
+        position: absolute;
+        bottom: calc((var(--menu-height-percentage) - var(--menu-height-percentage) / var(--button-count) * 1) * 1%);
+        left: 50%;
+        transform: translate(-50%, -50%);
+        opacity: 0;
+        transition: opacity 0.5s ease;
+        pointer-events: none;
+        cursor: pointer;
+        z-index: 1;
+    }
+    
+    #toggleSelection {
+        position: absolute;
+        bottom: calc((var(--menu-height-percentage) - var(--menu-height-percentage) / var(--button-count) * 2) * 1%);
+        left: 50%;
+        transform: translate(-50%, -50%);
+        opacity: 0;
+        transition: opacity 0.5s ease;
+        pointer-events: none;
+        cursor: pointer;
+        z-index: 1;
+    }
+    
+    #themeEmoji {
+        position: absolute;
+        bottom: calc((var(--menu-height-percentage) - var(--menu-height-percentage) / var(--button-count) * 3) * 1%);
+        left: 50%;
+        transform: translate(-50%, -50%);
+        opacity: 0;
+        transition: opacity 0.5s ease;
+        pointer-events: none;
+        cursor: pointer;
+        z-index: 1;
+    }
+    
+    #infoLink {
+        position: absolute;
+        bottom: calc((var(--menu-height-percentage) - var(--menu-height-percentage) / var(--button-count) * 4) * 1%);
+        left: 50%;
+        transform: translate(-50%, -50%);
+        opacity: 0;
+        transition: opacity 0.5s ease;
+        pointer-events: none;
+        color: white;
+        font-size: 20px;
+        cursor: pointer;
+        z-index: 1;
+    }
+    
+    #localStorageReset {
+        position: absolute;
+        bottom: calc((var(--menu-height-percentage) - var(--menu-height-percentage) / var(--button-count) * 5) * 1%);
+        left: 50%;
+        transform: translate(-50%, -50%);
+        opacity: 0;
+        transition: opacity 0.5s ease;
+        pointer-events: none;
+        cursor: pointer;
+        z-index: 1;
+    }
+
     #keybindMenu {
         display: none;
         pointer-events: none;
+    }
+
+    #languageMenu {
+        position: absolute;
+        bottom: calc((var(--menu-height-percentage) - var(--menu-height-percentage) / var(--button-count) * 6) * 1%);
+        left: 50%;
+        transform: translate(-50%, -50%);
+        opacity: 0;
+        transition: opacity 0.5s ease;
+        pointer-events: none;
+        cursor: pointer;
+        z-index: 1;
     }
 }
