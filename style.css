@@ -1329,3 +1329,60 @@ body,
 #credits {
     transition: background 1s ease, color 1s ease, border 1s ease, box-shadow 1s ease;
 }
+
+/* Mobile Responsiveness */
+@media only screen and (orientation: portrait) {
+    body {
+        padding: 1rem;
+        font-size: 16px;
+    }
+
+    header {
+        padding: 1rem;
+        border-radius: 12px 12px 0 0;
+    }
+
+    /* Make glassmorphism containers full width and reduce padding */
+    #gameModeSelector,
+    #gameContainer,
+    #playerList,
+    #gameVersion,
+    #mapSelector {
+        margin: 1rem auto;
+        padding: 1rem;
+        width: calc(100% - 2rem);
+    }
+
+    .images-wrapper img {
+        width: 100%;
+        height: auto;
+    }
+
+    button {
+        padding: 0.75rem 2.25rem;
+    }
+
+    /* Simplify content layout for mobile */
+    #content-wrapper {
+        grid-template-columns: 1fr;
+        padding: 1rem;
+        gap: 1rem;
+    }
+
+    /* Hide sidebar on mobile */
+    #toc-sidebar {
+        display: none;
+    }
+
+    :root {
+        --menu-height: 220;
+        --menu-height-percentage: 90;
+        --button-count: 7;
+        /* Number of buttons in the menu, including the textButton */
+    }
+
+    #keybindMenu {
+        display: none;
+        pointer-events: none;
+    }
+}
