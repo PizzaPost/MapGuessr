@@ -1548,4 +1548,12 @@ body,
     .button-gray {
         font-size: 60%;
     }
+
+    #leaveLobbyButton {
+        margin-left: 6.2em;
+    }
+
+    #playerList {
+        font-size: 145%;
+    }
 }
