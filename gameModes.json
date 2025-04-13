@@ -2720,6 +2720,48 @@
                     0.5138304274948856
                 ]
             ]
+        ],
+        "Near the dam": [
+            "images/babbdi/near_the_dam/map.jpg",
+            [
+                "images/babbdi/near_the_dam/boat.jpg",
+                []
+            ],
+            [
+                "images/babbdi/near_the_dam/doggo.jpg",
+                [
+                    0.49957947855340623,
+                    0.5020558826277918
+                ]
+            ],
+            [
+                "images/babbdi/near_the_dam/gate.jpg",
+                [
+                    0.060574971688396095,
+                    0.6760612196063126
+                ]
+            ],
+            [
+                "images/babbdi/near_the_dam/graves.jpg",
+                [
+                    0.31324289384461734,
+                    0.5376903753883983
+                ]
+            ],
+            [
+                "images/babbdi/near_the_dam/playground.jpg",
+                [
+                    0.44238856181665265,
+                    0.48859919633679094
+                ]
+            ],
+            [
+                "images/babbdi/near_the_dam/pottel.jpg",
+                [
+                    0.440961869058009,
+                    0.6880600968656104
+                ]
+            ]
         ]
     },
     "Ghost of Tsushima": {

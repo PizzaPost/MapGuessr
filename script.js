@@ -28,7 +28,7 @@ let lastPressTime = null;
 let timeoutId = null;
 
 let devSkip = false;
-let devMode = -1;
+let devMode = urlParams.get('devMode') || -1;
 let altDevMode = 0;
 
 let loadingDiv;
@@ -2065,7 +2065,7 @@ function startGame(gameArea) {
             startX = clientX;
             startY = clientY;
 
-            updateMarker(e);
+            updateMarker(e, true);
         }
 
         function endDrag(e) {
@@ -2205,13 +2205,9 @@ function startGame(gameArea) {
                         solutionMarker.style.border = '2px solid black';
                         solutionMarker.dataset.x = solutionX;
                         solutionMarker.dataset.y = solutionY;
-                        const mapRect = mapImage.getBoundingClientRect();
-                        const scaleX = mapImage.naturalWidth / mapRect.width;
-                        const scaleY = mapImage.naturalHeight / mapRect.height;
-                        solutionMarker.style.left = `${(solutionX * mapImage.naturalWidth / scaleX) - 5}px`;
-                        solutionMarker.style.top = `${(solutionY * mapImage.naturalHeight / scaleY) - 5}px`;
                         solutionMarker.style.display = 'block';
                         mapImageContainer.appendChild(solutionMarker);
+                        updateMarker(solutionMarker);
 
                         // Create the connection Line
 
@@ -2318,13 +2314,20 @@ function startGame(gameArea) {
             const updatePosition = (marker) => {
                 if (!marker.dataset.x || !marker.dataset.y) return;
 
-                const rect = mapImage.getBoundingClientRect();
                 const x = parseFloat(marker.dataset.x);
                 const y = parseFloat(marker.dataset.y);
 
-                // Calculate expected position regardless of current visibility
-                const markerLeft = (x * rect.width) - 5;
-                const markerTop = (y * rect.height) - 5;
+                const translateMatch = mapImage.style.transform.match(/translate\(([^)]+)\)/);
+                const translateX = translateMatch ? parseFloat(translateMatch[1].split(',')[0]) : 0;
+                const translateY = translateMatch ? parseFloat(translateMatch[1].split(',')[1]) : 0;
+
+                const scaleMatch = mapImage.style.transform.match(/scale\(([^)]+)\)/);
+                const scale = scaleMatch ? parseFloat(scaleMatch[1]) : 1;
+
+                const rect = mapImage.getBoundingClientRect();
+                const containerRect = mapImageContainer.getBoundingClientRect();
+                const markerLeft = (x * rect.width) - 5 + (rect.left - containerRect.left);
+                const markerTop = (y * rect.height) - 5 + (rect.top - containerRect.top);
 
                 // Update marker position
                 marker.style.left = `${markerLeft}px`;
