@@ -480,12 +480,6 @@ input[type="checkbox"] {
     box-shadow: 0 4px 15px rgba(0, 123, 255, 0.2);
 }
 
-#textButton {
-    display: block;
-    transform: translateY(1px);
-    transition: transform 0.5s ease;
-}
-
 #menuButton:hover {
     height: calc(var(--menu-height) * 1px);
     border-radius: 17px;
@@ -1364,8 +1358,22 @@ body,
     }
 
     button {
-        padding: 1.5rem 3rem;
+        padding: 0.75rem 2.25rem;
         font-size: 1.25rem;
+    }
+
+    button:hover::after {
+        transform: translate(-50%, -50%) scale(1.6);
+    }
+
+    input[type="checkbox"] {
+        transform: scale(2);
+        margin-left: 1rem;
+        margin-right: 0.5rem;
+    }
+
+    #selectedPath {
+        font-size: 2rem;
     }
 
     /* Simplify content layout for mobile */
@@ -1464,5 +1472,21 @@ body,
         pointer-events: none;
         cursor: pointer;
         z-index: 1;
+    }
+
+    #menuButton {
+        transform: scale(2);
+        margin-right: 2rem;
+        margin-bottom: 2rem;
+    }
+
+    #menuButton:hover {
+        animation: moveUp 0.5s ease forwards;
+    }
+
+    @keyframes moveUp {
+        to {
+            bottom: 100px;
+        }
     }
 }
