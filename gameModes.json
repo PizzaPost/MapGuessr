@@ -1408,7 +1408,10 @@
                         "images/portal_series/portal2/chapter6/underground/maps/0.png",
                         [
                             "images/portal_series/portal2/chapter6/underground/0.png",
-                            []
+                            [
+                                0.5147150783432263,
+                                0.7769582209660908
+                            ]
                         ]
                     ],
                     "1": [
