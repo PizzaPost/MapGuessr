@@ -1489,4 +1489,51 @@ body,
             bottom: 100px;
         }
     }
+
+    .input-field-1 {
+        position: absolute;
+        right: 449.8px;
+        left: 0.1;
+        top: 0.1;
+        height: 76px;
+        border: 4px solid #ccc;
+        border-top-left-radius: 24px;
+        border-bottom-left-radius: 24px;
+        font-size: 32px;
+        transition: border-color 0.3s ease-in-out;
+    }
+    
+    .input-field-2 {
+        position: absolute;
+        left: 449.8px;
+        right: 0.1;
+        top: 0.1;
+        height: 76px;
+        border: 4px solid #ccc;
+        border-top-right-radius: 24px;
+        border-bottom-right-radius: 24px;
+        font-size: 32px;
+    }
+
+    #joinLobbyButton {
+        position: absolute;
+        left: 40px;
+        top: 100px;
+        width: 44%;
+        height: 76px;
+        font-size: 200%;
+    }
+
+    #singlePlayerButton {
+        position: absolute;
+        right: 40px;
+        top: 100px;
+        width: 44%;
+        height: 76px;
+        font-size: 200%;
+    }
+
+    #gameVersion {
+        height: 200px;
+    }
 }

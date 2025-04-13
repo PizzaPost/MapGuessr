@@ -553,6 +553,7 @@ function chooseVersion() {
 
     // Create the play single player button
     const singlePlayerButton = document.createElement('button');
+    singlePlayerButton.id = 'singlePlayerButton';
     singlePlayerButton.innerText = gLS("singlePlayerButtonText");
     singlePlayerButton.onclick = () => {
         console.log('Starting single player game...');
