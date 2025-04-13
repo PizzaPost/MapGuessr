@@ -52,7 +52,9 @@
             "toggleHistoryTooltipText": "Photo Emoji",
             "toggleSelectionTooltipText": "hate these maps",
             "welcomeTitle": "Sweet Home Alabama!",
-            "wrongMap": "It's alright. No need to cry about it. "
+            "wrongMap": "It's alright. No need to cry about it. ",
+            "languages": "SPRACHEN",
+            "languageMenuTooltipText": "Zwischen Sprachen wechseln"
         },
         "normal": {
             "actionLabelText": "Buttons pressed by this keybind:",
@@ -106,7 +108,9 @@
             "toggleHistoryTooltipText": "Toggle the map History in the Game",
             "toggleSelectionTooltipText": "Toggle inverting current selection",
             "welcomeTitle": "🌍 Welcome to MapGuessr!",
-            "wrongMap": "You have chosen the wrong map. It was: "
+            "wrongMap": "You have chosen the wrong map. It was: ",
+            "languages": "LANGUAGES",
+            "languageMenuTooltipText": "Switch between languages"
         }
     },
     "de": {
@@ -162,7 +166,9 @@
             "toggleHistoryTooltipText": "Geschichtsunterricht",
             "toggleSelectionTooltipText": "Diese hasse ich",
             "welcomeTitle": "Genau so muss es!",
-            "wrongMap": "Kein Grund traurig zu sein. "
+            "wrongMap": "Kein Grund traurig zu sein. ",
+            "languages": "IDIOMAS",
+            "languageMenuTooltipText": "Cambiar idioma"
         },
         "normal": {
             "actionLabelText": "Von diesem Kurzbefehl gedrückte Knöpfe:",
@@ -216,7 +222,9 @@
             "toggleHistoryTooltipText": "Verlauf im Spiel umschalten",
             "toggleSelectionTooltipText": "Umkehrung der aktuellen Auswahl umschalten",
             "welcomeTitle": "🌍 Willkommen zu MapGuessr!",
-            "wrongMap": "Das war die falsche Karte. Die korrekte wäre: "
+            "wrongMap": "Das war die falsche Karte. Die korrekte wäre: ",
+            "languages": "SPRACHEN",
+            "languageMenuTooltipText": "Zwischen Sprachen wechseln"
         }
     },
     "fr": {
@@ -272,7 +280,9 @@
             "toggleHistoryTooltipText": "Cours d'histoire",
             "toggleSelectionTooltipText": "Je déteste ceux-là",
             "welcomeTitle": "C'est exactement ça !",
-            "wrongMap": "Pas de raison d'être triste."
+            "wrongMap": "Pas de raison d'être triste.",
+            "languages": "SPRACHEN",
+            "languageMenuTooltipText": "Zwischen Sprachen wechseln"
         },
         "normal": {
             "actionLabelText": "Boutons activés par ce raccourci :",
@@ -326,7 +336,9 @@
             "toggleHistoryTooltipText": "Basculer l'historique en jeu",
             "toggleSelectionTooltipText": "Inverser la sélection actuelle",
             "welcomeTitle": "🌍 Bienvenue sur MapGuessr !",
-            "wrongMap": "Mauvaise carte. La bonne était : "
+            "wrongMap": "Mauvaise carte. La bonne était : ",
+            "languages": "LANGUES",
+            "languageMenuTooltipText": "Changer de langue"
         }
     },
     "es": {
@@ -382,7 +394,9 @@
             "toggleHistoryTooltipText": "Clase de historia",
             "toggleSelectionTooltipText": "Odio estos",
             "welcomeTitle": "¡Así se hace!",
-            "wrongMap": "No hay que ponerse triste. "
+            "wrongMap": "No hay que ponerse triste. ",
+            "languages": "SPRACHEN",
+            "languageMenuTooltipText": "Zwischen Sprachen wechseln"
         },
         "normal": {
             "actionLabelText": "Botones pulsados por este atajo:",
@@ -436,7 +450,9 @@
             "toggleHistoryTooltipText": "Alternar historial en juego",
             "toggleSelectionTooltipText": "Invertir selección actual",
             "welcomeTitle": "🌍 ¡Bienvenido a MapGuessr!",
-            "wrongMap": "Mapa incorrecto. El correcto era: "
+            "wrongMap": "Mapa incorrecto. El correcto era: ",
+            "languages": "IDIOMAS",
+            "languageMenuTooltipText": "Cambiar idioma"
         }
     },
     "ja": {
@@ -492,7 +508,9 @@
             "toggleHistoryTooltipText": "歴史の授業",
             "toggleSelectionTooltipText": "これ嫌い",
             "welcomeTitle": "そうそう！",
-            "wrongMap": "泣くことないよ。"
+            "wrongMap": "泣くことないよ。",
+            "languages": "SPRACHEN",
+            "languageMenuTooltipText": "Zwischen Sprachen wechseln"
         },
         "normal": {
             "actionLabelText": "このショートカットで押されるボタン:",
@@ -546,7 +564,9 @@
             "toggleHistoryTooltipText": "ゲーム履歴切替",
             "toggleSelectionTooltipText": "選択反転切替",
             "welcomeTitle": "🌍 MapGuessrへようこそ！",
-            "wrongMap": "不正解。正解は: "
+            "wrongMap": "不正解。正解は: ",
+            "languages": "言語",
+            "languageMenuTooltipText": "言語を切り替える"
         }
     },
     "zh": {
@@ -602,7 +622,9 @@
             "toggleHistoryTooltipText": "历史课",
             "toggleSelectionTooltipText": "讨厌这些",
             "welcomeTitle": "这就对了！",
-            "wrongMap": "没必要难过。"
+            "wrongMap": "没必要难过。",
+            "languages": "SPRACHEN",
+            "languageMenuTooltipText": "Zwischen Sprachen wechseln"
         },
         "normal": {
             "actionLabelText": "此快捷键按下的按钮:",
@@ -656,7 +678,9 @@
             "toggleHistoryTooltipText": "切换游戏历史",
             "toggleSelectionTooltipText": "反转当前选择",
             "welcomeTitle": "🌍 欢迎来到MapGuessr！",
-            "wrongMap": "错误答案。正确答案是: "
+            "wrongMap": "错误答案。正确答案是: ",
+            "languages": "语言",
+            "languageMenuTooltipText": "切换语言"
         }
     },
     "ru": {
@@ -712,7 +736,9 @@
             "toggleHistoryTooltipText": "Урок истории",
             "toggleSelectionTooltipText": "Ненавижу эти",
             "welcomeTitle": "Так точно!",
-            "wrongMap": "Не грусти. "
+            "wrongMap": "Не грусти. ",
+            "languages": "SPRACHEN",
+            "languageMenuTooltipText": "Zwischen Sprachen wechseln"
         },
         "normal": {
             "actionLabelText": "Кнопки этого сочетания:",
@@ -766,7 +792,9 @@
             "toggleHistoryTooltipText": "Переключить историю",
             "toggleSelectionTooltipText": "Инвертировать выбор",
             "welcomeTitle": "🌍 Добро пожаловать в MapGuessr!",
-            "wrongMap": "Неверный ответ. Правильный: "
+            "wrongMap": "Неверный ответ. Правильный: ",
+            "languages": "ЯЗЫКИ",
+            "languageMenuTooltipText": "Переключить язык"
         }
     },
     "ar": {
@@ -822,7 +850,9 @@
             "toggleHistoryTooltipText": "درس تاريخ",
             "toggleSelectionTooltipText": "أكره هؤلاء",
             "welcomeTitle": "هكذا تمامًا!",
-            "wrongMap": "لا داعي للحزن. "
+            "wrongMap": "لا داعي للحزن. ",
+            "languages": "SPRACHEN",
+            "languageMenuTooltipText": "Zwischen Sprachen wechseln"
         },
         "normal": {
             "actionLabelText": "أزرار هذا الاختصار:",
@@ -876,7 +906,9 @@
             "toggleHistoryTooltipText": "تبديل التاريخ",
             "toggleSelectionTooltipText": "عكس الاختيار",
             "welcomeTitle": "🌍 مرحبًا في MapGuessr!",
-            "wrongMap": "الجواب خاطئ. الصحيح كان: "
+            "wrongMap": "الجواب خاطئ. الصحيح كان: ",
+            "languages": "اللغات",
+            "languageMenuTooltipText": "تغيير اللغة"
         }
     },
     "pt": {
@@ -932,7 +964,9 @@
             "toggleHistoryTooltipText": "Aula de história",
             "toggleSelectionTooltipText": "Odeio esses",
             "welcomeTitle": "Isso mesmo!",
-            "wrongMap": "Não precisa chorar."
+            "wrongMap": "Não precisa chorar.",
+            "languages": "SPRACHEN",
+            "languageMenuTooltipText": "Zwischen Sprachen wechseln"
         },
         "normal": {
             "actionLabelText": "Botões pressionados por este atalho:",
@@ -986,7 +1020,9 @@
             "toggleHistoryTooltipText": "Alternar histórico",
             "toggleSelectionTooltipText": "Inverter seleção",
             "welcomeTitle": "🌍 Bem-vindo ao MapGuessr!",
-            "wrongMap": "Resposta errada. A certa era: "
+            "wrongMap": "Resposta errada. A certa era: ",
+            "languages": "IDIOMAS",
+            "languageMenuTooltipText": "Mudar idioma"
         }
     },
     "hi": {
@@ -1042,7 +1078,9 @@
             "toggleHistoryTooltipText": "इतिहास की कक्षा",
             "toggleSelectionTooltipText": "इनसे नफरत",
             "welcomeTitle": "बिल्कुल सही!",
-            "wrongMap": "रोने की ज़रूरत नहीं।"
+            "wrongMap": "रोने की ज़रूरत नहीं।",
+            "languages": "SPRACHEN",
+            "languageMenuTooltipText": "Zwischen Sprachen wechseln"
         },
         "normal": {
             "actionLabelText": "इस शॉर्टकट के बटन:",
@@ -1096,7 +1134,9 @@
             "toggleHistoryTooltipText": "इतिहास टॉगल",
             "toggleSelectionTooltipText": "चयन उल्टा करें",
             "welcomeTitle": "🌍 MapGuessr में आपका स्वागत है!",
-            "wrongMap": "गलत जवाब। सही था: "
+            "wrongMap": "गलत जवाब। सही था: ",
+            "languages": "भाषाएँ",
+            "languageMenuTooltipText": "भाषा बदलें"
         }
     },
     "it": {
@@ -1152,7 +1192,9 @@
             "toggleHistoryTooltipText": "Lezione di storia",
             "toggleSelectionTooltipText": "Odio questi",
             "welcomeTitle": "Esattamente così!",
-            "wrongMap": "Non c'è bisogno di piangere."
+            "wrongMap": "Non c'è bisogno di piangere.",
+            "languages": "SPRACHEN",
+            "languageMenuTooltipText": "Zwischen Sprachen wechseln"
         },
         "normal": {
             "actionLabelText": "Pulsanti premuti da questo tasto:",
@@ -1206,7 +1248,9 @@
             "toggleHistoryTooltipText": "Alterna cronologia",
             "toggleSelectionTooltipText": "Inverti selezione",
             "welcomeTitle": "🌍 Benvenuto in MapGuessr!",
-            "wrongMap": "Sbagliato. La risposta era: "
+            "wrongMap": "Sbagliato. La risposta era: ",
+            "languages": "LINGUE",
+            "languageMenuTooltipText": "Cambia lingua"
         }
     },
     "ko": {
@@ -1262,7 +1306,9 @@
             "toggleHistoryTooltipText": "역사 수업",
             "toggleSelectionTooltipText": "이거 싫어",
             "welcomeTitle": "바로 이거야!",
-            "wrongMap": "울 필요 없어."
+            "wrongMap": "울 필요 없어.",
+            "languages": "SPRACHEN",
+            "languageMenuTooltipText": "Zwischen Sprachen wechseln"
         },
         "normal": {
             "actionLabelText": "단축키로 누른 버튼:",
@@ -1316,7 +1362,9 @@
             "toggleHistoryTooltipText": "기록 전환",
             "toggleSelectionTooltipText": "선택 반전",
             "welcomeTitle": "🌍 MapGuessr에 오신 것을 환영합니다!",
-            "wrongMap": "틀렸습니다. 정답: "
+            "wrongMap": "틀렸습니다. 정답: ",
+            "languages": "언어",
+            "languageMenuTooltipText": "언어 변경"
         }
     },
     "tr": {
@@ -1372,7 +1420,9 @@
             "toggleHistoryTooltipText": "Tarih dersi",
             "toggleSelectionTooltipText": "Bunlardan nefret",
             "welcomeTitle": "Aynen öyle!",
-            "wrongMap": "Üzülmeye gerek yok."
+            "wrongMap": "Üzülmeye gerek yok.",
+            "languages": "SPRACHEN",
+            "languageMenuTooltipText": "Zwischen Sprachen wechseln"
         },
         "normal": {
             "actionLabelText": "Kısayol tuşları:",
@@ -1426,7 +1476,9 @@
             "toggleHistoryTooltipText": "Geçmişi aç/kapat",
             "toggleSelectionTooltipText": "Seçimi ters çevir",
             "welcomeTitle": "🌍 MapGuessr'a hoş geldiniz!",
-            "wrongMap": "Yanlış cevap. Doğrusu: "
+            "wrongMap": "Yanlış cevap. Doğrusu: ",
+            "languages": "DİLLER",
+            "languageMenuTooltipText": "Dili değiştir"
         }
     },
     "vi": {
@@ -1482,7 +1534,9 @@
             "toggleHistoryTooltipText": "Lớp sử",
             "toggleSelectionTooltipText": "Ghét mấy cái này",
             "welcomeTitle": "Chuẩn đấy!",
-            "wrongMap": "Khóc lóc gì."
+            "wrongMap": "Khóc lóc gì.",
+            "languages": "SPRACHEN",
+            "languageMenuTooltipText": "Zwischen Sprachen wechseln"
         },
         "normal": {
             "actionLabelText": "Nút được bấm bởi phím tắt:",
@@ -1536,7 +1590,9 @@
             "toggleHistoryTooltipText": "Bật/tắt lịch sử",
             "toggleSelectionTooltipText": "Đảo lựa chọn",
             "welcomeTitle": "🌍 Chào mừng đến MapGuessr!",
-            "wrongMap": "Sai rồi. Đáp án: "
+            "wrongMap": "Sai rồi. Đáp án: ",
+            "languages": "NGÔN NGỮ",
+            "languageMenuTooltipText": "Chuyển đổi ngôn ngữ"
         }
     },
     "th": {
@@ -1592,7 +1648,9 @@
             "toggleHistoryTooltipText": "วิชาประวัติศาสตร์",
             "toggleSelectionTooltipText": "เกลียดอันนี้",
             "welcomeTitle": "ถูกต้องเลย!",
-            "wrongMap": "อย่าร้องไห้."
+            "wrongMap": "อย่าร้องไห้.",
+            "languages": "SPRACHEN",
+            "languageMenuTooltipText": "Zwischen Sprachen wechseln"
         },
         "normal": {
             "actionLabelText": "ปุ่มที่ถูกกด:",
@@ -1646,7 +1704,9 @@
             "toggleHistoryTooltipText": "สลับประวัติ",
             "toggleSelectionTooltipText": "กลับด้านการเลือก",
             "welcomeTitle": "🌍 ยินดีต้อนรับสู่ MapGuessr!",
-            "wrongMap": "ตอบผิด คำตอบถูก: "
+            "wrongMap": "ตอบผิด คำตอบถูก: ",
+            "languages": "ภาษา",
+            "languageMenuTooltipText": "เปลี่ยนภาษา"
         }
     },
     "nl": {
@@ -1702,7 +1762,9 @@
             "toggleHistoryTooltipText": "Geschiedenisles",
             "toggleSelectionTooltipText": "Haat deze",
             "welcomeTitle": "Precies zo!",
-            "wrongMap": "Geen reden om te huilen."
+            "wrongMap": "Geen reden om te huilen.",
+            "languages": "SPRACHEN",
+            "languageMenuTooltipText": "Zwischen Sprachen wechseln"
         },
         "normal": {
             "actionLabelText": "Toetsenbordknoppen:",
@@ -1756,7 +1818,9 @@
             "toggleHistoryTooltipText": "Schakel geschiedenis",
             "toggleSelectionTooltipText": "Keer selectie om",
             "welcomeTitle": "🌍 Welkom bij MapGuessr!",
-            "wrongMap": "Fout antwoord. Juist was: "
+            "wrongMap": "Fout antwoord. Juist was: ",
+            "languages": "TALEN",
+            "languageMenuTooltipText": "Taal wijzigen"
         }
     },
     "pl": {
@@ -1812,7 +1876,9 @@
             "toggleHistoryTooltipText": "Lekcja historii",
             "toggleSelectionTooltipText": "Nienawidzę tych",
             "welcomeTitle": "Dokładnie tak!",
-            "wrongMap": "Nie ma co płakać."
+            "wrongMap": "Nie ma co płakać.",
+            "languages": "SPRACHEN",
+            "languageMenuTooltipText": "Zwischen Sprachen wechseln"
         },
         "normal": {
             "actionLabelText": "Przyciski skrótów:",
@@ -1866,7 +1932,9 @@
             "toggleHistoryTooltipText": "Przełącz historię",
             "toggleSelectionTooltipText": "Odwróć wybór",
             "welcomeTitle": "🌍 Witaj w MapGuessr!",
-            "wrongMap": "Zła odpowiedź. Poprawna: "
+            "wrongMap": "Zła odpowiedź. Poprawna: ",
+            "languages": "JĘZYKI",
+            "languageMenuTooltipText": "Zmień język"
         }
     },
     "id": {
@@ -1922,7 +1990,9 @@
             "toggleHistoryTooltipText": "Pelajaran sejarah",
             "toggleSelectionTooltipText": "Benci yang ini",
             "welcomeTitle": "Nah gitu dong!",
-            "wrongMap": "Nggak usah nangis."
+            "wrongMap": "Nggak usah nangis.",
+            "languages": "SPRACHEN",
+            "languageMenuTooltipText": "Zwischen Sprachen wechseln"
         },
         "normal": {
             "actionLabelText": "Tombol shortcut:",
@@ -1976,7 +2046,9 @@
             "toggleHistoryTooltipText": "Toggle riwayat",
             "toggleSelectionTooltipText": "Balik pilihan",
             "welcomeTitle": "🌍 Selamat datang di MapGuessr!",
-            "wrongMap": "Salah. Jawaban benar: "
+            "wrongMap": "Salah. Jawaban benar: ",
+            "languages": "BAHASA",
+            "languageMenuTooltipText": "Ganti bahasa"
         }
     },
     "uk": {
@@ -2032,7 +2104,9 @@
             "toggleHistoryTooltipText": "Урок історії",
             "toggleSelectionTooltipText": "Ненавиджу це",
             "welcomeTitle": "Саме так!",
-            "wrongMap": "Не плач."
+            "wrongMap": "Не плач.",
+            "languages": "SPRACHEN",
+            "languageMenuTooltipText": "Zwischen Sprachen wechseln"
         },
         "normal": {
             "actionLabelText": "Клавіші цього ярлика:",
@@ -2086,7 +2160,9 @@
             "toggleHistoryTooltipText": "Перемикач історії",
             "toggleSelectionTooltipText": "Інвертувати вибір",
             "welcomeTitle": "🌍 Ласкаво просимо до MapGuessr!",
-            "wrongMap": "Неправильно. Правильна відповідь: "
+            "wrongMap": "Неправильно. Правильна відповідь: ",
+            "languages": "МОВИ",
+            "languageMenuTooltipText": "Змінити мову"
         }
     },
     "ms": {
@@ -2142,7 +2218,9 @@
             "toggleHistoryTooltipText": "Kelas sejarah",
             "toggleSelectionTooltipText": "Benci ini",
             "welcomeTitle": "Macam tu lah!",
-            "wrongMap": "Tak payah nangis."
+            "wrongMap": "Tak payah nangis.",
+            "languages": "SPRACHEN",
+            "languageMenuTooltipText": "Zwischen Sprachen wechseln"
         },
         "normal": {
             "actionLabelText": "Kekunci ditekan:",
@@ -2196,7 +2274,9 @@
             "toggleHistoryTooltipText": "Togol sejarah",
             "toggleSelectionTooltipText": "Balikkan pilihan",
             "welcomeTitle": "🌍 Selamat datang ke MapGuessr!",
-            "wrongMap": "Salah. Jawapan betul: "
+            "wrongMap": "Salah. Jawapan betul: ",
+            "languages": "BAHASA",
+            "languageMenuTooltipText": "Tukar bahasa"
         }
     },
     "sw": {
@@ -2252,7 +2332,9 @@
             "toggleHistoryTooltipText": "Somo la historia",
             "toggleSelectionTooltipText": "Chukia hizi",
             "welcomeTitle": "Hivyo ndivyo!",
-            "wrongMap": "Hakuna haja ya kulia."
+            "wrongMap": "Hakuna haja ya kulia.",
+            "languages": "SPRACHEN",
+            "languageMenuTooltipText": "Zwischen Sprachen wechseln"
         },
         "normal": {
             "actionLabelText": "Vifungo vilivyobonyezwa:",
@@ -2306,7 +2388,9 @@
             "toggleHistoryTooltipText": "Badilisha historia",
             "toggleSelectionTooltipText": "Geuza uchaguzi",
             "welcomeTitle": "🌍 Karibu MapGuessr!",
-            "wrongMap": "Sio sahihi. Jibu ni: "
+            "wrongMap": "Sio sahihi. Jibu ni: ",
+            "languages": "LUGHA",
+            "languageMenuTooltipText": "Badilisha lugha"
         }
     },
     "bn": {
@@ -2362,7 +2446,9 @@
             "toggleHistoryTooltipText": "ইতিহাস ক্লাস",
             "toggleSelectionTooltipText": "এগুলো ঘৃণা করি",
             "welcomeTitle": "ঠিক এইরকম!",
-            "wrongMap": "কান্নার কোনো কারণ নেই।"
+            "wrongMap": "কান্নার কোনো কারণ নেই।",
+            "languages": "SPRACHEN",
+            "languageMenuTooltipText": "Zwischen Sprachen wechseln"
         },
         "normal": {
             "actionLabelText": "এই কী-বাইন্ডের চাপা বোতাম:",
@@ -2416,7 +2502,9 @@
             "toggleHistoryTooltipText": "গেমে ইতিহাস টগল করুন",
             "toggleSelectionTooltipText": "নির্বাচন উল্টান",
             "welcomeTitle": "🌍 MapGuessr এ স্বাগতম!",
-            "wrongMap": "ভুল মানচিত্র। সঠিকটি ছিল: "
+            "wrongMap": "ভুল মানচিত্র। সঠিকটি ছিল: ",
+            "languages": "ভাষা",
+            "languageMenuTooltipText": "ভাষা পরিবর্তন করুন"
         }
     },
     "lv": {
@@ -2472,7 +2560,9 @@
             "toggleHistoryTooltipText": "Vēstures stunda",
             "toggleSelectionTooltipText": "Iesīkstu šajos",
             "welcomeTitle": "Tieši tā!",
-            "wrongMap": "Nav jāraud."
+            "wrongMap": "Nav jāraud.",
+            "languages": "SPRACHEN",
+            "languageMenuTooltipText": "Zwischen Sprachen wechseln"
         },
         "normal": {
             "actionLabelText": "Šī taustiņa nospiestās pogas:",
@@ -2526,7 +2616,9 @@
             "toggleHistoryTooltipText": "Pārslēgt vēsturi",
             "toggleSelectionTooltipText": "Apgriezt atlasi",
             "welcomeTitle": "🌍 Laipni lūgti MapGuessr!",
-            "wrongMap": "Nepareiza karte. Pareiza bija: "
+            "wrongMap": "Nepareiza karte. Pareiza bija: ",
+            "languages": "VALODAS",
+            "languageMenuTooltipText": "Mainīt valodu"
         }
     }
 }
