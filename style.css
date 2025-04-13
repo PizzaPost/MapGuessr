@@ -58,7 +58,7 @@ html {
     --button-shadow-hover: rgba(0, 40, 216, 0.3);
     --button-shadow-alt: rgba(35, 0, 163, 0.5);
     --button-container-background: linear-gradient(135deg, #002144, #000b18);
-    --link-color: Blue;
+    --link-color: rgb(49, 49, 255);
     --link-alt: Royalblue;
     --credits-color: rgb(40, 40, 40);
     --button-bg-red: linear-gradient(135deg, #c00000, #920000);

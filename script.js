@@ -1155,7 +1155,8 @@ function showLanguageMenu() {
     const languageBox = document.createElement('div');
     languageBox.id = 'languageBox';
     languageBox.innerHTML = `
-    <h2 style="text-align: center; font-weight: bold;">LANGUAGES</h2>
+    <h2 style="text-align: center; font-weight: bold;">${gLS("languages")}</h2>
+    <br>
     <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; font-size: 18px;">
         <div style="text-align: center;"><a href="?lang=en">English (en)</a></div>
         <div style="text-align: center;"><a href="?lang=de">Deutsch (de)</a></div>
@@ -1188,8 +1189,23 @@ function showLanguageMenu() {
         <div style="text-align: center;"><a href="?lang=ms">Bahasa Melayu (ms)</a></div>
         <div style="text-align: center;"><a href="?lang=sw">Kiswahili (sw)</a></div>
         <div style="text-align: center;"></div> <!-- Empty div for layout balance -->
-    </div>
-`;
+    </div>`;
+
+    const flags = document.createElement('div');
+    flags.className = 'lottieContainer';
+    flags.style.width = '80px';
+    flags.style.height = '80px';
+
+    const animation = lottie.loadAnimation({
+        container: flags,
+        renderer: 'svg',
+        loop: false,
+        autoplay: false,
+        path: 'flags.json'
+    });
+    setTimeout(() => animation.play(), 500);
+
+    languageBox.insertBefore(flags, languageBox.firstChild);
 
     // Create the close button
     const closeButton = document.createElement('button');
@@ -1459,7 +1475,7 @@ function createMoreButton() {
                     renderer: 'svg',
                     loop: false,
                     autoplay: false,
-                    path: 'lot.json'
+                    path: 'slider.json'
                 });
 
                 if (keybinds[index][2]) { animation.playSegments([30], true); }
