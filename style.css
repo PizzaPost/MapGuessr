@@ -1490,50 +1490,46 @@ body,
         }
     }
 
+    #gameVersion {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 1em;
+        gap: 1em;
+    }
+    
+    .input-field-1,
+    .input-field-2 {
+        width: 100%;
+        height: 3em;
+        border: 0.2em solid #ccc;
+        font-size: clamp(2rem, 5vw, 3rem);
+        padding: 0.5em;
+        margin: 0.75em 0;
+    }
+    
     .input-field-1 {
-        position: absolute;
-        right: 449.8px;
-        left: 0.1;
-        top: 0.1;
-        height: 76px;
-        border: 4px solid #ccc;
-        border-top-left-radius: 24px;
-        border-bottom-left-radius: 24px;
-        font-size: 32px;
-        transition: border-color 0.3s ease-in-out;
+        border-top-left-radius: 1em;
+        border-top-right-radius: 1em;
     }
     
     .input-field-2 {
-        position: absolute;
-        left: 449.8px;
-        right: 0.1;
-        top: 0.1;
-        height: 76px;
-        border: 4px solid #ccc;
-        border-top-right-radius: 24px;
-        border-bottom-right-radius: 24px;
-        font-size: 32px;
+        border-bottom-left-radius: 1em;
+        border-bottom-right-radius: 1em;
+        margin-top: -1.3em;
     }
-
-    #joinLobbyButton {
-        position: absolute;
-        left: 40px;
-        top: 100px;
-        width: 44%;
-        height: 76px;
-        font-size: 200%;
+    
+    #joinLobbyButton,
+    #singlePlayerButton {
+        width: 100%;
+        height: 5em;
+        font-size: clamp(2rem, 5vw, 3rem);
+        border-radius: 2em;
+        padding: 0.5em 1em;
+        margin: 0.2em 0;
     }
 
     #singlePlayerButton {
-        position: absolute;
-        right: 40px;
-        top: 100px;
-        width: 44%;
-        height: 76px;
-        font-size: 200%;
-    }
-
-    #gameVersion {
-        height: 200px;
+        margin-top: -0.75em;
     }
 }
