@@ -1549,10 +1549,6 @@ body,
         font-size: 60%;
     }
 
-    #leaveLobbyButton {
-        margin-left: 6.2em; /*This isnt perfect*/
-    }
-
     #playerList {
         font-size: 145%;
     }

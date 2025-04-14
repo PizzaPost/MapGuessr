@@ -147,7 +147,7 @@ const possibleNames = [
 ];
 
 function initialDeviceCheck() {
-    if (isMobile() && 1===2) {
+    if (isMobile() && 1 === 2) {
         const blackOverlay = document.createElement('div');
         blackOverlay.style.position = 'fixed';
         blackOverlay.style.top = '0';
@@ -580,20 +580,28 @@ function leaveLobby() {
 
 function joinLobby() {
     console.log(`Joining lobby: ${lobbyName}`);
+    const lobbyButtonContainer = document.createElement('div');
+    lobbyButtonContainer.id = 'lobbyButtonContainer';
+    lobbyButtonContainer.style.display = 'flex';
+    lobbyButtonContainer.style.gap = '10px';
+    lobbyButtonContainer.style.position = 'fixed';
+    lobbyButtonContainer.style.bottom = '20px';
+    lobbyButtonContainer.style.left = '50%';
+    lobbyButtonContainer.style.transform = 'translateX(-50%)';
+    lobbyButtonContainer.style.zIndex = '9999';
     gameVersionDiv.style.display = 'none';
     leaveLobbyButton = document.createElement('button');
     leaveLobbyButton.id = 'leaveLobbyButton';
     leaveLobbyButton.innerText = gLS("leaveLobbyButtonText");
-    leaveLobbyButton.style.position = 'fixed';
-    leaveLobbyButton.style.bottom = '0';
-    leaveLobbyButton.style.left = '50%';
-    leaveLobbyButton.style.transform = 'translateX(-50%)';
-    leaveLobbyButton.style.zIndex = '9999';
     leaveLobbyButton.style.cursor = 'pointer';
     leaveLobbyButton.onclick = () => {
+        if (lobbyButtonContainer.parentElement) {
+            lobbyButtonContainer.remove();
+        }
         leaveLobby();
     };
-    document.body.appendChild(leaveLobbyButton);
+    lobbyButtonContainer.appendChild(leaveLobbyButton);
+    document.body.appendChild(lobbyButtonContainer);
     db.collection('lobbies').doc(lobbyName).get().then(doc => {
         playerListText.innerText = gLS("playerListText");
         if (doc.exists) {
@@ -734,9 +742,7 @@ function playAsMember() {
                     }
                     claimHostButton.id = 'claimHostButton';
                     claimHostButton.innerText = gLS("claimHostButtonText");
-                    claimHostButton.style.position = 'fixed';
-                    claimHostButton.style.bottom = '0';
-                    claimHostButton.style.left = '0';
+                    claimHostButton.style.cursor = 'pointer';
                     claimHostButton.onclick = () => {
                         doc.ref.update({
                             players: doc.data().players.map(player => {
@@ -747,7 +753,8 @@ function playAsMember() {
                             })
                         });
                     };
-                    document.body.appendChild(claimHostButton);
+                    const lobbyButtonContainer = document.getElementById('lobbyButtonContainer');
+                    lobbyButtonContainer.appendChild(claimHostButton);
                 } else {
                     const claimHostButton = document.getElementById('claimHostButton');
                     if (claimHostButton) {
@@ -774,6 +781,9 @@ function playAsMember() {
 
 function playAsHost() {
     gameVersionDiv.style.display = 'none';
+    const lobbyButtonContainer = document.getElementById('lobbyButtonContainer');
+    const claimHostButton = document.getElementById('claimHostButton');
+    if (claimHostButton) claimHostButton.remove();
     db.collection('lobbies').doc(lobbyName).onSnapshot(doc => {
         if (!doc.exists) {
             showCustomAlert(gLS("lobbyNonexistent"), undefined, [], true);
@@ -788,9 +798,6 @@ function playAsHost() {
     giveUpHostButton = document.createElement('button');
     giveUpHostButton.id = 'giveUpHostButton';
     giveUpHostButton.innerText = gLS("giveUpHostButtonText");
-    giveUpHostButton.style.position = 'fixed';
-    giveUpHostButton.style.bottom = '0';
-    giveUpHostButton.style.left = '0';
     giveUpHostButton.onclick = () => {
         db.collection('lobbies').doc(lobbyName).get().then(doc => {
             if (doc.exists) {
@@ -810,20 +817,15 @@ function playAsHost() {
             }
         });
     };
-    document.body.appendChild(giveUpHostButton);
-
     closeLobbyButton.id = 'closeLobbyButton';
     closeLobbyButton.innerText = gLS("closeLobbyButtonText");
-    closeLobbyButton.style.position = 'fixed';
-    closeLobbyButton.style.bottom = '0';
-    const giveUpHostButtonRect = giveUpHostButton.getBoundingClientRect();
-    closeLobbyButton.style.left = `${giveUpHostButtonRect.right}px`;
     closeLobbyButton.onclick = () => {
         closeLobbyButton.disabled = true;
         closeLobbyButton.style.cursor = 'not-allowed';
         closeThisLobby();
     };
-    document.body.appendChild(closeLobbyButton);
+    lobbyButtonContainer.appendChild(closeLobbyButton);
+    lobbyButtonContainer.appendChild(giveUpHostButton);
 
     isHost = true;
 
