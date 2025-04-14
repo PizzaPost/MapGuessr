@@ -1550,7 +1550,7 @@ body,
     }
 
     #leaveLobbyButton {
-        margin-left: 6.2em;
+        margin-left: 6.2em; /*This isnt perfect*/
     }
 
     #playerList {

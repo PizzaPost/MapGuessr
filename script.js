@@ -147,7 +147,7 @@ const possibleNames = [
 ];
 
 function initialDeviceCheck() {
-    if (isMobile()) {
+    if (isMobile() && 1===2) {
         const blackOverlay = document.createElement('div');
         blackOverlay.style.position = 'fixed';
         blackOverlay.style.top = '0';
