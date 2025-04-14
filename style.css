@@ -1366,6 +1366,11 @@ body,
         transform: translate(-50%, -50%) scale(1.6);
     }
 
+    #joinLobbyButton:hover::after,
+    #singlePlayerButton:hover::after {
+        transform: translate(-50%, -50%) scale(3);
+    }
+
     input[type="checkbox"] {
         transform: scale(2);
         margin-left: 1rem;
@@ -1522,9 +1527,9 @@ body,
     #joinLobbyButton,
     #singlePlayerButton {
         width: 100%;
-        height: 5em;
+        height: 3em;
         font-size: clamp(2rem, 5vw, 3rem);
-        border-radius: 2em;
+        border-radius: 1em;
         padding: 0.5em 1em;
         margin: 0.2em 0;
     }
