@@ -782,6 +782,10 @@ function playAsMember() {
 function playAsHost() {
     gameVersionDiv.style.display = 'none';
     const lobbyButtonContainer = document.getElementById('lobbyButtonContainer');
+    const existingCloseLobbyButton = document.getElementById('closeLobbyButton');
+    if (existingCloseLobbyButton) existingCloseLobbyButton.remove();
+    const existingGiveUpHostButton = document.getElementById('giveUpHostButton');
+    if (existingGiveUpHostButton) existingGiveUpHostButton.remove();
     const claimHostButton = document.getElementById('claimHostButton');
     if (claimHostButton) claimHostButton.remove();
     db.collection('lobbies').doc(lobbyName).onSnapshot(doc => {
