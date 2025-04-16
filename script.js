@@ -550,22 +550,23 @@ function chooseVersion() {
 
     gameVersionDiv.appendChild(lobbyContainer);
 
-    const HISTORY_KEY = 'lobbyNameHistory';
-    let history = JSON.parse(localStorage.getItem(HISTORY_KEY) || '[]');
+    let dropDownHistory = JSON.parse(localStorage.getItem('lobbyNameHistory') || '[]');
 
     function updateDropdown() {
-        dropdown.innerHTML = history
+        dropdown.innerHTML = dropDownHistory
             .map(item => `<div class="suggestion-item">${item}</div>`)
             .join('');
     }
 
     lobbyInput.addEventListener('focus', () => {
-        if (closingTimeout) {
-            clearTimeout(closingTimeout);
-            dropdown.classList.remove('closing');
+        if (dropDownHistory.length > 0) {
+            if (closingTimeout) {
+                clearTimeout(closingTimeout);
+                dropdown.classList.remove('closing');
+            }
+            dropdown.style.display = 'block';
+            updateDropdown();
         }
-        dropdown.style.display = 'block';
-        updateDropdown();
     });
 
     lobbyInput.addEventListener('blur', () => {
@@ -584,10 +585,8 @@ function chooseVersion() {
         }
     });
 
-
-
     nameInput.type = 'text';
-    nameInput.placeholder = gLS("placeholderUserName");
+    nameInput.placeholder = gLS('placeholderUserName');
     nameInput.classList.add('input-field-2');
 
     // Create loading animation element
@@ -609,6 +608,12 @@ function chooseVersion() {
             if (userName) {
                 loadingDiv.style.display = 'flex';
                 localStorage.setItem('lastUsedName', userName);
+                let history = JSON.parse(localStorage.getItem('lobbyNameHistory') || '[]');
+                history = [...new Set(history.concat(lobbyName))];
+                if (history.length > 3) {
+                    history.shift();
+                }
+                localStorage.setItem('lobbyNameHistory', JSON.stringify(history));
                 joinLobby();
             } else {
                 showCustomAlert(gLS("noUserName"), undefined, gameVersionDiv);
