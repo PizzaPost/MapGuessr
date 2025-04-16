@@ -66,6 +66,7 @@ let leaveLobbyButton; keybinds.push(["Escape", ["leaveLobbyButton"], false]); //
 let closeLobbyButton; keybinds.push(["Escape", ["closeLobbyButton"], true]); // double press escape to close lobby
 let giveUpHostButton; keybinds.push(["g", ["giveUpHostButton"], false]); // single press g to give up host position
 let claimHostButton; keybinds.push(["c", ["claimHostButton"], false]); // single press c to claim host position
+let createNewLobbyCode; keybinds.push(["N", ["createNewLobbyCode"], false]); // single press N to create a new lobby
 // default keybinds will be overridden if there are custom ones in localStorage
 keybinds = JSON.parse(localStorage.getItem('keybinds')) || keybinds;
 
@@ -2440,11 +2441,7 @@ function isElementVisible(element) {
 
 // keybinds
 document.addEventListener('keydown', event => {
-    if (document.getElementById('keybinds') !== null) {
-        document.getElementById('lastKeyPressed').textContent = `'${event.key}'`;
-        return;
-    }
-    if (document.activeElement.tagName !== 'INPUT' && document.getElementById('keybinds') === null) {
+    if (document.activeElement.tagName !== 'INPUT' && document.getElementById('keybinds') === null && event.key !== 'Shift') {
         const currentTime = Date.now();
         // Check for double press (within 300ms)
         if (lastPressTime !== null && currentTime - lastPressTime < 300) {
@@ -2458,6 +2455,7 @@ document.addEventListener('keydown', event => {
                 const [key, elements, isDoublePress] = keybind;
                 if (event.key === key && isDoublePress) {
                     elements.forEach(element => {
+                        const elementID = element;
                         element = document.getElementById(element);
                         if (isElementVisible(element)) {
                             // check for special case of joinLobbyButton
@@ -2466,6 +2464,9 @@ document.addEventListener('keydown', event => {
                             } else {
                                 element.click();
                             }
+                        }
+                        if (elementID === 'createNewLobbyCode') {
+                            createNewLobby();
                         }
                     });
                 }
@@ -2480,6 +2481,7 @@ document.addEventListener('keydown', event => {
                     const [key, elements, isDoublePress] = keybind;
                     if (event.key === key && !isDoublePress) {
                         elements.forEach(element => {
+                            const elementID = element;
                             element = document.getElementById(element);
                             if (isElementVisible(element)) {
                                 // check for special case of joinLobbyButton
@@ -2488,6 +2490,9 @@ document.addEventListener('keydown', event => {
                                 } else {
                                     element.click();
                                 }
+                            }
+                            if (elementID === 'createNewLobbyCode') {
+                                createNewLobby();
                             }
                         });
                     }
@@ -2500,7 +2505,24 @@ document.addEventListener('keydown', event => {
     }
 });
 
+function createNewLobby() {
+    // Show loading animation
+    loadingDiv.style.display = 'flex';
+    db.collection('lobbies').get().then(querySnapshot => {
+        const lobbies = querySnapshot.docs.map(doc => doc.id);
+        let newLobbyName;
+        do {
+            newLobbyName = 'lobby' + Math.floor(Math.random() * 1000);
+        } while (lobbies.includes(newLobbyName));
+        lobbyInput.value = newLobbyName;
+        document.body.removeChild(loadingAnimation);
+    }).catch(() => {
+        loadingDiv.style.display = 'none';
+    });
+}
+
 function autoFill(element = null) {
+    loadingDiv.style.display = 'flex';
     db.collection('lobbies').get().then(querySnapshot => {
         if (lobbyInput.value === '') {
             const lobbies = querySnapshot.docs;
@@ -2514,6 +2536,9 @@ function autoFill(element = null) {
         if (element) {
             element.click();
         }
+        document.body.removeChild(loadingAnimation);
+    }).catch(() => {
+        loadingDiv.style.display = 'none';
     });
 }
 
@@ -2525,21 +2550,6 @@ function resize() {
     const isPortrait = (width < height) || (allImages.length === 1);
     imagesWrapper.style.gridTemplateColumns = isPortrait ? '1fr' : 'repeat(2, 1fr)';
 }
-
-// a way to disable console? should we do that?
-// 
-// Ethical Note:
-// Blocking the console harms legitimate users and developers trying to debug our site. Browsers like Chrome may even penalize this behavior in the future.
-
-
-// Detect devtools via debugger; statements
-// setInterval(() => {
-//     const start = Date.now();
-//     debugger;
-//     if (Date.now() - start > 100) {
-//         window.location.reload();
-//     }
-// }, 1000);
 
 window.addEventListener('resize', resize);
 
