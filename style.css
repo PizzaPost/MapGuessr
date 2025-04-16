@@ -44,6 +44,9 @@ html {
     --primary-accent: #4CAF50;
     --secondary-accent: #2196F3;
     --border-color: rgba(0, 0, 0, 0.3);
+    --autocomplete-bg: #f5f5f5;
+    --autocomplete-bg-hover: #e0e0e0;
+    --autocomplete-border: #d0d0d0;
 }
 
 [data-theme="dark"] {
@@ -78,6 +81,9 @@ html {
     --primary-accent: #4CAF50;
     --secondary-accent: #2196F3;
     --border-color: rgba(255, 255, 255, 0.3);
+    --autocomplete-bg: #2d2d2d;
+    --autocomplete-bg-hover: #3a3a3a;
+    --autocomplete-border: #404040;
 }
 
 header {
@@ -1235,6 +1241,66 @@ button:hover::after {
     transform: scale(1.05);
 }
 
+.autocomplete-container {
+    position: relative;
+    margin-bottom: 15px;
+}
+
+.custom-autocomplete {
+    display: none;
+    width: 217px;
+    position: absolute;
+    top: 100%;
+    left: 185px;
+    right: 0;
+    margin-top: 55px;
+    background: var(--autocomplete-bg);
+    border: 1px solid var(--autocomplete-border);
+    border-radius: 4px;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+    z-index: 1000;
+    overflow: hidden;
+}
+
+.suggestion-item {
+    padding: 5px 10px;
+    cursor: pointer;
+    color: var(--text-color);
+    font-size: 14px;
+    transition: background-color 0.2s;
+    opacity: 0;
+    animation: fadeInSlide 0.3s ease forwards;
+}
+
+.suggestion-item:nth-child(1) { animation-delay: 0.1s; }
+.suggestion-item:nth-child(2) { animation-delay: 0.2s; }
+.suggestion-item:nth-child(3) { animation-delay: 0.3s; }
+.suggestion-item:nth-child(4) { animation-delay: 0.4s; }
+.suggestion-item:nth-child(5) { animation-delay: 0.5s; }
+
+.custom-autocomplete.closing {
+    display: block;
+}
+
+.custom-autocomplete.closing .suggestion-item {
+    animation: fadeOutSlide 0.3s ease forwards;
+    opacity: 1;
+}
+
+.custom-autocomplete.closing .suggestion-item:nth-last-child(1) { animation-delay: 0.1s; }
+.custom-autocomplete.closing .suggestion-item:nth-last-child(2) { animation-delay: 0.2s; }
+.custom-autocomplete.closing .suggestion-item:nth-last-child(3) { animation-delay: 0.3s; }
+.custom-autocomplete.closing .suggestion-item:nth-last-child(4) { animation-delay: 0.4s; }
+.custom-autocomplete.closing .suggestion-item:nth-last-child(5) { animation-delay: 0.5s; }
+
+.suggestion-item:hover {
+    background-color: var(--autocomplete-bg-hover);
+}
+
+.suggestion-item:not(:last-child) {
+    border-bottom: 1px solid var(--autocomplete-border);
+}
+
 #lastKeyPressed {
     font-weight: normal;
     color: var(--accent-color);
@@ -1285,6 +1351,28 @@ button:hover::after {
     button {
         width: 100%;
         margin: 8px 0;
+    }
+}
+
+@keyframes fadeInSlide {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeOutSlide {
+    from {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateY(-10px);
     }
 }
 
@@ -1582,5 +1670,36 @@ body,
 
     #playerList {
         font-size: 145%;
+    }
+
+    .autocomplete-container {
+        position: relative;
+        margin-bottom: 15px;
+    }
+    
+    .custom-autocomplete {
+        display: none;
+        width: 883px;
+        position: absolute;
+        top: 100%;
+        left: -440px;
+        right: 0;
+        margin-top: 380px;
+        background: var(--autocomplete-bg);
+        border: 1px solid var(--autocomplete-border);
+        border-radius: 4px;
+        box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+        z-index: 1000;
+        overflow: hidden;
+    }
+    
+    .suggestion-item {
+        padding: 5px 10px;
+        cursor: pointer;
+        color: var(--text-color);
+        font-size: 42px;
+        transition: background-color 0.2s;
+        opacity: 0;
+        animation: fadeInSlide 0.3s ease forwards;
     }
 }

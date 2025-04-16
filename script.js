@@ -27,6 +27,7 @@ const toggleHistory = document.createElement('span');
 let lastPressTime = null;
 let timeoutId = null;
 let lastLobbyAnimationTime = 0;
+let closingTimeout = null;
 
 let devSkip = false;
 let devMode = urlParams.get('devMode') || -1;
@@ -533,9 +534,63 @@ function chooseVersion() {
     document.body.appendChild(gameVersionDiv);
 
     // Create the text input for lobby name
-    lobbyInput.type = 'text';
+    lobbyInput.type = 'password';
     lobbyInput.placeholder = gLS("placeholderLobbyName");
     lobbyInput.classList.add('input-field-1');
+
+
+
+    // Autocomplete-Container erstellen
+    const lobbyContainer = document.createElement('div');
+    lobbyContainer.className = 'autocomplete-container';
+    lobbyContainer.appendChild(lobbyInput);
+    
+    // Custom Dropdown für Vorschläge
+    const dropdown = document.createElement('div');
+    dropdown.className = 'custom-autocomplete';
+    lobbyContainer.appendChild(dropdown);
+    
+    // Zur DOM hinzufügen
+    gameVersionDiv.appendChild(lobbyContainer);
+
+    // History-Logik
+    const HISTORY_KEY = 'lobbyNameHistory';
+    let history = JSON.parse(localStorage.getItem(HISTORY_KEY) || '[]');
+
+    function updateDropdown() {
+        dropdown.innerHTML = history
+            .map(item => `<div class="suggestion-item">${item}</div>`)
+            .join('');
+    }
+
+    lobbyInput.addEventListener('focus', () => {
+        if (closingTimeout) {
+            clearTimeout(closingTimeout);
+            dropdown.classList.remove('closing');
+        }
+        dropdown.style.display = 'block';
+        updateDropdown();
+    });
+    
+    lobbyInput.addEventListener('blur', () => {
+        dropdown.classList.add('closing');
+        closingTimeout = setTimeout(() => {
+            dropdown.style.display = 'none';
+            dropdown.classList.remove('closing');
+        }, 600); // Matches the longest animation time (0.5s delay + 0.3s duration)
+    });
+    
+    dropdown.addEventListener('mousedown', (e) => {
+        if (e.target.classList.contains('suggestion-item')) {
+            lobbyInput.value = e.target.textContent;
+            // Close immediately without animation
+            clearTimeout(closingTimeout);
+            dropdown.classList.remove('closing');
+        }
+    });
+
+
+
     nameInput.type = 'text';
     nameInput.placeholder = gLS("placeholderUserName");
     nameInput.classList.add('input-field-2');
