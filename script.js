@@ -526,6 +526,9 @@ function initializeGame() {
 const gameVersionDiv = document.createElement('div');
 const lobbyInput = document.createElement('input');
 const nameInput = document.createElement('input');
+if (localStorage.getItem('lastUsedName')) {
+    nameInput.value = localStorage.getItem('lastUsedName');
+}
 let lobbyName = "defaultlobby";
 let userName = "defaultuser";
 
@@ -540,11 +543,11 @@ function chooseVersion() {
     const lobbyContainer = document.createElement('div');
     lobbyContainer.className = 'autocomplete-container';
     lobbyContainer.appendChild(lobbyInput);
-    
+
     const dropdown = document.createElement('div');
     dropdown.className = 'custom-autocomplete';
     lobbyContainer.appendChild(dropdown);
-    
+
     gameVersionDiv.appendChild(lobbyContainer);
 
     const HISTORY_KEY = 'lobbyNameHistory';
@@ -564,7 +567,7 @@ function chooseVersion() {
         dropdown.style.display = 'block';
         updateDropdown();
     });
-    
+
     lobbyInput.addEventListener('blur', () => {
         dropdown.classList.add('closing');
         closingTimeout = setTimeout(() => {
@@ -572,7 +575,7 @@ function chooseVersion() {
             dropdown.classList.remove('closing');
         }, 600);
     });
-    
+
     dropdown.addEventListener('mousedown', (e) => {
         if (e.target.classList.contains('suggestion-item')) {
             lobbyInput.value = e.target.textContent;
@@ -605,6 +608,7 @@ function chooseVersion() {
         if (lobbyName) {
             if (userName) {
                 loadingDiv.style.display = 'flex';
+                localStorage.setItem('lastUsedName', userName);
                 joinLobby();
             } else {
                 showCustomAlert(gLS("noUserName"), undefined, gameVersionDiv);
