@@ -622,6 +622,12 @@ function joinLobby() {
             userName = newUserName;
             console.log(`Lobby exists, joining as ${userName}`);
 
+            const bannedPlayers = doc.data().bannedPlayers || [];
+            if (bannedPlayers.includes(auth.currentUser.uid)) {
+                showCustomAlert(gLS("lobbyBanned"), 0, undefined, gameVersionDiv, true);
+                return;
+            }
+
             // Join the lobby
             doc.ref.get().then(docSnapshot => {
                 if (docSnapshot.exists) {
@@ -797,6 +803,44 @@ function playAsHost() {
         const playerNames = getPlayerNames(players);
         playerListText.innerHTML = `${gLS("playerListText")}<br>${getPlayerNames(doc.data().players || [])}`;
         document.body.appendChild(playerListDiv);
+        const playerList = document.getElementById('playerList');
+        const kickAndBanButtonContainer = document.createElement('span');
+        kickAndBanButtonContainer.id = 'kickAndBanButtonContainer';
+        playerList.appendChild(kickAndBanButtonContainer);
+        playerList.innerHTML = '';
+        players.forEach(player => {
+            const playerDiv = document.createElement('div');
+            playerDiv.className = 'playerListDiv';
+            const kickButton = document.createElement('button');
+            kickButton.className = 'kickButton';
+            kickButton.innerText = gLS("kickButtonText");
+
+            const banButton = document.createElement('button');
+            banButton.className = 'banButton';
+            banButton.innerText = gLS("banButtonText");
+            if (player.uid !== auth.currentUser.uid) {
+                kickButton.onclick = () => {
+                    doc.ref.update({
+                        players: players.filter(playerElement => playerElement.uid !== player.uid)
+                    });
+                };
+                banButton.onclick = () => {
+                    doc.ref.update({
+                        players: players.filter(playerElement => playerElement.uid !== player.uid)
+                    });
+                    doc.ref.update({
+                        bannedPlayers: firebase.firestore.FieldValue.arrayUnion(player.uid)
+                    });
+                };
+            } else {
+                kickButton.style.display = 'none';
+                banButton.style.display = 'none';
+            }
+            playerDiv.appendChild(banButton);
+            playerDiv.appendChild(kickButton);
+            playerDiv.appendChild(document.createTextNode(player.name));
+            playerList.appendChild(playerDiv);
+        });
     });
     closeLobbyButton = document.createElement('button');
     giveUpHostButton = document.createElement('button');
