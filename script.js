@@ -26,6 +26,7 @@ let tooltip;
 const toggleHistory = document.createElement('span');
 let lastPressTime = null;
 let timeoutId = null;
+let lastLobbyAnimationTime = 0;
 
 let devSkip = false;
 let devMode = urlParams.get('devMode') || -1;
@@ -404,6 +405,25 @@ function closeAllLobbies() {
     });
 }
 
+function triggerLobbyAnimation() {
+    const now = Date.now();
+    // Check if 5 seconds have passed since the last animation
+    if (now - lastLobbyAnimationTime >= 5000) {
+        playerListDiv.classList.remove('animate');
+        void playerListDiv.offsetWidth; // Trigger reflow to restart animation
+        playerListDiv.classList.add('animate');
+        gameModeSelector.classList.remove('animate');
+        void gameModeSelector.offsetWidth; // Trigger reflow to restart animation
+        gameModeSelector.classList.add('animate');
+        lastLobbyAnimationTime = now;
+        // Remove the class after animation completes
+        setTimeout(() => {
+            playerListDiv.classList.remove('animate');
+            gameModeSelector.classList.remove('animate');
+        }, 800);
+    }
+}
+
 function closeThisLobby() {
     db.collection('lobbies').doc(lobbyName).delete();
 }
@@ -602,6 +622,7 @@ function joinLobby() {
     };
     lobbyButtonContainer.appendChild(leaveLobbyButton);
     document.body.appendChild(lobbyButtonContainer);
+    triggerLobbyAnimation();
     db.collection('lobbies').doc(lobbyName).get().then(doc => {
         playerListText.innerText = gLS("playerListText");
         if (doc.exists) {

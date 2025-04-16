@@ -1097,15 +1097,15 @@ button:hover::after {
     animation: fadeIn 0.6s ease-out;
 }
 
-#playerList {
-    animation: fadeIn 0.6s ease-out;
+#playerList.animate {
+    animation: fadeIn 0.6s ease-out forwards;
 }
 
 #gameVersion {
     animation: fadeIn 0.6s ease-out;
 }
 
-#gameModeSelector {
+#gameModeSelector.animate {
     animation: fadeInLeft 3.6s ease-out;
 }
 
