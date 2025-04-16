@@ -813,11 +813,11 @@ function playAsHost() {
             playerDiv.className = 'playerListDiv';
             const kickButton = document.createElement('button');
             kickButton.className = 'kickButton';
-            kickButton.innerText = gLS("kickButtonText");
+            kickButton.innerText = gLS("kickButton");
 
             const banButton = document.createElement('button');
             banButton.className = 'banButton';
-            banButton.innerText = gLS("banButtonText");
+            banButton.innerText = gLS("banButton");
             if (player.uid !== auth.currentUser.uid) {
                 kickButton.onclick = () => {
                     doc.ref.update({

@@ -55,7 +55,10 @@
             "wrongMap": "It's alright. No need to cry about it. ",
             "languages": "SPRACHEN",
             "languageMenuTooltipText": "Zwischen Sprachen wechseln",
-            "aiMistakes": "Definitely not AI translated."
+            "aiMistakes": "Definitely not AI translated.",
+            "kickButton": "Boot 'em!",
+            "banButton": "Ban-o-rama!",
+            "lobbyBanned": "Oh no! The gods have declared you too legendary for this lobby. You're hilariously exiled – the page is about to reload!"
         },
         "normal": {
             "actionLabelText": "Buttons pressed by this keybind:",
@@ -112,7 +115,10 @@
             "wrongMap": "You have chosen the wrong map. It was: ",
             "languages": "LANGUAGES",
             "languageMenuTooltipText": "Switch between languages",
-            "aiMistakes": "Artificial intelligence can make mistakes. If you find one, we'd love to hear about it."
+            "aiMistakes": "Artificial intelligence can make mistakes. If you find one, we'd love to hear about it.",
+            "kickButton": "kick",
+            "banButton": "ban",
+            "lobbyBanned": "You have been banned from this lobby. The page will reload now."
         }
     },
     "de": {
@@ -171,7 +177,10 @@
             "wrongMap": "Kein Grund traurig zu sein. ",
             "languages": "IDIOMAS",
             "languageMenuTooltipText": "Cambiar idioma",
-            "aiMistakes": "Auf keinen Fall von künstlicher Intelligenz übersetzt."
+            "aiMistakes": "Auf keinen Fall von künstlicher Intelligenz übersetzt.",
+            "kickButton": "Stiefel drauf!",
+            "banButton": "Verbanne dich!",
+            "lobbyBanned": "Oh nein! Die Götter haben entschieden, dass du zu legendär für dieses Lobby bist. Du bist verbannt – die Seite lädt neu!"
         },
         "normal": {
             "actionLabelText": "Von diesem Kurzbefehl gedrückte Knöpfe:",
@@ -228,7 +237,10 @@
             "wrongMap": "Das war die falsche Karte. Die korrekte wäre: ",
             "languages": "SPRACHEN",
             "languageMenuTooltipText": "Zwischen Sprachen wechseln",
-            "aiMistakes": "Künstliche Intelligenz kann Fehler machen. Wenn Sie einen finden, würden wir uns freuen, davon zu hören."
+            "aiMistakes": "Künstliche Intelligenz kann Fehler machen. Wenn Sie einen finden, würden wir uns freuen, davon zu hören.",
+            "kickButton": "kicken",
+            "banButton": "bannen",
+            "lobbyBanned": "Sie wurden aus dieser Gruppe gebannt. Die Seite wird nun neu laden."
         }
     },
     "fr": {
@@ -287,7 +299,10 @@
             "wrongMap": "Pas de raison d'être triste.",
             "languages": "SPRACHEN",
             "languageMenuTooltipText": "Zwischen Sprachen wechseln",
-            "aiMistakes": "Définitivement pas traduit par intelligence artificielle."
+            "aiMistakes": "Définitivement pas traduit par intelligence artificielle.",
+            "kickButton": "Frappe-le!",
+            "banButton": "Bannir en folie!",
+            "lobbyBanned": "Oh là là ! Les dieux de la farce ont décidé que tu es trop légendaire pour ce lobby. Tu es exilé avec humour – la page va se recharger avec une touche de malice!"
         },
         "normal": {
             "actionLabelText": "Boutons activés par ce raccourci :",
@@ -344,7 +359,10 @@
             "wrongMap": "Mauvaise carte. La bonne était : ",
             "languages": "LANGUES",
             "languageMenuTooltipText": "Changer de langue",
-            "aiMistakes": "L'intelligence artificielle peut faire des erreurs. Si vous en trouvez une, nous serions ravis d'en être informés."
+            "aiMistakes": "L'intelligence artificielle peut faire des erreurs. Si vous en trouvez une, nous serions ravis d'en être informés.",
+            "kickButton": "virer",
+            "banButton": "bannir",
+            "lobbyBanned": "Vous avez été banni de ce lobby. La page va maintenant se recharger."
         }
     },
     "es": {
@@ -403,7 +421,10 @@
             "wrongMap": "No hay que ponerse triste. ",
             "languages": "SPRACHEN",
             "languageMenuTooltipText": "Zwischen Sprachen wechseln",
-            "aiMistakes": "Definitivamente no traducido por inteligencia artificial."
+            "aiMistakes": "Definitivamente no traducido por inteligencia artificial.",
+            "kickButton": "¡PateaYa!",
+            "banButton": "¡Banearón!",
+            "lobbyBanned": "¡Oh no! Los dioses de las bromas han decretado que eres demasiado legendario para este lobby. Estás hilarantemente desterrado; ¡la página se recargará con un giro de humor!"
         },
         "normal": {
             "actionLabelText": "Botones pulsados por este atajo:",
@@ -460,7 +481,10 @@
             "wrongMap": "Mapa incorrecto. El correcto era: ",
             "languages": "IDIOMAS",
             "languageMenuTooltipText": "Cambiar idioma",
-            "aiMistakes": "La inteligencia artificial puede cometer errores. Si encuentras uno, nos encantaría saberlo."
+            "aiMistakes": "La inteligencia artificial puede cometer errores. Si encuentras uno, nos encantaría saberlo.",
+            "kickButton": "expulsar",
+            "banButton": "banear",
+            "lobbyBanned": "Has sido baneado de este lobby. La página se recargará ahora."
         }
     },
     "ja": {
@@ -519,7 +543,10 @@
             "wrongMap": "泣くことないよ。",
             "languages": "SPRACHEN",
             "languageMenuTooltipText": "Zwischen Sprachen wechseln",
-            "aiMistakes": "決して人工知能によって翻訳されたものではありません。"
+            "aiMistakes": "決して人工知能によって翻訳されたものではありません。",
+            "kickButton": "蹴っ飛ばせ！",
+            "banButton": "バン・オ・ラマ！",
+            "lobbyBanned": "あらら！いたずらの神々があなたをこのロビーには伝説的すぎると宣言しました。ユーモラスに追放されたので、ページがひねりと共に再読み込みされます！"
         },
         "normal": {
             "actionLabelText": "このショートカットで押されるボタン:",
@@ -576,7 +603,10 @@
             "wrongMap": "不正解。正解は: ",
             "languages": "言語",
             "languageMenuTooltipText": "言語を切り替える",
-            "aiMistakes": "人工知能は間違いを犯すことがあります。もし見つけたら、ぜひお知らせください。"
+            "aiMistakes": "人工知能は間違いを犯すことがあります。もし見つけたら、ぜひお知らせください。",
+            "kickButton": "キック",
+            "banButton": "バン",
+            "lobbyBanned": "このロビーからBANされています。ページは今すぐ再読み込みされます。"
         }
     },
     "zh": {
@@ -635,7 +665,10 @@
             "wrongMap": "没必要难过。",
             "languages": "SPRACHEN",
             "languageMenuTooltipText": "Zwischen Sprachen wechseln",
-            "aiMistakes": "绝对不是由人工智能翻译的。"
+            "aiMistakes": "绝对不是由人工智能翻译的。",
+            "kickButton": "踢他走！",
+            "banButton": "封禁狂潮！",
+            "lobbyBanned": "糟糕！恶作剧之神宣布你太传奇，无法容纳于此大厅。你已被幽默地驱逐——页面即将以搞笑的方式重新加载！"
         },
         "normal": {
             "actionLabelText": "此快捷键按下的按钮:",
@@ -692,7 +725,10 @@
             "wrongMap": "错误答案。正确答案是: ",
             "languages": "语言",
             "languageMenuTooltipText": "切换语言",
-            "aiMistakes": "人工智能可能会出错。如果你发现了，我们非常乐意听取反馈。"
+            "aiMistakes": "人工智能可能会出错。如果你发现了，我们非常乐意听取反馈。",
+            "kickButton": "踢出",
+            "banButton": "封禁",
+            "lobbyBanned": "您已被禁止进入此大厅。页面将立即重新加载。"
         }
     },
     "ru": {
@@ -751,7 +787,10 @@
             "wrongMap": "Не грусти. ",
             "languages": "SPRACHEN",
             "languageMenuTooltipText": "Zwischen Sprachen wechseln",
-            "aiMistakes": "Определённо не переведено искусственным интеллектом."
+            "aiMistakes": "Определённо не переведено искусственным интеллектом.",
+            "kickButton": "Ударь ногой!",
+            "banButton": "Банфест!",
+            "lobbyBanned": "О, нет! Боги шуток решили, что вы слишком легендарны для этого лобби. Вы забанены с юмором – страница сейчас перезагрузится с изюминкой!"
         },
         "normal": {
             "actionLabelText": "Кнопки этого сочетания:",
@@ -808,7 +847,10 @@
             "wrongMap": "Неверный ответ. Правильный: ",
             "languages": "ЯЗЫКИ",
             "languageMenuTooltipText": "Переключить язык",
-            "aiMistakes": "Искусственный интеллект может совершать ошибки. Если вы обнаружите ошибку, нам будет приятно об этом узнать."
+            "aiMistakes": "Искусственный интеллект может совершать ошибки. Если вы обнаружите ошибку, нам будет приятно об этом узнать.",
+            "kickButton": "кикнуть",
+            "banButton": "бан",
+            "lobbyBanned": "Вы были забанены в этом лобби. Страница будет перезагружена."
         }
     },
     "ar": {
@@ -867,7 +909,10 @@
             "wrongMap": "لا داعي للحزن. ",
             "languages": "SPRACHEN",
             "languageMenuTooltipText": "Zwischen Sprachen wechseln",
-            "aiMistakes": "ليس مترجمًا بواسطة الذكاء الاصطناعي على الإطلاق."
+            "aiMistakes": "ليس مترجمًا بواسطة الذكاء الاصطناعي على الإطلاق.",
+            "kickButton": "اركلهم!",
+            "banButton": "فرض الحظر!",
+            "lobbyBanned": "يا للهول! آلهة المقالب أعلنت أنك أسطوري جدًا لهذه الغرفة. لقد تم نفيك بطريقة فكاهية – الصفحة ستُعيد التحميل بلمسة من المرح!"
         },
         "normal": {
             "actionLabelText": "أزرار هذا الاختصار:",
@@ -924,7 +969,10 @@
             "wrongMap": "الجواب خاطئ. الصحيح كان: ",
             "languages": "اللغات",
             "languageMenuTooltipText": "تغيير اللغة",
-            "aiMistakes": "يمكن للذكاء الاصطناعي أن يرتكب أخطاء. إذا وجدت خطأً، سنكون سعداء لسماع رأيك."
+            "aiMistakes": "يمكن للذكاء الاصطناعي أن يرتكب أخطاء. إذا وجدت خطأً، سنكون سعداء لسماع رأيك.",
+            "kickButton": "طرد",
+            "banButton": "حظر",
+            "lobbyBanned": "لقد تم حظرك من هذه الغرفة. ستُعاد تحميل الصفحة الآن."
         }
     },
     "pt": {
@@ -983,7 +1031,10 @@
             "wrongMap": "Não precisa chorar.",
             "languages": "SPRACHEN",
             "languageMenuTooltipText": "Zwischen Sprachen wechseln",
-            "aiMistakes": "Definitivamente não traduzido por inteligência artificial."
+            "aiMistakes": "Definitivamente não traduzido por inteligência artificial.",
+            "kickButton": "Chuta Fora!",
+            "banButton": "BanaFest!",
+            "lobbyBanned": "Oh não! Os deuses das brincadeiras decretaram que você é lendário demais para este lobby. Você foi banido de forma hilária – a página vai recarregar com um toque de maluquice!"
         },
         "normal": {
             "actionLabelText": "Botões pressionados por este atalho:",
@@ -1040,7 +1091,10 @@
             "wrongMap": "Resposta errada. A certa era: ",
             "languages": "IDIOMAS",
             "languageMenuTooltipText": "Mudar idioma",
-            "aiMistakes": "A inteligência artificial pode cometer erros. Se você encontrar algum, adoraríamos saber."
+            "aiMistakes": "A inteligência artificial pode cometer erros. Se você encontrar algum, adoraríamos saber.",
+            "kickButton": "expulsar",
+            "banButton": "banir",
+            "lobbyBanned": "Você foi banido deste lobby. A página será recarregada agora."
         }
     },
     "hi": {
@@ -1099,7 +1153,10 @@
             "wrongMap": "रोने की ज़रूरत नहीं।",
             "languages": "SPRACHEN",
             "languageMenuTooltipText": "Zwischen Sprachen wechseln",
-            "aiMistakes": "बिल्कुल भी कृत्रिम बुद्धिमत्ता द्वारा अनुवादित नहीं।"
+            "aiMistakes": "बिल्कुल भी कृत्रिम बुद्धिमत्ता द्वारा अनुवादित नहीं।",
+            "kickButton": "लात मारो!",
+            "banButton": "बैनगो!",
+            "lobbyBanned": "अरे, शरारती देवताओं ने कहा कि आप इस लॉबी के लिए बहुत दिग्गज हैं। आपको हंसी-मजाक में बहिष्कृत कर दिया गया है – पृष्ठ अब मस्ती के साथ रीलोड हो रहा है!"
         },
         "normal": {
             "actionLabelText": "इस शॉर्टकट के बटन:",
@@ -1156,7 +1213,10 @@
             "wrongMap": "गलत जवाब। सही था: ",
             "languages": "भाषाएँ",
             "languageMenuTooltipText": "भाषा बदलें",
-            "aiMistakes": "कृत्रिम बुद्धिमत्ता से गलतियाँ हो सकती हैं। यदि आप कोई गलती पाते हैं, तो हमें बताने में खुशी होगी।"
+            "aiMistakes": "कृत्रिम बुद्धिमत्ता से गलतियाँ हो सकती हैं। यदि आप कोई गलती पाते हैं, तो हमें बताने में खुशी होगी।",
+            "kickButton": "किक",
+            "banButton": "बैन",
+            "lobbyBanned": "आपको इस लॉबी से प्रतिबंधित कर दिया गया है। पृष्ठ अब फिर से लोड होगा।"
         }
     },
     "it": {
@@ -1215,7 +1275,10 @@
             "wrongMap": "Non c'è bisogno di piangere.",
             "languages": "SPRACHEN",
             "languageMenuTooltipText": "Zwischen Sprachen wechseln",
-            "aiMistakes": "Decisamente non tradotto dall'intelligenza artificiale."
+            "aiMistakes": "Decisamente non tradotto dall'intelligenza artificiale.",
+            "kickButton": "Dai via il calcio!",
+            "banButton": "Bandisci con stile!",
+            "lobbyBanned": "Oh no! Gli dei degli scherzi hanno deciso che sei troppo leggendario per questa lobby. Sei esiliato in maniera esilarante – la pagina si ricaricherà con un tocco di follia!"
         },
         "normal": {
             "actionLabelText": "Pulsanti premuti da questo tasto:",
@@ -1272,7 +1335,10 @@
             "wrongMap": "Sbagliato. La risposta era: ",
             "languages": "LINGUE",
             "languageMenuTooltipText": "Cambia lingua",
-            "aiMistakes": "L'intelligenza artificiale può commettere errori. Se ne trovi uno, saremmo lieti di saperlo."
+            "aiMistakes": "L'intelligenza artificiale può commettere errori. Se ne trovi uno, saremmo lieti di saperlo.",
+            "kickButton": "espelli",
+            "banButton": "bandisci",
+            "lobbyBanned": "Sei stato bandito da questa lobby. La pagina si ricaricherà ora."
         }
     },
     "ko": {
@@ -1331,7 +1397,10 @@
             "wrongMap": "울 필요 없어.",
             "languages": "SPRACHEN",
             "languageMenuTooltipText": "Zwischen Sprachen wechseln",
-            "aiMistakes": "절대 인공지능에 의해 번역된 것이 아닙니다."
+            "aiMistakes": "절대 인공지능에 의해 번역된 것이 아닙니다.",
+            "kickButton": "차버려!",
+            "banButton": "밴세상!",
+            "lobbyBanned": "오 이런! 장난의 신들이 당신을 이 로비에서 전설적이라고 선언했습니다. 웃기게 추방되었어요 – 페이지가 재치 있게 새로고침됩니다!"
         },
         "normal": {
             "actionLabelText": "단축키로 누른 버튼:",
@@ -1388,7 +1457,10 @@
             "wrongMap": "틀렸습니다. 정답: ",
             "languages": "언어",
             "languageMenuTooltipText": "언어 변경",
-            "aiMistakes": "인공지능은 실수를 할 수 있습니다. 만약 발견하신다면 알려주시면 감사하겠습니다."
+            "aiMistakes": "인공지능은 실수를 할 수 있습니다. 만약 발견하신다면 알려주시면 감사하겠습니다.",
+            "kickButton": "킥",
+            "banButton": "밴",
+            "lobbyBanned": "당신은 이 로비에서 밴되었습니다. 페이지가 지금 새로고침됩니다."
         }
     },
     "tr": {
@@ -1447,7 +1519,10 @@
             "wrongMap": "Üzülmeye gerek yok.",
             "languages": "SPRACHEN",
             "languageMenuTooltipText": "Zwischen Sprachen wechseln",
-            "aiMistakes": "Kesinlikle yapay zeka tarafından çevrilmedi."
+            "aiMistakes": "Kesinlikle yapay zeka tarafından çevrilmedi.",
+            "kickButton": "Fırlat Onu!",
+            "banButton": "YasaGücü!",
+            "lobbyBanned": "Oh hayır! Şaka tanrıları bu lobi için seni çok efsane ilan etti. Espirili bir şekilde kovuldun – sayfa eğlenceli bir yeniden yüklemeyle geliyor!"
         },
         "normal": {
             "actionLabelText": "Kısayol tuşları:",
@@ -1504,7 +1579,10 @@
             "wrongMap": "Yanlış cevap. Doğrusu: ",
             "languages": "DİLLER",
             "languageMenuTooltipText": "Dili değiştir",
-            "aiMistakes": "Yapay zeka hata yapabilir. Eğer bir hata bulursanız, bize bildirmenizi çok isteriz."
+            "aiMistakes": "Yapay zeka hata yapabilir. Eğer bir hata bulursanız, bize bildirmenizi çok isteriz.",
+            "kickButton": "at",
+            "banButton": "yasakla",
+            "lobbyBanned": "Bu lobiden yasaklandınız. Sayfa şimdi yeniden yüklenecek."
         }
     },
     "vi": {
@@ -1563,7 +1641,10 @@
             "wrongMap": "Khóc lóc gì.",
             "languages": "SPRACHEN",
             "languageMenuTooltipText": "Zwischen Sprachen wechseln",
-            "aiMistakes": "Chắc chắn không được dịch bởi trí tuệ nhân tạo."
+            "aiMistakes": "Chắc chắn không được dịch bởi trí tuệ nhân tạo.",
+            "kickButton": "Đá Ra!",
+            "banButton": "Cấm Cách Đầy Phong Cách!",
+            "lobbyBanned": "Ôi không! Các vị thần của trò đùa quyết định bạn quá huyền thoại cho phòng này. Bạn bị đuổi một cách hài hước – trang sẽ tải lại với một cái twist đầy thú vị!"
         },
         "normal": {
             "actionLabelText": "Nút được bấm bởi phím tắt:",
@@ -1620,7 +1701,10 @@
             "wrongMap": "Sai rồi. Đáp án: ",
             "languages": "NGÔN NGỮ",
             "languageMenuTooltipText": "Chuyển đổi ngôn ngữ",
-            "aiMistakes": "Trí tuệ nhân tạo có thể mắc sai lầm. Nếu bạn tìm thấy sai sót, chúng tôi rất muốn biết."
+            "aiMistakes": "Trí tuệ nhân tạo có thể mắc sai lầm. Nếu bạn tìm thấy sai sót, chúng tôi rất muốn biết.",
+            "kickButton": "đá",
+            "banButton": "cấm",
+            "lobbyBanned": "Bạn đã bị cấm khỏi phòng này. Trang sẽ tải lại ngay bây giờ."
         }
     },
     "th": {
@@ -1679,7 +1763,10 @@
             "wrongMap": "อย่าร้องไห้.",
             "languages": "SPRACHEN",
             "languageMenuTooltipText": "Zwischen Sprachen wechseln",
-            "aiMistakes": "แน่นอนว่าไม่ใช่การแปลโดยปัญญาประดิษฐ์."
+            "aiMistakes": "แน่นอนว่าไม่ใช่การแปลโดยปัญญาประดิษฐ์.",
+            "kickButton": "เตะสุดมันส์!",
+            "banButton": "แบนแบบตลก!",
+            "lobbyBanned": "โอ้ไม่นะ! เทพแห่งการล้อเล่นตัดสินว่าคุณนั้น legendary มากเกินไปสำหรับห้องนี้ คุณถูกไล่ออกด้วยความขบขัน – หน้าเว็บกำลังรีโหลดพร้อมความสนุก!"
         },
         "normal": {
             "actionLabelText": "ปุ่มที่ถูกกด:",
@@ -1736,7 +1823,10 @@
             "wrongMap": "ตอบผิด คำตอบถูก: ",
             "languages": "ภาษา",
             "languageMenuTooltipText": "เปลี่ยนภาษา",
-            "aiMistakes": "ปัญญาประดิษฐ์อาจทำผิดพลาดได้ หากคุณพบข้อผิดพลาดใด ๆ เรายินดีที่จะรับฟังความคิดเห็น."
+            "aiMistakes": "ปัญญาประดิษฐ์อาจทำผิดพลาดได้ หากคุณพบข้อผิดพลาดใด ๆ เรายินดีที่จะรับฟังความคิดเห็น.",
+            "kickButton": "เตะออก",
+            "banButton": "แบน",
+            "lobbyBanned": "คุณถูกแบนออกจากห้องนี้แล้ว หน้าเว็บจะรีโหลดใหม่ทันที."
         }
     },
     "nl": {
@@ -1795,7 +1885,10 @@
             "wrongMap": "Geen reden om te huilen.",
             "languages": "SPRACHEN",
             "languageMenuTooltipText": "Zwischen Sprachen wechseln",
-            "aiMistakes": "Zeker niet door kunstmatige intelligentie vertaald."
+            "aiMistakes": "Zeker niet door kunstmatige intelligentie vertaald.",
+            "kickButton": "Schop 'm weg!",
+            "banButton": "Bannetastisch!",
+            "lobbyBanned": "Oh nee! De grappenmakersgoden hebben verklaard dat je te legendarisch bent voor deze lobby. Je bent op humoristische wijze verbannen – de pagina laadt nu opnieuw met een knipoog!"
         },
         "normal": {
             "actionLabelText": "Toetsenbordknoppen:",
@@ -1852,7 +1945,10 @@
             "wrongMap": "Fout antwoord. Juist was: ",
             "languages": "TALEN",
             "languageMenuTooltipText": "Taal wijzigen",
-            "aiMistakes": "Kunstmatige intelligentie kan fouten maken. Als je er een vindt, horen we dat graag."
+            "aiMistakes": "Kunstmatige intelligentie kan fouten maken. Als je er een vindt, horen we dat graag.",
+            "kickButton": "schoppen",
+            "banButton": "bannen",
+            "lobbyBanned": "Je bent verbannen uit deze lobby. De pagina wordt nu herladen."
         }
     },
     "pl": {
@@ -1911,7 +2007,10 @@
             "wrongMap": "Nie ma co płakać.",
             "languages": "SPRACHEN",
             "languageMenuTooltipText": "Zwischen Sprachen wechseln",
-            "aiMistakes": "Zdecydowanie nie przetłumaczone przez sztuczną inteligencję."
+            "aiMistakes": "Zdecydowanie nie przetłumaczone przez sztuczną inteligencję.",
+            "kickButton": "Kopnij to!",
+            "banButton": "Banorama!",
+            "lobbyBanned": "O nie! Bogowie psot orzekli, że jesteś zbyt legendarny dla tego lobby. Zostałeś wykluczony w humorystyczny sposób – strona zaraz się przeładuje z przymrużeniem oka!"
         },
         "normal": {
             "actionLabelText": "Przyciski skrótów:",
@@ -1968,7 +2067,10 @@
             "wrongMap": "Zła odpowiedź. Poprawna: ",
             "languages": "JĘZYKI",
             "languageMenuTooltipText": "Zmień język",
-            "aiMistakes": "Sztuczna inteligencja może popełniać błędy. Jeśli znajdziesz jakiś błąd, chętnie o tym usłyszymy."
+            "aiMistakes": "Sztuczna inteligencja może popełniać błędy. Jeśli znajdziesz jakiś błąd, chętnie o tym usłyszymy.",
+            "kickButton": "wyrzuć",
+            "banButton": "zbanuj",
+            "lobbyBanned": "Zostałeś zbanowany w tym lobby. Strona zostanie teraz przeładowana."
         }
     },
     "id": {
@@ -2027,7 +2129,10 @@
             "wrongMap": "Nggak usah nangis.",
             "languages": "SPRACHEN",
             "languageMenuTooltipText": "Zwischen Sprachen wechseln",
-            "aiMistakes": "Tentu saja tidak diterjemahkan oleh kecerdasan buatan."
+            "aiMistakes": "Tentu saja tidak diterjemahkan oleh kecerdasan buatan.",
+            "kickButton": "Tendang Aja!",
+            "banButton": "Ban-o-rama!",
+            "lobbyBanned": "Oh tidak! Dewa keusilan menyatakan Anda terlalu legendaris untuk lobi ini. Anda lucu-lucuan diusir – halaman segera dimuat ulang dengan gaya gokil!"
         },
         "normal": {
             "actionLabelText": "Tombol shortcut:",
@@ -2084,7 +2189,10 @@
             "wrongMap": "Salah. Jawaban benar: ",
             "languages": "BAHASA",
             "languageMenuTooltipText": "Ganti bahasa",
-            "aiMistakes": "Kecerdasan buatan bisa melakukan kesalahan. Jika Anda menemukan salah satunya, kami akan sangat senang untuk mengetahuinya."
+            "aiMistakes": "Kecerdasan buatan bisa melakukan kesalahan. Jika Anda menemukan salah satunya, kami akan sangat senang untuk mengetahuinya.",
+            "kickButton": "tendang",
+            "banButton": "ban",
+            "lobbyBanned": "Anda telah dilarang dari lobi ini. Halaman akan dimuat ulang sekarang."
         }
     },
     "uk": {
@@ -2143,7 +2251,10 @@
             "wrongMap": "Не плач.",
             "languages": "SPRACHEN",
             "languageMenuTooltipText": "Zwischen Sprachen wechseln",
-            "aiMistakes": "Абсолютно не перекладено штучним інтелектом."
+            "aiMistakes": "Абсолютно не перекладено штучним інтелектом.",
+            "kickButton": "Викочи з місця!",
+            "banButton": "Забануй стигло!",
+            "lobbyBanned": "Ой ні! Боги жартів вирішили, що ти занадто легендарний для цього лобі. Тебе висміяли настільки, що сторінка тепер перезавантажується з посмішкою!"
         },
         "normal": {
             "actionLabelText": "Клавіші цього ярлика:",
@@ -2200,7 +2311,10 @@
             "wrongMap": "Неправильно. Правильна відповідь: ",
             "languages": "МОВИ",
             "languageMenuTooltipText": "Змінити мову",
-            "aiMistakes": "Штучний інтелект може помилятися. Якщо ви знайдете помилку, нам буде приємно про це дізнатися."
+            "aiMistakes": "Штучний інтелект може помилятися. Якщо ви знайдете помилку, нам буде приємно про це дізнатися.",
+            "kickButton": "викинути",
+            "banButton": "забанити",
+            "lobbyBanned": "Ви були забанені в цьому лобі. Сторінка тепер перезавантажиться."
         }
     },
     "ms": {
@@ -2259,7 +2373,10 @@
             "wrongMap": "Tak payah nangis.",
             "languages": "SPRACHEN",
             "languageMenuTooltipText": "Zwischen Sprachen wechseln",
-            "aiMistakes": "Pastinya tidak diterjemahkan oleh kecerdasan buatan."
+            "aiMistakes": "Pastinya tidak diterjemahkan oleh kecerdasan buatan.",
+            "kickButton": "Tendang Hebat!",
+            "banButton": "Larangan Gempak!",
+            "lobbyBanned": "Oh tidak! Dewa jenaka telah menentukan anda terlalu legend untuk lobi ini. Anda diluputkan dengan penuh gelak – halaman kini akan muat semula dengan kejenakaan!"
         },
         "normal": {
             "actionLabelText": "Kekunci ditekan:",
@@ -2316,7 +2433,10 @@
             "wrongMap": "Salah. Jawapan betul: ",
             "languages": "BAHASA",
             "languageMenuTooltipText": "Tukar bahasa",
-            "aiMistakes": "Kecerdasan buatan boleh membuat kesilapan. Jika anda menjumpai satu, kami akan gembira untuk mendengarnya."
+            "aiMistakes": "Kecerdasan buatan boleh membuat kesilapan. Jika anda menjumpai satu, kami akan gembira untuk mendengarnya.",
+            "kickButton": "tendang",
+            "banButton": "larang",
+            "lobbyBanned": "Anda telah diharamkan dari lobi ini. Halaman akan dimuat semula sekarang."
         }
     },
     "sw": {
@@ -2375,7 +2495,10 @@
             "wrongMap": "Hakuna haja ya kulia.",
             "languages": "SPRACHEN",
             "languageMenuTooltipText": "Zwischen Sprachen wechseln",
-            "aiMistakes": "Hakika si tafsiri ya akili bandia."
+            "aiMistakes": "Hakika si tafsiri ya akili bandia.",
+            "kickButton": "Piga Uondoe!",
+            "banButton": "Zuia kwa Mzuka!",
+            "lobbyBanned": "Samahani! Miungu ya mzaha wameamua wewe ni maarufu mno kwa chumba hiki. Umeondolewa kwa ucheshi – ukurasa utaanzishwa upya kwa raha!"
         },
         "normal": {
             "actionLabelText": "Vifungo vilivyobonyezwa:",
@@ -2432,7 +2555,10 @@
             "wrongMap": "Sio sahihi. Jibu ni: ",
             "languages": "LUGHA",
             "languageMenuTooltipText": "Badilisha lugha",
-            "aiMistakes": "Akili bandia inaweza kufanya makosa. Ukipata moja, tunapenda kuisikia."
+            "aiMistakes": "Akili bandia inaweza kufanya makosa. Ukipata moja, tunapenda kuisikia.",
+            "kickButton": "ondoa",
+            "banButton": "zuia",
+            "lobbyBanned": "Umekatazwa kutoka kwenye chumba hiki. Ukurasa utapakuliwa tena sasa."
         }
     },
     "bn": {
@@ -2491,7 +2617,10 @@
             "wrongMap": "কান্নার কোনো কারণ নেই।",
             "languages": "SPRACHEN",
             "languageMenuTooltipText": "Zwischen Sprachen wechseln",
-            "aiMistakes": "নিশ্চিতভাবে কৃত্রিম বুদ্ধিমত্তা দ্বারা অনুবাদ করা হয়নি।"
+            "aiMistakes": "নিশ্চিতভাবে কৃত্রিম বুদ্ধিমত্তা দ্বারা অনুবাদ করা হয়নি।",
+            "kickButton": "লাথি মেরে দাও!",
+            "banButton": "ব্যান-আউস!",
+            "lobbyBanned": "আরে, তোমাকে এই লবিতে হাস্যকরভাবে বহিষ্কৃত করা হয়েছে। পৃষ্ঠাটি এখন মজার ছলে রিসেট হচ্ছে!"
         },
         "normal": {
             "actionLabelText": "এই কী-বাইন্ডের চাপা বোতাম:",
@@ -2548,7 +2677,10 @@
             "wrongMap": "ভুল মানচিত্র। সঠিকটি ছিল: ",
             "languages": "ভাষা",
             "languageMenuTooltipText": "ভাষা পরিবর্তন করুন",
-            "aiMistakes": "কৃত্রিম বুদ্ধিমত্তা ভুল করতে পারে। যদি আপনি কোনো ভুল পান, আমরা তা জানতে পেরে খুশি হব।"
+            "aiMistakes": "কৃত্রিম বুদ্ধিমত্তা ভুল করতে পারে। যদি আপনি কোনো ভুল পান, আমরা তা জানতে পেরে খুশি হব।",
+            "kickButton": "কিক",
+            "banButton": "ব্যান",
+            "lobbyBanned": "আপনাকে এই লবিতে নিষিদ্ধ করা হয়েছে। পৃষ্ঠা এখন পুনরায় লোড হবে।"
         }
     },
     "lv": {
@@ -2607,7 +2739,10 @@
             "wrongMap": "Nav jāraud.",
             "languages": "SPRACHEN",
             "languageMenuTooltipText": "Zwischen Sprachen wechseln",
-            "aiMistakes": "Noteikti nav tulkots ar mākslīgo intelektu."
+            "aiMistakes": "Noteikti nav tulkots ar mākslīgo intelektu.",
+            "kickButton": "Nomet ar spēku!",
+            "banButton": "Banē ar stilu!",
+            "lobbyBanned": "Ak! Joki dievi ir noteikuši, ka jūs esat pārāk leģendārs šim lobi. Jūs esat izsmieklu pilnībā izraidīts – lapa drīz pārstartēs ar smaidu!"
         },
         "normal": {
             "actionLabelText": "Šī taustiņa nospiestās pogas:",
@@ -2664,7 +2799,10 @@
             "wrongMap": "Nepareiza karte. Pareiza bija: ",
             "languages": "VALODAS",
             "languageMenuTooltipText": "Mainīt valodu",
-            "aiMistakes": "Mākslīgais intelekts var pieļaut kļūdas. Ja atradīsiet kļūdu, mēs būsim priecīgi to zināt."
+            "aiMistakes": "Mākslīgais intelekts var pieļaut kļūdas. Ja atradīsiet kļūdu, mēs būsim priecīgi to zināt.",
+            "kickButton": "izmet",
+            "banButton": "banēt",
+            "lobbyBanned": "Jūs esat bloķēts no šīs telpas. Lapa tagad tiks pārlādēta."
         }
     }
 }
