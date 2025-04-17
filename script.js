@@ -29,7 +29,6 @@ let timeoutId = null;
 let lastLobbyAnimationTime = 0;
 let closingTimeout = null;
 let leaveLobbyButtonClicked = false;
-let menuButtonsClickable = false;
 
 let devSkip = false;
 let devMode = urlParams.get('devMode') || -1;
@@ -1537,14 +1536,8 @@ function createMoreButton() {
         toggleHistory.classList.add('disabled');
     }
 
-    menuButton.addEventListener('mouseover', () => {
-        menuButtonsClickable = true;
-    });
-    menuButton.addEventListener('mouseout', () => {
-        menuButtonsClickable = false;
-    });
     menuButton.addEventListener('click', (event) => {
-        if (menuButtonsClickable) {
+        if (menuButton.getBoundingClientRect().height >= 200) {
             // option actions
             if (event.target.id === 'themeEmoji') {
                 const currentTheme = document.body.getAttribute('data-theme');
@@ -1831,8 +1824,6 @@ function createMoreButton() {
                 localStorage.clear();
                 showCustomAlert(gLS("localStorageCleared"), 1);
             }
-        } else {
-            menuButtonsClickable = true;
         }
     });
 
