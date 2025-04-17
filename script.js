@@ -867,7 +867,7 @@ function playAsMember() {
                     reload = doc.data().reload;
                     startGame(JSON.parse(doc.data().gameArea));
                 } else {
-                    playerListText.innerHTML = '${gLS("playerListText")}<br>${getPlayerNames(doc.data().players || [])}';
+                    playerListText.innerHTML = `${gLS("playerListText")}<br>${getPlayerNames(doc.data().players || [])}`;
                     document.body.appendChild(playerListDiv);
                 }
                 if (reload) {
