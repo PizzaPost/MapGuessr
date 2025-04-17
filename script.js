@@ -650,7 +650,7 @@ function leaveLobby() {
                 closeThisLobby();
             }
             doc.ref.update({ players: updatedPlayers }).then(() => {
-                leaveLobbyButtonClicked=true;
+                leaveLobbyButtonClicked = true;
                 location.reload();
             });
         }
@@ -669,6 +669,20 @@ function joinLobby() {
     lobbyButtonContainer.style.transform = 'translateX(-50%)';
     lobbyButtonContainer.style.zIndex = '9999';
     gameVersionDiv.style.display = 'none';
+    const lobbyCodeDisplay = document.createElement('div');
+    lobbyCodeDisplay.id = 'lobbyCodeDisplay';
+    lobbyCodeDisplay.innerText = `${gLS("lobbyCode")}: ${lobbyName.replace(/./g, '*')}`;
+    lobbyCodeDisplay.onmouseenter = () => {
+        lobbyCodeDisplay.innerText = `${gLS("clickToCopy")}`;
+    };
+    lobbyCodeDisplay.onmouseleave = () => {
+        lobbyCodeDisplay.innerText = `${gLS("lobbyCode")}: ${lobbyName.replace(/./g, '*')}`;
+    };
+    lobbyCodeDisplay.onclick = () => {
+        navigator.clipboard.writeText(lobbyName)
+        showCustomAlert(gLS("lobbyCodeCopied"), 1);
+    };
+    document.body.appendChild(lobbyCodeDisplay);
     leaveLobbyButton = document.createElement('button');
     leaveLobbyButton.id = 'leaveLobbyButton';
     leaveLobbyButton.innerText = gLS("leaveLobbyButtonText");
@@ -792,7 +806,7 @@ function playAsMember() {
         const userInLobby = players.find(player => player.uid === auth.currentUser.uid);
         if (!userInLobby && !leaveLobbyButtonClicked) {
             showCustomAlert(gLS("lobbyKicked"), undefined, [], true);
-            leaveLobbyButtonClicked=false;
+            leaveLobbyButtonClicked = false;
             return;
         }
         setTimeout(() => {

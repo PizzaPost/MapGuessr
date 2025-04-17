@@ -322,7 +322,6 @@ input[type="checkbox"] {
     margin-left: 8px;
 }
 
-/* Scrollbar Styling */
 ::-webkit-scrollbar {
     width: 8px;
 }
@@ -1301,6 +1300,18 @@ button:hover::after {
     border-bottom: 1px solid var(--autocomplete-border);
 }
 
+#lobbyCodeDisplay {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    font-size: 16px;
+    background-color: var(--container-bg);
+    color: var(--text-color);
+    padding: 5px 10px;
+    border-radius: 5px;
+    z-index: 10000;
+}
+
 #lastKeyPressed {
     font-weight: normal;
     color: var(--accent-color);
@@ -1434,7 +1445,8 @@ body,
 #mapSelector,
 #tooltip,
 #custom-alert,
-#credits {
+#credits,
+#lobbyCodeDisplay {
     transition: background 1s ease, color 1s ease, border 1s ease, box-shadow 1s ease;
 }
 
