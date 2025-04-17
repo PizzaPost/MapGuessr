@@ -28,6 +28,7 @@ let lastPressTime = null;
 let timeoutId = null;
 let lastLobbyAnimationTime = 0;
 let closingTimeout = null;
+let leaveLobbyButtonClicked = false;
 
 let devSkip = false;
 let devMode = urlParams.get('devMode') || -1;
@@ -649,6 +650,7 @@ function leaveLobby() {
                 closeThisLobby();
             }
             doc.ref.update({ players: updatedPlayers }).then(() => {
+                leaveLobbyButtonClicked=true;
                 location.reload();
             });
         }
@@ -788,8 +790,9 @@ function playAsMember() {
         }
         const players = doc.data().players || [];
         const userInLobby = players.find(player => player.uid === auth.currentUser.uid);
-        if (!userInLobby) {
+        if (!userInLobby && !leaveLobbyButtonClicked) {
             showCustomAlert(gLS("lobbyKicked"), undefined, [], true);
+            leaveLobbyButtonClicked=false;
             return;
         }
         setTimeout(() => {
