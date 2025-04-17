@@ -29,6 +29,7 @@ let timeoutId = null;
 let lastLobbyAnimationTime = 0;
 let closingTimeout = null;
 let leaveLobbyButtonClicked = false;
+let menuButtonsClickable = false;
 
 let devSkip = false;
 let devMode = urlParams.get('devMode') || -1;
@@ -1536,294 +1537,302 @@ function createMoreButton() {
         toggleHistory.classList.add('disabled');
     }
 
+    menuButton.addEventListener('mouseover', () => {
+        menuButtonsClickable = true;
+    });
+    menuButton.addEventListener('mouseout', () => {
+        menuButtonsClickable = false;
+    });
     menuButton.addEventListener('click', (event) => {
-        // stop running actions on collapsed button (mobile issue)
-        if (menuButton.getBoundingClientRect().height === 40) return;
-        // option actions
-        if (event.target.id === 'themeEmoji') {
-            const currentTheme = document.body.getAttribute('data-theme');
-            if (currentTheme === 'dark') {
-                document.body.removeAttribute('data-theme');
-                localStorage.setItem('theme', 'light');
-            } else {
-                document.body.setAttribute('data-theme', 'dark');
-                localStorage.setItem('theme', 'dark');
-            }
-            updateEmoji();
-            updatePrankImage();
-        }
-        if (event.target.id === 'infoLink') {
-            showCreditMenu()
-        }
-        if (event.target.id === 'languageMenu') {
-            showLanguageMenu();
-        }
-        if (event.target.id === 'keybindMenu') {
-            if (document.getElementById('keybinds')) return;
-
-            // Create overlay
-            const overlay = document.createElement('div');
-            overlay.className = 'keybind-overlay';
-            overlay.addEventListener('click', (event) => { if (!event.target.closest('#keybinds')) { closeKeybindsMenu() } });
-            document.body.appendChild(overlay);
-
-            // Create menu container
-            const keybindMenuBox = document.createElement('div');
-            keybindMenuBox.id = 'keybinds';
-            keybindMenuBox.className = 'keybinds';
-
-            // Add title
-            const title = document.createElement('h2');
-            title.className = 'keybinds-title';
-            title.textContent = gLS("keybindMenuTitleText");
-            keybindMenuBox.appendChild(title);
-
-            // Add explanation
-            const explanation = document.createElement('p');
-            explanation.className = 'keybinds-explanation';
-            explanation.innerHTML = `<strong>Instructions:</strong><br>
-                - <strong>Key:</strong> The key that triggers the action.<br>
-                - <strong>Double Press:</strong> Whether the action requires a double press.<br>
-                - Modify the fields below to customize your keybinds.`;
-            keybindMenuBox.appendChild(explanation);
-
-            // Create keybinds list
-            const keybindsList = document.createElement('div');
-            keybindsList.className = 'keybinds-list';
-
-            keybinds.forEach(([key, elements, doublePress], index) => {
-                const keybindRow = document.createElement('div');
-                keybindRow.className = 'keybind-row';
-
-                // Key input
-                const keybindTextfield = document.createElement('input');
-                keybindTextfield.className = 'keybind-input';
-                keybindTextfield.value = key;
-                keybindTextfield.onkeydown = (e) => {
-                    e.preventDefault();
-                    const key = e.key === ' ' ? 'Space' : e.key;
-                    keybindTextfield.value = key;
-                    keybinds[index][0] = key;
-
-                    // adjust width of textfield
-                    keybindTextfield.style.width = '30px';
-                    if (keybindTextfield.scrollWidth > 30) {
-                        keybindTextfield.style.width = `${keybindTextfield.scrollWidth + 5}px`;
-                    }
-
-                    return false;
-                };
-
-                const slider = document.createElement('div');
-                slider.className = 'lottieContainer';
-
-                const animation = lottie.loadAnimation({
-                    container: slider,
-                    renderer: 'svg',
-                    loop: false,
-                    autoplay: false,
-                    path: 'slider.json'
-                });
-
-                if (keybinds[index][2]) { animation.playSegments([30], true); }
-
-                // State-Variable zum Umschalten der Segmente
-                let playFirstSegment = !keybinds[index][2];
-                slider.addEventListener('click', () => {
-                    if (playFirstSegment) {
-                        animation.playSegments([0, 30], true);
-                        keybinds[index][2] = true;
-                    } else {
-                        animation.playSegments([30, 0], true);
-                        keybinds[index][2] = false;
-                    }
-                    playFirstSegment = !playFirstSegment;
-                });
-
-
-                // Action description
-                const actionDescription = document.createElement('span');
-                actionDescription.className = 'keybind-action';
-                actionDescription.innerHTML = elements
-                    .map(element => {
-                        const el = document.getElementById(element);
-                        return isElementVisible(el) ? `<strong>${el.textContent}</strong>` : element;
-                    })
-                    .join(', ');
-
-                // Create labels
-                const createLabel = (text) => {
-                    const label = document.createElement('span');
-                    label.className = 'keybind-label';
-                    label.textContent = text;
-                    return label;
-                };
-
-                keybindRow.appendChild(createLabel(gLS("actionLabelText")));
-                keybindRow.appendChild(actionDescription);
-                keybindRow.appendChild(createLabel(gLS("keyLabelText")));
-                keybindRow.appendChild(keybindTextfield);
-                keybindRow.appendChild(createLabel(gLS("doublePressLabelText")));
-                keybindRow.appendChild(slider);
-
-                keybindsList.appendChild(keybindRow);
-            });
-
-            keybindMenuBox.appendChild(keybindsList);
-
-            // Exit button
-            const exitMenuButton = document.createElement('button');
-            exitMenuButton.className = 'keybind-exit-btn';
-            exitMenuButton.textContent = gLS("exitMenuButtonText");
-            exitMenuButton.onclick = () => closeKeybindsMenu();
-            function closeKeybindsMenu() {
-                localStorage.setItem('keybinds', JSON.stringify(keybinds));
-                if (prank) {
-                    const menuRect = keybindMenuBox.getBoundingClientRect();
-                    const centerX = menuRect.left + menuRect.width / 2;
-                    const centerY = menuRect.top + menuRect.height / 2;
-
-                    // Create realistic glass fragments
-                    const fragmentCount = 50;
-                    const originalStyles = window.getComputedStyle(keybindMenuBox);
-
-                    // Hide original menu but keep visible for cloning styles
-                    keybindMenuBox.style.opacity = '0';
-                    keybindMenuBox.style.pointerEvents = 'none';
-
-                    for (let i = 0; i < fragmentCount; i++) {
-                        const fragment = document.createElement('div');
-                        fragment.style.cssText = `
-                            position: fixed;
-                        `;
-
-                        // Create irregular polygon shapes
-                        const polygonPoints = Array.from({ length: 5 }, () =>
-                            Math.random() * 100 + '% ' + Math.random() * 100 + '%'
-                        ).join(',');
-
-                        // Clone original menu's appearance
-                        fragment.style.cssText = `
-                            position: fixed;
-                            width: ${Math.random() * 50 + 20}px;
-                            height: ${Math.random() * 50 + 20}px;
-                            background: rgba(255,255,255,0.9);
-                            border: 1px solid rgba(0,0,0,0.2);
-                            box-shadow: 0 0 5px rgba(0,0,0,0.3);
-                            clip-path: polygon(${polygonPoints});
-                            opacity: 0.9;
-                            transform-origin: center;
-                            backface-visibility: hidden;
-                        `;
-
-                        // Random position in menu
-                        fragment.style.left = `${menuRect.left + Math.random() * menuRect.width}px`;
-                        fragment.style.top = `${menuRect.top + Math.random() * menuRect.height}px`;
-
-                        document.body.appendChild(fragment);
-
-                        // Physics parameters
-                        const angle = Math.atan2(
-                            fragment.offsetTop - centerY,
-                            fragment.offsetLeft - centerX
-                        );
-                        const force = Math.random() * 150 + 50;
-                        const rotationX = (Math.random() - 0.5) * 360;
-                        const rotationY = (Math.random() - 0.5) * 360;
-                        const rotationZ = (Math.random() - 0.5) * 720;
-                        const gravity = 980; // px/s²
-
-                        // Animate with Web Animations API for better performance
-                        const animation = fragment.animate([
-                            {
-                                transform: `
-                                    translate(0, 0)
-                                    rotateX(0deg)
-                                    rotateY(0deg)
-                                    rotateZ(0deg)
-                                `,
-                                opacity: 1
-                            },
-                            {
-                                transform: `
-                                    translate(${Math.cos(angle) * force}px, 
-                                            ${Math.sin(angle) * force}px)
-                                    rotateX(${rotationX}deg)
-                                    rotateY(${rotationY}deg)
-                                    rotateZ(${rotationZ}deg)
-                                `,
-                                offset: 0.3,
-                                opacity: 0.8
-                            },
-                            {
-                                transform: `
-                                    translate(${Math.cos(angle) * force * 1.5}px, 
-                                            ${Math.sin(angle) * force + gravity}px)
-                                    rotateX(${rotationX * 2}deg)
-                                    rotateY(${rotationY * 2}deg)
-                                    rotateZ(${rotationZ * 2}deg)
-                                `,
-                                opacity: 0
-                            }
-                        ], {
-                            duration: 2000,
-                            easing: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)',
-                            fill: 'forwards'
-                        });
-
-                        animation.onfinish = () => fragment.remove();
-                    }
-
-                    // Add subtle overlay crack effect
-                    const crackOverlay = document.createElement('div');
-                    crackOverlay.style.cssText = `
-                        position: fixed;
-                        top: ${menuRect.top}px;
-                        left: ${menuRect.left}px;
-                        width: ${menuRect.width}px;
-                        height: ${menuRect.height}px;
-                        pointer-events: none;
-                        background-image: radial-gradient(circle at 50% 50%, 
-                            rgba(0,0,0,0.1) 10%,
-                            rgba(0,0,0,0) 70%);
-                        mix-blend-mode: overlay;
-                    `;
-                    document.body.appendChild(crackOverlay);
-                    crackOverlay.animate([{ opacity: 1 }, { opacity: 0 }],
-                        { duration: 300, fill: 'forwards' }).onfinish = () => crackOverlay.remove();
-
-                    // Remove overlay after animation
-                    const overlayAnimation = overlay.animate([{ opacity: 1 }, { opacity: 0 }],
-                        { duration: 2000, fill: 'forwards' });
-                    setTimeout(() => overlay.remove(), 2000);
+        if (menuButtonsClickable) {
+            // option actions
+            if (event.target.id === 'themeEmoji') {
+                const currentTheme = document.body.getAttribute('data-theme');
+                if (currentTheme === 'dark') {
+                    document.body.removeAttribute('data-theme');
+                    localStorage.setItem('theme', 'light');
                 } else {
-                    overlay.remove();
+                    document.body.setAttribute('data-theme', 'dark');
+                    localStorage.setItem('theme', 'dark');
                 }
-            };
+                updateEmoji();
+                updatePrankImage();
+            }
+            if (event.target.id === 'infoLink') {
+                showCreditMenu()
+            }
+            if (event.target.id === 'languageMenu') {
+                showLanguageMenu();
+            }
+            if (event.target.id === 'keybindMenu') {
+                if (document.getElementById('keybinds')) return;
 
-            keybindMenuBox.appendChild(exitMenuButton);
-            overlay.appendChild(keybindMenuBox);
-        }
-        if (event.target.id === 'toggleHistory') {
-            showHistory = !showHistory;
-            localStorage.setItem('showHistory', showHistory);
-            if (showHistory) {
-                toggleHistory.classList.add('disabled');
-                showCustomAlert(gLS("historyDisabled"), 1);
+                // Create overlay
+                const overlay = document.createElement('div');
+                overlay.className = 'keybind-overlay';
+                overlay.addEventListener('click', (event) => { if (!event.target.closest('#keybinds')) { closeKeybindsMenu() } });
+                document.body.appendChild(overlay);
+
+                // Create menu container
+                const keybindMenuBox = document.createElement('div');
+                keybindMenuBox.id = 'keybinds';
+                keybindMenuBox.className = 'keybinds';
+
+                // Add title
+                const title = document.createElement('h2');
+                title.className = 'keybinds-title';
+                title.textContent = gLS("keybindMenuTitleText");
+                keybindMenuBox.appendChild(title);
+
+                // Add explanation
+                const explanation = document.createElement('p');
+                explanation.className = 'keybinds-explanation';
+                explanation.innerHTML = `<strong>Instructions:</strong><br>
+                    - <strong>Key:</strong> The key that triggers the action.<br>
+                    - <strong>Double Press:</strong> Whether the action requires a double press.<br>
+                    - Modify the fields below to customize your keybinds.`;
+                keybindMenuBox.appendChild(explanation);
+
+                // Create keybinds list
+                const keybindsList = document.createElement('div');
+                keybindsList.className = 'keybinds-list';
+
+                keybinds.forEach(([key, elements, doublePress], index) => {
+                    const keybindRow = document.createElement('div');
+                    keybindRow.className = 'keybind-row';
+
+                    // Key input
+                    const keybindTextfield = document.createElement('input');
+                    keybindTextfield.className = 'keybind-input';
+                    keybindTextfield.value = key;
+                    keybindTextfield.onkeydown = (e) => {
+                        e.preventDefault();
+                        const key = e.key === ' ' ? 'Space' : e.key;
+                        keybindTextfield.value = key;
+                        keybinds[index][0] = key;
+
+                        // adjust width of textfield
+                        keybindTextfield.style.width = '30px';
+                        if (keybindTextfield.scrollWidth > 30) {
+                            keybindTextfield.style.width = `${keybindTextfield.scrollWidth + 5}px`;
+                        }
+
+                        return false;
+                    };
+
+                    const slider = document.createElement('div');
+                    slider.className = 'lottieContainer';
+
+                    const animation = lottie.loadAnimation({
+                        container: slider,
+                        renderer: 'svg',
+                        loop: false,
+                        autoplay: false,
+                        path: 'slider.json'
+                    });
+
+                    if (keybinds[index][2]) { animation.playSegments([30], true); }
+
+                    // State-Variable zum Umschalten der Segmente
+                    let playFirstSegment = !keybinds[index][2];
+                    slider.addEventListener('click', () => {
+                        if (playFirstSegment) {
+                            animation.playSegments([0, 30], true);
+                            keybinds[index][2] = true;
+                        } else {
+                            animation.playSegments([30, 0], true);
+                            keybinds[index][2] = false;
+                        }
+                        playFirstSegment = !playFirstSegment;
+                    });
+
+
+                    // Action description
+                    const actionDescription = document.createElement('span');
+                    actionDescription.className = 'keybind-action';
+                    actionDescription.innerHTML = elements
+                        .map(element => {
+                            const el = document.getElementById(element);
+                            return isElementVisible(el) ? `<strong>${el.textContent}</strong>` : element;
+                        })
+                        .join(', ');
+
+                    // Create labels
+                    const createLabel = (text) => {
+                        const label = document.createElement('span');
+                        label.className = 'keybind-label';
+                        label.textContent = text;
+                        return label;
+                    };
+
+                    keybindRow.appendChild(createLabel(gLS("actionLabelText")));
+                    keybindRow.appendChild(actionDescription);
+                    keybindRow.appendChild(createLabel(gLS("keyLabelText")));
+                    keybindRow.appendChild(keybindTextfield);
+                    keybindRow.appendChild(createLabel(gLS("doublePressLabelText")));
+                    keybindRow.appendChild(slider);
+
+                    keybindsList.appendChild(keybindRow);
+                });
+
+                keybindMenuBox.appendChild(keybindsList);
+
+                // Exit button
+                const exitMenuButton = document.createElement('button');
+                exitMenuButton.className = 'keybind-exit-btn';
+                exitMenuButton.textContent = gLS("exitMenuButtonText");
+                exitMenuButton.onclick = () => closeKeybindsMenu();
+                function closeKeybindsMenu() {
+                    localStorage.setItem('keybinds', JSON.stringify(keybinds));
+                    if (prank) {
+                        const menuRect = keybindMenuBox.getBoundingClientRect();
+                        const centerX = menuRect.left + menuRect.width / 2;
+                        const centerY = menuRect.top + menuRect.height / 2;
+
+                        // Create realistic glass fragments
+                        const fragmentCount = 50;
+                        const originalStyles = window.getComputedStyle(keybindMenuBox);
+
+                        // Hide original menu but keep visible for cloning styles
+                        keybindMenuBox.style.opacity = '0';
+                        keybindMenuBox.style.pointerEvents = 'none';
+
+                        for (let i = 0; i < fragmentCount; i++) {
+                            const fragment = document.createElement('div');
+                            fragment.style.cssText = `
+                                position: fixed;
+                            `;
+
+                            // Create irregular polygon shapes
+                            const polygonPoints = Array.from({ length: 5 }, () =>
+                                Math.random() * 100 + '% ' + Math.random() * 100 + '%'
+                            ).join(',');
+
+                            // Clone original menu's appearance
+                            fragment.style.cssText = `
+                                position: fixed;
+                                width: ${Math.random() * 50 + 20}px;
+                                height: ${Math.random() * 50 + 20}px;
+                                background: rgba(255,255,255,0.9);
+                                border: 1px solid rgba(0,0,0,0.2);
+                                box-shadow: 0 0 5px rgba(0,0,0,0.3);
+                                clip-path: polygon(${polygonPoints});
+                                opacity: 0.9;
+                                transform-origin: center;
+                                backface-visibility: hidden;
+                            `;
+
+                            // Random position in menu
+                            fragment.style.left = `${menuRect.left + Math.random() * menuRect.width}px`;
+                            fragment.style.top = `${menuRect.top + Math.random() * menuRect.height}px`;
+
+                            document.body.appendChild(fragment);
+
+                            // Physics parameters
+                            const angle = Math.atan2(
+                                fragment.offsetTop - centerY,
+                                fragment.offsetLeft - centerX
+                            );
+                            const force = Math.random() * 150 + 50;
+                            const rotationX = (Math.random() - 0.5) * 360;
+                            const rotationY = (Math.random() - 0.5) * 360;
+                            const rotationZ = (Math.random() - 0.5) * 720;
+                            const gravity = 980; // px/s²
+
+                            // Animate with Web Animations API for better performance
+                            const animation = fragment.animate([
+                                {
+                                    transform: `
+                                        translate(0, 0)
+                                        rotateX(0deg)
+                                        rotateY(0deg)
+                                        rotateZ(0deg)
+                                    `,
+                                    opacity: 1
+                                },
+                                {
+                                    transform: `
+                                        translate(${Math.cos(angle) * force}px, 
+                                                ${Math.sin(angle) * force}px)
+                                        rotateX(${rotationX}deg)
+                                        rotateY(${rotationY}deg)
+                                        rotateZ(${rotationZ}deg)
+                                    `,
+                                    offset: 0.3,
+                                    opacity: 0.8
+                                },
+                                {
+                                    transform: `
+                                        translate(${Math.cos(angle) * force * 1.5}px, 
+                                                ${Math.sin(angle) * force + gravity}px)
+                                        rotateX(${rotationX * 2}deg)
+                                        rotateY(${rotationY * 2}deg)
+                                        rotateZ(${rotationZ * 2}deg)
+                                    `,
+                                    opacity: 0
+                                }
+                            ], {
+                                duration: 2000,
+                                easing: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+                                fill: 'forwards'
+                            });
+
+                            animation.onfinish = () => fragment.remove();
+                        }
+
+                        // Add subtle overlay crack effect
+                        const crackOverlay = document.createElement('div');
+                        crackOverlay.style.cssText = `
+                            position: fixed;
+                            top: ${menuRect.top}px;
+                            left: ${menuRect.left}px;
+                            width: ${menuRect.width}px;
+                            height: ${menuRect.height}px;
+                            pointer-events: none;
+                            background-image: radial-gradient(circle at 50% 50%, 
+                                rgba(0,0,0,0.1) 10%,
+                                rgba(0,0,0,0) 70%);
+                            mix-blend-mode: overlay;
+                        `;
+                        document.body.appendChild(crackOverlay);
+                        crackOverlay.animate([{ opacity: 1 }, { opacity: 0 }],
+                            { duration: 300, fill: 'forwards' }).onfinish = () => crackOverlay.remove();
+
+                        // Remove overlay after animation
+                        const overlayAnimation = overlay.animate([{ opacity: 1 }, { opacity: 0 }],
+                            { duration: 2000, fill: 'forwards' });
+                        setTimeout(() => overlay.remove(), 2000);
+                    } else {
+                        overlay.remove();
+                    }
+                };
+
+                keybindMenuBox.appendChild(exitMenuButton);
+                overlay.appendChild(keybindMenuBox);
             }
-            else {
-                toggleHistory.classList.remove('disabled');
-                showCustomAlert(gLS("historyEnabled"), 1);
+            if (event.target.id === 'toggleHistory') {
+                showHistory = !showHistory;
+                localStorage.setItem('showHistory', showHistory);
+                if (showHistory) {
+                    toggleHistory.classList.add('disabled');
+                    showCustomAlert(gLS("historyDisabled"), 1);
+                }
+                else {
+                    toggleHistory.classList.remove('disabled');
+                    showCustomAlert(gLS("historyEnabled"), 1);
+                }
             }
-        }
-        if (event.target.id === 'toggleSelection') {
-            invertSelection = !invertSelection;
-            showCustomAlert(invertSelection ? gLS("selectionInverted") : gLS("selectionNormal"), 1); // TODO: I selected Portal 2 and Subnautica but it didn't invert
-            // TODO: The whole selection thing is broken. I selected Subnautica and presssed toggle but nothing happened.
-        }
-        if (event.target.id === 'localStorageReset') {
-            localStorage.clear();
-            showCustomAlert(gLS("localStorageCleared"), 1);
+            if (event.target.id === 'toggleSelection') {
+                invertSelection = !invertSelection;
+                showCustomAlert(invertSelection ? gLS("selectionInverted") : gLS("selectionNormal"), 1); // TODO: I selected Portal 2 and Subnautica but it didn't invert
+                // TODO: The whole selection thing is broken. I selected Subnautica and presssed toggle but nothing happened.
+            }
+            if (event.target.id === 'localStorageReset') {
+                localStorage.clear();
+                showCustomAlert(gLS("localStorageCleared"), 1);
+            }
+        } else {
+            menuButtonsClickable = true;
         }
     });
 
