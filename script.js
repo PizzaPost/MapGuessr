@@ -716,8 +716,7 @@ function joinLobby() {
             userName = newUserName;
             console.log(`Lobby exists, joining as ${userName}`);
 
-            const bannedPlayers = doc.data().bannedPlayers || [];
-            if (bannedPlayers.includes(auth.currentUser.uid)) {
+            if (doc.data().bannedPlayers?.some(banned => banned.uid === firebase.auth().currentUser?.uid)) {
                 showCustomAlert(gLS("lobbyBanned"), 0, undefined, gameVersionDiv, true);
                 return;
             }
@@ -868,8 +867,7 @@ function playAsMember() {
                     reload = doc.data().reload;
                     startGame(JSON.parse(doc.data().gameArea));
                 } else {
-                    const playerNames = getPlayerNames(doc.data().players);
-                    playerListText.innerHTML = `${gLS("playerListText")}<br>${getPlayerNames(doc.data().players || [])}`;
+                    playerListText.innerHTML = '${gLS("playerListText")}<br>${getPlayerNames(doc.data().players || [])}';
                     document.body.appendChild(playerListDiv);
                 }
                 if (reload) {
@@ -895,8 +893,17 @@ function playAsHost() {
             return;
         }
         const players = doc.data().players || [];
-        const playerNames = getPlayerNames(players);
-        playerListText.innerHTML = `${gLS("playerListText")}<br>${getPlayerNames(doc.data().players || [])}`;
+        const bannedPlayers = doc.data().bannedPlayers || [];
+        const bannedPlayerNames = bannedPlayers.map(banned => banned.name || banned);
+        playerListText.innerHTML = `${gLS('playerListText')}<br>${getPlayerNames(doc.data().players || [])}`;
+        if (bannedPlayerNames.length > 0) {
+            playerListText.innerHTML+='<br>'
+            playerListText.innerHTML+=`${gLS('bannedPlayers')}<br>`
+            bannedPlayerNames.forEach(banned => {
+                playerListText.innerHTML+=`${banned}<br>`
+            });
+        }
+        console.log(playerListText.innerHTML);
         document.body.appendChild(playerListDiv);
         const playerList = document.getElementById('playerList');
         const kickAndBanButtonContainer = document.createElement('span');
@@ -924,7 +931,7 @@ function playAsHost() {
                         players: players.filter(playerElement => playerElement.uid !== player.uid)
                     });
                     doc.ref.update({
-                        bannedPlayers: firebase.firestore.FieldValue.arrayUnion(player.uid)
+                        bannedPlayers: firebase.firestore.FieldValue.arrayUnion({ uid: player.uid, name: player.name })
                     });
                 };
             } else {
