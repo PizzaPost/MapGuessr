@@ -39,7 +39,18 @@ let alertBox;
 let closeButton;
 
 let keybinds = [];
-// Keybinds for the game: "key": [[buttonsToPress], doubleClick: boolean]
+// Keybinds for the game: ["key", [buttonsToPress, ...], doubleClick: boolean]
+let selectButton; let submitButton; let continueButton;
+keybinds.push([" ", ["selectButton", "submitButton", "continueButton"], false]); // single press space to select / submit / continue
+let joinLobbyButton; keybinds.push(["n", ["joinLobbyButton"], false]); // single press n to join any lobby
+let leaveLobbyButton; keybinds.push(["Escape", ["leaveLobbyButton"], false]); // single press escape to leave lobby
+let closeLobbyButton; keybinds.push(["Escape", ["closeLobbyButton"], true]); // double press escape to close lobby
+let giveUpHostButton; keybinds.push(["g", ["giveUpHostButton"], false]); // single press g to give up host position
+let claimHostButton; keybinds.push(["c", ["claimHostButton"], false]); // single press c to claim host position
+let createNewLobbyCode; keybinds.push(["N", ["createNewLobbyCode"], false]); // single press N to create a new lobby
+// default keybinds will be overridden if there are custom ones in localStorage
+keybinds = JSON.parse(localStorage.getItem('keybinds')) || keybinds;
+
 function updatePrankImage() {
     if (prank && localStorage.getItem('theme') === 'light') {
         const image = document.createElement('img');
@@ -61,16 +72,6 @@ function updatePrankImage() {
 }
 
 updatePrankImage();
-let selectButton; let submitButton; let continueButton;
-keybinds.push([" ", ["selectButton", "submitButton", "continueButton"], false]); // single press space to select / submit / continue
-let joinLobbyButton; keybinds.push(["n", ["joinLobbyButton"], false]); // single press n to join any lobby
-let leaveLobbyButton; keybinds.push(["Escape", ["leaveLobbyButton"], false]); // single press escape to leave lobby
-let closeLobbyButton; keybinds.push(["Escape", ["closeLobbyButton"], true]); // double press escape to close lobby
-let giveUpHostButton; keybinds.push(["g", ["giveUpHostButton"], false]); // single press g to give up host position
-let claimHostButton; keybinds.push(["c", ["claimHostButton"], false]); // single press c to claim host position
-let createNewLobbyCode; keybinds.push(["N", ["createNewLobbyCode"], false]); // single press N to create a new lobby
-// default keybinds will be overridden if there are custom ones in localStorage
-keybinds = JSON.parse(localStorage.getItem('keybinds')) || keybinds;
 
 // duplicate names filter regex (replace selected with ""): ("[^,]*?")(?=[\d\D\n]*?\1), *(?=\n* *?")
 const possibleNames = [
@@ -368,6 +369,13 @@ if (showHistory) {
     toggleHistory.classList.add('disabled');
 }
 
+function isMobile() {
+    const toMatch = [/Android/i, /webOS/i, /iPhone/i, /iPod/i, /BlackBerry/i, /Windows Phone/i];
+    return toMatch.some((toMatchItem) => {
+        return navigator.userAgent.match(toMatchItem);
+    });
+}
+
 // Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
@@ -380,13 +388,6 @@ const firebaseConfig = {
     measurementId: "G-DNV45FQ36B"
 };
 
-function isMobile() {
-    const toMatch = [/Android/i, /webOS/i, /iPhone/i, /iPod/i, /BlackBerry/i, /Windows Phone/i];
-    return toMatch.some((toMatchItem) => {
-        return navigator.userAgent.match(toMatchItem);
-    });
-}
-
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 
@@ -398,6 +399,81 @@ const auth = firebase.auth();
 
 auth.signInAnonymously().catch(error => {
     console.error('Authentication failed:', error);
+});
+
+// This will hopefully slowly replace firebase
+class PiWebSocket {
+    constructor() {
+        this.socket = null;
+        this.connectionUrl = this.determineConnectionUrl();
+        this.reconnectInterval = 5000; // 5 seconds
+        this.messageCallbacks = [];
+        this.connect();
+    }
+
+    determineConnectionUrl() {
+        // Use different URLs based on development or production
+        // Development - connect to your Windows PC
+        return 'ws://192.168.178.130:8765'; // use IPv4 from cmd: ipconfig
+        // Production - connect to Raspberry Pi
+        // return 'ws://84.171.121.113:8765'; // TODO
+    }
+
+    connect() {
+        this.socket = new WebSocket(this.connectionUrl);
+
+        this.socket.onopen = () => {
+            console.log('WebSocket connected');
+            this.send({ type: 'connection', status: 'connected' });
+        };
+
+        this.socket.onmessage = (event) => {
+            try {
+                const data = JSON.parse(event.data);
+                this.messageCallbacks.forEach(callback => callback(data));
+            } catch (e) {
+                console.error('Error parsing message:', e);
+            }
+        };
+
+        this.socket.onclose = () => {
+            if (!this.reconnectAttempts) {
+                this.reconnectAttempts = 0;
+            }
+
+            if (this.reconnectAttempts < 3) { // Maximum of 5 reconnect attempts
+                console.log('WebSocket disconnected. Attempting to reconnect... (Attempt ' + (this.reconnectAttempts + 1) + '/5)');
+                this.reconnectAttempts++;
+                setTimeout(() => this.connect(), this.reconnectInterval);
+            } else {
+                console.error('Maximum reconnect attempts reached. Please reload the page to try again.');
+            }
+        }
+
+        this.socket.onerror = (error) => {
+            console.error('WebSocket error:', error);
+        };
+    }
+
+    send(message) {
+        if (this.socket && this.socket.readyState === WebSocket.OPEN) {
+            this.socket.send(JSON.stringify(message));
+        } else {
+            console.error('WebSocket not ready');
+        }
+    }
+
+    onMessage(callback) {
+        this.messageCallbacks.push(callback);
+    }
+}
+
+// Usage example:
+const piSocket = new PiWebSocket();
+
+piSocket.onMessage((data) => {
+    console.log('Received from server:', data);
+    // Update your UI or process the data
 });
 
 function closeAllLobbies() {
@@ -477,8 +553,9 @@ async function loadGameModes() {
     }
 }
 
-function getPlayerNames(players) {
-    let result = '';
+function getPlayerNames(players, doc = null) {
+    console.log(doc !== null);
+    let result = [];
     players.sort((a, b) => b.totalScore - a.totalScore);
     let rank = 1;
     let prevScore = null;
@@ -504,7 +581,45 @@ function getPlayerNames(players) {
             glow = 'none';
         }
 
-        result += `<span style="color:${color}; text-shadow: ${glow};">${player.name} (${player.score.toFixed(0)} / ${player.totalScore.toFixed(0)} / ${player.totalPossibleScore.toFixed(0)})</span><br>`;
+        let playerName = document.createElement('span');
+        playerName.style.color = color;
+        playerName.style.textShadow = glow;
+        playerName.textContent = `${player.name} (${player.score.toFixed(0)} / ${player.totalScore.toFixed(0)} / ${player.totalPossibleScore.toFixed(0)})`;
+        const kickAndBanButtonContainer = document.createElement('span');
+        kickAndBanButtonContainer.id = 'kickAndBanButtonContainer';
+        const kickButton = document.createElement('button');
+        kickButton.className = 'kickButton';
+        kickButton.innerText = gLS("kickButton");
+        const banButton = document.createElement('button');
+        banButton.className = 'banButton';
+        banButton.innerText = gLS("banButton");
+        if (player.uid !== auth.currentUser.uid) {
+            kickButton.onclick = () => {
+                doc.ref.update({
+                    players: players.filter(playerElement => playerElement.uid !== player.uid)
+                });
+            };
+            banButton.onclick = () => {
+                doc.ref.update({
+                    players: players.filter(playerElement => playerElement.uid !== player.uid),
+                    bannedPlayers: firebase.firestore.FieldValue.arrayUnion({ uid: player.uid, name: player.name })
+                });
+            };
+        } else {
+            kickButton.style.display = 'none';
+            banButton.style.display = 'none';
+        }
+        if (doc) {
+            kickAndBanButtonContainer.appendChild(banButton);
+            kickAndBanButtonContainer.appendChild(kickButton);
+        }
+
+        const playerDiv = document.createElement('div');
+        playerDiv.appendChild(playerName);
+        playerDiv.appendChild(kickAndBanButtonContainer);
+        playerDiv.appendChild(document.createElement('br'));
+
+        result.push(playerDiv);
     });
     return result;
 }
@@ -657,9 +772,9 @@ function leaveLobby() {
     });
 }
 
+const lobbyButtonContainer = document.createElement('div');
 function joinLobby() {
     console.log(`Joining lobby: ${lobbyName}`);
-    const lobbyButtonContainer = document.createElement('div');
     lobbyButtonContainer.id = 'lobbyButtonContainer';
     lobbyButtonContainer.style.display = 'flex';
     lobbyButtonContainer.style.gap = '10px';
@@ -756,11 +871,7 @@ function joinLobby() {
                 }
             }).then(() => {
                 loadingDiv.style.display = 'none';
-                if (isHost) {
-                    playAsHost();
-                } else {
-                    playAsMember();
-                }
+                play();
             });
         } else {
             console.log('Lobby does not exist, creating...');
@@ -789,13 +900,13 @@ function joinLobby() {
 
 const playerListDiv = document.createElement('div');
 playerListDiv.id = 'playerList';
-const playerListText = document.createElement('p');
+const playerListText = document.createElement('div');
+playerListText.id = 'playerListText';
 playerListDiv.appendChild(playerListText);
 
-function playAsMember() {
+function play() {
     gameVersionDiv.style.display = 'none';
     lobbyName = lobbyInput.value;
-    claimHostButton = document.createElement('button');
     db.collection('lobbies').doc(lobbyName).onSnapshot(doc => {
         if (!doc.exists) {
             showCustomAlert(gLS("lobbyNonexistent"), undefined, [], true);
@@ -810,182 +921,159 @@ function playAsMember() {
         }
         setTimeout(() => {
             db.collection('lobbies').doc(lobbyName).get().then(doc => {
-                const hostPlayers = doc.data().players.filter(player => player.host);
-                if (hostPlayers.length === 0) {
-                    const wantsHostPlayers = doc.data().players.filter(player => player.wantsHost !== null && player.wantsHost !== undefined);
-                    if (wantsHostPlayers.length > 0) {
-                        const ourPlayer = wantsHostPlayers.find(player => player.name === userName);
-                        if (ourPlayer && wantsHostPlayers.reduce((max, player) => player.wantsHost > max ? player.wantsHost : max, 0) === ourPlayer.wantsHost) {
-                            doc.ref.update({
-                                players: doc.data().players.map(player => {
-                                    if (player.name === userName) {
-                                        player.host = true;
-                                        player.wantsHost = null;
-                                    }
-                                    return player;
-                                })
-                            }).then(() => {
-                                isHost = true;
-                                playAsHost();
-                            });
-                        } else {
-                            doc.ref.update({
-                                players: doc.data().players.map(player => {
-                                    if (player.name === userName) {
-                                        player.wantsHost = null;
-                                    }
-                                    return player;
-                                })
-                            });
-                            isHost = false;
-                        }
+                if (isHost) {
+                    if (claimHostButton) claimHostButton.remove();
+                    const bannedPlayers = doc.data().bannedPlayers || [];
+                    const bannedPlayerNames = bannedPlayers.map(banned => banned.name || banned);
+                    playerListText.innerHTML = "";
+                    const playerListDescriptor = document.createElement('div');
+                    playerListDescriptor.textContent = gLS('playerListText');
+                    playerListText.appendChild(playerListDescriptor);
+                    playerListText.appendChild(document.createElement('br'));
+                    getPlayerNames(doc.data().players || [], doc = doc).forEach(playerDiv => {
+                        playerListText.appendChild(playerDiv);
+                    });
+                    if (bannedPlayerNames.length > 0) {
+                        playerListText.appendChild(document.createElement('br'));
+                        const bannedPlayersDescriptor = document.createElement('div');
+                        bannedPlayersDescriptor.textContent = gLS('bannedPlayers');
+                        playerListText.appendChild(bannedPlayersDescriptor)
+                        playerListText.appendChild(document.createElement('br'));
+                        bannedPlayerNames.forEach(bannedPlayerName => {
+                            const bannedPlayerDiv = document.createElement('div');
+                            bannedPlayerDiv.id = 'bannedPlayerDiv';
+                            const bannedPlayerText = document.createElement('span');
+                            bannedPlayerText.id = 'bannedPlayerText';
+                            bannedPlayerText.style.color = 'red';
+                            bannedPlayerText.textContent = bannedPlayerName;
+                            bannedPlayerDiv.appendChild(bannedPlayerText);
+                            const unbanButton = document.createElement('button');
+                            unbanButton.className = 'unbanButton';
+                            unbanButton.innerText = gLS("unbanButton");
+                            unbanButton.onclick = () => {
+                                doc.ref.update({
+                                    bannedPlayers: doc.data().bannedPlayers.filter(banned => banned.name !== bannedPlayerName)
+                                });
+                            };
+                            bannedPlayerDiv.appendChild(unbanButton);
+                            playerListText.appendChild(bannedPlayerDiv);
+                        });
                     }
-                    claimHostButton.id = 'claimHostButton';
-                    claimHostButton.innerText = gLS("claimHostButtonText");
-                    claimHostButton.style.cursor = 'pointer';
-                    claimHostButton.onclick = () => {
-                        doc.ref.update({
-                            players: doc.data().players.map(player => {
-                                if (player.name === userName) {
-                                    player.wantsHost = Math.random();
-                                }
-                                return player;
-                            })
+                    document.body.appendChild(playerListDiv);
+
+
+                    closeLobbyButton = document.createElement('button');
+                    giveUpHostButton = document.createElement('button');
+                    giveUpHostButton.id = 'giveUpHostButton';
+                    giveUpHostButton.innerText = gLS("giveUpHostButtonText");
+                    giveUpHostButton.onclick = () => {
+                        db.collection('lobbies').doc(lobbyName).get().then(doc => {
+                            if (doc.exists) {
+                                doc.ref.update({
+                                    players: doc.data().players.map(player => {
+                                        if (player.uid === auth.currentUser.uid) {
+                                            player.host = false;
+                                        }
+                                        return player;
+                                    })
+                                });
+                                giveUpHostButton.remove();
+                                closeLobbyButton.remove();
+                                gameModeSelector.style.display = 'none';
+                                isHost = false;
+                            }
                         });
                     };
-                    const lobbyButtonContainer = document.getElementById('lobbyButtonContainer');
-                    lobbyButtonContainer.appendChild(claimHostButton);
+                    closeLobbyButton.id = 'closeLobbyButton';
+                    closeLobbyButton.innerText = gLS("closeLobbyButtonText");
+                    closeLobbyButton.onclick = () => {
+                        closeLobbyButton.disabled = true;
+                        closeLobbyButton.style.cursor = 'not-allowed';
+                        closeThisLobby();
+                    };
+                    lobbyButtonContainer.appendChild(closeLobbyButton);
+                    lobbyButtonContainer.appendChild(giveUpHostButton);
+                    if (doc.data().hasOwnProperty('gameStarted')) {
+                        gameStarted = doc.data().gameStarted;
+                    }
+                    if (!gameStarted) {
+                        startGameModeSelector();
+                    }
                 } else {
-                    const claimHostButton = document.getElementById('claimHostButton');
-                    if (claimHostButton) {
-                        claimHostButton.remove();
+                    if (closeLobbyButton) closeLobbyButton.remove();
+                    if (giveUpHostButton) giveUpHostButton.remove();
+                    if (claimHostButton) { claimHostButton.remove(); }
+                    claimHostButton = document.createElement('button');
+                    const hostPlayers = doc.data().players.filter(player => player.host);
+                    if (hostPlayers.length === 0) {
+                        const wantsHostPlayers = doc.data().players.filter(player => player.wantsHost !== null && player.wantsHost !== undefined);
+                        if (wantsHostPlayers.length > 0) {
+                            const ourPlayer = wantsHostPlayers.find(player => player.name === userName);
+                            if (ourPlayer && wantsHostPlayers.reduce((max, player) => player.wantsHost > max ? player.wantsHost : max, 0) === ourPlayer.wantsHost) {
+                                doc.ref.update({
+                                    players: doc.data().players.map(player => {
+                                        if (player.name === userName) {
+                                            player.host = true;
+                                            player.wantsHost = null;
+                                        }
+                                        return player;
+                                    })
+                                }).then(() => {
+                                    isHost = true;
+                                });
+                            } else {
+                                doc.ref.update({
+                                    players: doc.data().players.map(player => {
+                                        if (player.name === userName) {
+                                            player.wantsHost = null;
+                                        }
+                                        return player;
+                                    })
+                                });
+                                isHost = false;
+                            }
+                            if (claimHostButton) claimHostButton.remove();
+                        } else {
+                            lobbyButtonContainer.appendChild(claimHostButton);
+                        }
+                        claimHostButton.id = 'claimHostButton';
+                        claimHostButton.innerText = gLS("claimHostButtonText");
+                        claimHostButton.style.cursor = 'pointer';
+                        claimHostButton.onclick = () => {
+                            doc.ref.update({
+                                players: doc.data().players.map(player => {
+                                    if (player.name === userName) {
+                                        player.wantsHost = Math.random();
+                                    }
+                                    return player;
+                                })
+                            });
+                        };
+                    } else {
+                        if (claimHostButton) { claimHostButton.remove(); }
+                    }
+                    if (doc.data().gameStarted && syncRandomImage != doc.data().randomImage) {
+                        syncActualMap = doc.data().actualMap;
+                        syncRandomImage = doc.data().randomImage;
+                        reload = doc.data().reload;
+                        startGame(JSON.parse(doc.data().gameArea));
+                    } else {
+                        playerListText.innerHTML = "";
+                        const playerListDescriptor = document.createElement('span');
+                        playerListDescriptor.textContent = gLS("playerListText");
+                        playerListText.appendChild(playerListDescriptor);
+                        playerListText.appendChild(document.createElement('br'));
+                        getPlayerNames(doc.data().players || []).forEach(playerDiv => {
+                            playerListText.appendChild(playerDiv);
+                        });
+                        document.body.appendChild(playerListDiv);
+                    }
+                    if (reload) {
+                        location.reload();
                     }
                 }
-                if (doc.data().gameStarted && syncRandomImage != doc.data().randomImage) {
-                    syncActualMap = doc.data().actualMap;
-                    syncRandomImage = doc.data().randomImage;
-                    reload = doc.data().reload;
-                    startGame(JSON.parse(doc.data().gameArea));
-                } else {
-                    playerListText.innerHTML = `${gLS("playerListText")}<br>${getPlayerNames(doc.data().players || [])}`;
-                    document.body.appendChild(playerListDiv);
-                }
-                if (reload) {
-                    location.reload();
-                }
             });
-        }, 1000); // IMPORTANT: gives the server some time to transfer the data
-    });
-}
-
-function playAsHost() {
-    gameVersionDiv.style.display = 'none';
-    const lobbyButtonContainer = document.getElementById('lobbyButtonContainer');
-    const existingCloseLobbyButton = document.getElementById('closeLobbyButton');
-    if (existingCloseLobbyButton) existingCloseLobbyButton.remove();
-    const existingGiveUpHostButton = document.getElementById('giveUpHostButton');
-    if (existingGiveUpHostButton) existingGiveUpHostButton.remove();
-    const claimHostButton = document.getElementById('claimHostButton');
-    if (claimHostButton) claimHostButton.remove();
-    db.collection('lobbies').doc(lobbyName).onSnapshot(doc => {
-        if (!doc.exists) {
-            showCustomAlert(gLS("lobbyNonexistent"), undefined, [], true);
-            return;
-        }
-        const players = doc.data().players || [];
-        const bannedPlayers = doc.data().bannedPlayers || [];
-        const bannedPlayerNames = bannedPlayers.map(banned => banned.name || banned);
-        playerListText.innerHTML = `${gLS('playerListText')}<br>${getPlayerNames(doc.data().players || [])}`;
-        if (bannedPlayerNames.length > 0) {
-            playerListText.innerHTML+='<br>'
-            playerListText.innerHTML+=`${gLS('bannedPlayers')}<br>`
-            bannedPlayerNames.forEach(banned => {
-                playerListText.innerHTML+=`${banned}<br>`
-            });
-        }
-        console.log(playerListText.innerHTML);
-        document.body.appendChild(playerListDiv);
-        const playerList = document.getElementById('playerList');
-        const kickAndBanButtonContainer = document.createElement('span');
-        kickAndBanButtonContainer.id = 'kickAndBanButtonContainer';
-        playerList.appendChild(kickAndBanButtonContainer);
-        playerList.innerHTML = '';
-        players.forEach(player => {
-            const playerDiv = document.createElement('div');
-            playerDiv.className = 'playerListDiv';
-            const kickButton = document.createElement('button');
-            kickButton.className = 'kickButton';
-            kickButton.innerText = gLS("kickButton");
-
-            const banButton = document.createElement('button');
-            banButton.className = 'banButton';
-            banButton.innerText = gLS("banButton");
-            if (player.uid !== auth.currentUser.uid) {
-                kickButton.onclick = () => {
-                    doc.ref.update({
-                        players: players.filter(playerElement => playerElement.uid !== player.uid)
-                    });
-                };
-                banButton.onclick = () => {
-                    doc.ref.update({
-                        players: players.filter(playerElement => playerElement.uid !== player.uid)
-                    });
-                    doc.ref.update({
-                        bannedPlayers: firebase.firestore.FieldValue.arrayUnion({ uid: player.uid, name: player.name })
-                    });
-                };
-            } else {
-                kickButton.style.display = 'none';
-                banButton.style.display = 'none';
-            }
-            playerDiv.appendChild(banButton);
-            playerDiv.appendChild(kickButton);
-            playerDiv.appendChild(document.createTextNode(player.name));
-            playerList.appendChild(playerDiv);
-        });
-    });
-    closeLobbyButton = document.createElement('button');
-    giveUpHostButton = document.createElement('button');
-    giveUpHostButton.id = 'giveUpHostButton';
-    giveUpHostButton.innerText = gLS("giveUpHostButtonText");
-    giveUpHostButton.onclick = () => {
-        db.collection('lobbies').doc(lobbyName).get().then(doc => {
-            if (doc.exists) {
-                doc.ref.update({
-                    players: doc.data().players.map(player => {
-                        if (player.uid === auth.currentUser.uid) {
-                            player.host = false;
-                        }
-                        return player;
-                    })
-                });
-                giveUpHostButton.remove();
-                closeLobbyButton.remove();
-                gameModeSelector.style.display = 'none';
-                isHost = false;
-                playAsMember();
-            }
-        });
-    };
-    closeLobbyButton.id = 'closeLobbyButton';
-    closeLobbyButton.innerText = gLS("closeLobbyButtonText");
-    closeLobbyButton.onclick = () => {
-        closeLobbyButton.disabled = true;
-        closeLobbyButton.style.cursor = 'not-allowed';
-        closeThisLobby();
-    };
-    lobbyButtonContainer.appendChild(closeLobbyButton);
-    lobbyButtonContainer.appendChild(giveUpHostButton);
-
-    isHost = true;
-
-    db.collection('lobbies').doc(lobbyName).get().then(doc => {
-        if (doc.data().hasOwnProperty('gameStarted')) {
-            gameStarted = doc.data().gameStarted;
-        }
-        if (!gameStarted) {
-            startGameModeSelector();
-        }
+        }, isHost ? 0 : 1000); // IMPORTANT: gives the server some time to transfer the data
     });
 }
 
