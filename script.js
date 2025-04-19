@@ -406,20 +406,25 @@ class PiWebSocket {
     constructor() {
         this.socket = null;
         this.connectionUrl = this.determineConnectionUrl();
-        this.reconnectInterval = 5000; // 5 seconds
+        this.reconnectInterval = 3000; // 3 seconds
         this.messageCallbacks = [];
         this.connect();
     }
 
+    setConnectionUrl(url) {
+        localStorage.setItem('serverUrl', url);
+        this.connectionUrl = url;
+    }
+
     determineConnectionUrl() {
-        if (localStorage.getItem('serverUrl')) {
-            return localStorage.getItem('serverUrl');
-        }
+        // if (localStorage.getItem('serverUrl')) {
+        //     return localStorage.getItem('serverUrl');
+        // }
         // Use different URLs based on development or production
         // Development - connect to your Windows PC
-        return 'ws://192.168.178.130:8765'; // use IPv4 from cmd: ipconfig
+        // return 'ws://192.168.178.130:8765'; // use IPv4 from cmd: ipconfig
         // Production - connect to Raspberry Pi
-        // return 'ws://84.171.121.113:8765'; // TODO
+        return 'wss://s1rv1v4l.myftp.org:8765';
     }
 
     connect() {
@@ -444,7 +449,7 @@ class PiWebSocket {
                 this.reconnectAttempts = 0;
             }
 
-            if (this.reconnectAttempts < 3) { // Maximum of 5 reconnect attempts
+            if (true) { // this.reconnectAttempts < 3) { // Maximum of 5 reconnect attempts
                 console.log('WebSocket disconnected. Attempting to reconnect... (Attempt ' + (this.reconnectAttempts + 1) + '/5)');
                 this.reconnectAttempts++;
                 setTimeout(() => this.connect(), this.reconnectInterval);
@@ -891,7 +896,8 @@ function joinLobby() {
                 }]
             }).then(() => {
                 loadingDiv.style.display = 'none';
-                playAsHost();
+                isHost = true;
+                play();
             });
         }
     }).catch(error => {
