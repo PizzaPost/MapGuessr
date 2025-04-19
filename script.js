@@ -412,6 +412,9 @@ class PiWebSocket {
     }
 
     determineConnectionUrl() {
+        if (localStorage.getItem('serverUrl')) {
+            return localStorage.getItem('serverUrl');
+        }
         // Use different URLs based on development or production
         // Development - connect to your Windows PC
         return 'ws://192.168.178.130:8765'; // use IPv4 from cmd: ipconfig
@@ -468,13 +471,13 @@ class PiWebSocket {
     }
 }
 
-// Usage example:
-const piSocket = new PiWebSocket();
+// // Usage example:
+// const piSocket = new PiWebSocket();
 
-piSocket.onMessage((data) => {
-    console.log('Received from server:', data);
-    // Update your UI or process the data
-});
+// piSocket.onMessage((data) => {
+//     console.log('Received from server:', data);
+//     // Update your UI or process the data
+// });
 
 function closeAllLobbies() {
     db.collection('lobbies').get().then(querySnapshot => {
