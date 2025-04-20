@@ -58,7 +58,12 @@
             "aiMistakes": "Definitely not AI translated.",
             "kickButton": "Boot 'em!",
             "banButton": "Ban-o-rama!",
-            "lobbyBanned": "Oh no! The gods have declared you too legendary for this lobby. You're hilariously exiled – the page is about to reload!"
+            "lobbyBanned": "Oh no! The gods have declared you too legendary for this lobby. You're hilariously exiled – the page is about to reload!",
+            "bannedPlayers": "Cool Players:",
+            "lobbyCode": "Wanted level:",
+            "clickToCopy": "Rotate Display to Copy",
+            "lobbyCodeCopied": "Don't leak it now!",
+            "unbanButton": "Unban-o-rama!"
         },
         "normal": {
             "actionLabelText": "Buttons pressed by this keybind:",
@@ -118,7 +123,12 @@
             "aiMistakes": "Artificial intelligence can make mistakes. If you find one, we'd love to hear about it.",
             "kickButton": "kick",
             "banButton": "ban",
-            "lobbyBanned": "You have been banned from this lobby. The page will reload now."
+            "lobbyBanned": "You have been banned from this lobby. The page will reload now.",
+            "bannedPlayers": "Banned Players:",
+            "lobbyCode": "Lobbycode",
+            "clickToCopy": "Click to Copy",
+            "lobbyCodeCopied": "Lobbycode copied successfully.",
+            "unbanButton": "unban"
         }
     },
     "de": {
@@ -180,7 +190,12 @@
             "aiMistakes": "Auf keinen Fall von künstlicher Intelligenz übersetzt.",
             "kickButton": "Stiefel drauf!",
             "banButton": "Verbanne dich!",
-            "lobbyBanned": "Oh nein! Die Götter haben entschieden, dass du zu legendär für dieses Lobby bist. Du bist verbannt – die Seite lädt neu!"
+            "lobbyBanned": "Oh nein! Die Götter haben entschieden, dass du zu legendär für dieses Lobby bist. Du bist verbannt – die Seite lädt neu!",
+            "bannedPlayers": "Coole Spieler:",
+            "lobbyCode": "Gewünschtes Level:",
+            "clickToCopy": "Display drehen zum Kopieren",
+            "lobbyCodeCopied": "Lass es jetzt nicht durchsickern!",
+            "unbanButton": "Unban-o-rama!"
         },
         "normal": {
             "actionLabelText": "Von diesem Kurzbefehl gedrückte Knöpfe:",
@@ -240,7 +255,12 @@
             "aiMistakes": "Künstliche Intelligenz kann Fehler machen. Wenn Sie einen finden, würden wir uns freuen, davon zu hören.",
             "kickButton": "kicken",
             "banButton": "bannen",
-            "lobbyBanned": "Sie wurden aus dieser Gruppe gebannt. Die Seite wird nun neu laden."
+            "lobbyBanned": "Sie wurden aus dieser Gruppe gebannt. Die Seite wird nun neu laden.",
+            "bannedPlayers": "Gesperrte Spieler:",
+            "lobbyCode": "Lobbycode",
+            "clickToCopy": "Klicken zum Kopieren",
+            "lobbyCodeCopied": "Lobbycode erfolgreich kopiert.",
+            "unbanButton": "Entsperren"
         }
     },
     "fr": {
@@ -302,7 +322,12 @@
             "aiMistakes": "Définitivement pas traduit par intelligence artificielle.",
             "kickButton": "Frappe-le!",
             "banButton": "Bannir en folie!",
-            "lobbyBanned": "Oh là là ! Les dieux de la farce ont décidé que tu es trop légendaire pour ce lobby. Tu es exilé avec humour – la page va se recharger avec une touche de malice!"
+            "lobbyBanned": "Oh là là ! Les dieux de la farce ont décidé que tu es trop légendaire pour ce lobby. Tu es exilé avec humour – la page va se recharger avec une touche de malice!",
+            "bannedPlayers": "Cool Players :",
+            "lobbyCode": "Niveau recherché :",
+            "clickToCopy": "Faire pivoter l'affichage pour copier",
+            "lobbyCodeCopied": "Ne le divulguez pas maintenant !",
+            "unbanButton": "Unban-o-rama !"
         },
         "normal": {
             "actionLabelText": "Boutons activés par ce raccourci :",
@@ -362,7 +387,12 @@
             "aiMistakes": "L'intelligence artificielle peut faire des erreurs. Si vous en trouvez une, nous serions ravis d'en être informés.",
             "kickButton": "virer",
             "banButton": "bannir",
-            "lobbyBanned": "Vous avez été banni de ce lobby. La page va maintenant se recharger."
+            "lobbyBanned": "Vous avez été banni de ce lobby. La page va maintenant se recharger.",
+            "bannedPlayers": "Joueurs interdits :",
+            "lobbyCode": "Lobbycode",
+            "clickToCopy": "Cliquez pour copier",
+            "lobbyCodeCopied": "Lobbycode copié avec succès.",
+            "unbanButton": "Débloquer"
         }
     },
     "es": {
@@ -424,7 +454,12 @@
             "aiMistakes": "Definitivamente no traducido por inteligencia artificial.",
             "kickButton": "¡PateaYa!",
             "banButton": "¡Banearón!",
-            "lobbyBanned": "¡Oh no! Los dioses de las bromas han decretado que eres demasiado legendario para este lobby. Estás hilarantemente desterrado; ¡la página se recargará con un giro de humor!"
+            "lobbyBanned": "¡Oh no! Los dioses de las bromas han decretado que eres demasiado legendario para este lobby. Estás hilarantemente desterrado; ¡la página se recargará con un giro de humor!",
+            "bannedPlayers": "Jugadores geniales:",
+            "lobbyCode": "Nivel deseado:",
+            "clickToCopy": "Girar pantalla para copiar",
+            "lobbyCodeCopied": "¡No lo pierdas ahora!",
+            "unbanButton": "¡Unban-o-rama!"
         },
         "normal": {
             "actionLabelText": "Botones pulsados por este atajo:",
@@ -484,7 +519,12 @@
             "aiMistakes": "La inteligencia artificial puede cometer errores. Si encuentras uno, nos encantaría saberlo.",
             "kickButton": "expulsar",
             "banButton": "banear",
-            "lobbyBanned": "Has sido baneado de este lobby. La página se recargará ahora."
+            "lobbyBanned": "Has sido baneado de este lobby. La página se recargará ahora.",
+            "bannedPlayers": "Jugadores prohibidos",
+            "lobbyCode": "Lobbycode",
+            "clickToCopy": "Haz clic para copiar",
+            "lobbyCodeCopied": "Lobbycode copiado correctamente.",
+            "unbanButton": "آنبن"
         }
     },
     "ja": {
@@ -546,7 +586,12 @@
             "aiMistakes": "決して人工知能によって翻訳されたものではありません。",
             "kickButton": "蹴っ飛ばせ！",
             "banButton": "バン・オ・ラマ！",
-            "lobbyBanned": "あらら！いたずらの神々があなたをこのロビーには伝説的すぎると宣言しました。ユーモラスに追放されたので、ページがひねりと共に再読み込みされます！"
+            "lobbyBanned": "あらら！いたずらの神々があなたをこのロビーには伝説的すぎると宣言しました。ユーモラスに追放されたので、ページがひねりと共に再読み込みされます！",
+            "bannedPlayers": "クールなプレイヤー：",
+            "lobbyCode": "指名手配レベル：",
+            "clickToCopy": "コピーするディスプレイを回転",
+            "lobbyCodeCopied": "今すぐ漏らさないでください！",
+            "unbanButton": "アンバン・オ・ラマ！"
         },
         "normal": {
             "actionLabelText": "このショートカットで押されるボタン:",
@@ -606,7 +651,12 @@
             "aiMistakes": "人工知能は間違いを犯すことがあります。もし見つけたら、ぜひお知らせください。",
             "kickButton": "キック",
             "banButton": "バン",
-            "lobbyBanned": "このロビーからBANされています。ページは今すぐ再読み込みされます。"
+            "lobbyBanned": "このロビーからBANされています。ページは今すぐ再読み込みされます。",
+            "bannedPlayers": "禁止されたプレーヤー",
+            "lobbyCode": "ロビーコード",
+            "clickToCopy": "クリックしてコピー",
+            "lobbyCodeCopied": "ロビーコードが正常にコピーされました。",
+            "unbanButton": "同時"
         }
     },
     "zh": {
@@ -668,7 +718,12 @@
             "aiMistakes": "绝对不是由人工智能翻译的。",
             "kickButton": "踢他走！",
             "banButton": "封禁狂潮！",
-            "lobbyBanned": "糟糕！恶作剧之神宣布你太传奇，无法容纳于此大厅。你已被幽默地驱逐——页面即将以搞笑的方式重新加载！"
+            "lobbyBanned": "糟糕！恶作剧之神宣布你太传奇，无法容纳于此大厅。你已被幽默地驱逐——页面即将以搞笑的方式重新加载！",
+            "bannedPlayers": "酷玩家：",
+            "lobbyCode": "通缉等级",
+            "clickToCopy": "旋转显示以复制",
+            "lobbyCodeCopied": "现在不要泄露！",
+            "unbanButton": "Unban-o-rama ！"
         },
         "normal": {
             "actionLabelText": "此快捷键按下的按钮:",
@@ -728,7 +783,12 @@
             "aiMistakes": "人工智能可能会出错。如果你发现了，我们非常乐意听取反馈。",
             "kickButton": "踢出",
             "banButton": "封禁",
-            "lobbyBanned": "您已被禁止进入此大厅。页面将立即重新加载。"
+            "lobbyBanned": "您已被禁止进入此大厅。页面将立即重新加载。",
+            "bannedPlayers": "被封禁的玩家：",
+            "lobbyCode": "大堂密码",
+            "clickToCopy": "点击来复制",
+            "lobbyCodeCopied": "大厅代码复制成功。",
+            "unbanButton": "不再屏蔽"
         }
     },
     "ru": {
@@ -790,7 +850,12 @@
             "aiMistakes": "Определённо не переведено искусственным интеллектом.",
             "kickButton": "Ударь ногой!",
             "banButton": "Банфест!",
-            "lobbyBanned": "О, нет! Боги шуток решили, что вы слишком легендарны для этого лобби. Вы забанены с юмором – страница сейчас перезагрузится с изюминкой!"
+            "lobbyBanned": "О, нет! Боги шуток решили, что вы слишком легендарны для этого лобби. Вы забанены с юмором – страница сейчас перезагрузится с изюминкой!",
+            "bannedPlayers": "Крутые игроки:",
+            "lobbyCode": "Требуемый уровень:",
+            "clickToCopy": "Повернуть дисплей для копирования",
+            "lobbyCodeCopied": "Не сливайте его сейчас!",
+            "unbanButton": "Unban-o-rama!"
         },
         "normal": {
             "actionLabelText": "Кнопки этого сочетания:",
@@ -850,7 +915,12 @@
             "aiMistakes": "Искусственный интеллект может совершать ошибки. Если вы обнаружите ошибку, нам будет приятно об этом узнать.",
             "kickButton": "кикнуть",
             "banButton": "бан",
-            "lobbyBanned": "Вы были забанены в этом лобби. Страница будет перезагружена."
+            "lobbyBanned": "Вы были забанены в этом лобби. Страница будет перезагружена.",
+            "bannedPlayers": "Забаненные игроки",
+            "lobbyCode": "Код лобби",
+            "clickToCopy": "Нажмите, чтобы скопировать",
+            "lobbyCodeCopied": "Код лобби успешно скопирован.",
+            "unbanButton": "unban"
         }
     },
     "ar": {
@@ -912,7 +982,12 @@
             "aiMistakes": "ليس مترجمًا بواسطة الذكاء الاصطناعي على الإطلاق.",
             "kickButton": "اركلهم!",
             "banButton": "فرض الحظر!",
-            "lobbyBanned": "يا للهول! آلهة المقالب أعلنت أنك أسطوري جدًا لهذه الغرفة. لقد تم نفيك بطريقة فكاهية – الصفحة ستُعيد التحميل بلمسة من المرح!"
+            "lobbyBanned": "يا للهول! آلهة المقالب أعلنت أنك أسطوري جدًا لهذه الغرفة. لقد تم نفيك بطريقة فكاهية – الصفحة ستُعيد التحميل بلمسة من المرح!",
+            "bannedPlayers": "لاعبون رائعون:",
+            "lobbyCode": "المستوى المطلوب:",
+            "clickToCopy": "تدوير العرض للنسخ",
+            "lobbyCodeCopied": "لا تقم بتسريبه الآن!",
+            "unbanButton": "Unban - o - rama!"
         },
         "normal": {
             "actionLabelText": "أزرار هذا الاختصار:",
@@ -972,7 +1047,12 @@
             "aiMistakes": "يمكن للذكاء الاصطناعي أن يرتكب أخطاء. إذا وجدت خطأً، سنكون سعداء لسماع رأيك.",
             "kickButton": "طرد",
             "banButton": "حظر",
-            "lobbyBanned": "لقد تم حظرك من هذه الغرفة. ستُعاد تحميل الصفحة الآن."
+            "lobbyBanned": "لقد تم حظرك من هذه الغرفة. ستُعاد تحميل الصفحة الآن.",
+            "bannedPlayers": "اللاعبون المحظورون:",
+            "lobbyCode": "رمز اللوبي",
+            "clickToCopy": "انقر للنسخ",
+            "lobbyCodeCopied": "تم نسخ رمز الردهة بنجاح.",
+            "unbanButton": "الغاء حظر المستخدم"
         }
     },
     "pt": {
@@ -1034,7 +1114,12 @@
             "aiMistakes": "Definitivamente não traduzido por inteligência artificial.",
             "kickButton": "Chuta Fora!",
             "banButton": "BanaFest!",
-            "lobbyBanned": "Oh não! Os deuses das brincadeiras decretaram que você é lendário demais para este lobby. Você foi banido de forma hilária – a página vai recarregar com um toque de maluquice!"
+            "lobbyBanned": "Oh não! Os deuses das brincadeiras decretaram que você é lendário demais para este lobby. Você foi banido de forma hilária – a página vai recarregar com um toque de maluquice!",
+            "bannedPlayers": "Cool Players:",
+            "lobbyCode": "Nível desejado:",
+            "clickToCopy": "Girar o visor para copiar",
+            "lobbyCodeCopied": "Não vaze agora!",
+            "unbanButton": "Unban-o-rama!"
         },
         "normal": {
             "actionLabelText": "Botões pressionados por este atalho:",
@@ -1094,7 +1179,12 @@
             "aiMistakes": "A inteligência artificial pode cometer erros. Se você encontrar algum, adoraríamos saber.",
             "kickButton": "expulsar",
             "banButton": "banir",
-            "lobbyBanned": "Você foi banido deste lobby. A página será recarregada agora."
+            "lobbyBanned": "Você foi banido deste lobby. A página será recarregada agora.",
+            "bannedPlayers": "Jogadores Banidos:",
+            "lobbyCode": "Lobbycode",
+            "clickToCopy": "Clique para copiar",
+            "lobbyCodeCopied": "Lobbycode copiado com sucesso.",
+            "unbanButton": "Retirar"
         }
     },
     "hi": {
@@ -1156,7 +1246,12 @@
             "aiMistakes": "बिल्कुल भी कृत्रिम बुद्धिमत्ता द्वारा अनुवादित नहीं।",
             "kickButton": "लात मारो!",
             "banButton": "बैनगो!",
-            "lobbyBanned": "अरे, शरारती देवताओं ने कहा कि आप इस लॉबी के लिए बहुत दिग्गज हैं। आपको हंसी-मजाक में बहिष्कृत कर दिया गया है – पृष्ठ अब मस्ती के साथ रीलोड हो रहा है!"
+            "lobbyBanned": "अरे, शरारती देवताओं ने कहा कि आप इस लॉबी के लिए बहुत दिग्गज हैं। आपको हंसी-मजाक में बहिष्कृत कर दिया गया है – पृष्ठ अब मस्ती के साथ रीलोड हो रहा है!",
+            "bannedPlayers": "कूल प्लेयर्स:",
+            "lobbyCode": "वांछित स्तर:",
+            "clickToCopy": "डिस्प्ले को कॉपी करने के लिए घुमाएँ",
+            "lobbyCodeCopied": "इसे अभी लीक न करें!",
+            "unbanButton": "अनबन - ओ - रामा!"
         },
         "normal": {
             "actionLabelText": "इस शॉर्टकट के बटन:",
@@ -1216,7 +1311,12 @@
             "aiMistakes": "कृत्रिम बुद्धिमत्ता से गलतियाँ हो सकती हैं। यदि आप कोई गलती पाते हैं, तो हमें बताने में खुशी होगी।",
             "kickButton": "किक",
             "banButton": "बैन",
-            "lobbyBanned": "आपको इस लॉबी से प्रतिबंधित कर दिया गया है। पृष्ठ अब फिर से लोड होगा।"
+            "lobbyBanned": "आपको इस लॉबी से प्रतिबंधित कर दिया गया है। पृष्ठ अब फिर से लोड होगा।",
+            "bannedPlayers": "प्रतिबंधित खिलाड़ी:",
+            "lobbyCode": "लॉबीकोड",
+            "clickToCopy": "कॉपी करने के लिए क्लिक करें",
+            "lobbyCodeCopied": "लॉबीकोड सफलतापूर्वक कॉपी किया गया।",
+            "unbanButton": "अप्रतिबंधित करें"
         }
     },
     "it": {
@@ -1278,7 +1378,12 @@
             "aiMistakes": "Decisamente non tradotto dall'intelligenza artificiale.",
             "kickButton": "Dai via il calcio!",
             "banButton": "Bandisci con stile!",
-            "lobbyBanned": "Oh no! Gli dei degli scherzi hanno deciso che sei troppo leggendario per questa lobby. Sei esiliato in maniera esilarante – la pagina si ricaricherà con un tocco di follia!"
+            "lobbyBanned": "Oh no! Gli dei degli scherzi hanno deciso che sei troppo leggendario per questa lobby. Sei esiliato in maniera esilarante – la pagina si ricaricherà con un tocco di follia!",
+            "bannedPlayers": "Giocatori fantastici:",
+            "lobbyCode": "Livello ricercato:",
+            "clickToCopy": "Ruota display per copiare",
+            "lobbyCodeCopied": "Non perderlo ora!",
+            "unbanButton": "Unban-o-rama!"
         },
         "normal": {
             "actionLabelText": "Pulsanti premuti da questo tasto:",
@@ -1338,7 +1443,12 @@
             "aiMistakes": "L'intelligenza artificiale può commettere errori. Se ne trovi uno, saremmo lieti di saperlo.",
             "kickButton": "espelli",
             "banButton": "bandisci",
-            "lobbyBanned": "Sei stato bandito da questa lobby. La pagina si ricaricherà ora."
+            "lobbyBanned": "Sei stato bandito da questa lobby. La pagina si ricaricherà ora.",
+            "bannedPlayers": "Giocatori bannati",
+            "lobbyCode": "Lobbycode",
+            "clickToCopy": "Clicca per copiare",
+            "lobbyCodeCopied": "Lobbycode copiato correttamente.",
+            "unbanButton": "Annulla divieto"
         }
     },
     "ko": {
@@ -1400,7 +1510,12 @@
             "aiMistakes": "절대 인공지능에 의해 번역된 것이 아닙니다.",
             "kickButton": "차버려!",
             "banButton": "밴세상!",
-            "lobbyBanned": "오 이런! 장난의 신들이 당신을 이 로비에서 전설적이라고 선언했습니다. 웃기게 추방되었어요 – 페이지가 재치 있게 새로고침됩니다!"
+            "lobbyBanned": "오 이런! 장난의 신들이 당신을 이 로비에서 전설적이라고 선언했습니다. 웃기게 추방되었어요 – 페이지가 재치 있게 새로고침됩니다!",
+            "bannedPlayers": "쿨 플레이어:",
+            "lobbyCode": "수배 레벨:",
+            "clickToCopy": "디스플레이를 회전하여 복사",
+            "lobbyCodeCopied": "지금 유출하지 마십시오!",
+            "unbanButton": "언반오라마!"
         },
         "normal": {
             "actionLabelText": "단축키로 누른 버튼:",
@@ -1460,7 +1575,12 @@
             "aiMistakes": "인공지능은 실수를 할 수 있습니다. 만약 발견하신다면 알려주시면 감사하겠습니다.",
             "kickButton": "킥",
             "banButton": "밴",
-            "lobbyBanned": "당신은 이 로비에서 밴되었습니다. 페이지가 지금 새로고침됩니다."
+            "lobbyBanned": "당신은 이 로비에서 밴되었습니다. 페이지가 지금 새로고침됩니다.",
+            "bannedPlayers": "금지된 플레이어:",
+            "lobbyCode": "로비 코드",
+            "clickToCopy": "복사하려면 클릭하십시오",
+            "lobbyCodeCopied": "로비 코드가 성공적으로 복사되었습니다.",
+            "unbanButton": "활동금지해제"
         }
     },
     "tr": {
@@ -1522,7 +1642,12 @@
             "aiMistakes": "Kesinlikle yapay zeka tarafından çevrilmedi.",
             "kickButton": "Fırlat Onu!",
             "banButton": "YasaGücü!",
-            "lobbyBanned": "Oh hayır! Şaka tanrıları bu lobi için seni çok efsane ilan etti. Espirili bir şekilde kovuldun – sayfa eğlenceli bir yeniden yüklemeyle geliyor!"
+            "lobbyBanned": "Oh hayır! Şaka tanrıları bu lobi için seni çok efsane ilan etti. Espirili bir şekilde kovuldun – sayfa eğlenceli bir yeniden yüklemeyle geliyor!",
+            "bannedPlayers": "Havalı Oyuncular:",
+            "lobbyCode": "İstenen seviye:",
+            "clickToCopy": "Kopyalamak için Ekranı Döndür",
+            "lobbyCodeCopied": "Şimdi sızdırmayın!",
+            "unbanButton": "Unban - o - rama!"
         },
         "normal": {
             "actionLabelText": "Kısayol tuşları:",
@@ -1582,7 +1707,12 @@
             "aiMistakes": "Yapay zeka hata yapabilir. Eğer bir hata bulursanız, bize bildirmenizi çok isteriz.",
             "kickButton": "at",
             "banButton": "yasakla",
-            "lobbyBanned": "Bu lobiden yasaklandınız. Sayfa şimdi yeniden yüklenecek."
+            "lobbyBanned": "Bu lobiden yasaklandınız. Sayfa şimdi yeniden yüklenecek.",
+            "bannedPlayers": "Yasaklı oyuncular",
+            "lobbyCode": "Lobi kodu",
+            "clickToCopy": "Kopyalamak için tıklayın",
+            "lobbyCodeCopied": "Lobi kodu başarıyla kopyalandı.",
+            "unbanButton": "Yasağı Kaldır"
         }
     },
     "vi": {
@@ -1644,7 +1774,12 @@
             "aiMistakes": "Chắc chắn không được dịch bởi trí tuệ nhân tạo.",
             "kickButton": "Đá Ra!",
             "banButton": "Cấm Cách Đầy Phong Cách!",
-            "lobbyBanned": "Ôi không! Các vị thần của trò đùa quyết định bạn quá huyền thoại cho phòng này. Bạn bị đuổi một cách hài hước – trang sẽ tải lại với một cái twist đầy thú vị!"
+            "lobbyBanned": "Ôi không! Các vị thần của trò đùa quyết định bạn quá huyền thoại cho phòng này. Bạn bị đuổi một cách hài hước – trang sẽ tải lại với một cái twist đầy thú vị!",
+            "bannedPlayers": "Người chơi tuyệt vời:",
+            "lobbyCode": "Cấp độ mong muốn:",
+            "clickToCopy": "Xoay màn hình để sao chép",
+            "lobbyCodeCopied": "Đừng làm rò rỉ nó ngay bây giờ!",
+            "unbanButton": "Unban-o-rama!"
         },
         "normal": {
             "actionLabelText": "Nút được bấm bởi phím tắt:",
@@ -1704,7 +1839,12 @@
             "aiMistakes": "Trí tuệ nhân tạo có thể mắc sai lầm. Nếu bạn tìm thấy sai sót, chúng tôi rất muốn biết.",
             "kickButton": "đá",
             "banButton": "cấm",
-            "lobbyBanned": "Bạn đã bị cấm khỏi phòng này. Trang sẽ tải lại ngay bây giờ."
+            "lobbyBanned": "Bạn đã bị cấm khỏi phòng này. Trang sẽ tải lại ngay bây giờ.",
+            "bannedPlayers": "Người chơi bị cấm:",
+            "lobbyCode": "Mã sảnh",
+            "clickToCopy": "Bấm Chuột để Sao chép",
+            "lobbyCodeCopied": "Đã sao chép thành công Lobbycode.",
+            "unbanButton": "Bỏ Cấm"
         }
     },
     "th": {
@@ -1766,7 +1906,12 @@
             "aiMistakes": "แน่นอนว่าไม่ใช่การแปลโดยปัญญาประดิษฐ์.",
             "kickButton": "เตะสุดมันส์!",
             "banButton": "แบนแบบตลก!",
-            "lobbyBanned": "โอ้ไม่นะ! เทพแห่งการล้อเล่นตัดสินว่าคุณนั้น legendary มากเกินไปสำหรับห้องนี้ คุณถูกไล่ออกด้วยความขบขัน – หน้าเว็บกำลังรีโหลดพร้อมความสนุก!"
+            "lobbyBanned": "โอ้ไม่นะ! เทพแห่งการล้อเล่นตัดสินว่าคุณนั้น legendary มากเกินไปสำหรับห้องนี้ คุณถูกไล่ออกด้วยความขบขัน – หน้าเว็บกำลังรีโหลดพร้อมความสนุก!",
+            "bannedPlayers": "ผู้เล่นที่ยอดเยี่ยม:",
+            "lobbyCode": "ระดับที่ต้องการ:",
+            "clickToCopy": "หมุนจอแสดงผลเพื่อคัดลอก",
+            "lobbyCodeCopied": "อย่าปล่อยให้รั่วไหลตอนนี้!",
+            "unbanButton": "Unban-o-rama!"
         },
         "normal": {
             "actionLabelText": "ปุ่มที่ถูกกด:",
@@ -1826,7 +1971,12 @@
             "aiMistakes": "ปัญญาประดิษฐ์อาจทำผิดพลาดได้ หากคุณพบข้อผิดพลาดใด ๆ เรายินดีที่จะรับฟังความคิดเห็น.",
             "kickButton": "เตะออก",
             "banButton": "แบน",
-            "lobbyBanned": "คุณถูกแบนออกจากห้องนี้แล้ว หน้าเว็บจะรีโหลดใหม่ทันที."
+            "lobbyBanned": "คุณถูกแบนออกจากห้องนี้แล้ว หน้าเว็บจะรีโหลดใหม่ทันที.",
+            "bannedPlayers": "ผู้เล่นที่ถูกแบน:",
+            "lobbyCode": "รหัสล็อบบี้",
+            "clickToCopy": "คลิกเพื่อคัดลอก",
+            "lobbyCodeCopied": "คัดลอกรหัสล็อบบี้สำเร็จแล้ว",
+            "unbanButton": "ยกเลิกการแบน"
         }
     },
     "nl": {
@@ -1888,7 +2038,12 @@
             "aiMistakes": "Zeker niet door kunstmatige intelligentie vertaald.",
             "kickButton": "Schop 'm weg!",
             "banButton": "Bannetastisch!",
-            "lobbyBanned": "Oh nee! De grappenmakersgoden hebben verklaard dat je te legendarisch bent voor deze lobby. Je bent op humoristische wijze verbannen – de pagina laadt nu opnieuw met een knipoog!"
+            "lobbyBanned": "Oh nee! De grappenmakersgoden hebben verklaard dat je te legendarisch bent voor deze lobby. Je bent op humoristische wijze verbannen – de pagina laadt nu opnieuw met een knipoog!",
+            "bannedPlayers": "Coole spelers:",
+            "lobbyCode": "Gezocht niveau:",
+            "clickToCopy": "Scherm draaien om te kopiëren",
+            "lobbyCodeCopied": "Lek het nu niet!",
+            "unbanButton": "Unban-o-rama!"
         },
         "normal": {
             "actionLabelText": "Toetsenbordknoppen:",
@@ -1948,7 +2103,12 @@
             "aiMistakes": "Kunstmatige intelligentie kan fouten maken. Als je er een vindt, horen we dat graag.",
             "kickButton": "schoppen",
             "banButton": "bannen",
-            "lobbyBanned": "Je bent verbannen uit deze lobby. De pagina wordt nu herladen."
+            "lobbyBanned": "Je bent verbannen uit deze lobby. De pagina wordt nu herladen.",
+            "bannedPlayers": "Verbannen Spelers",
+            "lobbyCode": "Lobbycode",
+            "clickToCopy": "Klik om te kopiëren",
+            "lobbyCodeCopied": "Lobbycode succesvol gekopieerd.",
+            "unbanButton": "﻿unban"
         }
     },
     "pl": {
@@ -2010,7 +2170,12 @@
             "aiMistakes": "Zdecydowanie nie przetłumaczone przez sztuczną inteligencję.",
             "kickButton": "Kopnij to!",
             "banButton": "Banorama!",
-            "lobbyBanned": "O nie! Bogowie psot orzekli, że jesteś zbyt legendarny dla tego lobby. Zostałeś wykluczony w humorystyczny sposób – strona zaraz się przeładuje z przymrużeniem oka!"
+            "lobbyBanned": "O nie! Bogowie psot orzekli, że jesteś zbyt legendarny dla tego lobby. Zostałeś wykluczony w humorystyczny sposób – strona zaraz się przeładuje z przymrużeniem oka!",
+            "bannedPlayers": "Fajni gracze:",
+            "lobbyCode": "Pożądany poziom:",
+            "clickToCopy": "Obróć wyświetlacz, aby skopiować",
+            "lobbyCodeCopied": "Nie wyciekaj teraz!",
+            "unbanButton": "Unban-o-rama!"
         },
         "normal": {
             "actionLabelText": "Przyciski skrótów:",
@@ -2070,7 +2235,12 @@
             "aiMistakes": "Sztuczna inteligencja może popełniać błędy. Jeśli znajdziesz jakiś błąd, chętnie o tym usłyszymy.",
             "kickButton": "wyrzuć",
             "banButton": "zbanuj",
-            "lobbyBanned": "Zostałeś zbanowany w tym lobby. Strona zostanie teraz przeładowana."
+            "lobbyBanned": "Zostałeś zbanowany w tym lobby. Strona zostanie teraz przeładowana.",
+            "bannedPlayers": "Zakazani gracze:",
+            "lobbyCode": "Lobbycode",
+            "clickToCopy": "Kliknij, aby skopiować",
+            "lobbyCodeCopied": "Lobbycode skopiowano pomyślnie.",
+            "unbanButton": "Odbanowany"
         }
     },
     "id": {
@@ -2132,7 +2302,12 @@
             "aiMistakes": "Tentu saja tidak diterjemahkan oleh kecerdasan buatan.",
             "kickButton": "Tendang Aja!",
             "banButton": "Ban-o-rama!",
-            "lobbyBanned": "Oh tidak! Dewa keusilan menyatakan Anda terlalu legendaris untuk lobi ini. Anda lucu-lucuan diusir – halaman segera dimuat ulang dengan gaya gokil!"
+            "lobbyBanned": "Oh tidak! Dewa keusilan menyatakan Anda terlalu legendaris untuk lobi ini. Anda lucu-lucuan diusir – halaman segera dimuat ulang dengan gaya gokil!",
+            "bannedPlayers": "Pemain Keren:",
+            "lobbyCode": "Level yang diinginkan:",
+            "clickToCopy": "Putar Layar untuk Menyalin",
+            "lobbyCodeCopied": "Jangan bocor sekarang!",
+            "unbanButton": "Unban - o - rama!"
         },
         "normal": {
             "actionLabelText": "Tombol shortcut:",
@@ -2192,7 +2367,12 @@
             "aiMistakes": "Kecerdasan buatan bisa melakukan kesalahan. Jika Anda menemukan salah satunya, kami akan sangat senang untuk mengetahuinya.",
             "kickButton": "tendang",
             "banButton": "ban",
-            "lobbyBanned": "Anda telah dilarang dari lobi ini. Halaman akan dimuat ulang sekarang."
+            "lobbyBanned": "Anda telah dilarang dari lobi ini. Halaman akan dimuat ulang sekarang.",
+            "bannedPlayers": "Pemain yang Dilarang:",
+            "lobbyCode": "Lobbycode",
+            "clickToCopy": "Klik untuk menyalin",
+            "lobbyCodeCopied": "Lobbycode berhasil disalin.",
+            "unbanButton": "unban"
         }
     },
     "uk": {
@@ -2254,7 +2434,12 @@
             "aiMistakes": "Абсолютно не перекладено штучним інтелектом.",
             "kickButton": "Викочи з місця!",
             "banButton": "Забануй стигло!",
-            "lobbyBanned": "Ой ні! Боги жартів вирішили, що ти занадто легендарний для цього лобі. Тебе висміяли настільки, що сторінка тепер перезавантажується з посмішкою!"
+            "lobbyBanned": "Ой ні! Боги жартів вирішили, що ти занадто легендарний для цього лобі. Тебе висміяли настільки, що сторінка тепер перезавантажується з посмішкою!",
+            "bannedPlayers": "Круті гравці:",
+            "lobbyCode": "Бажаний рівень:",
+            "clickToCopy": "Повернути дисплей для копіювання",
+            "lobbyCodeCopied": "Не просочуйте його зараз!",
+            "unbanButton": "Unban-o-rama!"
         },
         "normal": {
             "actionLabelText": "Клавіші цього ярлика:",
@@ -2314,7 +2499,12 @@
             "aiMistakes": "Штучний інтелект може помилятися. Якщо ви знайдете помилку, нам буде приємно про це дізнатися.",
             "kickButton": "викинути",
             "banButton": "забанити",
-            "lobbyBanned": "Ви були забанені в цьому лобі. Сторінка тепер перезавантажиться."
+            "lobbyBanned": "Ви були забанені в цьому лобі. Сторінка тепер перезавантажиться.",
+            "bannedPlayers": "Заблоковані гравці:",
+            "lobbyCode": "Код лобі",
+            "clickToCopy": "Натисніть, щоб скопіювати",
+            "lobbyCodeCopied": "Код лобі успішно скопійовано.",
+            "unbanButton": "Розблокувати"
         }
     },
     "ms": {
@@ -2376,7 +2566,12 @@
             "aiMistakes": "Pastinya tidak diterjemahkan oleh kecerdasan buatan.",
             "kickButton": "Tendang Hebat!",
             "banButton": "Larangan Gempak!",
-            "lobbyBanned": "Oh tidak! Dewa jenaka telah menentukan anda terlalu legend untuk lobi ini. Anda diluputkan dengan penuh gelak – halaman kini akan muat semula dengan kejenakaan!"
+            "lobbyBanned": "Oh tidak! Dewa jenaka telah menentukan anda terlalu legend untuk lobi ini. Anda diluputkan dengan penuh gelak – halaman kini akan muat semula dengan kejenakaan!",
+            "bannedPlayers": "Pemain Hebat:",
+            "lobbyCode": "Tahap yang dikehendaki:",
+            "clickToCopy": "Putar Paparan untuk Menyalin",
+            "lobbyCodeCopied": "Jangan bocorkannya sekarang!",
+            "unbanButton": "Unban-o-rama!"
         },
         "normal": {
             "actionLabelText": "Kekunci ditekan:",
@@ -2436,7 +2631,12 @@
             "aiMistakes": "Kecerdasan buatan boleh membuat kesilapan. Jika anda menjumpai satu, kami akan gembira untuk mendengarnya.",
             "kickButton": "tendang",
             "banButton": "larang",
-            "lobbyBanned": "Anda telah diharamkan dari lobi ini. Halaman akan dimuat semula sekarang."
+            "lobbyBanned": "Anda telah diharamkan dari lobi ini. Halaman akan dimuat semula sekarang.",
+            "bannedPlayers": "Pemain yang Diharamkan:",
+            "lobbyCode": "Lobbycode",
+            "clickToCopy": "Klik untuk Salin",
+            "lobbyCodeCopied": "Lobbycode berjaya disalin.",
+            "unbanButton": "nyahban"
         }
     },
     "sw": {
@@ -2498,7 +2698,12 @@
             "aiMistakes": "Hakika si tafsiri ya akili bandia.",
             "kickButton": "Piga Uondoe!",
             "banButton": "Zuia kwa Mzuka!",
-            "lobbyBanned": "Samahani! Miungu ya mzaha wameamua wewe ni maarufu mno kwa chumba hiki. Umeondolewa kwa ucheshi – ukurasa utaanzishwa upya kwa raha!"
+            "lobbyBanned": "Samahani! Miungu ya mzaha wameamua wewe ni maarufu mno kwa chumba hiki. Umeondolewa kwa ucheshi – ukurasa utaanzishwa upya kwa raha!",
+            "bannedPlayers": "Wachezaji Wazuri:",
+            "lobbyCode": "Kiwango kinachotakiwa:",
+            "clickToCopy": "Zungusha Kioo Onyeshi ili Kunakili",
+            "lobbyCodeCopied": "Usifungue sasa!",
+            "unbanButton": "Unban-o-rama!"
         },
         "normal": {
             "actionLabelText": "Vifungo vilivyobonyezwa:",
@@ -2558,7 +2763,12 @@
             "aiMistakes": "Akili bandia inaweza kufanya makosa. Ukipata moja, tunapenda kuisikia.",
             "kickButton": "ondoa",
             "banButton": "zuia",
-            "lobbyBanned": "Umekatazwa kutoka kwenye chumba hiki. Ukurasa utapakuliwa tena sasa."
+            "lobbyBanned": "Umekatazwa kutoka kwenye chumba hiki. Ukurasa utapakuliwa tena sasa.",
+            "bannedPlayers": "Wachezaji Waliopigwa Marufuku:",
+            "lobbyCode": "Msimbo wa Lobby",
+            "clickToCopy": "Bofya ili kunakili",
+            "lobbyCodeCopied": "Msimbo wa Lobbycode umenakiliwa kwa mafanikio.",
+            "unbanButton": "ondoa marufuku"
         }
     },
     "bn": {
@@ -2620,7 +2830,12 @@
             "aiMistakes": "নিশ্চিতভাবে কৃত্রিম বুদ্ধিমত্তা দ্বারা অনুবাদ করা হয়নি।",
             "kickButton": "লাথি মেরে দাও!",
             "banButton": "ব্যান-আউস!",
-            "lobbyBanned": "আরে, তোমাকে এই লবিতে হাস্যকরভাবে বহিষ্কৃত করা হয়েছে। পৃষ্ঠাটি এখন মজার ছলে রিসেট হচ্ছে!"
+            "lobbyBanned": "আরে, তোমাকে এই লবিতে হাস্যকরভাবে বহিষ্কৃত করা হয়েছে। পৃষ্ঠাটি এখন মজার ছলে রিসেট হচ্ছে!",
+            "bannedPlayers": "দুর্দান্ত খেলোয়াড়:",
+            "lobbyCode": "কাঙ্ক্ষিত লেভেল:",
+            "clickToCopy": "অনুলিপি করতে প্রদর্শন ঘোরান",
+            "lobbyCodeCopied": "এখনই এটি ফাঁস করবেন না!",
+            "unbanButton": "আনবান-ও-রামা!"
         },
         "normal": {
             "actionLabelText": "এই কী-বাইন্ডের চাপা বোতাম:",
@@ -2680,7 +2895,12 @@
             "aiMistakes": "কৃত্রিম বুদ্ধিমত্তা ভুল করতে পারে। যদি আপনি কোনো ভুল পান, আমরা তা জানতে পেরে খুশি হব।",
             "kickButton": "কিক",
             "banButton": "ব্যান",
-            "lobbyBanned": "আপনাকে এই লবিতে নিষিদ্ধ করা হয়েছে। পৃষ্ঠা এখন পুনরায় লোড হবে।"
+            "lobbyBanned": "আপনাকে এই লবিতে নিষিদ্ধ করা হয়েছে। পৃষ্ঠা এখন পুনরায় লোড হবে।",
+            "bannedPlayers": "নিষিদ্ধ খেলোয়াড়:",
+            "lobbyCode": "লবিকোড",
+            "clickToCopy": "কপি করতে ক্লিক করুন",
+            "lobbyCodeCopied": "Lobbycode সফলভাবে অনুলিপি করা হয়েছে ।",
+            "unbanButton": "আনবান"
         }
     },
     "lv": {
@@ -2742,7 +2962,12 @@
             "aiMistakes": "Noteikti nav tulkots ar mākslīgo intelektu.",
             "kickButton": "Nomet ar spēku!",
             "banButton": "Banē ar stilu!",
-            "lobbyBanned": "Ak! Joki dievi ir noteikuši, ka jūs esat pārāk leģendārs šim lobi. Jūs esat izsmieklu pilnībā izraidīts – lapa drīz pārstartēs ar smaidu!"
+            "lobbyBanned": "Ak! Joki dievi ir noteikuši, ka jūs esat pārāk leģendārs šim lobi. Jūs esat izsmieklu pilnībā izraidīts – lapa drīz pārstartēs ar smaidu!",
+            "bannedPlayers": "Lieliski spēlētāji:",
+            "lobbyCode": "Vēlamais līmenis:",
+            "clickToCopy": "Pagriezt displeju, lai kopētu",
+            "lobbyCodeCopied": "Nenoplūdiniet to tagad!",
+            "unbanButton": "Unban-o-rama!"
         },
         "normal": {
             "actionLabelText": "Šī taustiņa nospiestās pogas:",
@@ -2802,7 +3027,12 @@
             "aiMistakes": "Mākslīgais intelekts var pieļaut kļūdas. Ja atradīsiet kļūdu, mēs būsim priecīgi to zināt.",
             "kickButton": "izmet",
             "banButton": "banēt",
-            "lobbyBanned": "Jūs esat bloķēts no šīs telpas. Lapa tagad tiks pārlādēta."
+            "lobbyBanned": "Jūs esat bloķēts no šīs telpas. Lapa tagad tiks pārlādēta.",
+            "bannedPlayers": "Aizliegtie spēlētāji:",
+            "lobbyCode": "Vestibila kods",
+            "clickToCopy": "Noklikšķiniet, lai kopētu",
+            "lobbyCodeCopied": "Vestibila kods veiksmīgi nokopēts.",
+            "unbanButton": "atcelt aizliegumu"
         }
     }
 }

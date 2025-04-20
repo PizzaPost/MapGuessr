@@ -33,10 +33,13 @@ html {
     --credits-color: rgb(160, 160, 160);
     --button-bg-orange: linear-gradient(135deg, #e94200, #922900);
     --button-bg-red: linear-gradient(135deg, #c00000, #920000);
+    --button-bg-red-gray: linear-gradient(135deg, #8d3333, #5c2020);
     --button-shadow-orange: rgba(202, 40, 0, 0.2);
     --button-shadow-hover-orange: rgba(252, 40, 0, 0.2);
     --button-shadow-red: rgba(202, 0, 0, 0.2);
+    --button-shadow-red-gray: rgba(151, 42, 42, 0.2);
     --button-shadow-hover-red: rgba(255, 0, 0, 0.2);
+    --button-shadow-hover-red-gray: rgba(204, 86, 86, 0.2);
     --button-bg-green: linear-gradient(135deg, #00c01a, #0e7c00);
     --button-shadow-green: rgba(0, 202, 27, 0.2);
     --button-shadow-hover-green: rgba(0, 255, 55, 0.2);
@@ -71,10 +74,13 @@ html {
     --credits-color: rgb(40, 40, 40);
     --button-bg-orange: linear-gradient(135deg, #e94200, #922900);
     --button-bg-red: linear-gradient(135deg, #c00000, #920000);
+    --button-bg-red-gray: linear-gradient(135deg, #8d3333, #5c2020);
     --button-shadow-orange: rgba(202, 40, 0, 0.2);
     --button-shadow-hover-orange: rgba(252, 40, 0, 0.2);
     --button-shadow-red: rgba(202, 0, 0, 0.2);
+    --button-shadow-red-gray: rgba(151, 42, 42, 0.2);
     --button-shadow-hover-red: rgba(255, 0, 0, 0.2);
+    --button-shadow-hover-red-gray: rgba(204, 86, 86, 0.2);
     --button-bg-green: linear-gradient(135deg, #00c01a, #0e7c00);
     --button-shadow-green: rgba(0, 202, 27, 0.2);
     --button-shadow-hover-green: rgba(0, 255, 55, 0.2);
@@ -627,19 +633,29 @@ button:hover::after {
     box-shadow: 0 4px 15px var(--button-shadow-orange);
 }
 
-.banButton {
-    background: var(--button-bg-red);
-    box-shadow: 0 4px 15px var(--button-shadow-red);
-}
-
 .kickButton:hover {
     background: var(--button-bg-orange);
     box-shadow: 0 6px 20px var(--button-shadow-hover-orange);
 }
 
+.banButton {
+    background: var(--button-bg-red);
+    box-shadow: 0 4px 15px var(--button-shadow-red);
+}
+
 .banButton:hover {
     background: var(--button-bg-red);
     box-shadow: 0 6px 20px var(--button-shadow-hover-red);
+}
+
+.unbanButton {
+    background: var(--button-bg-red-gray);
+    box-shadow: 0 4px 15px var(--button-shadow-red-gray);
+}
+
+.unbanButton:hover {
+    background: var(--button-bg-red-gray);
+    box-shadow: 0 6px 20px var(--button-shadow-hover-red-gray);
 }
 
 /* Marker Styling */
