@@ -740,7 +740,11 @@ function joinLobby() {
     triggerLobbyAnimation();
     db.collection('lobbies').doc(lobbyName).get().then(doc => {
         playerListText.innerText = gLS("playerListText");
-        if (doc.exists && doc.data().state === 'public') { //TODO: add a check if the lobby is friends only and add a button that switches between public, private and friends only (only for the host)
+        if (doc.exists) {
+            if (!doc.data().state === 'public' && !(doc.data().state === 'friendsOnly' && doc.data().friends?.includes(auth.currentUser.uid))) {
+                showCustomAlert(gLS("lobbyPrivate"));
+                return;
+            }
             const existingPlayers = doc.data().players;
             const existingPlayerNames = existingPlayers.map(player => player.name);
             let newUserName = userName;
