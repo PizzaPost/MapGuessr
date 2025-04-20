@@ -849,6 +849,8 @@ function play() {
         }
         setTimeout(() => {
             db.collection('lobbies').doc(lobbyName).get().then(doc => {
+                lobbyButtonContainer.innerHTML = "";
+                lobbyButtonContainer.appendChild(leaveLobbyButton);
                 if (isHost) {
                     if (claimHostButton) claimHostButton.remove();
                     const bannedPlayers = doc.data().bannedPlayers || [];
