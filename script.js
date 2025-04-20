@@ -29,6 +29,7 @@ let timeoutId = null;
 let lastLobbyAnimationTime = 0;
 let closingTimeout = null;
 let leaveLobbyButtonClicked = false;
+let lobbyStates = ["private", "friendsOnly", "public"];
 
 let devSkip = false;
 let devMode = urlParams.get('devMode') || -1;
@@ -821,7 +822,7 @@ function joinLobby() {
     triggerLobbyAnimation();
     db.collection('lobbies').doc(lobbyName).get().then(doc => {
         playerListText.innerText = gLS("playerListText");
-        if (doc.exists) { //TODO: add a check if the lobby is private and add a button that switches between public, private and friends only (only for the host)
+        if (doc.exists && doc.data().state === 'open') { //TODO: add a check if the lobby is friends only and add a button that switches between public, private and friends only (only for the host)
             const existingPlayers = doc.data().players;
             const existingPlayerNames = existingPlayers.map(player => player.name);
             let newUserName = userName;
@@ -894,7 +895,7 @@ function joinLobby() {
                     totalScore: 0,
                     totalPossibleScore: 0
                 }],
-                "state": "private"
+                state: "private"
             }).then(() => {
                 loadingDiv.style.display = 'none';
                 isHost = true;
@@ -971,8 +972,6 @@ function play() {
                         });
                     }
                     document.body.appendChild(playerListDiv);
-
-
                     closeLobbyButton = document.createElement('button');
                     giveUpHostButton = document.createElement('button');
                     giveUpHostButton.id = 'giveUpHostButton';
@@ -1002,8 +1001,20 @@ function play() {
                         closeLobbyButton.style.cursor = 'not-allowed';
                         closeThisLobby();
                     };
+                    switchLobbyStateButton = document.createElement('button');
+                    switchLobbyStateButton.className = 'switchLobbyStateButton';
+                    switchLobbyStateButton.innerText = gLS("switchLobbyStateButton");
+                    switchLobbyStateButton.onclick = () => {
+                        lobbyStates = [...lobbyStates.slice(1), lobbyStates[0]];
+                        doc.ref.update({
+                            state: lobbyStates[0]
+                        });
+                        console.log(doc.data().state);
+                        console.log(lobbyStates)
+                    };
                     lobbyButtonContainer.appendChild(closeLobbyButton);
                     lobbyButtonContainer.appendChild(giveUpHostButton);
+                    lobbyButtonContainer.appendChild(switchLobbyStateButton);
                     if (doc.data().hasOwnProperty('gameStarted')) {
                         gameStarted = doc.data().gameStarted;
                     }
@@ -1014,6 +1025,7 @@ function play() {
                     if (closeLobbyButton) closeLobbyButton.remove();
                     if (giveUpHostButton) giveUpHostButton.remove();
                     if (claimHostButton) { claimHostButton.remove(); }
+                    if (switchLobbyStateButton) { switchLobbyStateButton.remove(); }
                     claimHostButton = document.createElement('button');
                     const hostPlayers = doc.data().players.filter(player => player.host);
                     if (hostPlayers.length === 0) {
