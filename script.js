@@ -742,7 +742,7 @@ function joinLobby() {
         playerListText.innerText = gLS("playerListText");
         if (doc.exists) {
             if (doc.data().state !== 'public' && !(doc.data().state === 'friendsOnly' && doc.data().friends?.includes(auth.currentUser.uid))) {
-                showCustomAlert(gLS("lobbyPrivate"));
+                showCustomAlert(gLS("lobbyPrivate"), 0, undefined, true);
                 return;
             }
             const existingPlayers = doc.data().players;
