@@ -49,6 +49,7 @@ let closeLobbyButton; keybinds.push(["Escape", ["closeLobbyButton"], true]); // 
 let giveUpHostButton; keybinds.push(["g", ["giveUpHostButton"], false]); // single press g to give up host position
 let claimHostButton; keybinds.push(["c", ["claimHostButton"], false]); // single press c to claim host position
 let createNewLobbyCode; keybinds.push(["N", ["createNewLobbyCode"], false]); // single press N to create a new lobby
+let switchLobbyStateButton;
 // default keybinds will be overridden if there are custom ones in localStorage
 keybinds = JSON.parse(localStorage.getItem('keybinds')) || keybinds;
 
@@ -739,7 +740,7 @@ function joinLobby() {
     triggerLobbyAnimation();
     db.collection('lobbies').doc(lobbyName).get().then(doc => {
         playerListText.innerText = gLS("playerListText");
-        if (doc.exists && doc.data().state === 'open') { //TODO: add a check if the lobby is friends only and add a button that switches between public, private and friends only (only for the host)
+        if (doc.exists && doc.data().state === 'public') { //TODO: add a check if the lobby is friends only and add a button that switches between public, private and friends only (only for the host)
             const existingPlayers = doc.data().players;
             const existingPlayerNames = existingPlayers.map(player => player.name);
             let newUserName = userName;
