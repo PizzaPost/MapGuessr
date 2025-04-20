@@ -627,7 +627,8 @@ button:hover::after {
     box-shadow: 0 4px 15px var(--button-shadow-orange);
 }
 
-.banButton {
+.banButton,
+.unbanButton {
     background: var(--button-bg-red);
     box-shadow: 0 4px 15px var(--button-shadow-red);
 }
@@ -637,7 +638,8 @@ button:hover::after {
     box-shadow: 0 6px 20px var(--button-shadow-hover-orange);
 }
 
-.banButton:hover {
+.banButton:hover,
+.unbanButton:hover {
     background: var(--button-bg-red);
     box-shadow: 0 6px 20px var(--button-shadow-hover-red);
 }
