@@ -741,7 +741,7 @@ function joinLobby() {
     db.collection('lobbies').doc(lobbyName).get().then(doc => {
         playerListText.innerText = gLS("playerListText");
         if (doc.exists) {
-            if (!doc.data().state === 'public' && !(doc.data().state === 'friendsOnly' && doc.data().friends?.includes(auth.currentUser.uid))) {
+            if (doc.data().state !== 'public' && !(doc.data().state === 'friendsOnly' && doc.data().friends?.includes(auth.currentUser.uid))) {
                 showCustomAlert(gLS("lobbyPrivate"));
                 return;
             }
