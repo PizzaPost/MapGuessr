@@ -953,7 +953,8 @@ function play() {
                             bannedPlayerDiv.id = 'bannedPlayerDiv';
                             const bannedPlayerText = document.createElement('span');
                             bannedPlayerText.id = 'bannedPlayerText';
-                            bannedPlayerText.style.color = 'red';
+                            bannedPlayerText.style.color = 'gray';
+                            bannedPlayerText.style.fontStyle = 'italic';
                             bannedPlayerText.textContent = bannedPlayerName;
                             bannedPlayerDiv.appendChild(bannedPlayerText);
                             const unbanButton = document.createElement('button');
