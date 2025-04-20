@@ -26,4 +26,3 @@ TODO:
 - global leaderboard
 - friends leaderboard
 - more maps
-- add translations for bannedPlayers, lobbyCode, clickToCopy, lobbyCodeCopied
