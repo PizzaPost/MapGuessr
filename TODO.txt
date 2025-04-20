@@ -16,10 +16,9 @@ TODO:
 - Profil Name that is automatically entered in the username field
 - see open Server ids additionally to the last 3 used over them
 - friend list
--  see open Servers from Friends
+- see open Servers from Friends
 - view profiles from Friends when they're not online
 - Friends only Lobby
-- unban from Lobby
 - over me section for profiles
 - contact document to Report profiles, suggest Features, suggest Translation improvements, Report a bug, other (Google docs :/)
 - chat for lobbys
