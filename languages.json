@@ -63,7 +63,8 @@
             "lobbyCode": "Wanted level:",
             "clickToCopy": "Rotate Display to Copy",
             "lobbyCodeCopied": "Don't leak it now!",
-            "unbanButton": "Unban-o-rama!"
+            "unbanButton": "Unban-o-rama!",
+            "lobbyPrivate": "The people in this room want some privacy. Please join another one."
         },
         "normal": {
             "actionLabelText": "Buttons pressed by this keybind:",
@@ -128,7 +129,8 @@
             "lobbyCode": "Lobbycode",
             "clickToCopy": "Click to Copy",
             "lobbyCodeCopied": "Lobbycode copied successfully.",
-            "unbanButton": "unban"
+            "unbanButton": "unban",
+            "lobbyPrivate": "This lobby is private. Please join another one."
         }
     },
     "de": {
@@ -195,7 +197,8 @@
             "lobbyCode": "Gewünschtes Level:",
             "clickToCopy": "Display drehen zum Kopieren",
             "lobbyCodeCopied": "Lass es jetzt nicht durchsickern!",
-            "unbanButton": "Unban-o-rama!"
+            "unbanButton": "Unban-o-rama!",
+            "lobbyPrivate": "Die Leute in diesem Raum wollen etwas Privatsphäre. Bitte schließen Sie sich einem anderen an."
         },
         "normal": {
             "actionLabelText": "Von diesem Kurzbefehl gedrückte Knöpfe:",
@@ -260,7 +263,8 @@
             "lobbyCode": "Lobbycode",
             "clickToCopy": "Klicken zum Kopieren",
             "lobbyCodeCopied": "Lobbycode erfolgreich kopiert.",
-            "unbanButton": "Entsperren"
+            "unbanButton": "Entsperren",
+            "lobbyPrivate": "Diese Lobby ist privat. Bitte schließen Sie sich einem anderen an."
         }
     },
     "fr": {
@@ -327,7 +331,8 @@
             "lobbyCode": "Niveau recherché :",
             "clickToCopy": "Faire pivoter l'affichage pour copier",
             "lobbyCodeCopied": "Ne le divulguez pas maintenant !",
-            "unbanButton": "Unban-o-rama !"
+            "unbanButton": "Unban-o-rama !",
+            "lobbyPrivate": "Les gens dans cette pièce veulent un peu d'intimité. Veuillez en rejoindre un autre."
         },
         "normal": {
             "actionLabelText": "Boutons activés par ce raccourci :",
@@ -392,7 +397,8 @@
             "lobbyCode": "Lobbycode",
             "clickToCopy": "Cliquez pour copier",
             "lobbyCodeCopied": "Lobbycode copié avec succès.",
-            "unbanButton": "Débloquer"
+            "unbanButton": "Débloquer",
+            "lobbyPrivate": "Ce hall est privé. Veuillez en rejoindre un autre."
         }
     },
     "es": {
@@ -459,7 +465,8 @@
             "lobbyCode": "Nivel deseado:",
             "clickToCopy": "Girar pantalla para copiar",
             "lobbyCodeCopied": "¡No lo pierdas ahora!",
-            "unbanButton": "¡Unban-o-rama!"
+            "unbanButton": "¡Unban-o-rama!",
+            "lobbyPrivate": "Las personas en esta sala quieren algo de privacidad. Únete a otro."
         },
         "normal": {
             "actionLabelText": "Botones pulsados por este atajo:",
@@ -524,7 +531,8 @@
             "lobbyCode": "Lobbycode",
             "clickToCopy": "Haz clic para copiar",
             "lobbyCodeCopied": "Lobbycode copiado correctamente.",
-            "unbanButton": "آنبن"
+            "unbanButton": "آنبن",
+            "lobbyPrivate": "Este vestíbulo es privado. Únete a otro."
         }
     },
     "ja": {
@@ -591,7 +599,8 @@
             "lobbyCode": "指名手配レベル：",
             "clickToCopy": "コピーするディスプレイを回転",
             "lobbyCodeCopied": "今すぐ漏らさないでください！",
-            "unbanButton": "アンバン・オ・ラマ！"
+            "unbanButton": "アンバン・オ・ラマ！",
+            "lobbyPrivate": "この部屋の人たちはプライバシーを求めています。別のアカウントに参加してください。"
         },
         "normal": {
             "actionLabelText": "このショートカットで押されるボタン:",
@@ -656,7 +665,8 @@
             "lobbyCode": "ロビーコード",
             "clickToCopy": "クリックしてコピー",
             "lobbyCodeCopied": "ロビーコードが正常にコピーされました。",
-            "unbanButton": "同時"
+            "unbanButton": "同時",
+            "lobbyPrivate": "このロビーは貸切です。別のアカウントに参加してください。"
         }
     },
     "zh": {
@@ -723,7 +733,8 @@
             "lobbyCode": "通缉等级",
             "clickToCopy": "旋转显示以复制",
             "lobbyCodeCopied": "现在不要泄露！",
-            "unbanButton": "Unban-o-rama ！"
+            "unbanButton": "Unban-o-rama ！",
+            "lobbyPrivate": "这个房间里的人想要一些隐私。请加入另一个。"
         },
         "normal": {
             "actionLabelText": "此快捷键按下的按钮:",
@@ -788,7 +799,8 @@
             "lobbyCode": "大堂密码",
             "clickToCopy": "点击来复制",
             "lobbyCodeCopied": "大厅代码复制成功。",
-            "unbanButton": "不再屏蔽"
+            "unbanButton": "不再屏蔽",
+            "lobbyPrivate": "这个大堂是私密的。请加入另一个。"
         }
     },
     "ru": {
@@ -855,7 +867,8 @@
             "lobbyCode": "Требуемый уровень:",
             "clickToCopy": "Повернуть дисплей для копирования",
             "lobbyCodeCopied": "Не сливайте его сейчас!",
-            "unbanButton": "Unban-o-rama!"
+            "unbanButton": "Unban-o-rama!",
+            "lobbyPrivate": "Люди в этой комнате хотят уединения. Присоединяйтесь к другому."
         },
         "normal": {
             "actionLabelText": "Кнопки этого сочетания:",
@@ -920,7 +933,8 @@
             "lobbyCode": "Код лобби",
             "clickToCopy": "Нажмите, чтобы скопировать",
             "lobbyCodeCopied": "Код лобби успешно скопирован.",
-            "unbanButton": "unban"
+            "unbanButton": "unban",
+            "lobbyPrivate": "Это частный вестибюль. Присоединяйтесь к другому."
         }
     },
     "ar": {
@@ -987,7 +1001,8 @@
             "lobbyCode": "المستوى المطلوب:",
             "clickToCopy": "تدوير العرض للنسخ",
             "lobbyCodeCopied": "لا تقم بتسريبه الآن!",
-            "unbanButton": "Unban - o - rama!"
+            "unbanButton": "Unban - o - rama!",
+            "lobbyPrivate": "الناس في هذه الغرفة يريدون بعض الخصوصية. يرجى الانضمام إلى واحد آخر."
         },
         "normal": {
             "actionLabelText": "أزرار هذا الاختصار:",
@@ -1052,7 +1067,8 @@
             "lobbyCode": "رمز اللوبي",
             "clickToCopy": "انقر للنسخ",
             "lobbyCodeCopied": "تم نسخ رمز الردهة بنجاح.",
-            "unbanButton": "الغاء حظر المستخدم"
+            "unbanButton": "الغاء حظر المستخدم",
+            "lobbyPrivate": "هذا الردهة خاص. يرجى الانضمام إلى واحد آخر."
         }
     },
     "pt": {
@@ -1119,7 +1135,8 @@
             "lobbyCode": "Nível desejado:",
             "clickToCopy": "Girar o visor para copiar",
             "lobbyCodeCopied": "Não vaze agora!",
-            "unbanButton": "Unban-o-rama!"
+            "unbanButton": "Unban-o-rama!",
+            "lobbyPrivate": "As pessoas nesta sala querem um pouco de privacidade. Por favor, junte-se a outro."
         },
         "normal": {
             "actionLabelText": "Botões pressionados por este atalho:",
@@ -1184,7 +1201,8 @@
             "lobbyCode": "Lobbycode",
             "clickToCopy": "Clique para copiar",
             "lobbyCodeCopied": "Lobbycode copiado com sucesso.",
-            "unbanButton": "Retirar"
+            "unbanButton": "Retirar",
+            "lobbyPrivate": "Este átrio é privado. Por favor, junte-se a outro."
         }
     },
     "hi": {
@@ -1251,7 +1269,8 @@
             "lobbyCode": "वांछित स्तर:",
             "clickToCopy": "डिस्प्ले को कॉपी करने के लिए घुमाएँ",
             "lobbyCodeCopied": "इसे अभी लीक न करें!",
-            "unbanButton": "अनबन - ओ - रामा!"
+            "unbanButton": "अनबन - ओ - रामा!",
+            "lobbyPrivate": "इस कमरे के लोग कुछ निजता चाहते हैं। कृपया किसी और के साथ जुड़ें।"
         },
         "normal": {
             "actionLabelText": "इस शॉर्टकट के बटन:",
@@ -1316,7 +1335,8 @@
             "lobbyCode": "लॉबीकोड",
             "clickToCopy": "कॉपी करने के लिए क्लिक करें",
             "lobbyCodeCopied": "लॉबीकोड सफलतापूर्वक कॉपी किया गया।",
-            "unbanButton": "अप्रतिबंधित करें"
+            "unbanButton": "अप्रतिबंधित करें",
+            "lobbyPrivate": "यह लॉबी निजी है। कृपया किसी और के साथ जुड़ें।"
         }
     },
     "it": {
@@ -1383,7 +1403,8 @@
             "lobbyCode": "Livello ricercato:",
             "clickToCopy": "Ruota display per copiare",
             "lobbyCodeCopied": "Non perderlo ora!",
-            "unbanButton": "Unban-o-rama!"
+            "unbanButton": "Unban-o-rama!",
+            "lobbyPrivate": "Le persone in questa stanza vogliono un po' di privacy. Unisciti a un altro."
         },
         "normal": {
             "actionLabelText": "Pulsanti premuti da questo tasto:",
@@ -1448,7 +1469,8 @@
             "lobbyCode": "Lobbycode",
             "clickToCopy": "Clicca per copiare",
             "lobbyCodeCopied": "Lobbycode copiato correttamente.",
-            "unbanButton": "Annulla divieto"
+            "unbanButton": "Annulla divieto",
+            "lobbyPrivate": "Questa lobby è privata. Unisciti a un altro."
         }
     },
     "ko": {
@@ -1515,7 +1537,8 @@
             "lobbyCode": "수배 레벨:",
             "clickToCopy": "디스플레이를 회전하여 복사",
             "lobbyCodeCopied": "지금 유출하지 마십시오!",
-            "unbanButton": "언반오라마!"
+            "unbanButton": "언반오라마!",
+            "lobbyPrivate": "이 방에 있는 사람들은 프라이버시를 원합니다. 다른 계정에 가입하세요."
         },
         "normal": {
             "actionLabelText": "단축키로 누른 버튼:",
@@ -1580,7 +1603,8 @@
             "lobbyCode": "로비 코드",
             "clickToCopy": "복사하려면 클릭하십시오",
             "lobbyCodeCopied": "로비 코드가 성공적으로 복사되었습니다.",
-            "unbanButton": "활동금지해제"
+            "unbanButton": "활동금지해제",
+            "lobbyPrivate": "이 로비는 단독으로 사용할 수 있습니다. 다른 계정에 가입하세요."
         }
     },
     "tr": {
@@ -1647,7 +1671,8 @@
             "lobbyCode": "İstenen seviye:",
             "clickToCopy": "Kopyalamak için Ekranı Döndür",
             "lobbyCodeCopied": "Şimdi sızdırmayın!",
-            "unbanButton": "Unban - o - rama!"
+            "unbanButton": "Unban - o - rama!",
+            "lobbyPrivate": "Bu odadaki insanlar biraz mahremiyet istiyor. Lütfen başka bir tanesine katılın."
         },
         "normal": {
             "actionLabelText": "Kısayol tuşları:",
@@ -1712,7 +1737,8 @@
             "lobbyCode": "Lobi kodu",
             "clickToCopy": "Kopyalamak için tıklayın",
             "lobbyCodeCopied": "Lobi kodu başarıyla kopyalandı.",
-            "unbanButton": "Yasağı Kaldır"
+            "unbanButton": "Yasağı Kaldır",
+            "lobbyPrivate": "Bu lobi özeldir. Lütfen başka bir tanesine katılın."
         }
     },
     "vi": {
@@ -1779,7 +1805,8 @@
             "lobbyCode": "Cấp độ mong muốn:",
             "clickToCopy": "Xoay màn hình để sao chép",
             "lobbyCodeCopied": "Đừng làm rò rỉ nó ngay bây giờ!",
-            "unbanButton": "Unban-o-rama!"
+            "unbanButton": "Unban-o-rama!",
+            "lobbyPrivate": "Những người trong phòng này muốn có chút riêng tư. Vui lòng tham gia một chương trình khác."
         },
         "normal": {
             "actionLabelText": "Nút được bấm bởi phím tắt:",
@@ -1844,7 +1871,8 @@
             "lobbyCode": "Mã sảnh",
             "clickToCopy": "Bấm Chuột để Sao chép",
             "lobbyCodeCopied": "Đã sao chép thành công Lobbycode.",
-            "unbanButton": "Bỏ Cấm"
+            "unbanButton": "Bỏ Cấm",
+            "lobbyPrivate": "Sảnh đợi này là riêng tư. Vui lòng tham gia một chương trình khác."
         }
     },
     "th": {
@@ -1911,7 +1939,8 @@
             "lobbyCode": "ระดับที่ต้องการ:",
             "clickToCopy": "หมุนจอแสดงผลเพื่อคัดลอก",
             "lobbyCodeCopied": "อย่าปล่อยให้รั่วไหลตอนนี้!",
-            "unbanButton": "Unban-o-rama!"
+            "unbanButton": "Unban-o-rama!",
+            "lobbyPrivate": "คนในห้องนี้ต้องการความเป็นส่วนตัวโปรดเข้าร่วมอีกคน"
         },
         "normal": {
             "actionLabelText": "ปุ่มที่ถูกกด:",
@@ -1976,7 +2005,8 @@
             "lobbyCode": "รหัสล็อบบี้",
             "clickToCopy": "คลิกเพื่อคัดลอก",
             "lobbyCodeCopied": "คัดลอกรหัสล็อบบี้สำเร็จแล้ว",
-            "unbanButton": "ยกเลิกการแบน"
+            "unbanButton": "ยกเลิกการแบน",
+            "lobbyPrivate": "ล็อบบี้นี้เป็นส่วนตัวโปรดเข้าร่วมอีกคน"
         }
     },
     "nl": {
@@ -2043,7 +2073,8 @@
             "lobbyCode": "Gezocht niveau:",
             "clickToCopy": "Scherm draaien om te kopiëren",
             "lobbyCodeCopied": "Lek het nu niet!",
-            "unbanButton": "Unban-o-rama!"
+            "unbanButton": "Unban-o-rama!",
+            "lobbyPrivate": "De mensen in deze kamer willen wat privacy. Sluit je alsjeblieft aan bij een andere."
         },
         "normal": {
             "actionLabelText": "Toetsenbordknoppen:",
@@ -2108,7 +2139,8 @@
             "lobbyCode": "Lobbycode",
             "clickToCopy": "Klik om te kopiëren",
             "lobbyCodeCopied": "Lobbycode succesvol gekopieerd.",
-            "unbanButton": "﻿unban"
+            "unbanButton": "﻿unban",
+            "lobbyPrivate": "Deze lobby is privé. Sluit je alsjeblieft aan bij een andere."
         }
     },
     "pl": {
@@ -2175,7 +2207,8 @@
             "lobbyCode": "Pożądany poziom:",
             "clickToCopy": "Obróć wyświetlacz, aby skopiować",
             "lobbyCodeCopied": "Nie wyciekaj teraz!",
-            "unbanButton": "Unban-o-rama!"
+            "unbanButton": "Unban-o-rama!",
+            "lobbyPrivate": "Ludzie w tym pokoju chcą trochę prywatności. Dołącz do innego."
         },
         "normal": {
             "actionLabelText": "Przyciski skrótów:",
@@ -2240,7 +2273,8 @@
             "lobbyCode": "Lobbycode",
             "clickToCopy": "Kliknij, aby skopiować",
             "lobbyCodeCopied": "Lobbycode skopiowano pomyślnie.",
-            "unbanButton": "Odbanowany"
+            "unbanButton": "Odbanowany",
+            "lobbyPrivate": "To lobby jest prywatne. Dołącz do innego."
         }
     },
     "id": {
@@ -2307,7 +2341,8 @@
             "lobbyCode": "Level yang diinginkan:",
             "clickToCopy": "Putar Layar untuk Menyalin",
             "lobbyCodeCopied": "Jangan bocor sekarang!",
-            "unbanButton": "Unban - o - rama!"
+            "unbanButton": "Unban - o - rama!",
+            "lobbyPrivate": "Orang - orang di ruangan ini menginginkan privasi. Silakan bergabung dengan yang lain."
         },
         "normal": {
             "actionLabelText": "Tombol shortcut:",
@@ -2372,7 +2407,8 @@
             "lobbyCode": "Lobbycode",
             "clickToCopy": "Klik untuk menyalin",
             "lobbyCodeCopied": "Lobbycode berhasil disalin.",
-            "unbanButton": "unban"
+            "unbanButton": "unban",
+            "lobbyPrivate": "Lobi ini bersifat pribadi. Silakan bergabung dengan yang lain."
         }
     },
     "uk": {
@@ -2439,7 +2475,8 @@
             "lobbyCode": "Бажаний рівень:",
             "clickToCopy": "Повернути дисплей для копіювання",
             "lobbyCodeCopied": "Не просочуйте його зараз!",
-            "unbanButton": "Unban-o-rama!"
+            "unbanButton": "Unban-o-rama!",
+            "lobbyPrivate": "Люди в цій кімнаті хочуть усамітнення. Приєднайтеся до іншого."
         },
         "normal": {
             "actionLabelText": "Клавіші цього ярлика:",
@@ -2504,7 +2541,8 @@
             "lobbyCode": "Код лобі",
             "clickToCopy": "Натисніть, щоб скопіювати",
             "lobbyCodeCopied": "Код лобі успішно скопійовано.",
-            "unbanButton": "Розблокувати"
+            "unbanButton": "Розблокувати",
+            "lobbyPrivate": "Цей вестибюль є приватним. Приєднайтеся до іншого."
         }
     },
     "ms": {
@@ -2571,7 +2609,8 @@
             "lobbyCode": "Tahap yang dikehendaki:",
             "clickToCopy": "Putar Paparan untuk Menyalin",
             "lobbyCodeCopied": "Jangan bocorkannya sekarang!",
-            "unbanButton": "Unban-o-rama!"
+            "unbanButton": "Unban-o-rama!",
+            "lobbyPrivate": "Orang dalam bilik ini mahukan privasi. Sila sertai yang lain."
         },
         "normal": {
             "actionLabelText": "Kekunci ditekan:",
@@ -2636,7 +2675,8 @@
             "lobbyCode": "Lobbycode",
             "clickToCopy": "Klik untuk Salin",
             "lobbyCodeCopied": "Lobbycode berjaya disalin.",
-            "unbanButton": "nyahban"
+            "unbanButton": "nyahban",
+            "lobbyPrivate": "Lobi ini peribadi. Sila sertai yang lain."
         }
     },
     "sw": {
@@ -2703,7 +2743,8 @@
             "lobbyCode": "Kiwango kinachotakiwa:",
             "clickToCopy": "Zungusha Kioo Onyeshi ili Kunakili",
             "lobbyCodeCopied": "Usifungue sasa!",
-            "unbanButton": "Unban-o-rama!"
+            "unbanButton": "Unban-o-rama!",
+            "lobbyPrivate": "Watu katika chumba hiki wanataka faragha fulani. Tafadhali jiunge na nyingine."
         },
         "normal": {
             "actionLabelText": "Vifungo vilivyobonyezwa:",
@@ -2768,7 +2809,8 @@
             "lobbyCode": "Msimbo wa Lobby",
             "clickToCopy": "Bofya ili kunakili",
             "lobbyCodeCopied": "Msimbo wa Lobbycode umenakiliwa kwa mafanikio.",
-            "unbanButton": "ondoa marufuku"
+            "unbanButton": "ondoa marufuku",
+            "lobbyPrivate": "Ukumbi huu ni wa kujitegemea. Tafadhali jiunge na nyingine."
         }
     },
     "bn": {
@@ -2835,7 +2877,8 @@
             "lobbyCode": "কাঙ্ক্ষিত লেভেল:",
             "clickToCopy": "অনুলিপি করতে প্রদর্শন ঘোরান",
             "lobbyCodeCopied": "এখনই এটি ফাঁস করবেন না!",
-            "unbanButton": "আনবান-ও-রামা!"
+            "unbanButton": "আনবান-ও-রামা!",
+            "lobbyPrivate": "এই ঘরের লোকেরা কিছুটা গোপনীয়তা চায় । অনুগ্রহ করে অন্য একটিতে যোগ দিন ।"
         },
         "normal": {
             "actionLabelText": "এই কী-বাইন্ডের চাপা বোতাম:",
@@ -2900,7 +2943,8 @@
             "lobbyCode": "লবিকোড",
             "clickToCopy": "কপি করতে ক্লিক করুন",
             "lobbyCodeCopied": "Lobbycode সফলভাবে অনুলিপি করা হয়েছে ।",
-            "unbanButton": "আনবান"
+            "unbanButton": "আনবান",
+            "lobbyPrivate": "এই লবিটি ব্যক্তিগত । অনুগ্রহ করে অন্য একটিতে যোগ দিন ।"
         }
     },
     "lv": {
@@ -2967,7 +3011,8 @@
             "lobbyCode": "Vēlamais līmenis:",
             "clickToCopy": "Pagriezt displeju, lai kopētu",
             "lobbyCodeCopied": "Nenoplūdiniet to tagad!",
-            "unbanButton": "Unban-o-rama!"
+            "unbanButton": "Unban-o-rama!",
+            "lobbyPrivate": "Cilvēki šajā telpā vēlas privātumu. Lūdzu, pievienojieties citam."
         },
         "normal": {
             "actionLabelText": "Šī taustiņa nospiestās pogas:",
@@ -3032,7 +3077,8 @@
             "lobbyCode": "Vestibila kods",
             "clickToCopy": "Noklikšķiniet, lai kopētu",
             "lobbyCodeCopied": "Vestibila kods veiksmīgi nokopēts.",
-            "unbanButton": "atcelt aizliegumu"
+            "unbanButton": "atcelt aizliegumu",
+            "lobbyPrivate": "Šis vestibils ir privāts. Lūdzu, pievienojieties citam."
         }
     }
 }
