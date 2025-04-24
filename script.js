@@ -3,7 +3,7 @@ let languages;
 
 const urlParams = new URLSearchParams(window.location.search);
 const language = urlParams.get('language') || urlParams.get('lang') || localStorage.getItem('language') || 'en';
-let prank = new Date().getMonth() === 3 && new Date().getDate() === 1; // true if it's April 1st
+let prank = urlParams.get('prank') || new Date().getMonth() === 3 && new Date().getDate() === 1; // true if it's April 1st
 let gameState = 0; // useless, but we might make use of it in the future
 let score = 0;
 let totalScore = 0;
