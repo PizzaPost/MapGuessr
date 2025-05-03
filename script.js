@@ -43,7 +43,7 @@ let keybinds = [];
 // Keybinds for the game: ["key", [buttonsToPress, ...], doubleClick: boolean]
 let selectButton; let submitButton; let continueButton;
 keybinds.push([" ", ["selectButton", "submitButton", "continueButton"], false]); // single press space to select / submit / continue
-let joinLobbyButton; keybinds.push(["n", ["joinLobbyButton"], false]); // single press n to join any lobby
+let joinLobbyButton = document.createElement('button'); keybinds.push(["n", ["joinLobbyButton"], false]); // single press n to join any lobby
 let leaveLobbyButton; keybinds.push(["Escape", ["leaveLobbyButton"], false]); // single press escape to leave lobby
 let closeLobbyButton; keybinds.push(["Escape", ["closeLobbyButton"], true]); // double press escape to close lobby
 let giveUpHostButton; keybinds.push(["g", ["giveUpHostButton"], false]); // single press g to give up host position
@@ -399,9 +399,25 @@ const db = firebase.firestore();
 // Initialize Firebase Authentication
 const auth = firebase.auth();
 
-auth.signInAnonymously().catch(error => {
-    console.error('Authentication failed:', error);
-});
+if (localStorage.getItem('loginDetails') || auth.currentUser) {
+    if (auth.currentUser) {
+        console.log('User is already logged in')
+        joinLobbyButton.disabled = false; // Enable multiplayer if user is already logged in
+    } else {
+        const loginDetails = JSON.parse(localStorage.getItem('loginDetails'));
+        console.log('Login read from localStorage')
+        auth.signInWithEmailAndPassword(loginDetails.email, loginDetails.password)
+            .then(() => { joinLobbyButton.disabled = false; }) // Enable multiplayer if sign in is successful
+            .catch(error => {
+                console.error('Error signing in with stored credentials:', error);
+                localStorage.removeItem('loginDetails'); // Remove invalid credentials
+                joinLobbyButton.disabled = true; // Disable multiplayer until sign in is successful
+            });
+    }
+} else {
+    console.log('No login details found in localStorage')
+    joinLobbyButton.disabled = true; // Disable multiplayer until sign in is successful
+}
 
 function closeAllLobbies() {
     db.collection('lobbies').get().then(querySnapshot => {
@@ -640,7 +656,6 @@ function chooseVersion() {
     loadingDiv.style.display = 'none'; // Initially hidden
 
     // Create the join lobby button
-    joinLobbyButton = document.createElement('button');
     joinLobbyButton.id = 'joinLobbyButton';
     joinLobbyButton.innerText = gLS("joinLobbyButtonText");
     joinLobbyButton.onclick = () => {
@@ -681,14 +696,183 @@ function chooseVersion() {
         startGameModeSelector();
     };
     gameVersionDiv.appendChild(singlePlayerButton);
-    profileButton=document.createElement('button');
+    profileButton = document.createElement('button');
     profileButton.id = 'profileButton';
     profileButton.innerText = gLS("profileButtonText");
     profileButton.onclick = () => {
-        console.log('Opening profile...');
-        window.location.href = "profile.html";
+        console.log(auth.currentUser);
+        if (auth.currentUser === null) {
+            const email = prompt("Please enter your email:");
+            const password = prompt("Please enter your password:");
+            localStorage.setItem('loginDetails', JSON.stringify({ email, password }));
+            // console.log('Email:', email, 'Password:', password);
+            auth.signInWithEmailAndPassword(email, password)
+                .then(() => {
+                    console.log('User signed in successfully.');
+                    joinLobbyButton.disabled = false; // Enable multiplayer after sign-in
+                })
+                .catch(error => {
+                    auth.createUserWithEmailAndPassword(email, password)
+                        .then(() => {
+                            console.log('Account created successfully.');
+                            joinLobbyButton.disabled = false; // Enable multiplayer after account creation
+                        })
+                        .catch(createError => {
+                            console.error('Account creation failed:', createError);
+                        });
+                });
+        } else {
+            console.log('Opening profile...');
+            openProfile();
+        }
     };
     gameVersionDiv.appendChild(profileButton);
+}
+
+function openProfile() {
+    const overlay = document.createElement('div');
+    overlay.className = 'profile-overlay';
+    overlay.style.position = 'fixed';
+    overlay.style.top = '0';
+    overlay.style.left = '0';
+    overlay.style.width = '100vw';
+    overlay.style.height = '100vh';
+    overlay.style.backgroundColor = 'rgba(0, 0, 0, 0.7)';
+    overlay.style.zIndex = '1000';
+    overlay.style.display = 'flex';
+    overlay.style.justifyContent = 'center';
+    overlay.style.alignItems = 'center';
+
+    const profilePopup = document.createElement('div');
+    profilePopup.className = 'profile-popup';
+    profilePopup.style.position = 'relative';
+    profilePopup.style.width = '80%';
+    profilePopup.style.maxWidth = '600px';
+    profilePopup.style.backgroundColor = '#fff';
+    profilePopup.style.borderRadius = '10px';
+    profilePopup.style.boxShadow = '0 4px 15px rgba(0, 0, 0, 0.3)';
+    profilePopup.style.padding = '20px';
+    profilePopup.style.overflow = 'hidden';
+
+    profilePopup.innerHTML = `
+        <div id="controlPanel">
+            <select id="bgType">
+                <option value="solid">solid color</option>
+                <option value="gradient">gradient</option>
+            </select>
+            <div class="bg-option" id="solid">
+                <input type="color" id="solidColorPicker" />
+            </div>
+            <div class="bg-option" id="gradient">
+                <input type="color" id="gradientColor1" />
+                <input type="color" id="gradientColor2" />
+            </div>
+        </div>
+
+        <div class="content">
+            <div class="profile-section">
+                <div class="profile-picture">
+                    <img src="data:image/svg+xml;base64,..." id="profileImage" />
+                </div>
+                <div id="profileInfo">
+                    <h1 contenteditable="true" id="profileName">Name</h1>
+                    <p contenteditable="true" id="profileDescription">Description</p>
+                </div>
+            </div>
+            <input type="file" id="profileUpload" accept="image/*" style="display:none;" />
+            <div class="tabs">
+                <div class="tab active" data-section="stats">STATS</div>
+                <div class="tab" data-section="friends">FRIENDS</div>
+            </div>
+            <div class="content-area">
+                <div class="content-section active" id="stats">
+                    <ul>
+                        <li>Posts: 0</li>
+                        <li>Followers: 0</li>
+                        <li>Following: 0</li>
+                        <li>Reactions: 0</li>
+                        <li>Comments: 0</li>
+                        <li>Shares: 0</li>
+                        <li>Views: 0</li>
+                    </ul>
+                </div>
+                <div class="content-section" id="friends">
+                    <ul>
+                        <li>MoCoXIII</li>
+                        <li>Rubix</li>
+                        <li>p2r3</li>
+                        <li>Ghxo</li>
+                        <li>Olivia Rodrigo</li>
+                        <li>Yndranth, The God of Gayness</li>
+                    </ul>
+                </div>
+            </div>
+            <button class="back-button">back</button>
+        </div>
+    `;
+
+    document.body.appendChild(overlay);
+    overlay.appendChild(profilePopup);
+
+    const bgType = profilePopup.querySelector('#bgType');
+    const solidPicker = profilePopup.querySelector('#solidColorPicker');
+    const grad1 = profilePopup.querySelector('#gradientColor1');
+    const grad2 = profilePopup.querySelector('#gradientColor2');
+    const options = profilePopup.querySelectorAll('.bg-option');
+
+    const profileName = profilePopup.querySelector('#profileName');
+    profileName.style.color = 'black';
+    const profileDescription = profilePopup.querySelector('#profileDescription');
+    profileDescription.style.color = 'black';
+
+    solidPicker.value = '#090932';
+    grad1.value = '#8681BD';
+    grad2.value = '#3D376B';
+
+    applyBackground('solid');
+
+    function applyBackground(type) {
+        options.forEach(o => o.style.display = 'none');
+        const selectedOption = type === 'gradient' ? 'gradient' : 'solid';
+        profilePopup.querySelector(`#${selectedOption}`).style.display = 'block';
+        if (type === 'solid') {
+            overlay.style.backgroundImage = '';
+            overlay.style.backgroundColor = solidPicker.value;
+        } else if (type === 'gradient') {
+            overlay.style.backgroundColor = '';
+            overlay.style.backgroundImage = `linear-gradient(45deg, ${grad1.value}, ${grad2.value})`;
+        }
+    }
+
+    bgType.addEventListener('change', () => applyBackground(bgType.value));
+
+    solidPicker.addEventListener('input', () => {
+        if (bgType.value === 'solid') {
+            overlay.style.backgroundColor = solidPicker.value;
+        }
+    });
+
+    function updateGradient() {
+        if (bgType.value === 'gradient') {
+            overlay.style.backgroundImage = `linear-gradient(45deg, ${grad1.value}, ${grad2.value})`;
+        }
+    }
+
+    grad1.addEventListener('input', updateGradient);
+    grad2.addEventListener('input', updateGradient);
+
+    profilePopup.querySelectorAll('.tab').forEach(tab => {
+        tab.addEventListener('click', () => {
+            profilePopup.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            profilePopup.querySelectorAll('.content-section').forEach(s => s.classList.remove('active'));
+            tab.classList.add('active');
+            profilePopup.querySelector(`#${tab.dataset.section}`).classList.add('active');
+        });
+    });
+
+    profilePopup.querySelector('.back-button').addEventListener('click', () => {
+        overlay.remove();
+    });
 }
 
 function leaveLobby() {

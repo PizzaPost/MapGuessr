@@ -315,6 +315,18 @@ input[type="checkbox"] {
     margin-left: 8px;
 }
 
+button:disabled {
+    background: darkred;
+    color: white;
+    cursor: not-allowed;
+    box-shadow: #920000 0 4px 15px;
+}
+
+button:disabled:hover {
+    background: darkred;
+    box-shadow: #920000 0 4px 15px;
+}
+
 ::-webkit-scrollbar {
     width: 8px;
 }
