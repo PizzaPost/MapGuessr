@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Profilseite</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            background: none;
+            transition: background 1s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="controlPanel">
+        <select id="bgType">
+            <option value="solid">solid color</option>
+            <option value="gradient">gradient</option>
+        </select>
+        <div class="bg-option" id="solid">
+            <input type="color" id="solidColorPicker" />
+        </div>
+        <div class="bg-option" id="gradient">
+            <input type="color" id="gradientColor1" />
+            <input type="color" id="gradientColor2" />
+        </div>
+    </div>
+
+    <div class="content">
+        <div class="profile-section">
+            <div class="profile-picture">
+                <img src="data:image/svg+xml;base64,..." id="profileImage" />
+            </div>
+            <div id="profileInfo">
+                <h1 contenteditable="true">Name</h1>
+                <p contenteditable="true">Description</p>
+            </div>
+        </div>
+        <input type="file" id="profileUpload" accept="image/*" style="display:none;" />
+        <div class="tabs">
+            <div class="tab active" data-section="stats">STATS</div>
+            <div class="tab" data-section="friends">FRIENDS</div>
+        </div>
+        <div class="content-area">
+            <div class="content-section active" id="stats">
+                <ul>
+                    <li>Posts: 0</li>
+                    <li>Followers: 0</li>
+                    <li>Following: 0</li>
+                    <li>Reactions: 0</li>
+                    <li>Comments: 0</li>
+                    <li>Shares: 0</li>
+                    <li>Views: 0</li>
+                </ul>
+            </div>
+            <div class="content-section" id="friends">
+                <ul>
+                    <li>MoCoXIII</li>
+                    <li>Rubix</li>
+                    <li>p2r3</li>
+                    <li>Ghxo</li>
+                    <li>Olivia Rodrigo</li>
+                    <li>Yndranth, The God of Gayness</li>
+                </ul>
+            </div>
+        </div>
+        <button class="back-button" onclick="window.location.href = 'index.html';">back</button>
+    </div>
+
+    <script>
+        window.addEventListener('DOMContentLoaded', () => {
+            const bgType = document.getElementById('bgType');
+            const solidPicker = document.getElementById('solidColorPicker');
+            const grad1 = document.getElementById('gradientColor1');
+            const grad2 = document.getElementById('gradientColor2');
+            const options = document.querySelectorAll('.bg-option');
+
+            solidPicker.value = '#090932';
+            grad1.value = '#8681BD';
+            grad2.value = '#3D376B';
+
+            updateGradient();
+            document.body.style.backgroundImage = '';
+            document.body.style.backgroundColor = solidPicker.value;
+            applyBackground('solid');
+
+            function applyBackground(type) {
+                options.forEach(o => o.style.display = 'none');
+                const selectedOption = type === 'gradient' ? 'gradient' : 'solid';
+                document.getElementById(selectedOption).style.display = 'block';
+                if (type === 'solid') {
+                    document.body.style.backgroundImage = '';
+                    document.body.style.backgroundColor = solidPicker.value;
+                } else if (type === 'gradient') {
+                    document.body.style.backgroundColor = '';
+                    document.body.style.backgroundImage = `linear-gradient(45deg, ${grad1.value}, ${grad2.value})`;
+                }
+            }
+
+            bgType.addEventListener('change', () => applyBackground(bgType.value));
+
+            solidPicker.addEventListener('input', () => {
+                if (bgType.value === 'solid') {
+                    document.body.style.backgroundColor = solidPicker.value;
+                }
+            });
+
+            function updateGradient() {
+                if (bgType.value === 'gradient') {
+                    document.body.style.backgroundImage = `linear-gradient(45deg, ${grad1.value}, ${grad2.value})`;
+                }
+            }
+
+            grad1.addEventListener('input', updateGradient);
+            grad2.addEventListener('input', updateGradient);
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.addEventListener('click', () => {
+                    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                    document.querySelectorAll('.content-section').forEach(s => s.classList.remove('active'));
+                    tab.classList.add('active');
+                    document.getElementById(tab.dataset.section).classList.add('active');
+                });
+            });
+            grad1.addEventListener('input', updateGradient);
+            grad2.addEventListener('input', updateGradient);
+
+            function applyImageStyles() {
+                if (!document.body.style.backgroundImage) return;
+                document.body.style.backgroundSize = `${scaleSlider.value * 100}%`;
+                document.body.style.backgroundPosition = `${posXSlider.value}% ${posYSlider.value}%`;
+                document.body.style.backgroundRepeat = 'no-repeat';
+            }
+
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.addEventListener('click', () => {
+                    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                    document.querySelectorAll('.content-section').forEach(s => s.classList.remove('active'));
+                    tab.classList.add('active');
+                    document.getElementById(tab.dataset.section).classList.add('active');
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>

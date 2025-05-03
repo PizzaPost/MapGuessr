@@ -681,6 +681,14 @@ function chooseVersion() {
         startGameModeSelector();
     };
     gameVersionDiv.appendChild(singlePlayerButton);
+    profileButton=document.createElement('button');
+    profileButton.id = 'profileButton';
+    profileButton.innerText = gLS("profileButtonText");
+    profileButton.onclick = () => {
+        console.log('Opening profile...');
+        window.location.href = "profile.html";
+    };
+    gameVersionDiv.appendChild(profileButton);
 }
 
 function leaveLobby() {
