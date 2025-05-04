@@ -619,7 +619,41 @@ button:disabled:hover {
     outline: 2px dashed var(--accent-color);
 }
 
-/* Button Styling */
+#loginEmail {
+    height: 38px;
+    padding: 10px;
+    border: 2px solid #ccc;
+    border-top-left-radius: 12px;
+    border-bottom-left-radius: 12px;
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+    font-size: 16px;
+    transition: border-color 0.3s ease-in-out;
+}
+
+#loginEmail:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+#loginPassword {
+    height: 38px;
+    padding: 10px;
+    border: 2px solid #ccc;
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+    border-top-right-radius: 12px;
+    border-bottom-right-radius: 12px;
+    font-size: 16px;
+    transition: border-color 0.3s ease-in-out;
+    margin-left: -0.25em;
+}
+
+#loginPassword:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
 button {
     background: var(--button-bg);
     color: var(--button-color);
@@ -1543,6 +1577,15 @@ button:hover::after {
     }
 }
 
+@keyframes glow {
+    0%, 100% {
+        box-shadow: 0 0 0 2px #33ccff, 0 0 10px 6px #33ccff;
+    }
+    50% {
+        box-shadow: 0 0 0 2px #33ccff, 0 0 15px 8px #33ccff;
+    }
+}
+
 /* Dark/Light Mode Transitions */
 #welcome-container,
 #welcome-container header,
@@ -1825,15 +1868,15 @@ body,
     }
 
     .button-red {
-        font-size: 60%;
+        font-size: 75%;
     }
 
     .button-green {
-        font-size: 60%;
+        font-size: 75%;
     }
 
     .button-gray {
-        font-size: 60%;
+        font-size: 75%;
     }
 
     #playerList {
@@ -1877,5 +1920,38 @@ body,
         transition: background-color 0.2s;
         opacity: 0;
         animation: fadeInSlide 0.3s ease forwards;
+    }
+
+    #loginPassword,
+    #loginEmail {
+        width: 100%;
+        height: 3em;
+        border: 0.2em solid #ccc;
+        font-size: clamp(2rem, 5vw, 3rem);
+        padding: 0.5em;
+        margin: 0.75em 0;
+        outline: none;
+    }
+
+    #loginEmail {
+        border-top-left-radius: 1em;
+        border-top-right-radius: 1em;
+    }
+
+    #loginPassword {
+        border-bottom-left-radius: 1em;
+        border-bottom-right-radius: 1em;
+        margin-top: -1.3em;
+    }
+
+    #loginAlert {
+        width: 9999em;
+    }
+
+    #loginSubmit {
+        width: 100%;
+        height: 2.4em;
+        font-size: clamp(2rem, 5vw, 3rem);
+        border-radius: 0.75em;
     }
 }

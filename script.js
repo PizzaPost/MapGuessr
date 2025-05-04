@@ -674,6 +674,19 @@ function chooseVersion() {
     // Create the join lobby button
     joinLobbyButton.id = 'joinLobbyButton';
     joinLobbyButton.innerText = gLS("joinLobbyButtonText");
+    joinLobbyButton.addEventListener("mouseenter", () => {
+        if (joinLobbyButton.disabled) {
+            profileButton.style.transition = "transform 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55)";
+            profileButton.style.transform = "scale(1.3)";
+            profileButton.style.boxShadow = "0 0 0 2px #33ccff, 0 0 10px 4px #33ccff";
+            profileButton.style.animation = "glow 1s ease infinite";
+        }
+    });
+
+    joinLobbyButton.addEventListener("mouseleave", () => {
+        profileButton.style.transform = "scale(1)";
+        profileButton.style.boxShadow = "none";
+    });
     joinLobbyButton.onclick = () => {
         isOnline = true;
         lobbyName = lobbyInput.value.trim();
@@ -714,7 +727,14 @@ function chooseVersion() {
     gameVersionDiv.appendChild(singlePlayerButton);
     profileButton = document.createElement('button');
     profileButton.id = 'profileButton';
-    profileButton.innerText = gLS("profileButtonText");
+    profileButton.innerText = gLS("loginButtonText");
+    if (localStorage.getItem('loginDetails') || auth.currentUser) {
+        if (auth.currentUser) {
+            profileButton.innerText = gLS("profileButtonText");
+        } else {
+            profileButton.innerText = gLS("profileButtonText");
+        }
+    }
     profileButton.onclick = () => {
         console.log(auth.currentUser);
         if (auth.currentUser === null) {
@@ -749,7 +769,7 @@ function chooseVersion() {
                     .then(() => {
                         console.log('User signed in successfully.');
                         closeAlert();
-                        profileButton.click();
+                        profileButton.innerText = gLS("profileButtonText");
                         joinLobbyButton.disabled = false; // Enable multiplayer after sign-in
                     })
                     .catch(error => {
@@ -757,7 +777,7 @@ function chooseVersion() {
                             .then(() => {
                                 console.log('Account created successfully.');
                                 closeAlert();
-                                profileButton.click();
+                                profileButton.innerText = gLS("profileButtonText");
                                 joinLobbyButton.disabled = false; // Enable multiplayer after account creation
                             })
                             .catch(createError => {
