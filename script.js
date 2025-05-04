@@ -849,8 +849,8 @@ function openProfile() {
     profilePopup.innerHTML = `
         <div id="controlPanel">
             <select id="bgType">
-                <option value="solid">solid color</option>
-                <option value="gradient">gradient</option>
+                <option id="solidOption" value="solid">solid color</option>
+                <option id="gradientOption" value="gradient">gradient</option>
             </select>
             <div class="bg-option" id="solid">
                 <input type="color" id="solidColorPicker" />
@@ -872,8 +872,8 @@ function openProfile() {
                 </div>
             </div>
             <div class="tabs">
-                <div class="tab active" data-section="stats">STATS</div>
-                <div class="tab" data-section="friends">FRIENDS</div>
+                <div id="statsTab" class="tab active" data-section="stats"></div>
+                <div id="friendsTab" class="tab" data-section="friends"></div>
             </div>
             <div class="content-area">
                 <div class="content-section active" id="stats">
@@ -898,7 +898,7 @@ function openProfile() {
                     </ul>
                 </div>
             </div>
-            <button class="back-button">back</button>
+            <button id="back-button" class="back-button"></button>
         </div>
     `;
 
@@ -910,6 +910,17 @@ function openProfile() {
     const grad1 = profilePopup.querySelector('#gradientColor1');
     const grad2 = profilePopup.querySelector('#gradientColor2');
     const options = profilePopup.querySelectorAll('.bg-option');
+    const statsTab = document.getElementById("statsTab");
+    const friendsTab = document.getElementById("friendsTab");
+    const backButton = document.getElementById("back-button");
+    const solidColor= document.getElementById("solidOption");
+    const gradientColor= document.getElementById("gradientOption");
+
+    statsTab.textContent = gLS("statsTabText");
+    friendsTab.textContent = gLS("friendsTabText");
+    backButton.textContent = gLS("backButtonText");
+    solidColor.textContent = gLS("solidColorText");
+    gradientColor.textContent = gLS("gradientColorText");
 
     const profileName = profilePopup.querySelector('#profileName');
     profileName.style.color = 'black';

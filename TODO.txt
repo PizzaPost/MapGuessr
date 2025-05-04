@@ -25,3 +25,15 @@ TODO:
 - global leaderboard
 - friends leaderboard
 - more maps
+
+TRANSLATIONS:
+- loginButtonText
+- loginTitle
+- loginText
+- emailPlaceholder
+- passwordPlaceholder
+- profileButtonText
+- statsTabText
+- friendsTabText
+- solidColorText
+- gradientText
