@@ -214,8 +214,13 @@ footer {
     width: 100vw;
     height: 100vh;
     background: rgba(0, 0, 0, 0);
-    z-index: 999;
+    z-index: 1000;
     pointer-events: auto;
+    backdrop-filter: blur(2px);
+}
+
+.login-overlay {
+    backdrop-filter: blur(2px);
 }
 
 .custom-alert {
@@ -247,6 +252,7 @@ footer {
     background: rgba(0, 0, 0, 0);
     z-index: 1001;
     pointer-events: auto;
+    backdrop-filter: blur(2px);
 }
 
 /* Alert variations */
@@ -992,7 +998,7 @@ button:hover::after {
 }
 
 .tab.active {
-    background: var(--accent-color);
+    background: var(--button-bg);
     font-weight: bold;
 }
 
@@ -1252,6 +1258,7 @@ button:hover::after {
     justify-content: center;
     align-items: center;
     z-index: 1000;
+    backdrop-filter: blur(2px);
 }
 
 .keybinds {

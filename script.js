@@ -367,6 +367,14 @@ function gLS(key) { // get language string
     return languages[language][prank ? 'aprilFools' : 'normal'][key] || key;
 }
 
+function charLimit(element, limit) {
+    element2 = document.getElementById(element);
+    if (element2.innerText.length > limit) {
+        element2.innerText = element2.innerText.slice(0, limit);
+        element2.blur();
+    }
+}
+
 if (showHistory) {
     toggleHistory.classList.add('disabled');
 }
@@ -702,25 +710,83 @@ function chooseVersion() {
     profileButton.onclick = () => {
         console.log(auth.currentUser);
         if (auth.currentUser === null) {
-            const email = prompt("Please enter your email:");
-            const password = prompt("Please enter your password:");
-            localStorage.setItem('loginDetails', JSON.stringify({ email, password }));
-            // console.log('Email:', email, 'Password:', password);
-            auth.signInWithEmailAndPassword(email, password)
-                .then(() => {
-                    console.log('User signed in successfully.');
-                    joinLobbyButton.disabled = false; // Enable multiplayer after sign-in
-                })
-                .catch(error => {
-                    auth.createUserWithEmailAndPassword(email, password)
-                        .then(() => {
-                            console.log('Account created successfully.');
-                            joinLobbyButton.disabled = false; // Enable multiplayer after account creation
-                        })
-                        .catch(createError => {
-                            console.error('Account creation failed:', createError);
-                        });
-                });
+            profileButton.blur();
+            const loginOverlay = document.createElement('div');
+            loginOverlay.id = 'loginOverlay';
+            loginOverlay.zIndex = '999';
+            loginOverlay.classList.add('custom-alert-overlay');
+            loginOverlay.style.background = 'rgba(0, 0, 0, 0.5)';
+            loginOverlay.style.backdropFilter = 'blur(2px)';
+            loginOverlay.innerHTML = `
+                <div class="custom-alert" id="loginAlert">
+                    <h2>${gLS("loginTitle")}</h2>
+                    <p>${gLS("loginText")}</p>
+                    <input type="email" id="loginEmail" placeholder="${gLS("emailPlaceholder")}" required>
+                    <input type="password" id="loginPassword" placeholder="${gLS("passwordPlaceholder")}" required>
+                    <button id="loginSubmit">${gLS("loginButtonText")}</button>
+                </div>
+            `;
+            document.body.appendChild(loginOverlay);
+
+            const loginEmail = document.getElementById('loginEmail');
+            const loginPassword = document.getElementById('loginPassword');
+            const loginSubmit = document.getElementById('loginSubmit');
+            const loginAlert = document.getElementById('loginAlert');
+
+            loginSubmit.onclick = () => {
+                const email = loginEmail.value.trim();
+                const password = loginPassword.value.trim();
+                localStorage.setItem('loginDetails', JSON.stringify({ email, password }));
+                auth.signInWithEmailAndPassword(email, password)
+                    .then(() => {
+                        console.log('User signed in successfully.');
+                        closeAlert();
+                        profileButton.click();
+                        joinLobbyButton.disabled = false; // Enable multiplayer after sign-in
+                    })
+                    .catch(error => {
+                        auth.createUserWithEmailAndPassword(email, password)
+                            .then(() => {
+                                console.log('Account created successfully.');
+                                closeAlert();
+                                profileButton.click();
+                                joinLobbyButton.disabled = false; // Enable multiplayer after account creation
+                            })
+                            .catch(createError => {
+                                showCustomAlert(createError.message.replace('Firebase:', ''), 0);
+                            });
+                    });
+            };
+            function closeAlert() {
+                loginAlert.style.animation = 'shrinkOut 0.2s ease-in forwards';
+                loginOverlay.style.opacity = '0';
+                loginOverlay.style.transition = 'opacity 0.2s ease-in';
+                loginOverlay.addEventListener('animationend', () => {
+                    loginAlert.remove();
+                    loginOverlay.remove();
+                    document.removeEventListener('keydown', keyHandler);
+                }, { once: true });
+
+                if (reload) {
+                    window.location.reload();
+                }
+            }
+
+            loginOverlay.onclick = (event) => {
+                if (!loginAlert.contains(event.target)) {
+                    closeAlert();
+                }
+            };
+
+            document.addEventListener('keydown', (event) => {
+                if (event.key === 'Enter' && loginOverlay.parentNode) {
+                    // Check if any input is focused
+                    if (document.activeElement === loginEmail ||
+                        document.activeElement === loginPassword) {
+                        loginSubmit.click();
+                    }
+                }
+            });
         } else {
             console.log('Opening profile...');
             openProfile();
@@ -746,11 +812,9 @@ function openProfile() {
     const profilePopup = document.createElement('div');
     profilePopup.className = 'profile-popup';
     profilePopup.style.position = 'relative';
-    profilePopup.style.width = '80%';
-    profilePopup.style.maxWidth = '600px';
-    profilePopup.style.backgroundColor = '#fff';
-    profilePopup.style.borderRadius = '10px';
-    profilePopup.style.boxShadow = '0 4px 15px rgba(0, 0, 0, 0.3)';
+    profilePopup.style.width = '100%';
+    profilePopup.style.maxWidth = '1200px';
+    profilePopup.style.backgroundColor = 'none';
     profilePopup.style.padding = '20px';
     profilePopup.style.overflow = 'hidden';
 
@@ -772,14 +836,13 @@ function openProfile() {
         <div class="content">
             <div class="profile-section">
                 <div class="profile-picture">
-                    <img src="data:image/svg+xml;base64,..." id="profileImage" />
+                    <img src="images/no-pf-pic.png" id="profileImage" />
                 </div>
                 <div id="profileInfo">
-                    <h1 contenteditable="true" id="profileName">Name</h1>
-                    <p contenteditable="true" id="profileDescription">Description</p>
+                    <h1 contenteditable="true" onkeydown="charLimit('profileName', 30);" onkeyup="charLimit('profileName', 30);" onkeypress="charLimit('profileName', 30);" id="profileName">Name</h1>
+                    <p style="width: 970px;" contenteditable="true" onkeydown="charLimit('profileDescription', 320);" onkeyup="charLimit('profileDescription', 320);" onkeypress="charLimit('profileDescription', 320);" id="profileDescription">Description</p>
                 </div>
             </div>
-            <input type="file" id="profileUpload" accept="image/*" style="display:none;" />
             <div class="tabs">
                 <div class="tab active" data-section="stats">STATS</div>
                 <div class="tab" data-section="friends">FRIENDS</div>
@@ -825,7 +888,7 @@ function openProfile() {
     const profileDescription = profilePopup.querySelector('#profileDescription');
     profileDescription.style.color = 'black';
 
-    solidPicker.value = '#090932';
+    solidPicker.value = '#092E6A';
     grad1.value = '#8681BD';
     grad2.value = '#3D376B';
 
@@ -1266,7 +1329,6 @@ function showCustomAlert(message, mode = 0, cont = null, reload = false) {
     // Create overlay to block interactions
     const overlay = document.createElement('div');
     overlay.className = 'custom-alert-overlay';
-
     // Create the alert box
     alertBox = document.createElement('div');
     alertBox.id = 'custom-alert';
@@ -2056,6 +2118,7 @@ function createMoreButton() {
             }
             if (event.target.id === 'localStorageReset') {
                 localStorage.clear();
+                firebase.auth().signOut();
                 showCustomAlert(gLS("localStorageCleared"), 1);
             }
         }
