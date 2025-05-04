@@ -177,7 +177,15 @@ function initialDeviceCheck() {
 
             const header = document.createElement('header');
             const headerTitle = document.createElement('h1');
-            headerTitle.textContent = gLS("welcomeTitle");
+            headerTitle.id = 'welcome-title';
+            const raw = gLS("welcomeTitle");
+            const emojiMatch = raw.match(/^(\p{Emoji_Presentation}|\p{Emoji}\uFE0F)/u);
+            const emoji = emojiMatch ? emojiMatch[0] : "";
+            const text = emoji ? raw.slice(emoji.length) : raw;
+            headerTitle.innerHTML = `
+                <span>${emoji}</span>
+                <span class="shimmer-text">${text}</span>
+            `;
             header.appendChild(headerTitle);
 
             const contentWrapper = document.createElement('div');

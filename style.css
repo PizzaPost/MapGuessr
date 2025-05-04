@@ -1019,7 +1019,30 @@ button:hover::after {
     display: block;
 }
 
+.shimmer-text {
+    display: inline-block;
+    color: transparent;
+    background: linear-gradient(90deg,
+            #222 20%,
+            #5e5e5e 50%,
+            #222 80%);
+    background-size: 200% 100%;
+    animation: shimmer 3s infinite ease-in-out alternate;
+    -webkit-background-clip: text;
+    background-clip: text;
+}
+
 /* Animations */
+@keyframes shimmer {
+    0% {
+        background-position: -200% 0;
+    }
+
+    100% {
+        background-position: 200% 0;
+    }
+}
+
 @keyframes fadeIn {
     from {
         opacity: 0;
