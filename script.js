@@ -676,8 +676,7 @@ function chooseVersion() {
     joinLobbyButton.innerText = gLS("joinLobbyButtonText");
     joinLobbyButton.addEventListener("mouseenter", () => {
         if (joinLobbyButton.disabled) {
-            profileButton.style.transition = "transform 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55)";
-            profileButton.style.transform = "scale(1.3)";
+            profileButton.style.transform = "translate(-30px, 20px) scale(1.3)";
             profileButton.style.boxShadow = "0 0 0 2px #33ccff, 0 0 10px 4px #33ccff";
             profileButton.style.animation = "glow 1s ease infinite";
         }
@@ -686,6 +685,7 @@ function chooseVersion() {
     joinLobbyButton.addEventListener("mouseleave", () => {
         profileButton.style.transform = "scale(1)";
         profileButton.style.boxShadow = "none";
+        profileButton.style.animation = "none";
     });
     joinLobbyButton.onclick = () => {
         profileButton.style.display = 'none';
