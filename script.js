@@ -869,9 +869,9 @@ function openProfile() {
                     <img src="images/no-pf-pic.png" id="profileImage" />
                 </div>
                 <div id="profileInfo">
-                    <h1 contenteditable="true" onkeydown="charLimit('profileName', 30);" onkeyup="charLimit('profileName', 30);" onkeypress="charLimit('profileName', 30);" id="profileName">Name</h1>
-                    <p style="width: 970px;" contenteditable="true" onkeydown="charLimit('profileDescription', 320);" onkeyup="charLimit('profileDescription', 320);" onkeypress="charLimit('profileDescription', 320);" id="profileDescription">Description</p>
+                    <h1 style="width: 650px; font-size: clamp(2rem, 5vw, 3rem);" contenteditable="true" onkeydown="charLimit('profileName', 25);" onkeyup="charLimit('profileName', 25);" onkeypress="charLimit('profileName', 25);" id="profileName">Name</h1>
                 </div>
+                    <p style="width: 900px; max-height: 200px; overflow-y: scroll; font-size: clamp(0.5rem, 1.25vw, 0.75rem);" contenteditable="true" onkeydown="charLimit('profileDescription', 350);" onkeyup="charLimit('profileDescription', 350);" onkeypress="charLimit('profileDescription', 350);" id="profileDescription">Description</p>
             </div>
             <div class="tabs">
                 <div id="statsTab" class="tab active" data-section="stats"></div>
