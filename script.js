@@ -688,6 +688,7 @@ function chooseVersion() {
         profileButton.style.boxShadow = "none";
     });
     joinLobbyButton.onclick = () => {
+        profileButton.style.display = 'none';
         isOnline = true;
         lobbyName = lobbyInput.value.trim();
         userName = nameInput.value.trim();
@@ -723,6 +724,7 @@ function chooseVersion() {
         console.log('Starting single player game...');
         gameVersionDiv.style.display = 'none';
         startGameModeSelector();
+        profileButton.style.display = 'none';
     };
     gameVersionDiv.appendChild(singlePlayerButton);
     profileButton = document.createElement('button');
@@ -820,7 +822,7 @@ function chooseVersion() {
             openProfile();
         }
     };
-    gameVersionDiv.appendChild(profileButton);
+    document.body.appendChild(profileButton);
 }
 
 function openProfile() {
@@ -847,7 +849,7 @@ function openProfile() {
     profilePopup.style.overflow = 'hidden';
 
     profilePopup.innerHTML = `
-        <div id="controlPanel">
+        <div id="controlPanel" style="animation: slideInLeft 0.5s ease-out forwards;">
             <select id="bgType">
                 <option id="solidOption" value="solid">solid color</option>
                 <option id="gradientOption" value="gradient">gradient</option>
@@ -913,8 +915,8 @@ function openProfile() {
     const statsTab = document.getElementById("statsTab");
     const friendsTab = document.getElementById("friendsTab");
     const backButton = document.getElementById("back-button");
-    const solidColor= document.getElementById("solidOption");
-    const gradientColor= document.getElementById("gradientOption");
+    const solidColor = document.getElementById("solidOption");
+    const gradientColor = document.getElementById("gradientOption");
 
     statsTab.textContent = gLS("statsTabText");
     friendsTab.textContent = gLS("friendsTabText");

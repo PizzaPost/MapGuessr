@@ -598,7 +598,7 @@ button:disabled:hover {
     border-radius: 12px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
     z-index: 1000;
-    animation: slideIn 0.5s;
+    animation: slideInLeft 0.5s;
     max-width: 200px;
 }
 
@@ -652,6 +652,13 @@ button:disabled:hover {
 #loginPassword:focus {
     border-color: #007bff;
     box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+#profileButton {
+    position: absolute;
+    top: 0;
+    right: 0;
+    animation: slideInLeft 0.5s;
 }
 
 button {
@@ -1256,6 +1263,18 @@ button:hover::after {
     }
 }
 
+@keyframes slideInLeft {
+    0% {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
 /* Element Specific Animations */
 #gameContainer {
     animation: fadeIn 0.6s ease-out;
@@ -1578,9 +1597,12 @@ button:hover::after {
 }
 
 @keyframes glow {
-    0%, 100% {
+
+    0%,
+    100% {
         box-shadow: 0 0 0 2px #33ccff, 0 0 10px 6px #33ccff;
     }
+
     50% {
         box-shadow: 0 0 0 2px #33ccff, 0 0 15px 8px #33ccff;
     }
@@ -1645,7 +1667,12 @@ body,
 #tooltip,
 #custom-alert,
 #credits,
-#lobbyCodeDisplay {
+#lobbyCodeDisplay,
+.profile-picture,
+#controlPanel,
+#friendsTab,
+#statsTab,
+.content-area {
     transition: background 1s ease, color 1s ease, border 1s ease, box-shadow 1s ease;
 }
 
@@ -1953,5 +1980,16 @@ body,
         height: 2.4em;
         font-size: clamp(2rem, 5vw, 3rem);
         border-radius: 0.75em;
+    }
+
+    #profileButton {
+        position: absolute;
+        width: 97%;
+        height: 3em;
+        left: 0;
+        margin-left: 1.5%;
+        margin-top: 85%;
+        border-radius: 36px;
+        font-size: clamp(2rem, 5vw, 3rem);
     }
 }
