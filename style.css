@@ -990,25 +990,55 @@ button:hover::after {
 }
 
 .profile-section {
-    display: flex;
-    align-items: center;
-    gap: 30px;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 15px;
+    align-items: start;
     margin-bottom: 40px;
 }
 
 .profile-picture {
+    grid-row: 1;
+    grid-column: 1;
     width: 150px;
     height: 150px;
     border-radius: 50%;
     overflow: hidden;
     border: 4px solid var(--accent-color);
+    position: relative;
+    transition: transform 0.3s ease-in-out;
+}
+
+.profile-picture:hover {
+    transform: scale(1.05);
 }
 
 .profile-picture img {
-    width: 150px;
-    height: 150px;
+    width: 100%;
+    height: 100%;
     object-fit: cover;
     pointer-events: none;
+    transition: filter 0.4s ease-in-out;
+}
+
+.profile-picture:hover::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 40%;
+    height: 100%;
+    background: linear-gradient(to right,
+            rgba(255, 255, 255, 0) 0%,
+            rgba(255, 255, 255, 0.2) 50%,
+            rgba(255, 255, 255, 0) 100%);
+    transform: skewX(-25deg);
+    animation: shine 1.5s ease-in-out infinite;
+    pointer-events: none;
+}
+
+.profile-picture:hover img {
+    filter: brightness(1.08) contrast(1.05);
 }
 
 .tabs {
@@ -1267,6 +1297,48 @@ button:hover::after {
     }
 }
 
+@keyframes fadeInSlide {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeOutSlide {
+    from {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    to {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+}
+
+@keyframes glow {
+
+    0%,
+    100% {
+        box-shadow: 0 0 0 2px #33ccff, 0 0 10px 6px #33ccff;
+    }
+
+    50% {
+        box-shadow: 0 0 0 2px #33ccff, 0 0 15px 8px #33ccff;
+    }
+}
+
+@keyframes shine {
+    100% {
+        left: 150%;
+    }
+}
+
 /* Element Specific Animations */
 #gameContainer {
     animation: fadeIn 0.6s ease-out;
@@ -1499,18 +1571,6 @@ button:hover::after {
     border-bottom: 1px solid var(--autocomplete-border);
 }
 
-.profile-section {
-    display: grid;
-    grid-template-columns: auto 1fr;
-    gap: 15px;
-    align-items: start;
-}
-
-.profile-picture {
-    grid-row: 1;
-    grid-column: 1;
-}
-
 #lobbyCodeDisplay {
     position: fixed;
     top: 10px;
@@ -1532,7 +1592,7 @@ button:hover::after {
     grid-row: 1;
     grid-column: 1;
     margin-left: 180px;
-    margin-top:5px;
+    margin-top: 5px;
 }
 
 #profileDescription {
@@ -1586,42 +1646,6 @@ button:hover::after {
     button {
         width: 100%;
         margin: 8px 0;
-    }
-}
-
-@keyframes fadeInSlide {
-    from {
-        opacity: 0;
-        transform: translateY(-10px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@keyframes fadeOutSlide {
-    from {
-        opacity: 1;
-        transform: translateY(0);
-    }
-
-    to {
-        opacity: 0;
-        transform: translateY(-10px);
-    }
-}
-
-@keyframes glow {
-
-    0%,
-    100% {
-        box-shadow: 0 0 0 2px #33ccff, 0 0 10px 6px #33ccff;
-    }
-
-    50% {
-        box-shadow: 0 0 0 2px #33ccff, 0 0 15px 8px #33ccff;
     }
 }
 
