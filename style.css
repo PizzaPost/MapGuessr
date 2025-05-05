@@ -123,7 +123,6 @@ footer {
 #gameVersion,
 #mapSelector {
     background: var(--container-bg);
-    backdrop-filter: blur(10px);
     border-radius: 20px;
     border: 1px solid rgba(255, 255, 255, 0.2);
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
@@ -236,7 +235,6 @@ footer {
     text-align: center;
     z-index: 1001;
     border: 2px solid var(--accent-color);
-    backdrop-filter: blur(5px);
     min-width: 250px;
     max-width: 90vw;
     animation: slideIn 0.3s ease-out forwards;
@@ -593,7 +591,6 @@ button:disabled:hover {
     top: 10px;
     right: 10px;
     background: var(--container-bg);
-    backdrop-filter: blur(10px);
     padding: 15px;
     border-radius: 12px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
