@@ -435,6 +435,13 @@ if (localStorage.getItem('loginDetails') || auth.currentUser) {
     joinLobbyButton.disabled = true; // Disable multiplayer until sign in is successful
 }
 
+// default is darkMode
+const userThemePreference = localStorage.getItem('theme');
+if (!userThemePreference || userThemePreference !== 'light') {
+    document.body.setAttribute('data-theme', 'dark');
+}
+
+
 function closeAllLobbies() {
     db.collection('lobbies').get().then(querySnapshot => {
         querySnapshot.forEach(doc => {
