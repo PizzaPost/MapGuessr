@@ -880,13 +880,19 @@ function openProfile() {
             <div class="content-area">
                 <div class="content-section active" id="stats">
                     <ul>
-                        <li>Posts: 0</li>
-                        <li>Followers: 0</li>
-                        <li>Following: 0</li>
-                        <li>Reactions: 0</li>
-                        <li>Comments: 0</li>
-                        <li>Shares: 0</li>
-                        <li>Views: 0</li>
+                        <li><span style="text-decoration: underline;">Games Played:</span> NaN</li>
+                        <li><span style="text-decoration: underline;">Maps Played:</span> NaN</li>
+                        <li><span style="text-decoration: underline;">Games Won:</span> NaN</li>
+                        <li><span style="text-decoration: underline;">Games Lost:</span> NaN</li>
+                        <li><span style="text-decoration: underline;">Games Drawn:</span> NaN</li>
+                        <li><span style="text-decoration: underline;">Points Gained:</span> NaN</li>
+                        <li><span style="text-decoration: underline;">5k:</span> NaN</li>
+                        <li><span style="text-decoration: underline;">Fastest 5k:</span> NaN</li>
+                        <li><span style="text-decoration: underline;">Highest 5k Streak:</span> NaN</li>
+                        <li><span style="text-decoration: underline;">Highest 4k Streak:</span> NaN</li>
+                        <li>Games created: NaN</li>
+                        <li>Games joined: NaN</li>
+                        <li>Account created on: NaN</li>
                     </ul>
                 </div>
                 <div class="content-section" id="friends">
