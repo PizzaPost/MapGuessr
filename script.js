@@ -880,21 +880,22 @@ function openProfile() {
             <div class="content-area">
                 <div style="overflow-y: scroll; max-height: 500px; position: relative;" class="content-section active" id="stats">
                     <ul>
-                        <li><span style="text-decoration: underline;">Games Played:</span> NaN</li>
-                        <li><span style="text-decoration: underline;">Maps Played:</span> NaN</li>
-                        <li><span style="text-decoration: underline;">Games Won:</span> NaN</li>
-                        <li><span style="text-decoration: underline;">Games Lost:</span> NaN</li>
-                        <li><span style="text-decoration: underline;">Games Drawn:</span> NaN</li>
-                        <li><span style="text-decoration: underline;">Points Gained:</span> NaN</li>
-                        <li><span style="text-decoration: underline;">5k:</span> NaN</li>
-                        <li><span style="text-decoration: underline;">Fastest 5k:</span> NaN</li>
-                        <li><span style="text-decoration: underline;">Highest 5k Streak:</span> NaN</li>
-                        <li><span style="text-decoration: underline;">Highest 4k Streak:</span> NaN</li>
-                        <li>Games created: NaN</li>
-                        <li>Games joined: NaN</li>
-                        <li>Login Streak: NaN</li>
-                        <li>Highest Login Streak: NaN</li>
-                        <li>Account created on: NaN</li>
+                        <li><span style="text-decoration: underline;">${gLS("statsGamesPlayed")}:</span> NaN</li>
+                        <li><span style="text-decoration: underline;">${gLS("statsMapsPlayed")}:</span> NaN</li>
+                        <li><span style="text-decoration: underline;">${gLS("statsGamesWon")}:</span> NaN</li>
+                        <li><span style="text-decoration: underline;">${gLS("statsGamesLost")}:</span> NaN</li>
+                        <li><span style="text-decoration: underline;">${gLS("statsGamesTied")}:</span> NaN</li>
+                        <li><span style="text-decoration: underline;">${gLS("statsPoints")}:</span> NaN</li>
+                        <li><span style="text-decoration: underline;">${gLS("stats5k")}:</span> NaN</li>
+                        <li><span style="text-decoration: underline;">${gLS("statsFastest5k")}:</span> NaN</li>
+                        <li><span style="text-decoration: underline;">${gLS("statsHighest5kStreak")}:</span> NaN</li>
+                        <li><span style="text-decoration: underline;">${gLS("statsHighest4kStreak")}:</span> NaN</li>
+                        <li></li>
+                        <li>${gLS("statsLobbysCreated")}: NaN</li>
+                        <li>${gLS("statsLobbysJoined")}: NaN</li>
+                        <li>${gLS("statsLoginStreak")}: NaN</li>
+                        <li>${gLS("statsHighestLoginStreak")}: NaN</li>
+                        <li>${gLS("statsAccountCreationDate")}: NaN</li>
                     </ul>
                 </div>
                 <div style="overflow-y: scroll; max-height: 500px;" class="content-section" id="friends">
@@ -928,38 +929,16 @@ function openProfile() {
     const statsSection = profilePopup.querySelector('#stats');
     const helpContainer = document.createElement('div');
     const lightbulb = document.createElement('div');
-    const helpMessage = document.createElement('div');
 
     helpContainer.className = 'lightbulb-help';
     lightbulb.className = 'lightbulb';
-    helpMessage.className = 'help-message';
 
     lightbulb.textContent = '💡';
-    helpMessage.textContent = gLS("underlineStatsMessage");
 
     helpContainer.appendChild(lightbulb);
-    helpContainer.appendChild(helpMessage);
     statsSection.appendChild(helpContainer);
 
-    const isTouchDevice = () => (
-        'ontouchstart' in window ||
-        navigator.maxTouchPoints > 0 ||
-        navigator.msMaxTouchPoints > 0
-    );
-
-    if (isTouchDevice()) {
-        helpContainer.addEventListener('click', (e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            helpContainer.classList.toggle('active');
-        });
-
-        document.addEventListener('click', (e) => {
-            if (!helpContainer.contains(e.target)) {
-                helpContainer.classList.remove('active');
-            }
-        });
-    }
+    attachTooltip(lightbulb, gLS("underlineStatsMessage"));
 
     statsTab.textContent = gLS("statsTabText");
     friendsTab.textContent = gLS("friendsTabText");
