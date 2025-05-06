@@ -37,3 +37,4 @@ TRANSLATIONS:
 - friendsTabText
 - solidColorText
 - gradientText
+- underlineStatsMessage

@@ -878,7 +878,7 @@ function openProfile() {
                 <div id="friendsTab" class="tab" data-section="friends"></div>
             </div>
             <div class="content-area">
-                <div class="content-section active" id="stats">
+                <div style="overflow-y: scroll; max-height: 500px; position: relative;" class="content-section active" id="stats">
                     <ul>
                         <li><span style="text-decoration: underline;">Games Played:</span> NaN</li>
                         <li><span style="text-decoration: underline;">Maps Played:</span> NaN</li>
@@ -892,10 +892,12 @@ function openProfile() {
                         <li><span style="text-decoration: underline;">Highest 4k Streak:</span> NaN</li>
                         <li>Games created: NaN</li>
                         <li>Games joined: NaN</li>
+                        <li>Login Streak: NaN</li>
+                        <li>Highest Login Streak: NaN</li>
                         <li>Account created on: NaN</li>
                     </ul>
                 </div>
-                <div class="content-section" id="friends">
+                <div style="overflow-y: scroll; max-height: 500px;" class="content-section" id="friends">
                     <ul>
                         <li>MoCoXIII</li>
                         <li>Rubix</li>
@@ -923,6 +925,41 @@ function openProfile() {
     const backButton = document.getElementById("back-button");
     const solidColor = document.getElementById("solidOption");
     const gradientColor = document.getElementById("gradientOption");
+    const statsSection = profilePopup.querySelector('#stats');
+    const helpContainer = document.createElement('div');
+    const lightbulb = document.createElement('div');
+    const helpMessage = document.createElement('div');
+
+    helpContainer.className = 'lightbulb-help';
+    lightbulb.className = 'lightbulb';
+    helpMessage.className = 'help-message';
+
+    lightbulb.textContent = '💡';
+    helpMessage.textContent = gLS("underlineStatsMessage");
+
+    helpContainer.appendChild(lightbulb);
+    helpContainer.appendChild(helpMessage);
+    statsSection.appendChild(helpContainer);
+
+    const isTouchDevice = () => (
+        'ontouchstart' in window ||
+        navigator.maxTouchPoints > 0 ||
+        navigator.msMaxTouchPoints > 0
+    );
+
+    if (isTouchDevice()) {
+        helpContainer.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            helpContainer.classList.toggle('active');
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!helpContainer.contains(e.target)) {
+                helpContainer.classList.remove('active');
+            }
+        });
+    }
 
     statsTab.textContent = gLS("statsTabText");
     friendsTab.textContent = gLS("friendsTabText");

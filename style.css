@@ -1095,7 +1095,55 @@ button:hover::after {
     background-clip: text;
 }
 
-/* Animations */
+.lightbulb-help {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+    cursor: pointer;
+    user-select: none;
+}
+
+.lightbulb {
+    font-size: 24px;
+    opacity: 0.8;
+    transition: opacity 0.2s;
+    position: relative;
+}
+
+.lightbulb:hover {
+    opacity: 1;
+}
+
+.help-message {
+    position: absolute;
+    bottom: 40px;
+    right: 0;
+    width: 200px;
+    padding: 10px;
+    background: var(--container-bg);
+    border-radius: 5px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    display: none;
+    font-size: 14px;
+    line-height: 1.4;
+    color: var(--text-color);
+}
+
+.lightbulb-help:hover .help-message {
+    display: block;
+}
+
+@media (hover: none) and (pointer: coarse) {
+    .lightbulb-help:hover .help-message {
+        display: none;
+    }
+
+    .lightbulb-help.active .help-message {
+        display: block;
+    }
+}
+
 @keyframes shimmer {
     0% {
         background-position: -200% 0;
