@@ -1,7 +1,7 @@
 {
     "Portal 2": {
         "debris": {
-            "text": "Text about debris",
+            "text": "Schrott ist meißtens im 1. Kapitel zu finden. Manchmal im 2. auch, aber dort ist es weniger und eher am Anfang. Mit chapter 6 startet ein etwas mehr älterer look, der ähnlich zum alten aussieht, aber mit weniger Schrott. Dieser zieht sich bis zum Ende von chapter 7.",
             "image": [
                 "portal_2/debris/0.png",
                 "portal_2/debris/1.png",
@@ -9,7 +9,7 @@
             ]
         },
         "bts": {
-            "text": "Text about bts",
+            "text": "Alle Maps die aussehen als wären sie im BTS Part sind in Chapter 1, auf escape und jail break in chapter 4, chapter 5-7 und chapter 9.",
             "image": [
                 "portal_2/bts/0.png",
                 "portal_2/bts/1.png",
@@ -17,7 +17,7 @@
             ]
         },
         "preplaced_portals": {
-            "text": "Text about preplaced_portals",
+            "text": "Portale die vom Spiel aus platziert sind kann man leicht an den schwarzen Metall Stangen rechts und links zu erkennen. Diese findet man nur auf den ersten 7 Leveln in chapter 1.",
             "image": [
                 "portal_2/preplaced_portals/0.png",
                 "portal_2/preplaced_portals/1.png",
@@ -25,7 +25,7 @@
             ]
         },
         "doors": {
-            "text": "Text about doors",
+            "text": "Runde Türen gibt es in Chapter 1-4 und 8. In Chapter 5-7 gibt es eckige und in chapter 9 gibt es keine.",
             "image": [
                 "portal_2/doors/0.png",
                 "portal_2/doors/1.png",
