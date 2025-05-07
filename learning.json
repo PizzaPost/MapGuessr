@@ -1,0 +1,164 @@
+{
+    "Portal 2": {
+        "debris": {
+            "text": "Text about debris",
+            "image": [
+                "portal_2/debris/0.png",
+                "portal_2/debris/1.png",
+                "portal_2/debris/2.png"
+            ]
+        },
+        "bts": {
+            "text": "Text about bts",
+            "image": [
+                "portal_2/bts/0.png",
+                "portal_2/bts/1.png",
+                "portal_2/bts/2.png"
+            ]
+        },
+        "preplaced_portals": {
+            "text": "Text about preplaced_portals",
+            "image": [
+                "portal_2/preplaced_portals/0.png",
+                "portal_2/preplaced_portals/1.png",
+                "portal_2/preplaced_portals/2.png"
+            ]
+        },
+        "doors": {
+            "text": "Text about doors",
+            "image": [
+                "portal_2/doors/0.png",
+                "portal_2/doors/1.png",
+                "portal_2/doors/2.png"
+            ]
+        },
+        "chamber_signs": {
+            "text": "Text about chamber_signs",
+            "image": [
+                "portal_2/chamber_signs/0.png",
+                "portal_2/chamber_signs/1.png",
+                "portal_2/chamber_signs/2.png"
+            ]
+        },
+        "main_characters": {
+            "text": "Text about main_characters",
+            "image": [
+                "portal_2/main_characters/0.png",
+                "portal_2/main_characters/1.png",
+                "portal_2/main_characters/2.png"
+            ]
+        },
+        "chamber_size": {
+            "text": "Text about chamber_size",
+            "image": [
+                "portal_2/chamber_size/0.png",
+                "portal_2/chamber_size/1.png",
+                "portal_2/chamber_size/2.png"
+            ]
+        },
+        "antlines": {
+            "text": "Text about antlines",
+            "image": [
+                "portal_2/antlines/0.png",
+                "portal_2/antlines/1.png",
+                "portal_2/antlines/2.png"
+            ]
+        },
+        "cubes": {
+            "text": "Text about cubes",
+            "image": [
+                "portal_2/cubes/0.png",
+                "portal_2/cubes/1.png",
+                "portal_2/cubes/2.png"
+            ]
+        },
+        "lasers": {
+            "text": "Text about lasers",
+            "image": [
+                "portal_2/lasers/0.png",
+                "portal_2/lasers/1.png",
+                "portal_2/lasers/2.png"
+            ]
+        },
+        "faith_plates": {
+            "text": "Text about faith_plates",
+            "image": [
+                "portal_2/faith_plates/0.png",
+                "portal_2/faith_plates/1.png",
+                "portal_2/faith_plates/2.png"
+            ]
+        },
+        "light_bridges": {
+            "text": "Text about light_bridges",
+            "image": [
+                "portal_2/light_bridges/0.png",
+                "portal_2/light_bridges/1.png",
+                "portal_2/light_bridges/2.png"
+            ]
+        },
+        "turrets": {
+            "text": "Text about turrets",
+            "image": [
+                "portal_2/turrets/0.png",
+                "portal_2/turrets/1.png",
+                "portal_2/turrets/2.png"
+            ]
+        },
+        "laser_relays": {
+            "text": "Text about laser_relays",
+            "image": [
+                "portal_2/laser_relays/0.png",
+                "portal_2/laser_relays/1.png",
+                "portal_2/laser_relays/2.png"
+            ]
+        },
+        "confetti": {
+            "text": "Text about confetti",
+            "image": [
+                "portal_2/confetti/0.png",
+                "portal_2/confetti/1.png",
+                "portal_2/confetti/2.png"
+            ]
+        },
+        "toilet": {
+            "text": "Text about toilet",
+            "image": [
+                "portal_2/toilet/0.png",
+                "portal_2/toilet/1.png",
+                "portal_2/toilet/2.png"
+            ]
+        },
+        "gel": {
+            "text": "Text about gel",
+            "image": [
+                "portal_2/gel/0.png",
+                "portal_2/gel/1.png",
+                "portal_2/gel/2.png"
+            ]
+        },
+        "buttons": {
+            "text": "Text about buttons",
+            "image": [
+                "portal_2/buttons/0.png",
+                "portal_2/buttons/1.png",
+                "portal_2/buttons/2.png"
+            ]
+        },
+        "shootable_surfaces": {
+            "text": "Text about shootable_surfaces",
+            "image": [
+                "portal_2/shootable_surfaces/0.png",
+                "portal_2/shootable_surfaces/1.png",
+                "portal_2/shootable_surfaces/2.png"
+            ]
+        },
+        "funnels": {
+            "text": "Text about funnels",
+            "image": [
+                "portal_2/funnels/0.png",
+                "portal_2/funnels/1.png",
+                "portal_2/funnels/2.png"
+            ]
+        }
+    }
+}

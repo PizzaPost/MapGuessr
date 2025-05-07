@@ -744,6 +744,68 @@ function chooseVersion() {
             profileButton.innerText = gLS("profileButtonText");
         }
     }
+    const learningButton = document.createElement('button');
+    learningButton.id = 'learningButton';
+    learningButton.innerText = gLS("learningButtonText");
+    learningButton.onclick = () => {
+        console.log('Starting learning game...');
+        function startLearningMode(gameMode) {
+            console.log('Coming soon...')
+        }
+
+        const overlay = document.createElement('div');
+        overlay.id = 'learning-overlay';
+        overlay.style.zIndex = '990';
+        overlay.classList.add('custom-alert-overlay');
+        overlay.style.background = 'rgba(0, 0, 0, 0.75)';
+        overlay.style.backdropFilter = 'blur(2px)';
+
+        const alertDiv = document.createElement('div');
+        alertDiv.className = 'custom-alert';
+        alertDiv.id = 'learningAlert';
+
+        const heading = document.createElement('h2');
+        heading.textContent = gLS("learningTitle");
+        alertDiv.appendChild(heading);
+
+        const description = document.createElement('p');
+        description.textContent = gLS("learningText");
+        alertDiv.appendChild(description);
+
+        Object.entries(gameModes).forEach(([gameMode, subGameModes]) => {
+            if (gameMode === 'Portal Series') {
+                Object.keys(subGameModes).forEach(subGameMode => {
+                    const portalButton = document.createElement('button');
+                    portalButton.className = 'learningGameButton';
+                    portalButton.onclick = () => startLearningMode(`${gameMode}/${subGameMode}`);
+                    portalButton.textContent = subGameMode;
+                    alertDiv.appendChild(portalButton);
+                });
+            } else {
+                const modeButton = document.createElement('button');
+                modeButton.className = 'learningGameButton';
+                modeButton.onclick = () => startLearningMode(gameMode);
+                modeButton.textContent = gameMode;
+                alertDiv.appendChild(modeButton);
+            }
+        });
+
+        function closeLearningAlert() {
+            alertDiv.style.animation = 'shrinkOut 0.2s ease-in forwards';
+            overlay.style.transition = 'opacity 0.2s ease-in';
+            overlay.style.opacity = '0';
+            alertDiv.addEventListener('animationend', () => {
+                alertDiv.remove();
+                overlay.remove();
+            }, { once: true });
+        }
+
+        overlay.onclick = () => closeLearningAlert();
+
+        overlay.appendChild(alertDiv);
+        document.body.appendChild(overlay);
+    }
+    gameVersionDiv.appendChild(learningButton);
     profileButton.onclick = () => {
         console.log(auth.currentUser);
         if (auth.currentUser === null) {
@@ -801,7 +863,6 @@ function chooseVersion() {
                 loginOverlay.addEventListener('animationend', () => {
                     loginAlert.remove();
                     loginOverlay.remove();
-                    document.removeEventListener('keydown', keyHandler);
                 }, { once: true });
 
                 if (reload) {

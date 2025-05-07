@@ -1106,7 +1106,7 @@ button:hover::after {
 
 .lightbulb {
     font-size: 24px;
-    opacity: 0.75;
+    opacity: 0.8;
     transition: opacity 0.2s;
     position: fixed;
     pointer-events: all;
@@ -1117,20 +1117,6 @@ button:hover::after {
     transition: opacity 1s;
     position: fixed;
     pointer-events: all;
-}
-
-.lightbulb-help:hover .help-message {
-    display: block;
-}
-
-@media (hover: none) and (pointer: coarse) {
-    .lightbulb-help:hover .help-message {
-        display: none;
-    }
-
-    .lightbulb-help.active .help-message {
-        display: block;
-    }
 }
 
 @keyframes shimmer {
