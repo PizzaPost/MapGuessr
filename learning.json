@@ -41,7 +41,7 @@
             ]
         },
         "main_characters": {
-            "text": "Text about main_characters",
+            "text": "Wenn du Wheathley oder GladOS und es zerstört aussieht, dann bist du sehr wahrscheinlich in Kapitel 1. Ist es eher modern und du siehst GladOS bist du in Kapitel 5. Wheatley kann in allen Kapiteln außer 6 und 7 vorkommen.",
             "image": [
                 "portal_2/main_characters/0.png",
                 "portal_2/main_characters/1.png",
@@ -49,7 +49,7 @@
             ]
         },
         "chamber_size": {
-            "text": "Text about chamber_size",
+            "text": "Wenn der Raum in dem du dich befindest extrem groß erscheint, dann bist du wahrscheinlich in Kapitel 6 oder 7.",
             "image": [
                 "portal_2/chamber_size/0.png",
                 "portal_2/chamber_size/1.png",
@@ -57,7 +57,7 @@
             ]
         },
         "antlines": {
-            "text": "Text about antlines",
+            "text": "Antlines von Bild 1 sind in Kapitel 6 und 7. Die aus Bild 2 sind in den restlichen. Kapitel 9 hat sehr wenige.",
             "image": [
                 "portal_2/antlines/0.png",
                 "portal_2/antlines/1.png",
@@ -65,7 +65,7 @@
             ]
         },
         "cubes": {
-            "text": "Text about cubes",
+            "text": "Würfel von Bild 1 sind in Kapitel 6 und 7. Die aus Bild 2 sind in den restlichen. Kapitel 9 hat sehr wenige.",
             "image": [
                 "portal_2/cubes/0.png",
                 "portal_2/cubes/1.png",
