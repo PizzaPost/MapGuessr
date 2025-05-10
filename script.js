@@ -3027,6 +3027,7 @@ function createNewLobby() {
 function autoFill(element = null) {
     loadingDiv.style.display = 'flex';
     db.collection('lobbies').get().then(querySnapshot => {
+        // This doesn't check if the lobby is private and if the lobby 1 is private it trys to create lobby 1 again
         if (lobbyInput.value === '') {
             const lobbies = querySnapshot.docs;
             const lobbyCount = lobbies.length;
