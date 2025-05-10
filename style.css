@@ -1942,7 +1942,12 @@ body,
 
     #joinLobbyButton,
     #singlePlayerButton,
-    #learningButton {
+    #learningButton,
+    #back-button,
+    #statsTab.tab.active,
+    #friendsTab.tab.active,
+    #statsTab.tab,
+    #friendsTab.tab {
         width: 100%;
         height: 3em;
         font-size: clamp(2rem, 5vw, 3rem);
@@ -2057,5 +2062,21 @@ body,
         border-radius: 36px;
         font-size: clamp(1.5rem, 4vw, 2.5rem);
         animation: slideIn 0.5s ease forwards;
+    }
+
+    #stats.content-section.active,
+    #friends.content-section.active {
+        max-height: 1500px !important;
+    }
+
+    .lightbulb {
+        font-size: 48px;
+        margin-right: 5px;
+        margin-bottom: 5px;
+    }
+
+    .tooltip {
+        font-size: 40px;
+        border-radius: 0.5em;
     }
 }
