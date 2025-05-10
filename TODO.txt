@@ -2,8 +2,6 @@ TODO:
 - babbdi map coords
 - keybinds for map selection
 - ⁠anzeigen wie viele und wer geguesst hat (mit nem haken vor dem namen in der playerlist?)
-- ⁠anmeldeoption
-- ⁠privater Server
 - move everything important to the Raspberry pi
 - add a style selection Option
 - place main menu button under both entrys (mobile)
