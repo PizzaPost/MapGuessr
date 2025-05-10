@@ -655,7 +655,7 @@ button:disabled:hover {
     position: absolute;
     top: 0;
     right: 0;
-    animation: slideInLeft 0.5s;
+    animation: slideIn 0.3s ease-in-out forwards;
 }
 
 button {
@@ -2048,17 +2048,13 @@ body,
     }
 
     #profileButton {
-        position: fixed !important;
         bottom: 80px;
         left: 50%;
         top: auto !important;
-        right: auto !important;
         transform: translateX(-50%);
         width: 97%;
         height: 3em;
-        margin: 0;
         border-radius: 36px;
         font-size: clamp(1.5rem, 4vw, 2.5rem);
-        animation: slideIn 0.5s ease forwards;
     }
 }
