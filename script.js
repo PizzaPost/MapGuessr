@@ -997,7 +997,7 @@ function openProfile() {
     const statsSection = profilePopup.querySelector('#stats');
     const helpContainer = document.createElement('div');
     const lightbulb = document.createElement('div');
-    const profileLoginStreak=document.getElementById('profileLoginStreak');
+    const profileLoginStreak = document.getElementById('profileLoginStreak');
 
     helpContainer.className = 'lightbulb-help';
     lightbulb.className = 'lightbulb';
@@ -1884,12 +1884,20 @@ function attachTooltip(el, text) {
         tooltip.textContent = text;
         tooltip.classList.add("tooltip");
         document.body.appendChild(tooltip);
-        tooltip.style.left = e.pageX - tooltip.offsetWidth - 20 + "px";
+        if (e.pageX < window.innerWidth / 2) {
+            tooltip.style.left = e.pageX + 10 + "px";
+        } else {
+            tooltip.style.left = e.pageX - tooltip.offsetWidth - 20 + "px";
+        }
         tooltip.style.top = e.pageY + "px";
     });
     el.addEventListener("mousemove", e => {
         if (tooltip) {
-            tooltip.style.left = e.pageX - tooltip.offsetWidth - 20 + "px";
+            if (e.pageX < window.innerWidth / 2) {
+                tooltip.style.left = e.pageX + 10 + "px";
+            } else {
+                tooltip.style.left = e.pageX - tooltip.offsetWidth - 20 + "px";
+            }
             tooltip.style.top = e.pageY - 10 + "px";
             document.body.appendChild(tooltip);
         }
@@ -2944,7 +2952,7 @@ function isElementVisible(element) {
 
 // keybinds
 document.addEventListener('keydown', event => {
-    if (document.activeElement.tagName !== 'INPUT' && document.activeElement.isContentEditable!== true && document.getElementById('keybinds') === null && event.key !== 'Shift') {
+    if (document.activeElement.tagName !== 'INPUT' && document.activeElement.isContentEditable !== true && document.getElementById('keybinds') === null && event.key !== 'Shift') {
         const currentTime = Date.now();
         // Check for double press (within 300ms)
         if (lastPressTime !== null && currentTime - lastPressTime < 300) {
