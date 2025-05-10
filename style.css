@@ -655,7 +655,7 @@ button:disabled:hover {
     position: absolute;
     top: 0;
     right: 0;
-    animation: slideIn 0.3s ease-in-out forwards;
+    animation: slideInLeft 0.3s ease-in-out forwards;
 }
 
 button {
@@ -2056,5 +2056,6 @@ body,
         height: 3em;
         border-radius: 36px;
         font-size: clamp(1.5rem, 4vw, 2.5rem);
+        animation: slideIn 0.5s ease forwards;
     }
 }
