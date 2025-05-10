@@ -1941,7 +1941,8 @@ body,
     }
 
     #joinLobbyButton,
-    #singlePlayerButton {
+    #singlePlayerButton,
+    #learningButton {
         width: 100%;
         height: 3em;
         font-size: clamp(2rem, 5vw, 3rem);
@@ -2047,13 +2048,17 @@ body,
     }
 
     #profileButton {
-        position: absolute;
+        position: fixed !important;
+        bottom: 80px;
+        left: 50%;
+        top: auto !important;
+        right: auto !important;
+        transform: translateX(-50%);
         width: 97%;
         height: 3em;
-        left: 0;
-        margin-left: 1.5%;
-        margin-top: 85%;
+        margin: 0;
         border-radius: 36px;
-        font-size: clamp(2rem, 5vw, 3rem);
+        font-size: clamp(1.5rem, 4vw, 2.5rem);
+        animation: slideIn 0.5s ease forwards;
     }
 }
