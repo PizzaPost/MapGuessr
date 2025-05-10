@@ -937,10 +937,10 @@ function openProfile() {
                     <img src="images/no-pf-pic.png" id="profileImage" />
                 </div>
                 <div id="profileInfo">
-                    <h1 style="width: 650px; max-height: 100px; font-size: clamp(1rem, 3vw, 2rem);" contenteditable="true" onkeydown="charLimit('profileName', 30);" onkeyup="charLimit('profileName', 30);" onkeypress="charLimit('profileName', 30);" id="profileName">Name</h1>
+                    <h1 style="width: 650px; max-height: 100px; font-size: clamp(1rem, 3vw, 2rem);" contenteditable="true" onkeydown="charLimit('profileName', 30);" onkeyup="charLimit('profileName', 30);" onkeypress="charLimit('profileName', 30);" onpaste="charLimit('profileName', 30);" id="profileName">Name</h1>
                     <p style="max-width: 3px; font-size: clamp(1.5rem, 4vw, 2.5rem);" id="profileLoginStreak">🔥</p>
                 </div>
-                    <p style="width: 900px; max-height: 200px; overflow-y: scroll; font-size: clamp(0.5rem, 1.25vw, 0.75rem);" contenteditable="true" onkeydown="charLimit('profileDescription', 350);" onkeyup="charLimit('profileDescription', 350);" onkeypress="charLimit('profileDescription', 350);" id="profileDescription">Description</p>
+                    <p style="width: 900px; max-height: 200px; overflow-y: scroll; font-size: clamp(0.5rem, 1.25vw, 0.75rem);" contenteditable="true" onkeydown="charLimit('profileDescription', 350);" onkeyup="charLimit('profileDescription', 350);" onkeypress="charLimit('profileDescription', 350);" onpaste="charLimit('profileDescription', 350);" id="profileDescription">Description</p>
             </div>
             <div class="tabs">
                 <div id="statsTab" class="tab active" data-section="stats"></div>
