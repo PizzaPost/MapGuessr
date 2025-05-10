@@ -937,7 +937,8 @@ function openProfile() {
                     <img src="images/no-pf-pic.png" id="profileImage" />
                 </div>
                 <div id="profileInfo">
-                    <h1 style="width: 650px; font-size: clamp(2rem, 5vw, 3rem);" contenteditable="true" onkeydown="charLimit('profileName', 25);" onkeyup="charLimit('profileName', 25);" onkeypress="charLimit('profileName', 25);" id="profileName">Name</h1>
+                    <h1 style="width: 650px; max-height: 100px; font-size: clamp(1rem, 3vw, 2rem);" contenteditable="true" onkeydown="charLimit('profileName', 30);" onkeyup="charLimit('profileName', 30);" onkeypress="charLimit('profileName', 30);" id="profileName">Name</h1>
+                    <p style="max-width: 3px; font-size: clamp(1.5rem, 4vw, 2.5rem);"contenteditable="true" id="profileLoginStreak">🔥</p>
                 </div>
                     <p style="width: 900px; max-height: 200px; overflow-y: scroll; font-size: clamp(0.5rem, 1.25vw, 0.75rem);" contenteditable="true" onkeydown="charLimit('profileDescription', 350);" onkeyup="charLimit('profileDescription', 350);" onkeypress="charLimit('profileDescription', 350);" id="profileDescription">Description</p>
             </div>
@@ -961,7 +962,6 @@ function openProfile() {
                         <li></li>
                         <li>${gLS("statsLobbysCreated")}: NaN</li>
                         <li>${gLS("statsLobbysJoined")}: NaN</li>
-                        <li>${gLS("statsLoginStreak")}: NaN</li>
                         <li>${gLS("statsHighestLoginStreak")}: NaN</li>
                         <li>${gLS("statsAccountCreationDate")}: NaN</li>
                     </ul>
@@ -997,6 +997,7 @@ function openProfile() {
     const statsSection = profilePopup.querySelector('#stats');
     const helpContainer = document.createElement('div');
     const lightbulb = document.createElement('div');
+    const profileLoginStreak=document.getElementById('profileLoginStreak');
 
     helpContainer.className = 'lightbulb-help';
     lightbulb.className = 'lightbulb';
@@ -1007,6 +1008,7 @@ function openProfile() {
     statsSection.appendChild(helpContainer);
 
     attachTooltip(lightbulb, gLS("underlineStatsMessage"));
+    attachTooltip(profileLoginStreak, gLS("statsLoginStreak"))
 
     statsTab.textContent = gLS("statsTabText");
     friendsTab.textContent = gLS("friendsTabText");
