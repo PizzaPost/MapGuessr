@@ -2944,7 +2944,7 @@ function isElementVisible(element) {
 
 // keybinds
 document.addEventListener('keydown', event => {
-    if (document.activeElement.tagName !== 'INPUT' && document.getElementById('keybinds') === null && event.key !== 'Shift') {
+    if (document.activeElement.tagName !== 'INPUT' && document.activeElement.isContentEditable!== true && document.getElementById('keybinds') === null && event.key !== 'Shift') {
         const currentTime = Date.now();
         // Check for double press (within 300ms)
         if (lastPressTime !== null && currentTime - lastPressTime < 300) {
