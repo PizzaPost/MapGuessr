@@ -6,7 +6,7 @@ TODO:
 - add a style selection Option
 - place main menu button under both entrys (mobile)
 - add timer and round number Option
-- see other Players Placements after finishing?
+- see other Players marker positions after finishing?
 - sounds? (inkl. Music)
 - GANZ VIEL WERBUNG DAMIT WIR VIEL GELD VERDIENEN MUHAHAHAHA
 - Profile with data like best round, rounds played, etc
@@ -27,32 +27,6 @@ TODO:
 - quickjoin keybind need an update (read comment for more info)
 
 TRANSLATIONS:
-- loginButtonText
-- loginTitle
-- loginText
-- emailPlaceholder
-- passwordPlaceholder
-- profileButtonText
-- statsTabText
-- friendsTabText
-- solidColorText
-- gradientText
-- underlineStatsMessage
-- statsGamesPlayed
-- statsMapsPlayed
-- statsGamesWon
-- statsGamesLost
-- statsGamesTied
-- statsPoints
-- stats5k
-- statsFastest5k
-- statsHighest5kStreak
-- statsHighest4kStreak
-- statsLobbysCreated
-- statsLobbysJoined
-- statsLoginStreak
-- statsHighestLoginStreak
-- statsAccountCreationDate
-- learningButtonText
-- learningTitle
-- learningText
+- 
+- 
+- 
