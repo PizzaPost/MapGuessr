@@ -23,7 +23,6 @@ TODO:
 - global leaderboard
 - friends leaderboard
 - more maps
-- keybinds trigger on profile entrys
 - quickjoin keybind need an update (read comment for more info)
 
 TRANSLATIONS:

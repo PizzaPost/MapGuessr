@@ -56,7 +56,7 @@ html {
 [data-theme="dark"] {
     --bg-gradient: linear-gradient(135deg, #3f3f3f, #1a1a1a);
     --text-color: #f8f9fa;
-    --container-bg: rgba(0, 0, 0, 0.7);
+    --container-bg: rgba(0, 0, 0, 0.95);
     --container-bg-darker: rgba(0, 0, 0, 0.8);
     --accent-color: #0205c2;
     --image-border: rgba(0, 0, 0, 0.3);
@@ -1736,7 +1736,8 @@ body,
 #controlPanel,
 #friendsTab,
 #statsTab,
-.content-area {
+.content-area,
+#languageBox {
     transition: background 1s ease, color 1s ease, border 1s ease, box-shadow 1s ease;
 }
 
@@ -2087,7 +2088,7 @@ body,
     }
 
     #solidOption,
-    #gradientOption{
+    #gradientOption {
         margin: 5px 0;
         width: 100%;
         font-size: 1rem;
@@ -2097,10 +2098,28 @@ body,
         font-size: 2.5rem;
     }
 
-    
+
     #controlPanel input[type="color"],
     #controlPanel input[type="range"] {
         width: 75px;
         height: 75px;
+    }
+
+    #languageBox {
+        border-radius: 28px;
+        border: 4px solid var(--credits-color);
+        width: 80%;
+    }
+
+    #credits {
+        font-size: 2.75rem;
+        border-radius: 8px;
+        border: 2px solid var(--credits-color);
+        width: 80%;
+        height: auto;
+    }
+
+    #creditsText {
+        font-size: 200%;
     }
 }

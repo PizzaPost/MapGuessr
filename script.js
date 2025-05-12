@@ -1729,43 +1729,86 @@ function showLanguageMenu() {
     // Create the alert box
     const languageBox = document.createElement('div');
     languageBox.id = 'languageBox';
-    languageBox.innerHTML = `
-    <h2 style="text-align: center; font-weight: bold;">${gLS("languages")}</h2>
-    <h3 style="text-align: center;font-weight: normal; color: red;">${gLS("aiMistakes")}</h3>
-    <br>
-    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; font-size: 18px;">
-        <div style="text-align: center;"><a href="?lang=en">English (en)</a></div>
-        <div style="text-align: center;"><a href="?lang=de">Deutsch (de)</a></div>
-        <div style="text-align: center;"><a href="?lang=fr">Français (fr)</a></div>
-        
-        <div style="text-align: center;"><a href="?lang=es">Español (es)</a></div>
-        <div style="text-align: center;"><a href="?lang=ja">日本語 (ja)</a></div>
-        <div style="text-align: center;"><a href="?lang=zh">中文 (zh)</a></div>
-        
-        <div style="text-align: center;"><a href="?lang=ru">Русский (ru)</a></div>
-        <div style="text-align: center;"><a href="?lang=ar">العربية (ar)</a></div>
-        <div style="text-align: center;"><a href="?lang=pt">Português (pt)</a></div>
-        
-        <div style="text-align: center;"><a href="?lang=hi">हिन्दी (hi)</a></div>
-        <div style="text-align: center;"><a href="?lang=it">Italiano (it)</a></div>
-        <div style="text-align: center;"><a href="?lang=ko">한국어 (ko)</a></div>
-        
-        <div style="text-align: center;"><a href="?lang=tr">Türkçe (tr)</a></div>
-        <div style="text-align: center;"><a href="?lang=vi">Tiếng Việt (vi)</a></div>
-        <div style="text-align: center;"><a href="?lang=th">ไทย (th)</a></div>
-        
-        <div style="text-align: center;"><a href="?lang=nl">Nederlands (nl)</a></div>
-        <div style="text-align: center;"><a href="?lang=pl">Polski (pl)</a></div>
-        <div style="text-align: center;"><a href="?lang=id">Bahasa Indonesia (id)</a></div>
-        
-        <div style="text-align: center;"><a href="?lang=bn">বাংলা (bn)</a></div>
-        <div style="text-align: center;"><a href="?lang=lv">Latviešu (lv)</a></div>
-        <div style="text-align: center;"><a href="?lang=uk">Українська (uk)</a></div>
-        
-        <div style="text-align: center;"><a href="?lang=ms">Bahasa Melayu (ms)</a></div>
-        <div style="text-align: center;"><a href="?lang=sw">Kiswahili (sw)</a></div>
-        <div style="text-align: center;"></div> <!-- Empty div for layout balance -->
-    </div>`;
+    if (isMobile()) {
+        languageBox.innerHTML = `
+            <h2 style="text-align: center; font-weight: bold; font-size: 40px;">${gLS("languages")}</h2>
+            <h3 style="text-align: center;font-weight: normal; color: red; font-size: 30px;">${gLS("aiMistakes")}</h3>
+            <br>
+            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 40px; font-size: 36px;">
+                <div style="text-align: center;"><a href="?lang=en">English (en)</a></div>
+                <div style="text-align: center;"><a href="?lang=de">Deutsch (de)</a></div>
+
+                <div style="text-align: center;"><a href="?lang=fr">Français (fr)</a></div>
+                <div style="text-align: center;"><a href="?lang=es">Español (es)</a></div>
+
+                <div style="text-align: center;"><a href="?lang=ja">日本語 (ja)</a></div>
+                <div style="text-align: center;"><a href="?lang=zh">中文 (zh)</a></div>
+
+                <div style="text-align: center;"><a href="?lang=ru">Русский (ru)</a></div>
+                <div style="text-align: center;"><a href="?lang=ar">العربية (ar)</a></div>
+
+                <div style="text-align: center;"><a href="?lang=pt">Português (pt)</a></div>
+                <div style="text-align: center;"><a href="?lang=hi">हिन्दी (hi)</a></div>
+
+                <div style="text-align: center;"><a href="?lang=it">Italiano (it)</a></div>
+                <div style="text-align: center;"><a href="?lang=ko">한국어 (ko)</a></div>
+                
+                <div style="text-align: center;"><a href="?lang=tr">Türkçe (tr)</a></div>
+                <div style="text-align: center;"><a href="?lang=vi">Tiếng Việt (vi)</a></div>
+
+                <div style="text-align: center;"><a href="?lang=th">ไทย (th)</a></div>
+                <div style="text-align: center;"><a href="?lang=nl">Nederlands (nl)</a></div>
+
+                <div style="text-align: center;"><a href="?lang=pl">Polski (pl)</a></div>
+                <div style="text-align: center;"><a href="?lang=id">Bahasa Indonesia (id)</a></div>
+                
+                <div style="text-align: center;"><a href="?lang=bn">বাংলা (bn)</a></div>
+                <div style="text-align: center;"><a href="?lang=lv">Latviešu (lv)</a></div>
+
+                <div style="text-align: center;"><a href="?lang=uk">Українська (uk)</a></div>
+                <div style="text-align: center;"><a href="?lang=ms">Bahasa Melayu (ms)</a></div>
+
+                <div style="text-align: center;"><a href="?lang=sw">Kiswahili (sw)</a></div>
+            </div>`;
+    } else {
+        languageBox.innerHTML = `
+        <h2 style="text-align: center; font-weight: bold;">${gLS("languages")}</h2>
+        <h3 style="text-align: center;font-weight: normal; color: red;">${gLS("aiMistakes")}</h3>
+        <br>
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; font-size: 18px;">
+            <div style="text-align: center;"><a href="?lang=en">English (en)</a></div>
+            <div style="text-align: center;"><a href="?lang=de">Deutsch (de)</a></div>
+            <div style="text-align: center;"><a href="?lang=fr">Français (fr)</a></div>
+            
+            <div style="text-align: center;"><a href="?lang=es">Español (es)</a></div>
+            <div style="text-align: center;"><a href="?lang=ja">日本語 (ja)</a></div>
+            <div style="text-align: center;"><a href="?lang=zh">中文 (zh)</a></div>
+            
+            <div style="text-align: center;"><a href="?lang=ru">Русский (ru)</a></div>
+            <div style="text-align: center;"><a href="?lang=ar">العربية (ar)</a></div>
+            <div style="text-align: center;"><a href="?lang=pt">Português (pt)</a></div>
+            
+            <div style="text-align: center;"><a href="?lang=hi">हिन्दी (hi)</a></div>
+            <div style="text-align: center;"><a href="?lang=it">Italiano (it)</a></div>
+            <div style="text-align: center;"><a href="?lang=ko">한국어 (ko)</a></div>
+            
+            <div style="text-align: center;"><a href="?lang=tr">Türkçe (tr)</a></div>
+            <div style="text-align: center;"><a href="?lang=vi">Tiếng Việt (vi)</a></div>
+            <div style="text-align: center;"><a href="?lang=th">ไทย (th)</a></div>
+            
+            <div style="text-align: center;"><a href="?lang=nl">Nederlands (nl)</a></div>
+            <div style="text-align: center;"><a href="?lang=pl">Polski (pl)</a></div>
+            <div style="text-align: center;"><a href="?lang=id">Bahasa Indonesia (id)</a></div>
+            
+            <div style="text-align: center;"><a href="?lang=bn">বাংলা (bn)</a></div>
+            <div style="text-align: center;"><a href="?lang=lv">Latviešu (lv)</a></div>
+            <div style="text-align: center;"><a href="?lang=uk">Українська (uk)</a></div>
+            
+            <div style="text-align: center;"><a href="?lang=ms">Bahasa Melayu (ms)</a></div>
+            <div style="text-align: center;"><a href="?lang=sw">Kiswahili (sw)</a></div>
+            <div style="text-align: center;"></div> <!-- Empty div for layout balance -->
+        </div>`;
+    }
 
     const flags = document.createElement('div');
     flags.className = 'lottieContainer';
@@ -1827,21 +1870,21 @@ function showCreditMenu() {
     <h2 style="text-align: center; font-weight: bold;">CREDITS</h2>
     <div style="display: flex; flex-direction: column; align-items: start; font-size: 18px;">
         <div>
-            <strong>${gLS("programmer")}</strong>
-            <a href="https://github.com/MoCoXIII/MapGuessr" target="_blank"><u>MoCoXIII</u></a><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <a href="https://github.com/PizzaPost/MapGuessr" target="_blank"><u>PizzaPost</u></a>
+            <strong id='creditsText'>${gLS("programmer")}</strong>
+            <a id='creditsText' href="https://github.com/MoCoXIII/MapGuessr" target="_blank"><u>MoCoXIII</u></a><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <a id='creditsText' href="https://github.com/PizzaPost/MapGuessr" target="_blank"><u>PizzaPost</u></a>
         </div>
         <div>
-            <strong>${gLS("mapper")}</strong>
-            <a href="https://github.com/PizzaPost/MapGuessr" target="_blank"><u>PizzaPost</u></a><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <a href="https://github.com/MoCoXIII/MapGuessr" target="_blank"><u>MoCoXIII</u></a><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            Ghxo
+            <strong id='creditsText'>${gLS("mapper")}</strong>
+            <a id='creditsText' href="https://github.com/PizzaPost/MapGuessr" target="_blank"><u>PizzaPost</u></a><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <a id='creditsText' href="https://github.com/MoCoXIII/MapGuessr" target="_blank"><u>MoCoXIII</u></a><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <span id='creditsText'>Ghxo</span>
         </div>
-        <div><strong>${gLS("designer")}</strong>
-            <a href="https://github.com/PizzaPost/MapGuessr" target="_blank"><u>PizzaPost</u></a>
+        <div><strong id='creditsText'>${gLS("designer")}</strong>
+            <a id='creditsText' href="https://github.com/PizzaPost/MapGuessr" target="_blank"><u>PizzaPost</u></a>
         </div>
-        <div><strong>${gLS("idea")}</strong>
-            <a href="https://github.com/MoCoXIII/MapGuessr" target="_blank"><u>MoCoXIII</u></a>
+        <div><strong id='creditsText'>${gLS("idea")}</strong>
+            <a id='creditsText' href="https://github.com/MoCoXIII/MapGuessr" target="_blank"><u>MoCoXIII</u></a>
         </div>
     </div>
     `;
