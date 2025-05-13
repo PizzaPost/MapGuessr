@@ -1990,6 +1990,10 @@ function createMoreButton() {
     languageMenu.id = 'languageMenu';
     languageMenu.textContent = '💬';
 
+    const contactButton = document.createElement('span');
+    contactButton.id = 'contactButton';
+    contactButton.textContent = '✉️';
+
     attachTooltip(infoLink, gLS("infoTooltipText"));
     attachTooltip(themeEmoji, gLS("themeTooltipText"));
     attachTooltip(keybindMenu, gLS("keybindTooltipText"));
@@ -1997,6 +2001,7 @@ function createMoreButton() {
     attachTooltip(toggleHistory, gLS("toggleHistoryTooltipText"));
     attachTooltip(localStorageReset, gLS("localStorageResetTooltipText"));
     attachTooltip(languageMenu, gLS("languageMenuTooltipText"));
+    attachTooltip(contactButton, gLS("contactButtonTooltipText"));
 
     menuButton.appendChild(textSpan);
     menuButton.appendChild(infoLink);
@@ -2006,6 +2011,7 @@ function createMoreButton() {
     menuButton.appendChild(toggleHistory);
     menuButton.appendChild(localStorageReset);
     menuButton.appendChild(languageMenu);
+    menuButton.appendChild(contactButton);
 
     const updateEmoji = () => {
         const currentTheme = document.body.getAttribute('data-theme');
@@ -2019,6 +2025,9 @@ function createMoreButton() {
     menuButton.addEventListener('click', (event) => {
         if (menuButton.getBoundingClientRect().height >= 200) {
             // option actions
+            if (event.target.id === 'contactButton') {
+                window.open('MoCoXIII please create the contact form and link it here.'); //TODO
+            }
             if (event.target.id === 'themeEmoji') {
                 const currentTheme = document.body.getAttribute('data-theme');
                 if (currentTheme === 'dark') {

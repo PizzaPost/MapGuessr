@@ -386,9 +386,9 @@ button:disabled:hover {
 }
 
 :root {
-    --menu-height: 220;
+    --menu-height: 260;
     --menu-height-percentage: 90;
-    --button-count: 8;
+    --button-count: 9;
     /* Number of buttons in the menu, including the textButton */
 }
 
@@ -478,6 +478,18 @@ button:disabled:hover {
     z-index: 1;
 }
 
+#contactButton {
+    position: absolute;
+    bottom: calc((var(--menu-height-percentage) - var(--menu-height-percentage) / var(--button-count) * 8) * 1%);
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    pointer-events: none;
+    cursor: pointer;
+    z-index: 1;
+}
+
 #menuButton {
     position: fixed;
     bottom: 20px;
@@ -518,13 +530,23 @@ button:disabled:hover {
 #menuButton:hover #toggleHistory,
 #menuButton:hover #keybindMenu,
 #menuButton:hover #localStorageReset,
-#menuButton:hover #languageMenu {
+#menuButton:hover #languageMenu,
+#menuButton:hover #contactButton {
     opacity: 1;
     pointer-events: auto;
 }
 
+#textButton {
+    position: absolute;
+    bottom: 10px;
+}
+
+#menuButton #textButton {
+    transition: transform 0.5s ease-out;
+}
+
 #menuButton:hover #textButton {
-    transform: translateX(-6px) translateY(calc((var(--menu-height) / 2 - 20) * 1px)) rotate(-90deg);
+    transform: translateX(-6px) rotate(-90deg);
 }
 
 #keybindMenuBox {
@@ -1813,9 +1835,9 @@ body,
     }
 
     :root {
-        --menu-height: 220;
+        --menu-height: 260;
         --menu-height-percentage: 90;
-        --button-count: 7;
+        --button-count: 8;
         /* Number of buttons in the menu, including the textButton */
     }
 
@@ -1889,6 +1911,18 @@ body,
     #languageMenu {
         position: absolute;
         bottom: calc((var(--menu-height-percentage) - var(--menu-height-percentage) / var(--button-count) * 6) * 1%);
+        left: 50%;
+        transform: translate(-50%, -50%);
+        opacity: 0;
+        transition: opacity 0.5s ease;
+        pointer-events: none;
+        cursor: pointer;
+        z-index: 1;
+    }
+
+    #contactButton {
+        position: absolute;
+        bottom: calc((var(--menu-height-percentage) - var(--menu-height-percentage) / var(--button-count) * 7) * 1%);
         left: 50%;
         transform: translate(-50%, -50%);
         opacity: 0;
