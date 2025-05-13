@@ -282,11 +282,13 @@ footer {
     box-shadow: 0 6px 20px var(--button-shadow-hover-green);
 }
 
-.button-gray {
+.button-gray,
+.button-gray2 {
     box-shadow: 0 4px 15px var(--button-shadow-gray);
 }
 
-.button-gray:hover {
+.button-gray:hover,
+.button-gray2:hover {
     box-shadow: 0 6px 20px var(--button-shadow-hover-gray);
 }
 
@@ -1975,6 +1977,10 @@ body,
 
     .button-gray {
         font-size: 75%;
+    }
+
+    .button-gray2 {
+        font-size: 180%;
     }
 
     #playerList {

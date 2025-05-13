@@ -1829,7 +1829,7 @@ function showLanguageMenu() {
     // Create the close button
     const closeButton = document.createElement('button');
     closeButton.innerText = gLS("closeButtonText");
-    closeButton.classList.add('button-gray');
+    closeButton.classList.add('button-gray2');
 
     function closeLanguageBox() {
         languageBox.style.animation = 'shrinkOut 0.2s ease-in forwards';
